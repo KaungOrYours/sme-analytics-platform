@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from services.cleaner import detect_problems, auto_clean, calculate_quality_score
 import pandas as pd
 import io
 
@@ -32,10 +33,10 @@ def health():
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
 
-    # Read file content into memory
+    # Read file into memory
     contents = await file.read()
 
-    # Detect file type and read with pandas
+    # Read with pandas
     if file.filename.endswith('.csv'):
         df = pd.read_csv(io.BytesIO(contents))
     elif file.filename.endswith(('.xlsx', '.xls')):
@@ -43,15 +44,29 @@ async def upload_file(file: UploadFile = File(...)):
     else:
         return {"error": "Unsupported file type"}
 
-    # Extract basic info
-    info = {
+    # Calculate quality before cleaning
+    quality_before = calculate_quality_score(df)
+
+    # Detect problems
+    problems = detect_problems(df)
+
+    # Auto clean
+    df_clean, cleaning_report = auto_clean(df)
+
+    # Calculate quality after cleaning
+    quality_after = calculate_quality_score(df_clean)
+
+    # Build response
+    result = {
         "filename": file.filename,
-        "rows": len(df),
-        "columns": len(df.columns),
-        "column_names": list(df.columns),
-        "preview": df.head(5).to_dict(orient="records")
+        "rows": len(df_clean),
+        "columns": len(df_clean.columns),
+        "column_names": list(df_clean.columns),
+        "preview": df_clean.head(5).to_dict(orient="records"),
+        "quality_before": quality_before,
+        "quality_after": quality_after,
+        "problems_found": problems,
+        "cleaning_report": cleaning_report
     }
 
-    # File deleted from memory automatically
-    # Nothing saved to disk ✅
-    return info
+    return result

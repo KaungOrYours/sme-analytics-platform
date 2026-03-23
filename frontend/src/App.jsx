@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
 import FileUpload from './components/FileUpload'
+import QualityScore from './components/QualityScore'
+import CleaningReport from './components/CleaningReport'
 
 function App() {
   const [fileData, setFileData] = useState(null)
@@ -12,7 +14,6 @@ function App() {
     setError(null)
     setFileData(null)
 
-    // Create form data
     const formData = new FormData()
     formData.append('file', file)
 
@@ -49,8 +50,8 @@ function App() {
         {/* Loading */}
         {loading && (
           <div className="mt-8 text-center">
-            <p className="text-blue-400 text-lg">
-              ⏳ Analyzing your data...
+            <p className="text-blue-400 text-lg animate-pulse">
+              ⏳ Analyzing and cleaning your data...
             </p>
           </div>
         )}
@@ -66,31 +67,34 @@ function App() {
         {fileData && (
           <div className="mt-8">
 
+            {/* Quality Score */}
+            <QualityScore
+              before={fileData.quality_before}
+              after={fileData.quality_after}
+            />
+
+            {/* Cleaning Report */}
+            <CleaningReport report={fileData.cleaning_report} />
+
             {/* Summary Cards */}
             <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="bg-gray-800 rounded-lg p-4 text-center">
                 <p className="text-3xl font-bold text-blue-400">
                   {fileData.rows}
                 </p>
-                <p className="text-gray-400 text-sm mt-1">
-                  Total Rows
-                </p>
+                <p className="text-gray-400 text-sm mt-1">Total Rows</p>
               </div>
               <div className="bg-gray-800 rounded-lg p-4 text-center">
                 <p className="text-3xl font-bold text-green-400">
                   {fileData.columns}
                 </p>
-                <p className="text-gray-400 text-sm mt-1">
-                  Total Columns
-                </p>
+                <p className="text-gray-400 text-sm mt-1">Total Columns</p>
               </div>
               <div className="bg-gray-800 rounded-lg p-4 text-center">
                 <p className="text-3xl font-bold text-purple-400">
-                  {fileData.column_names.length}
+                  {fileData.quality_after}%
                 </p>
-                <p className="text-gray-400 text-sm mt-1">
-                  Features
-                </p>
+                <p className="text-gray-400 text-sm mt-1">Quality Score</p>
               </div>
             </div>
 
