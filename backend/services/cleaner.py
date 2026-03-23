@@ -154,3 +154,65 @@ def calculate_quality_score(df):
     scores.append(max(consistency, 0))
 
     return round(sum(scores) / len(scores), 1)
+
+def detect_problem_type(df):
+    """
+    Automatically detect ML problem type
+    """
+    result = {
+        "problem_type": None,
+        "confidence": 0,
+        "reason": "",
+        "suggested_target": None
+    }
+
+    # Check for datetime columns
+    has_datetime = False
+    date_col = None
+    for col in df.columns:
+        if any(word in col.lower() for word in
+['date', 'datetime', 'timestamp', 'time_']):
+            has_datetime = True
+            date_col = col
+            break
+
+    # Get numeric columns
+    numeric_cols = df.select_dtypes(
+        include=['number']
+    ).columns.tolist()
+
+    # Check for binary columns (0/1)
+    binary_cols = []
+    for col in df.columns:
+        unique_vals = df[col].dropna().unique()
+        if len(unique_vals) == 2:
+            binary_cols.append(col)
+
+    # Decision logic
+    if has_datetime and len(numeric_cols) > 0:
+        result["problem_type"] = "time_series"
+        result["confidence"] = 85
+        result["reason"] = f"Date column '{date_col}' detected with numeric data — forecasting available"
+        result["suggested_target"] = numeric_cols[0]
+
+    elif len(binary_cols) > 0:
+        target = binary_cols[-1]
+        result["problem_type"] = "classification"
+        result["confidence"] = 85
+        result["reason"] = f"Binary column '{target}' detected — classification analysis available"
+        result["suggested_target"] = target
+
+    elif len(numeric_cols) >= 2:
+        target = numeric_cols[-1]
+        result["problem_type"] = "regression"
+        result["confidence"] = 75
+        result["reason"] = f"Multiple numeric columns detected — value prediction available"
+        result["suggested_target"] = target
+
+    else:
+        result["problem_type"] = "clustering"
+        result["confidence"] = 70
+        result["reason"] = "No clear target detected — grouping similar records"
+        result["suggested_target"] = None
+
+    return result

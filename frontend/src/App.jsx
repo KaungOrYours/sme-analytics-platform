@@ -1,8 +1,12 @@
+import ProblemType from './components/ProblemType'
+import Insights from './components/Insights'
+import Statistics from './components/Statistics'
 import { useState } from 'react'
 import axios from 'axios'
 import FileUpload from './components/FileUpload'
 import QualityScore from './components/QualityScore'
 import CleaningReport from './components/CleaningReport'
+import Charts from './components/Charts'
 
 function App() {
   const [fileData, setFileData] = useState(null)
@@ -75,6 +79,10 @@ function App() {
 
             {/* Cleaning Report */}
             <CleaningReport report={fileData.cleaning_report} />
+            <ProblemType detection={fileData.problem_detection} />
+            <Insights insights={fileData.insights} />
+            <Statistics statistics={fileData.statistics} />
+            <Charts fileData={fileData} />
 
             {/* Summary Cards */}
             <div className="grid grid-cols-3 gap-4 mb-6">
