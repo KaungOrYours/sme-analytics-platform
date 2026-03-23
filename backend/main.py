@@ -1,6 +1,7 @@
+from services.analyzer import generate_statistics, generate_insights
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from services.cleaner import detect_problems, auto_clean, calculate_quality_score
+from services.cleaner import detect_problems, auto_clean, calculate_quality_score, detect_problem_type
 import pandas as pd
 import io
 
@@ -56,12 +57,28 @@ async def upload_file(file: UploadFile = File(...)):
     # Calculate quality after cleaning
     quality_after = calculate_quality_score(df_clean)
 
+    # Detect problem type
+    problem_detection = detect_problem_type(df_clean)
+
+    # Generate statistics
+    statistics = generate_statistics(df_clean)
+
+    # Generate insights
+    insights = generate_insights(
+        df_clean,
+        statistics,
+        problem_detection["problem_type"]
+    )
+
     # Build response
     result = {
         "filename": file.filename,
         "rows": len(df_clean),
         "columns": len(df_clean.columns),
+        "problem_detection": problem_detection,
         "column_names": list(df_clean.columns),
+        "statistics": statistics,
+        "insights": insights,
         "preview": df_clean.head(5).to_dict(orient="records"),
         "quality_before": quality_before,
         "quality_after": quality_after,
