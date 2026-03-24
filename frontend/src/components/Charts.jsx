@@ -31,22 +31,31 @@ function ChartItem({ col, data }) {
       paper_bgcolor: '#1f2937',
       plot_bgcolor: '#1f2937',
       font: { color: '#9ca3af' },
-      margin: { t: 50, r: 20, b: 60, l: 60 },
+      margin: { t: 50, r: 20, b: 80, l: 70 },
       showlegend: false,
       title: {
-        text: col.replace(/_/g, ' '),
+        text: col.replace(/_/g, ' ')
+              .replace(/\b\w/g, l => l.toUpperCase()),
         font: { color: '#ffffff', size: 13 }
       },
       xaxis: {
         gridcolor: '#374151',
-        tickfont: { color: '#9ca3af' }
+        tickfont: { color: '#9ca3af', size: 10 },
+        title: {
+          text: col.replace(/_/g, ' ')
+                .replace(/\b\w/g, l => l.toUpperCase()),
+          font: { color: '#6b7280', size: 11 },
+          standoff: 15
+        }
       },
       yaxis: {
         gridcolor: '#374151',
-        tickfont: { color: '#9ca3af' },
+        tickfont: { color: '#9ca3af', size: 10 },
         title: {
-          text: 'Count',
-          font: { color: '#9ca3af', size: 11 }
+          text: data.type === 'numeric'
+                ? 'Count' : 'Number of Records',
+          font: { color: '#6b7280', size: 11 },
+          standoff: 15
         }
       }
     }
@@ -55,16 +64,30 @@ function ChartItem({ col, data }) {
       Plotly.newPlot(ref.current, [{
         x: data.values,
         type: 'histogram',
-        marker: { color: '#3b82f6' },
-        nbinsx: 20
-      }], darkLayout, { responsive: true, displayModeBar: false })
+        marker: {
+          color: '#3b82f6',
+          line: { color: '#1d4ed8', width: 0.5 }
+        },
+        nbinsx: 20,
+        hovertemplate: 'Value: %{x}<br>Count: %{y}<extra></extra>'
+      }], darkLayout, {
+        responsive: true,
+        displayModeBar: false
+      })
     } else {
       Plotly.newPlot(ref.current, [{
         x: data.labels,
         y: data.values,
         type: 'bar',
-        marker: { color: '#10b981' }
-      }], darkLayout, { responsive: true, displayModeBar: false })
+        marker: {
+          color: '#10b981',
+          line: { color: '#059669', width: 0.5 }
+        },
+        hovertemplate: '%{x}: %{y} records<extra></extra>'
+      }], darkLayout, {
+        responsive: true,
+        displayModeBar: false
+      })
     }
 
     return () => {
@@ -74,7 +97,10 @@ function ChartItem({ col, data }) {
 
   return (
     <div className="bg-gray-800 rounded-lg p-2">
-      <div ref={ref} style={{ width: '100%', height: '300px' }} />
+      <div
+        ref={ref}
+        style={{ width: '100%', height: '280px' }}
+      />
     </div>
   )
 }

@@ -1,7 +1,8 @@
 from services.analyzer import generate_statistics, generate_insights
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from services.cleaner import detect_problems, auto_clean, calculate_quality_score, detect_problem_type
+from services.automl import run_automl
+from services.cleaner import detect_problems, auto_clean, calculate_quality_score, detect_problem_type, make_readable_name
 import pandas as pd
 import io
 
@@ -10,9 +11,9 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-    "http://localhost:5173",
-    "http://localhost:5174"
-],
+        "http://localhost:5173",
+        "http://localhost:5174"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -63,6 +64,12 @@ async def upload_file(file: UploadFile = File(...)):
     # Detect problem type
     problem_detection = detect_problem_type(df_clean)
 
+    # Create readable column names
+    readable_columns = {
+        col: make_readable_name(col)
+        for col in df_clean.columns
+    }
+
     # Generate statistics
     statistics = generate_statistics(df_clean)
 
@@ -70,10 +77,11 @@ async def upload_file(file: UploadFile = File(...)):
     insights = generate_insights(
         df_clean,
         statistics,
-        problem_detection["problem_type"]
+        problem_detection["problem_type"],
+        readable_columns
     )
 
-    # Prepare chart data ← MOVED UP HERE
+    # Prepare chart data
     chart_data = {}
 
     for col in df_clean.select_dtypes(
@@ -94,14 +102,23 @@ async def upload_file(file: UploadFile = File(...)):
             "values": counts.values.tolist()
         }
 
-    # Build response ← AFTER chart_data
+    # Run AutoML
+    automl_results = run_automl(
+        df_clean,
+        problem_detection["problem_type"],
+        problem_detection["suggested_target"]
+    )
+
+    # Build response
     result = {
         "filename": file.filename,
         "rows": len(df_clean),
         "columns": len(df_clean.columns),
+        "readable_columns": readable_columns,
         "problem_detection": problem_detection,
         "column_names": list(df_clean.columns),
         "statistics": statistics,
+        "automl_results": automl_results,
         "insights": insights,
         "preview": df_clean.head(5).to_dict(orient='records'),
         "quality_before": quality_before,
