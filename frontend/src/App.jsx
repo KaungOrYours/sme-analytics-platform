@@ -82,7 +82,7 @@ function App() {
             <ProblemType detection={fileData.problem_detection} />
             <Insights insights={fileData.insights} />
             <Statistics statistics={fileData.statistics} />
-            <Charts fileData={fileData} />
+            <Charts chartData={fileData.chart_data} />
 
             {/* Summary Cards */}
             <div className="grid grid-cols-3 gap-4 mb-6">

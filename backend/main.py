@@ -9,7 +9,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+    "http://localhost:5173",
+    "http://localhost:5174"
+],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -70,7 +73,28 @@ async def upload_file(file: UploadFile = File(...)):
         problem_detection["problem_type"]
     )
 
-    # Build response
+    # Prepare chart data ← MOVED UP HERE
+    chart_data = {}
+
+    for col in df_clean.select_dtypes(
+        include=['number']
+    ).columns[:4]:
+        chart_data[col] = {
+            "type": "numeric",
+            "values": df_clean[col].dropna().tolist()[:500]
+        }
+
+    for col in df_clean.select_dtypes(
+        include=['object']
+    ).columns[:2]:
+        counts = df_clean[col].value_counts().head(8)
+        chart_data[col] = {
+            "type": "categorical",
+            "labels": counts.index.tolist(),
+            "values": counts.values.tolist()
+        }
+
+    # Build response ← AFTER chart_data
     result = {
         "filename": file.filename,
         "rows": len(df_clean),
@@ -79,10 +103,11 @@ async def upload_file(file: UploadFile = File(...)):
         "column_names": list(df_clean.columns),
         "statistics": statistics,
         "insights": insights,
-        "preview": df_clean.head(5).to_dict(orient="records"),
+        "preview": df_clean.head(5).to_dict(orient='records'),
         "quality_before": quality_before,
         "quality_after": quality_after,
         "problems_found": problems,
+        "chart_data": chart_data,
         "cleaning_report": cleaning_report
     }
 
