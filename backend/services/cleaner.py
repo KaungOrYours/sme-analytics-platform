@@ -78,6 +78,7 @@ def auto_clean(df):
         report.append(f"✅ Removed {removed} duplicate rows")
 
     # 2. Fix column names
+    # Clean column names
     df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
     report.append("✅ Standardized column names")
 
@@ -216,3 +217,26 @@ def detect_problem_type(df):
         result["suggested_target"] = None
 
     return result
+
+def make_readable_name(col_name):
+    """
+    Convert technical column names
+    to readable business names
+    """
+    import re
+
+    col = str(col_name)
+
+    # Split camelCase
+    col = re.sub(r'([a-z])([A-Z])', r'\1 \2', col)
+
+    # Replace underscores with spaces
+    col = col.replace('_', ' ')
+
+    # Clean multiple spaces
+    col = ' '.join(col.split())
+
+    # Capitalize each word
+    col = col.title()
+
+    return col

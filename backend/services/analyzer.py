@@ -59,97 +59,199 @@ def generate_statistics(df):
     return stats
 
 
-def generate_insights(df, stats, problem_type):
+
+def generate_insights(df, stats, problem_type, readable_columns=None):
     """
-    Generate plain English business insights
+    Generate smart plain English business insights
+    for non-technical SME owners
     """
+    # Helper function - INSIDE generate_insights
+    def readable(col):
+        if readable_columns and col in readable_columns:
+            return readable_columns[col]
+        return col.replace('_', ' ').title()
+    
     insights = []
 
-    # Insight 1: Dataset size
     rows = stats["overall"]["total_rows"]
     cols = stats["overall"]["total_columns"]
+    cat_cols = list(stats["categorical_stats"].keys())
+    num_cols = list(stats["numeric_stats"].keys())
+
+    # Value/revenue column keywords
+    value_keywords = [
+        'price', 'revenue', 'sales', 'amount',
+        'total', 'charges', 'cost', 'income',
+        'profit', 'value', 'spend', 'payment',
+        'salary', 'wage', 'fee', 'rate'
+    ]
+
+    # Find value column
+    value_col = None
+    for col in num_cols:
+        if any(word in col.lower()
+               for word in value_keywords):
+            value_col = col
+            break
+
+    # If no value col found use last numeric
+    if not value_col and num_cols:
+        value_col = num_cols[-1]
+
+    # Insight 1: Dataset overview
     insights.append({
         "type": "info",
         "icon": "📊",
-        "text": f"Your dataset has {rows:,} records across {cols} categories"
+        "text": f"Analyzing {rows:,} business records with {cols} data points each"
     })
 
-    # Insight 2: Best category insight
-    for col, cat_stats in stats["categorical_stats"].items():
-        if cat_stats["unique_values"] < 20:
-            pct = round(
-                cat_stats["most_common_count"] / rows * 100, 1
+    # Insight 2: Category vs value comparison
+    if value_col and cat_cols:
+        for cat_col in cat_cols:
+            unique_count = stats[
+                "categorical_stats"
+            ][cat_col]["unique_values"]
+
+            if 2 <= unique_count <= 8:
+                try:
+                    grouped = df.groupby(
+                        cat_col
+                    )[value_col].mean().sort_values(
+                        ascending=False
+                    )
+
+                    if len(grouped) >= 2:
+                        top = grouped.index[0]
+                        top_val = grouped.iloc[0]
+                        bot = grouped.index[-1]
+                        bot_val = grouped.iloc[-1]
+
+                        col_name = readable(value_col)
+                        cat_name = readable(cat_col)
+
+                        if bot_val > 0:
+                            ratio = top_val / bot_val
+                            insights.append({
+                                "type": "positive",
+                                "icon": "💡",
+                                "text": f"'{top}' customers have {ratio:.1f}x higher average {col_name} ({top_val:,.0f}) compared to '{bot}' ({bot_val:,.0f})"
+                            })
+                        else:
+                            insights.append({
+                                "type": "positive",
+                                "icon": "💡",
+                                "text": f"'{top}' has the highest average {col_name} at {top_val:,.0f}"
+                            })
+                except:
+                    pass
+                break
+
+    # Insight 3: Highest value segment
+    if value_col and cat_cols:
+        for cat_col in cat_cols:
+            unique_count = stats[
+                "categorical_stats"
+            ][cat_col]["unique_values"]
+
+            if 2 <= unique_count <= 10:
+                try:
+                    grouped = df.groupby(
+                        cat_col
+                    )[value_col].sum().sort_values(
+                        ascending=False
+                    )
+                    top = grouped.index[0]
+                    top_val = grouped.iloc[0]
+                    total = grouped.sum()
+                    pct = top_val / total * 100
+
+                    col_name = value_col.replace(
+                        '_', ' '
+                    )
+                    cat_name = cat_col.replace(
+                        '_', ' '
+                    )
+
+                    insights.append({
+                        "type": "positive",
+                        "icon": "🏆",
+                        "text": f"'{top}' is your most valuable {cat_name} group — contributing {pct:.1f}% of total {col_name} ({top_val:,.0f})"
+                    })
+                except:
+                    pass
+                break
+
+    # Insight 4: Average and range
+    if value_col:
+        num_stats = stats["numeric_stats"][value_col]
+        col_name = readable(value_col)
+        insights.append({
+            "type": "info",
+            "icon": "📈",
+            "text": f"Average {col_name} per record: {num_stats['mean']:,.2f} — ranging from {num_stats['min']:,.2f} to {num_stats['max']:,.2f}"
+        })
+
+    # Insight 5: Key driver correlation
+    if value_col and len(num_cols) >= 2:
+        try:
+            num_df = df.select_dtypes(
+                include=['number']
             )
-            insights.append({
-                "type": "positive",
-                "icon": "🏆",
-                "text": f"Most common {col} is '{cat_stats['most_common']}' — {pct}% of all records"
-            })
-            break
+            if value_col in num_df.columns:
+                corr = num_df.corr()[
+                    value_col
+                ].drop(value_col).abs().sort_values(
+                    ascending=False
+                )
 
-    # Insight 3: Revenue/cost insight
-    revenue_keywords = [
-        'price', 'revenue', 'sales', 'amount',
-        'total', 'charges', 'cost', 'income'
-    ]
-    for col, num_stats in stats["numeric_stats"].items():
-        if any(word in col.lower() for word in revenue_keywords):
-            insights.append({
-                "type": "positive",
-                "icon": "💰",
-                "text": f"Average {col}: {num_stats['mean']:,} | Total: {num_stats['sum']:,}"
-            })
-            insights.append({
-                "type": "info",
-                "icon": "📉",
-                "text": f"{col} ranges from {num_stats['min']:,} to {num_stats['max']:,}"
-            })
-            break
+                if len(corr) > 0 and corr.iloc[0] > 0.2:
+                    top_factor = corr.index[0]
+                    col_name = value_col.replace(
+                        '_', ' '
+                    )
+                    factor_name = readable(top_factor)
+                    insights.append({
+                        "type": "positive",
+                        "icon": "🔗",
+                        "text": f"'{factor_name}' is the strongest driver of {col_name} in your data — focus here for biggest impact"
+                    })
+        except:
+            pass
 
-    # Insight 4: Data quality
+    # Insight 6: Record count by top category
+    if cat_cols:
+        top_cat = cat_cols[0]
+        cat_stats = stats["categorical_stats"][top_cat]
+        most_common = cat_stats["most_common"]
+        count = cat_stats["most_common_count"]
+        pct = round(count / rows * 100, 1)
+        cat_name = top_cat.replace('_', ' ')
+        insights.append({
+            "type": "info",
+            "icon": "👥",
+            "text": f"Most common {cat_name}: '{most_common}' — represents {pct}% of all your records ({count:,} records)"
+        })
+
+    # Insight 7: Data quality
     missing_total = df.isnull().sum().sum()
     if missing_total == 0:
         insights.append({
             "type": "positive",
             "icon": "✅",
-            "text": "Your data is complete with no missing values"
+            "text": "Your data is clean and complete — ready for reliable analysis"
         })
     else:
         insights.append({
             "type": "warning",
             "icon": "⚠️",
-            "text": f"{missing_total:,} missing values were automatically handled"
+            "text": f"{missing_total:,} incomplete records were automatically filled — results may vary slightly"
         })
 
-    # Insight 5: Problem specific
-    if problem_type == "time_series":
-        insights.append({
-            "type": "info",
-            "icon": "📈",
-            "text": "Time-based patterns detected — sales trend analysis available"
-        })
-    elif problem_type == "classification":
-        insights.append({
-            "type": "info",
-            "icon": "🎯",
-            "text": "Classification patterns found — prediction analysis ready"
-        })
-    elif problem_type == "regression":
-        insights.append({
-            "type": "info",
-            "icon": "📊",
-            "text": "Numeric patterns detected — value prediction analysis ready"
-        })
-    elif problem_type == "clustering":
-        insights.append({
-            "type": "info",
-            "icon": "🔵",
-            "text": "Similar record groups detected — customer segmentation available"
-        })
-
-    # Insight 6: Outlier warning
-    outlier_cols = []
-    for col in df.select_dtypes(include=[np.number]).columns:
+    # Insight 8: Outliers
+    outlier_info = []
+    for col in df.select_dtypes(
+        include=['number']
+    ).columns:
         Q1 = df[col].quantile(0.25)
         Q3 = df[col].quantile(0.75)
         IQR = Q3 - Q1
@@ -158,13 +260,41 @@ def generate_insights(df, stats, problem_type):
             (df[col] > Q3 + 1.5 * IQR)
         ]
         if len(outliers) > 0:
-            outlier_cols.append(col)
+            outlier_info.append(
+                f"{readable(col)} ({len(outliers)} unusual)"
+            )
 
-    if outlier_cols:
+    if outlier_info:
         insights.append({
             "type": "warning",
             "icon": "🔍",
-            "text": f"Unusual values detected in: {', '.join(outlier_cols[:3])}"
+            "text": f"Unusual values found in: {', '.join(outlier_info[:2])} — worth reviewing manually"
+        })
+
+    # Insight 9: Problem specific action
+    if problem_type == "time_series":
+        insights.append({
+            "type": "info",
+            "icon": "📅",
+            "text": "Sales trend patterns detected — upload more months of data for better forecasting accuracy"
+        })
+    elif problem_type == "classification":
+        insights.append({
+            "type": "info",
+            "icon": "🎯",
+            "text": "Our ML model can predict outcomes for new records — useful for risk assessment and decision making"
+        })
+    elif problem_type == "regression":
+        insights.append({
+            "type": "info",
+            "icon": "📊",
+            "text": "Our ML model can estimate values for new records — useful for pricing and forecasting"
+        })
+    elif problem_type == "clustering":
+        insights.append({
+            "type": "info",
+            "icon": "🔵",
+            "text": "Your records naturally group into segments — useful for targeted marketing and inventory planning"
         })
 
     return insights
