@@ -10,7 +10,7 @@ function AIExplanation({ fileData }) {
     setLoading(true)
     try {
       const response = await axios.post(
-        'http://localhost:8000/explain',
+        'https://sme-analytics-platform.onrender.com/explain',
         {
           ...fileData,
           question: question ||

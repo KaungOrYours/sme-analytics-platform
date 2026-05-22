@@ -25,7 +25,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        'http://localhost:8000/upload',
+        'https://sme-analytics-platform.onrender.com/upload',
         formData
       )
       setFileData(response.data)
