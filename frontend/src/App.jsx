@@ -8,6 +8,7 @@ import Insights from './components/Insights'
 import Statistics from './components/Statistics'
 import Charts from './components/Charts'
 import MLResults from './components/MLResults'
+import AIExplanation from './components/AIExplanation'
 
 function App() {
   const [fileData, setFileData] = useState(null)
@@ -99,6 +100,9 @@ function App() {
             <MLResults
               results={fileData.automl_results}
             />
+
+            {/* AI Explanation */}
+            <AIExplanation fileData={fileData} />
 
             {/* Insights */}
             <Insights insights={fileData.insights} />

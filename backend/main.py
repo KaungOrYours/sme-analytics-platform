@@ -1,3 +1,6 @@
+
+from dotenv import load_dotenv
+load_dotenv()
 from services.analyzer import generate_statistics, generate_insights
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,6 +9,7 @@ from services.cleaner import detect_problems, auto_clean, calculate_quality_scor
 from groq import Groq
 import pandas as pd
 import io
+import os
 
 app = FastAPI()
 
@@ -139,8 +143,8 @@ async def explain_data(request: dict):
     """
     try:
         client = Groq(
-            api_key="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"
-        )
+            api_key=os.environ.get("GROQ_API_KEY")
+)
 
         # Build context from analysis data
         context = f"""
