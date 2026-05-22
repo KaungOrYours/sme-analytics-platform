@@ -3,6 +3,7 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from services.automl import run_automl
 from services.cleaner import detect_problems, auto_clean, calculate_quality_score, detect_problem_type, make_readable_name
+from groq import Groq
 import pandas as pd
 import io
 
@@ -129,3 +130,68 @@ async def upload_file(file: UploadFile = File(...)):
     }
 
     return result
+
+@app.post("/explain")
+async def explain_data(request: dict):
+    """
+    Use Groq LLM to explain analysis results
+    in plain English for SME owners
+    """
+    try:
+        client = Groq(
+            api_key="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"
+        )
+
+        # Build context from analysis data
+        context = f"""
+        Dataset: {request.get('filename', 'Unknown')}
+        Rows: {request.get('rows', 0)}
+        Columns: {request.get('columns', 0)}
+        Quality Score: {request.get('quality_after', 0)}%
+        Problem Type: {request.get('problem_detection', {}).get('problem_type', 'unknown')}
+        ML Model: {request.get('automl_results', {}).get('model_name', 'None')}
+        ML Performance: {request.get('automl_results', {}).get('performance', {})}
+        Key Insights: {request.get('insights', [])}
+        """
+
+        user_question = request.get(
+            'question',
+            'Explain this business data analysis in simple terms for a small business owner. What are the key takeaways and what actions should they consider?'
+        )
+
+        response = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[
+                {
+                    "role": "system",
+                    "content": """You are a friendly business analyst 
+                    helping Myanmar small business owners understand 
+                    their data. Explain insights in simple plain English. 
+                    No technical jargon. Be concise and actionable. 
+                    Maximum 3-4 sentences per point."""
+                },
+                {
+                    "role": "user",
+                    "content": f"""
+                    Here is the analysis of a business dataset:
+                    {context}
+                    
+                    Question: {user_question}
+                    """
+                }
+            ],
+            max_tokens=500,
+            temperature=0.7
+        )
+
+        return {
+            "explanation": response.choices[0].message.content,
+            "status": "success"
+        }
+
+    except Exception as e:
+        return {
+            "explanation": "Could not generate explanation.",
+            "status": "error",
+            "error": str(e)
+        }
