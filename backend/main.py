@@ -135,18 +135,27 @@ async def upload_file(file: UploadFile = File(...)):
 
     return result
 
+
+    
 @app.post("/explain")
 async def explain_data(request: dict):
     """
     Use Groq LLM to explain analysis results
-    in plain English for SME owners
     """
     try:
-        client = Groq(
-            api_key=os.environ.get("GROQ_API_KEY")
-)
+        import os
+        key = os.environ.get("GROQ_API_KEY")
+        print(f"API Key found: {bool(key)}")
+        print(f"Key length: {len(key) if key else 0}")
 
-        # Build context from analysis data
+        if not key:
+            return {
+                "explanation": "API key not found.",
+                "status": "error"
+            }
+
+        client = Groq(api_key=key)
+
         context = f"""
         Dataset: {request.get('filename', 'Unknown')}
         Rows: {request.get('rows', 0)}
@@ -160,11 +169,11 @@ async def explain_data(request: dict):
 
         user_question = request.get(
             'question',
-            'Explain this business data analysis in simple terms for a small business owner. What are the key takeaways and what actions should they consider?'
+            'Explain this business data in simple terms. What are the key findings and what actions should I take?'
         )
 
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {
                     "role": "system",
@@ -194,8 +203,8 @@ async def explain_data(request: dict):
         }
 
     except Exception as e:
+        print(f"Error: {str(e)}")
         return {
-            "explanation": "Could not generate explanation.",
-            "status": "error",
-            "error": str(e)
+            "explanation": f"Could not generate explanation: {str(e)[:100]}",
+            "status": "error"
         }
