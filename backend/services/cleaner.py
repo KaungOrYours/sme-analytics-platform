@@ -64,67 +64,218 @@ def detect_problems(df):
 
 def auto_clean(df):
     """
-    Automatically fix all data problems
-    Returns cleaned DataFrame and report
+    Improved auto cleaning pipeline
+    Handles real world digital SME data
     """
     report = []
     df = df.copy()
 
-    # 1. Remove duplicates
+    # 1. Remove exact duplicates
     before = len(df)
     df = df.drop_duplicates()
     removed = before - len(df)
     if removed > 0:
-        report.append(f"✅ Removed {removed} duplicate rows")
+        report.append(
+            f"✅ Removed {removed} duplicate rows"
+        )
 
-    # 2. Fix column names
-    # Clean column names
-    df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
+    # 2. Clean column names
+    df.columns = (
+        df.columns
+        .str.strip()
+        .str.lower()
+        .str.replace(' ', '_')
+        .str.replace(r'[^a-z0-9_]', '', regex=True)
+    )
     report.append("✅ Standardized column names")
 
-    # 3. Handle missing values
+    # 3. Deep whitespace cleaning
+    for col in df.select_dtypes(include=['object']).columns:
+        df[col] = (
+            df[col]
+            .astype(str)
+            .str.strip()
+            .str.replace(r'\s+', ' ', regex=True)
+            .str.replace('\t', ' ')
+            .str.replace('\xa0', ' ')
+        )
+        df[col] = df[col].replace('nan', None)
+
+    # 4. Smart number cleaning
+    for col in df.columns:
+        if df[col].dtype == 'object':
+            sample = df[col].dropna().head(20)
+            numeric_count = 0
+            for val in sample:
+                cleaned = (
+                    str(val)
+                    .replace(',', '')
+                    .replace(' ', '')
+                    .replace('ks', '')
+                    .replace('MMK', '')
+                    .replace('mmk', '')
+                    .replace('$', '')
+                    .replace('£', '')
+                    .replace('€', '')
+                    .strip()
+                )
+                # Handle k and M suffixes
+                if cleaned.lower().endswith('k'):
+                    cleaned = cleaned[:-1] + '000'
+                if cleaned.lower().endswith('m'):
+                    cleaned = cleaned[:-1] + '000000'
+                try:
+                    float(cleaned)
+                    numeric_count += 1
+                except:
+                    pass
+
+            if numeric_count >= len(sample) * 0.6:
+                def clean_number(val):
+                    if pd.isna(val):
+                        return None
+                    cleaned = (
+                        str(val)
+                        .replace(',', '')
+                        .replace(' ', '')
+                        .replace('ks', '')
+                        .replace('MMK', '')
+                        .replace('mmk', '')
+                        .replace('$', '')
+                        .replace('£', '')
+                        .replace('€', '')
+                        .strip()
+                    )
+                    if cleaned.lower().endswith('k'):
+                        cleaned = str(
+                            float(cleaned[:-1]) * 1000
+                        )
+                    if cleaned.lower().endswith('m'):
+                        cleaned = str(
+                            float(cleaned[:-1]) * 1000000
+                        )
+                    try:
+                        return float(cleaned)
+                    except:
+                        return None
+
+                df[col] = df[col].apply(clean_number)
+                report.append(
+                    f"✅ Cleaned numeric values in '{col}'"
+                )
+
+    # 5. Smart date detection and standardization
+    date_formats = [
+        '%Y-%m-%d', '%d/%m/%Y', '%m/%d/%Y',
+        '%d-%m-%Y', '%Y/%m/%d', '%d.%m.%Y',
+        '%d.%m.%y', '%d/%m/%y', '%B %d %Y',
+        '%b %d %Y', '%d %B %Y', '%d %b %Y',
+        '%Y%m%d'
+    ]
+
+    for col in df.columns:
+        if df[col].dtype == 'object':
+            if any(word in col.lower()
+                   for word in ['date', 'time',
+                                'day', 'month',
+                                'year']):
+                for fmt in date_formats:
+                    try:
+                        converted = pd.to_datetime(
+                            df[col],
+                            format=fmt,
+                            errors='coerce'
+                        )
+                        success_rate = (
+                            converted.notna().sum() /
+                            len(converted)
+                        )
+                        if success_rate > 0.5:
+                            df[col] = converted
+                            report.append(
+                                f"✅ Parsed dates in '{col}'"
+                            )
+                            break
+                    except:
+                        continue
+
+    # 6. Boolean standardization
+    bool_map = {
+        'yes': 1, 'no': 0,
+        'true': 1, 'false': 0,
+        'y': 1, 'n': 0,
+        't': 1, 'f': 0,
+        '1': 1, '0': 0,
+        'on': 1, 'off': 0,
+        'active': 1, 'inactive': 0
+    }
+
+    for col in df.select_dtypes(
+        include=['object']
+    ).columns:
+        unique_vals = (
+            df[col].dropna()
+            .str.lower()
+            .str.strip()
+            .unique()
+        )
+        if len(unique_vals) <= 3:
+            if all(v in bool_map
+                   for v in unique_vals):
+                df[col] = (
+                    df[col]
+                    .str.lower()
+                    .str.strip()
+                    .map(bool_map)
+                )
+                report.append(
+                    f"✅ Standardized yes/no values in '{col}'"
+                )
+
+    # 7. Handle missing values
     for col in df.columns:
         missing = df[col].isnull().sum()
         if missing > 0:
             missing_pct = missing / len(df)
 
-            # Drop column if too many missing
             if missing_pct > 0.6:
                 df = df.drop(columns=[col])
-                report.append(f"⚠️ Dropped column '{col}': {missing_pct:.0%} missing")
-
-            # Fill numeric with median
-            elif df[col].dtype in ['float64', 'int64']:
+                report.append(
+                    f"⚠️ Dropped '{col}': "
+                    f"{missing_pct:.0%} missing"
+                )
+            elif df[col].dtype in [
+                'float64', 'int64'
+            ]:
                 median = df[col].median()
                 df[col] = df[col].fillna(median)
-                report.append(f"✅ Filled {missing} missing values in '{col}' with median ({median})")
-
-            # Fill text with mode
+                report.append(
+                    f"✅ Filled {missing} missing "
+                    f"values in '{col}' "
+                    f"with median ({median})"
+                )
             else:
                 mode = df[col].mode()
                 if len(mode) > 0:
                     df[col] = df[col].fillna(mode[0])
-                    report.append(f"✅ Filled {missing} missing values in '{col}' with most common value")
+                    report.append(
+                        f"✅ Filled {missing} missing "
+                        f"values in '{col}' "
+                        f"with most common value"
+                    )
 
-    # 4. Fix currency symbols
-    for col in df.columns:
-        if df[col].dtype == 'object':
-            sample_val = str(df[col].dropna().iloc[0]) if len(df[col].dropna()) > 0 else ""
-            if any(sym in sample_val for sym in ['ks', 'MMK', '$', '£', '€', ',']):
-                try:
-                    df[col] = df[col].str.replace(r'[ks$£€MMK,\s]', '', regex=True)
-                    df[col] = pd.to_numeric(df[col], errors='coerce')
-                    report.append(f"✅ Removed currency symbols from '{col}'")
-                except:
-                    pass
-
-    # 5. Standardize text columns
-    for col in df.columns:
-        if df[col].dtype == 'object':
-            df[col] = df[col].str.strip().str.lower()
-            report.append(f"✅ Standardized text in '{col}'")
+    # 8. Standardize text categories
+    for col in df.select_dtypes(
+        include=['object']
+    ).columns:
+        df[col] = (
+            df[col]
+            .str.strip()
+            .str.lower()
+        )
 
     return df, report
+
 
 
 def calculate_quality_score(df):
@@ -172,7 +323,15 @@ def detect_problem_type(df):
     date_col = None
     for col in df.columns:
         if any(word in col.lower() for word in
-['date', 'datetime', 'timestamp', 'time_']):
+        ['date', 'datetime', 'timestamp',
+        'time_', 'month', 'year', 'week']):
+            try:
+                pd.to_datetime(df[col])
+                has_datetime = True
+                date_col = col
+                break
+            except:
+                continue
             has_datetime = True
             date_col = col
             break

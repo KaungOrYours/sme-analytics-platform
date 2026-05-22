@@ -122,7 +122,34 @@ function MLResults({ results }) {
           </div>
         </div>
       )}
-
+      {/* Forecast */}
+      {results.forecast &&
+      results.forecast.length > 0 && (
+        <div className="mb-4">
+          <p className="text-gray-400 text-sm mb-3">
+            📅 Next 5 Periods Forecast:
+          </p>
+          <div className="grid grid-cols-5 gap-2">
+            {results.forecast.map((val, i) => (
+              <div
+                key={i}
+                className="bg-blue-900/30 border
+                border-blue-500/30 rounded-lg
+                p-2 text-center"
+              >
+                <p className="text-blue-400
+                font-bold text-sm">
+                  {val.toLocaleString()}
+                </p>
+                <p className="text-gray-500
+                text-xs mt-1">
+                  Period {i + 1}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       {/* ML Insights */}
       {results.ml_insights &&
        results.ml_insights.length > 0 && (

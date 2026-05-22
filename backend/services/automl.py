@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor, GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression, LinearRegression, Ridge
@@ -27,11 +27,10 @@ def run_automl(df, problem_type, target_col):
     }
 
     try:
-        # Skip time series for now
+        # Time series
         if problem_type == "time_series":
-            results["status"] = "time_series"
-            results["ml_insights"].append(
-                "Time series forecasting coming soon"
+            results = run_time_series(
+                df, target_col, results
             )
             return results
 
@@ -71,6 +70,116 @@ def run_automl(df, problem_type, target_col):
     return results
 
 
+def run_time_series(df, target_col, results):
+    """Run time series forecasting"""
+    try:
+        # Find numeric target
+        num_cols = df.select_dtypes(
+            include=['number']
+        ).columns.tolist()
+
+        if not num_cols:
+            results["status"] = "error"
+            results["ml_insights"].append(
+                "No numeric columns for forecasting"
+            )
+            return results
+
+        # Use target or last numeric column
+        if target_col and target_col in num_cols:
+            forecast_col = target_col
+        else:
+            forecast_col = num_cols[-1]
+
+        # Create time index
+        y = df[forecast_col].dropna().values
+        X = np.arange(len(y)).reshape(-1, 1)
+
+        if len(y) < 10:
+            results["status"] = "insufficient_data"
+            results["ml_insights"].append(
+                "Need at least 10 records for forecasting"
+            )
+            return results
+
+        # Fit linear trend
+        model = LinearRegression()
+        model.fit(X, y)
+
+        # Calculate accuracy
+        y_pred = model.predict(X)
+        ss_res = np.sum((y - y_pred) ** 2)
+        ss_tot = np.sum((y - np.mean(y)) ** 2)
+        r2 = 1 - (ss_res / ss_tot) if ss_tot != 0 else 0
+
+        # Forecast next 5 periods
+        future_X = np.arange(
+            len(y), len(y) + 5
+        ).reshape(-1, 1)
+        forecast = model.predict(future_X)
+
+        # Trend direction
+        slope = model.coef_[0]
+        if slope > 0:
+            trend = "upward 📈"
+            trend_pct = abs(slope / np.mean(y) * 100)
+            trend_msg = f"growing at {trend_pct:.1f}% per period"
+        elif slope < 0:
+            trend = "downward 📉"
+            trend_pct = abs(slope / np.mean(y) * 100)
+            trend_msg = f"declining at {trend_pct:.1f}% per period"
+        else:
+            trend = "stable ➡️"
+            trend_msg = "relatively stable over time"
+
+        results["model_name"] = "Linear Trend Forecasting"
+        results["performance"] = {
+            "r2_score": round(max(r2, 0), 3),
+            "trend": trend
+        }
+        results["feature_importance"] = []
+        results["forecast"] = [
+            round(float(v), 2) for v in forecast
+        ]
+
+        results["ml_insights"].append(
+            f"Forecasting column: '{forecast_col}'"
+        )
+        results["ml_insights"].append(
+            f"Overall trend is {trend} — {trend_msg}"
+        )
+        results["ml_insights"].append(
+            f"Current average: {np.mean(y):,.2f}"
+        )
+        results["ml_insights"].append(
+            f"Next period forecast: {forecast[0]:,.2f}"
+        )
+        results["ml_insights"].append(
+            f"5-period forecast: {forecast[-1]:,.2f}"
+        )
+
+        if r2 > 0.7:
+            results["ml_insights"].append(
+                "Strong trend pattern detected ✅"
+            )
+        elif r2 > 0.4:
+            results["ml_insights"].append(
+                "Moderate trend — some seasonal variation present"
+            )
+        else:
+            results["ml_insights"].append(
+                "Irregular pattern — consider seasonal analysis"
+            )
+
+    except Exception as e:
+        results["status"] = "error"
+        results["ml_insights"].append(
+            f"Forecasting failed: {str(e)[:100]}"
+        )
+
+    return results
+
+
 def prepare_features(df, target_col):
     """
     Prepare features for ML
@@ -78,21 +187,15 @@ def prepare_features(df, target_col):
     """
     df_ml = df.copy()
 
-    # Remove target from features
     if target_col in df_ml.columns:
         y = df_ml[target_col]
         X = df_ml.drop(columns=[target_col])
     else:
         return None, None
 
-    # Drop non-numeric columns that
-    # cannot be encoded easily
     X = X.select_dtypes(include=[np.number])
-
-    # Fill missing values
     X = X.fillna(X.median())
 
-    # Encode target if categorical
     if y.dtype == 'object':
         le = LabelEncoder()
         y = le.fit_transform(y.astype(str))
@@ -112,34 +215,26 @@ def run_classification(df, target_col, results):
             )
             return results
 
-        # Split data
         X_train, X_test, y_train, y_test = train_test_split(
-            X, y,
-            test_size=0.2,
-            random_state=42
+            X, y, test_size=0.2, random_state=42
         )
 
-        # Scale features
         scaler = StandardScaler()
         X_train_scaled = scaler.fit_transform(X_train)
         X_test_scaled = scaler.transform(X_test)
 
-        # Try multiple models
         models = {
             "Random Forest": RandomForestClassifier(
-                n_estimators=50,
-                random_state=42
+                n_estimators=50, random_state=42
             ),
             "Logistic Regression": LogisticRegression(
-                random_state=42,
-                max_iter=200
+                random_state=42, max_iter=200
             ),
             "Decision Tree": DecisionTreeClassifier(
                 random_state=42
             ),
             "Gradient Boosting": GradientBoostingClassifier(
-                n_estimators=50,
-                random_state=42
+                n_estimators=50, random_state=42
             )
         }
 
@@ -161,7 +256,6 @@ def run_classification(df, target_col, results):
                         y_test,
                         model.predict(X_test)
                     )
-
                 if acc > best_acc:
                     best_acc = acc
                     best_name = name
@@ -181,7 +275,6 @@ def run_classification(df, target_col, results):
             "accuracy": round(best_acc, 3)
         }
 
-        # Feature importance
         if hasattr(best_model, 'feature_importances_'):
             importances = best_model.feature_importances_
             feature_imp = sorted(
@@ -197,7 +290,6 @@ def run_classification(df, target_col, results):
                 for f, imp in feature_imp[:6]
             ]
         elif hasattr(best_model, 'coef_'):
-            # Logistic Regression uses coef_
             importances = abs(best_model.coef_[0])
             feature_imp = sorted(
                 zip(X.columns, importances),
@@ -214,8 +306,6 @@ def run_classification(df, target_col, results):
                 for f, imp in feature_imp[:6]
             ]
 
-
-        # ML Insights
         results["ml_insights"].append(
             f"Best model: {best_name}"
         )
@@ -236,7 +326,6 @@ def run_classification(df, target_col, results):
                 "Weak patterns — consider adding more features"
             )
 
-        # Top feature insight
         if results["feature_importance"]:
             top = results["feature_importance"][0]
             results["ml_insights"].append(
@@ -266,15 +355,12 @@ def run_regression(df, target_col, results):
             return results
 
         X_train, X_test, y_train, y_test = train_test_split(
-            X, y,
-            test_size=0.2,
-            random_state=42
+            X, y, test_size=0.2, random_state=42
         )
 
         models = {
             "Random Forest": RandomForestRegressor(
-                n_estimators=50,
-                random_state=42
+                n_estimators=50, random_state=42
             ),
             "Linear Regression": LinearRegression(),
             "Ridge Regression": Ridge(alpha=1.0)
@@ -288,8 +374,7 @@ def run_regression(df, target_col, results):
             try:
                 model.fit(X_train, y_train)
                 r2 = r2_score(
-                    y_test,
-                    model.predict(X_test)
+                    y_test, model.predict(X_test)
                 )
                 if r2 > best_r2:
                     best_r2 = r2
@@ -303,8 +388,7 @@ def run_regression(df, target_col, results):
             return results
 
         mae = mean_absolute_error(
-            y_test,
-            best_model.predict(X_test)
+            y_test, best_model.predict(X_test)
         )
 
         results["model_name"] = best_name
@@ -313,7 +397,6 @@ def run_regression(df, target_col, results):
             "mae": round(float(mae), 2)
         }
 
-        # Feature importance
         if hasattr(best_model, 'feature_importances_'):
             importances = best_model.feature_importances_
             feature_imp = sorted(
@@ -382,11 +465,9 @@ def run_clustering(df, results):
             )
             return results
 
-        # Scale features
         scaler = StandardScaler()
         X_scaled = scaler.fit_transform(df_num)
 
-        # Find best number of clusters
         best_k = 3
         model = KMeans(
             n_clusters=best_k,
