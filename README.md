@@ -38,13 +38,9 @@ Small business owners in Myanmar have valuable data sitting unused in Excel file
 - Data quality comparison (before vs after cleaning)
 
 **AI Business Advisor**
-- Powered by Groq (LLaMA 3.3 70B)
+- Powered by Claude (claude-opus-5)
 - Ask questions about your data in plain English
 - Receive actionable business recommendations
-
-**Report Generation**
-- Professional PDF report download
-- Includes model results, insights, statistics, and data preview
 
 **Privacy**
 - Zero data retention — nothing is saved to any database
@@ -76,7 +72,7 @@ Small business owners in Myanmar have valuable data sitting unused in Excel file
 ## Tech Stack
 
 **Frontend**
-- React 18 + Vite
+- React 19 + Vite
 - Tailwind CSS
 - Plotly.js
 - Axios
@@ -85,8 +81,7 @@ Small business owners in Myanmar have valuable data sitting unused in Excel file
 - FastAPI (Python 3.13)
 - pandas + numpy
 - scikit-learn
-- ReportLab
-- Groq API
+- Anthropic API (Claude)
 
 ---
 
@@ -109,7 +104,7 @@ pip install -r requirements.txt
 Create a `.env` file inside the `backend` folder:
 
 ```
-GROQ_API_KEY=your_groq_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
 ```
 
 Start the backend server:
@@ -144,8 +139,7 @@ sme-analytics-platform/
 │   └── services/
 │       ├── cleaner.py          Automated data cleaning pipeline
 │       ├── analyzer.py         Statistics and insight generation
-│       ├── automl.py           ML model training and selection
-│       └── reporter.py         PDF report generation
+│       └── automl.py           ML model training and selection
 ├── frontend/
 │   ├── src/
 │   │   ├── App.jsx             Main application component
@@ -174,7 +168,6 @@ sme-analytics-platform/
 | GET | /health | Health check |
 | POST | /upload | Main analysis endpoint |
 | POST | /explain | AI explanation via Groq |
-| POST | /generate-report | PDF report download |
 
 ---
 
@@ -205,10 +198,7 @@ Chart generation
 Insight and statistics generation
          |
          v
-AI explanation (Groq)
-         |
-         v
-PDF report available for download
+AI explanation (Claude)
          |
          v
 All data and models deleted
@@ -225,7 +215,7 @@ Environment variables required on Render:
 
 | Key | Description |
 |---|---|
-| GROQ_API_KEY | Your Groq API key from console.groq.com |
+| ANTHROPIC_API_KEY | Your Anthropic API key from console.anthropic.com |
 
 ---
 
