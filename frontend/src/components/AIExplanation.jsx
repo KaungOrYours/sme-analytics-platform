@@ -18,7 +18,7 @@ function AIExplanation({ fileData }) {
         }
       )
       setExplanation(response.data.explanation)
-    } catch (err) {
+    } catch {
       setExplanation('Could not generate explanation.')
     } finally {
       setLoading(false)

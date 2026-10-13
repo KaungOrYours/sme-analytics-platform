@@ -29,7 +29,7 @@ function App() {
         formData
       )
       setFileData(response.data)
-    } catch (err) {
+    } catch {
       setError('Failed to process file. Please try again.')
     } finally {
       setLoading(false)

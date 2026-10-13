@@ -64,7 +64,7 @@ function MLResults({ results }) {
                   <p className="text-blue-400
                   font-bold text-2xl">
                     {key.includes('score') ||
-                     key === 'accuracy'
+                     key.includes('accuracy')
                       ? `${(value * 100).toFixed(1)}%`
                       : value.toLocaleString()
                     }
@@ -150,6 +150,43 @@ function MLResults({ results }) {
           </div>
         </div>
       )}
+      {/* All Candidate Models */}
+      {results.all_candidate_scores &&
+       results.all_candidate_scores.length > 0 && (
+        <div className="mb-4">
+          <p className="text-gray-400 text-sm mb-3">
+             All Models Tried (cross-validated):
+          </p>
+          <div className="space-y-2">
+            {results.all_candidate_scores.map((item, i) => {
+              const scoreKey = Object.keys(item).find(
+                (k) => k !== 'model'
+              )
+              const scoreValue = item[scoreKey]
+              return (
+                <div
+                  key={i}
+                  className="flex items-center justify-between
+                  bg-gray-700 rounded-lg px-4 py-2"
+                >
+                  <span className="text-gray-300 text-sm">
+                    {item.model}
+                    {item.model === results.model_name && (
+                      <span className="text-green-400 text-xs ml-2">
+                        (selected)
+                      </span>
+                    )}
+                  </span>
+                  <span className="text-gray-400 text-sm">
+                    {(scoreValue * 100).toFixed(1)}%
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
       {/* ML Insights */}
       {results.ml_insights &&
        results.ml_insights.length > 0 && (
