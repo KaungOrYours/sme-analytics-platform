@@ -6,7 +6,7 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from services.automl import run_automl
 from services.cleaner import detect_problems, auto_clean, calculate_quality_score, detect_problem_type, make_readable_name
-from groq import Groq
+from anthropic import Anthropic
 import pandas as pd
 import io
 import os
@@ -141,13 +141,10 @@ async def upload_file(file: UploadFile = File(...)):
 @app.post("/explain")
 async def explain_data(request: dict):
     """
-    Use Groq LLM to explain analysis results
+    Use Claude to explain analysis results
     """
     try:
-        import os
-        key = os.environ.get("GROQ_API_KEY")
-        print(f"API Key found: {bool(key)}")
-        print(f"Key length: {len(key) if key else 0}")
+        key = os.environ.get("ANTHROPIC_API_KEY")
 
         if not key:
             return {
@@ -155,7 +152,7 @@ async def explain_data(request: dict):
                 "status": "error"
             }
 
-        client = Groq(api_key=key)
+        client = Anthropic(api_key=key)
 
         context = f"""
         Dataset: {request.get('filename', 'Unknown')}
@@ -173,33 +170,41 @@ async def explain_data(request: dict):
             'Explain this business data in simple terms. What are the key findings and what actions should I take?'
         )
 
-        response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+        response = client.messages.create(
+            model="claude-opus-5",
+            max_tokens=2048,
+            output_config={"effort": "low"},
+            system="""You are a friendly business analyst
+            helping Myanmar small business owners understand
+            their data. Explain insights in simple plain English.
+            No technical jargon. Be concise and actionable.
+            Maximum 3-4 sentences per point.""",
             messages=[
-                {
-                    "role": "system",
-                    "content": """You are a friendly business analyst 
-                    helping Myanmar small business owners understand 
-                    their data. Explain insights in simple plain English. 
-                    No technical jargon. Be concise and actionable. 
-                    Maximum 3-4 sentences per point."""
-                },
                 {
                     "role": "user",
                     "content": f"""
                     Here is the analysis of a business dataset:
                     {context}
-                    
+
                     Question: {user_question}
                     """
                 }
-            ],
-            max_tokens=500,
-            temperature=0.7
+            ]
+        )
+
+        if response.stop_reason == "refusal":
+            return {
+                "explanation": "Could not generate an explanation for this request.",
+                "status": "error"
+            }
+
+        explanation = next(
+            (block.text for block in response.content if block.type == "text"),
+            None
         )
 
         return {
-            "explanation": response.choices[0].message.content,
+            "explanation": explanation or "No explanation generated.",
             "status": "success"
         }
 
