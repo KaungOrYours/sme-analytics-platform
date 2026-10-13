@@ -32,7 +32,7 @@ def detect_problems(df):
                     clean = str(val).replace(',', '').replace('ks', '').replace('MMK', '').strip()
                     float(clean)
                     numeric_count += 1
-                except:
+                except Exception:
                     pass
             if numeric_count > len(sample) * 0.7:
                 wrong_types.append(col)
@@ -127,7 +127,7 @@ def auto_clean(df):
                 try:
                     float(cleaned)
                     numeric_count += 1
-                except:
+                except Exception:
                     pass
 
             if numeric_count >= len(sample) * 0.6:
@@ -156,7 +156,7 @@ def auto_clean(df):
                         )
                     try:
                         return float(cleaned)
-                    except:
+                    except Exception:
                         return None
 
                 df[col] = df[col].apply(clean_number)
@@ -196,7 +196,7 @@ def auto_clean(df):
                                 f"✅ Parsed dates in '{col}'"
                             )
                             break
-                    except:
+                    except Exception:
                         continue
 
     # 6. Boolean standardization
@@ -318,6 +318,18 @@ def detect_problem_type(df):
         "suggested_target": None
     }
 
+    target_keywords = [
+        'target', 'label', 'class', 'outcome', 'result',
+        'churn', 'status', 'response', 'purchased', 'default',
+        'category', 'segment'
+    ]
+
+    def pick_target(candidates):
+        for col in candidates:
+            if any(word in col.lower() for word in target_keywords):
+                return col
+        return candidates[-1] if candidates else None
+
     # Check for datetime columns
     has_datetime = False
     date_col = None
@@ -330,11 +342,8 @@ def detect_problem_type(df):
                 has_datetime = True
                 date_col = col
                 break
-            except:
+            except Exception:
                 continue
-            has_datetime = True
-            date_col = col
-            break
 
     # Get numeric columns
     numeric_cols = df.select_dtypes(
@@ -342,11 +351,10 @@ def detect_problem_type(df):
     ).columns.tolist()
 
     # Check for binary columns (0/1)
-    binary_cols = []
-    for col in df.columns:
-        unique_vals = df[col].dropna().unique()
-        if len(unique_vals) == 2:
-            binary_cols.append(col)
+    binary_cols = [
+        col for col in df.columns
+        if df[col].dropna().nunique() == 2
+    ]
 
     # Decision logic
     if has_datetime and len(numeric_cols) > 0:
@@ -356,14 +364,14 @@ def detect_problem_type(df):
         result["suggested_target"] = numeric_cols[0]
 
     elif len(binary_cols) > 0:
-        target = binary_cols[-1]
+        target = pick_target(binary_cols)
         result["problem_type"] = "classification"
         result["confidence"] = 85
         result["reason"] = f"Binary column '{target}' detected — classification analysis available"
         result["suggested_target"] = target
 
     elif len(numeric_cols) >= 2:
-        target = numeric_cols[-1]
+        target = pick_target(numeric_cols)
         result["problem_type"] = "regression"
         result["confidence"] = 75
         result["reason"] = f"Multiple numeric columns detected — value prediction available"

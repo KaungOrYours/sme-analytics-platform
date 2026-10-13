@@ -1,14 +1,15 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold, KFold
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import LabelEncoder, StandardScaler, OneHotEncoder
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor, GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression, LinearRegression, Ridge
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.cluster import KMeans
 from sklearn.metrics import accuracy_score, r2_score, mean_absolute_error
-import warnings
-warnings.filterwarnings('ignore')
 
 
 def run_automl(df, problem_type, target_col):
@@ -23,6 +24,7 @@ def run_automl(df, problem_type, target_col):
         "model_name": None,
         "performance": {},
         "feature_importance": [],
+        "all_candidate_scores": [],
         "ml_insights": []
     }
 
@@ -71,7 +73,11 @@ def run_automl(df, problem_type, target_col):
 
 
 def run_time_series(df, target_col, results):
-    """Run time series forecasting"""
+    """
+    Run time series forecasting.
+    R2 is reported from a held-out backtest (fit on the first 80%,
+    scored on the last 20%), not from the training fit itself.
+    """
     try:
         # Find numeric target
         num_cols = df.select_dtypes(
@@ -102,15 +108,21 @@ def run_time_series(df, target_col, results):
             )
             return results
 
-        # Fit linear trend
+        # Backtest: hold out the last 20% to measure honest out-of-sample accuracy
+        split_at = min(max(int(len(y) * 0.8), len(y) - 5), len(y) - 1)
+        X_train, X_test = X[:split_at], X[split_at:]
+        y_train, y_test = y[:split_at], y[split_at:]
+
+        backtest_model = LinearRegression()
+        backtest_model.fit(X_train, y_train)
+        y_pred_test = backtest_model.predict(X_test)
+        ss_res = np.sum((y_test - y_pred_test) ** 2)
+        ss_tot = np.sum((y_test - np.mean(y_test)) ** 2)
+        r2 = 1 - (ss_res / ss_tot) if ss_tot != 0 else 0
+
+        # Refit on the full series for the actual forward-looking forecast
         model = LinearRegression()
         model.fit(X, y)
-
-        # Calculate accuracy
-        y_pred = model.predict(X)
-        ss_res = np.sum((y - y_pred) ** 2)
-        ss_tot = np.sum((y - np.mean(y)) ** 2)
-        r2 = 1 - (ss_res / ss_tot) if ss_tot != 0 else 0
 
         # Forecast next 5 periods
         future_X = np.arange(
@@ -135,7 +147,6 @@ def run_time_series(df, target_col, results):
         results["model_name"] = "Linear Trend Forecasting"
         results["performance"] = {
             "r2_score": round(max(r2, 0), 3),
-            "trend": trend
         }
         results["feature_importance"] = []
         results["forecast"] = [
@@ -156,6 +167,9 @@ def run_time_series(df, target_col, results):
         )
         results["ml_insights"].append(
             f"5-period forecast: {forecast[-1]:,.2f}"
+        )
+        results["ml_insights"].append(
+            f"R2 is measured on a held-out backtest of the last {len(y_test)} points, not the training fit"
         )
 
         if r2 > 0.7:
@@ -180,21 +194,21 @@ def run_time_series(df, target_col, results):
     return results
 
 
-def prepare_features(df, target_col):
+def select_features(df, target_col):
     """
-    Prepare features for ML
-    Handle encoding and scaling
+    Split a dataframe into feature matrix and target.
+    No imputation or encoding happens here — that is done inside each
+    model's Pipeline so it is fit on the training fold only, not on data
+    that includes the test rows.
     """
-    df_ml = df.copy()
-
-    if target_col in df_ml.columns:
-        y = df_ml[target_col]
-        X = df_ml.drop(columns=[target_col])
-    else:
+    if target_col not in df.columns:
         return None, None
 
-    X = X.select_dtypes(include=[np.number])
-    X = X.fillna(X.median())
+    y = df[target_col]
+    X = df.drop(columns=[target_col])
+
+    # Drop columns with no values at all — nothing to learn from them
+    X = X.dropna(axis=1, how='all')
 
     if y.dtype == 'object':
         le = LabelEncoder()
@@ -203,27 +217,66 @@ def prepare_features(df, target_col):
     return X, y
 
 
+def build_preprocessor(X):
+    """
+    Build a leakage-safe preprocessing step: median-impute + scale numeric
+    columns, most-frequent-impute + one-hot encode categorical columns.
+    Fit only ever happens on the training fold via the surrounding Pipeline.
+    """
+    numeric_cols = X.select_dtypes(include=[np.number]).columns.tolist()
+    categorical_cols = X.select_dtypes(exclude=[np.number]).columns.tolist()
+
+    transformers = []
+
+    if numeric_cols:
+        numeric_pipeline = Pipeline([
+            ("imputer", SimpleImputer(strategy="median")),
+            ("scaler", StandardScaler())
+        ])
+        transformers.append(("num", numeric_pipeline, numeric_cols))
+
+    if categorical_cols:
+        categorical_pipeline = Pipeline([
+            ("imputer", SimpleImputer(strategy="most_frequent")),
+            ("onehot", OneHotEncoder(handle_unknown="ignore"))
+        ])
+        transformers.append(("cat", categorical_pipeline, categorical_cols))
+
+    return ColumnTransformer(transformers)
+
+
+def readable_feature_names(preprocessor):
+    names = preprocessor.get_feature_names_out()
+    return [n.split("__", 1)[-1] for n in names]
+
+
 def run_classification(df, target_col, results):
-    """Run classification with multiple models"""
+    """
+    Run classification with multiple models.
+    Models are selected by cross-validated score on the training fold only
+    (not by score on the held-out test set). The test set is used once,
+    purely to report a final, unbiased performance number.
+    """
     try:
-        X, y = prepare_features(df, target_col)
+        X, y = select_features(df, target_col)
 
         if X is None or len(X.columns) == 0:
             results["status"] = "error"
             results["ml_insights"].append(
-                "Not enough numeric features for classification"
+                "No usable features for classification"
             )
             return results
 
+        class_counts = pd.Series(y).value_counts()
+        stratify_arg = y if class_counts.min() >= 2 else None
+
         X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42
+            X, y, test_size=0.2, random_state=42, stratify=stratify_arg
         )
 
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
+        preprocessor = build_preprocessor(X_train)
 
-        models = {
+        candidates = {
             "Random Forest": RandomForestClassifier(
                 n_estimators=50, random_state=42
             ),
@@ -238,47 +291,77 @@ def run_classification(df, target_col, results):
             )
         }
 
-        best_acc = 0
-        best_name = None
-        best_model = None
+        min_train_class_count = int(pd.Series(y_train).value_counts().min())
+        if min_train_class_count >= 2:
+            cv_folds = min(5, min_train_class_count)
+            cv = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
+        else:
+            cv_folds = min(5, len(y_train))
+            cv = KFold(n_splits=cv_folds, shuffle=True, random_state=42)
 
-        for name, model in models.items():
+        all_scores = []
+        best_cv_score = -1
+        best_name = None
+        best_pipeline = None
+
+        for name, model in candidates.items():
             try:
-                if name == "Logistic Regression":
-                    model.fit(X_train_scaled, y_train)
-                    acc = accuracy_score(
-                        y_test,
-                        model.predict(X_test_scaled)
-                    )
-                else:
-                    model.fit(X_train, y_train)
-                    acc = accuracy_score(
-                        y_test,
-                        model.predict(X_test)
-                    )
-                if acc > best_acc:
-                    best_acc = acc
+                pipeline = Pipeline([
+                    ("preprocess", preprocessor),
+                    ("model", model)
+                ])
+                cv_scores = cross_val_score(
+                    pipeline, X_train, y_train, cv=cv, scoring="accuracy"
+                )
+                mean_cv = float(cv_scores.mean())
+                all_scores.append({
+                    "model": name,
+                    "cv_accuracy": round(mean_cv, 3)
+                })
+
+                if mean_cv > best_cv_score:
+                    best_cv_score = mean_cv
                     best_name = name
-                    best_model = model
-            except:
+                    best_pipeline = pipeline
+            except Exception:
                 continue
 
-        if best_model is None:
+        if best_pipeline is None:
             results["status"] = "error"
             results["ml_insights"].append(
                 "All models failed to train"
             )
             return results
 
+        best_pipeline.fit(X_train, y_train)
+        test_acc = accuracy_score(
+            y_test, best_pipeline.predict(X_test)
+        )
+
         results["model_name"] = best_name
         results["performance"] = {
-            "accuracy": round(best_acc, 3)
+            "cv_accuracy": round(best_cv_score, 3),
+            "test_accuracy": round(test_acc, 3)
         }
+        results["all_candidate_scores"] = sorted(
+            all_scores, key=lambda r: r["cv_accuracy"], reverse=True
+        )
 
-        if hasattr(best_model, 'feature_importances_'):
-            importances = best_model.feature_importances_
+        feature_names = readable_feature_names(
+            best_pipeline.named_steps["preprocess"]
+        )
+        fitted_model = best_pipeline.named_steps["model"]
+
+        importances = None
+        if hasattr(fitted_model, 'feature_importances_'):
+            importances = fitted_model.feature_importances_
+        elif hasattr(fitted_model, 'coef_'):
+            raw = np.abs(fitted_model.coef_[0])
+            importances = raw / raw.max() if raw.max() > 0 else raw
+
+        if importances is not None:
             feature_imp = sorted(
-                zip(X.columns, importances),
+                zip(feature_names, importances),
                 key=lambda x: x[1],
                 reverse=True
             )
@@ -289,35 +372,22 @@ def run_classification(df, target_col, results):
                 }
                 for f, imp in feature_imp[:6]
             ]
-        elif hasattr(best_model, 'coef_'):
-            importances = abs(best_model.coef_[0])
-            feature_imp = sorted(
-                zip(X.columns, importances),
-                key=lambda x: x[1],
-                reverse=True
-            )
-            results["feature_importance"] = [
-                {
-                    "feature": f,
-                    "importance": round(
-                        float(imp) / max(importances), 3
-                    )
-                }
-                for f, imp in feature_imp[:6]
-            ]
 
         results["ml_insights"].append(
-            f"Best model: {best_name}"
+            f"Best model: {best_name} (selected by {cv_folds}-fold cross-validation)"
         )
         results["ml_insights"].append(
-            f"Prediction accuracy: {best_acc * 100:.1f}%"
+            f"Cross-validated accuracy: {best_cv_score * 100:.1f}%"
+        )
+        results["ml_insights"].append(
+            f"Held-out test accuracy: {test_acc * 100:.1f}%"
         )
 
-        if best_acc > 0.8:
+        if best_cv_score > 0.8:
             results["ml_insights"].append(
                 "Strong predictive patterns found ✅"
             )
-        elif best_acc > 0.6:
+        elif best_cv_score > 0.6:
             results["ml_insights"].append(
                 "Moderate patterns — more data may improve accuracy"
             )
@@ -329,8 +399,7 @@ def run_classification(df, target_col, results):
         if results["feature_importance"]:
             top = results["feature_importance"][0]
             results["ml_insights"].append(
-                f"Most important factor: "
-                f"'{top['feature'].replace('_', ' ')}'"
+                f"Most important factor: '{top['feature']}'"
             )
 
     except Exception as e:
@@ -343,14 +412,18 @@ def run_classification(df, target_col, results):
 
 
 def run_regression(df, target_col, results):
-    """Run regression with multiple models"""
+    """
+    Run regression with multiple models.
+    Models are selected by cross-validated R2 on the training fold only.
+    The test set is used once, purely to report a final, unbiased score.
+    """
     try:
-        X, y = prepare_features(df, target_col)
+        X, y = select_features(df, target_col)
 
         if X is None or len(X.columns) == 0:
             results["status"] = "error"
             results["ml_insights"].append(
-                "Not enough numeric features for regression"
+                "No usable features for regression"
             )
             return results
 
@@ -358,7 +431,9 @@ def run_regression(df, target_col, results):
             X, y, test_size=0.2, random_state=42
         )
 
-        models = {
+        preprocessor = build_preprocessor(X_train)
+
+        candidates = {
             "Random Forest": RandomForestRegressor(
                 n_estimators=50, random_state=42
             ),
@@ -366,41 +441,81 @@ def run_regression(df, target_col, results):
             "Ridge Regression": Ridge(alpha=1.0)
         }
 
-        best_r2 = -999
-        best_name = None
-        best_model = None
+        cv = KFold(n_splits=5, shuffle=True, random_state=42)
 
-        for name, model in models.items():
+        all_scores = []
+        best_cv_score = -np.inf
+        best_name = None
+        best_pipeline = None
+
+        for name, model in candidates.items():
             try:
-                model.fit(X_train, y_train)
-                r2 = r2_score(
-                    y_test, model.predict(X_test)
+                pipeline = Pipeline([
+                    ("preprocess", preprocessor),
+                    ("model", model)
+                ])
+                cv_scores = cross_val_score(
+                    pipeline, X_train, y_train, cv=cv, scoring="r2"
                 )
-                if r2 > best_r2:
-                    best_r2 = r2
+                mean_cv = float(cv_scores.mean())
+                all_scores.append({
+                    "model": name,
+                    "cv_r2": round(mean_cv, 3)
+                })
+
+                if mean_cv > best_cv_score:
+                    best_cv_score = mean_cv
                     best_name = name
-                    best_model = model
-            except:
+                    best_pipeline = pipeline
+            except Exception:
                 continue
 
-        if best_model is None:
+        if best_pipeline is None:
             results["status"] = "error"
+            results["ml_insights"].append(
+                "All models failed to train"
+            )
             return results
 
-        mae = mean_absolute_error(
-            y_test, best_model.predict(X_test)
-        )
+        best_pipeline.fit(X_train, y_train)
+        test_pred = best_pipeline.predict(X_test)
+        test_r2 = r2_score(y_test, test_pred)
+        mae = mean_absolute_error(y_test, test_pred)
 
         results["model_name"] = best_name
         results["performance"] = {
-            "r2_score": round(max(best_r2, 0), 3),
+            "cv_r2_score": round(max(best_cv_score, 0), 3),
+            "test_r2_score": round(max(test_r2, 0), 3),
             "mae": round(float(mae), 2)
         }
+        results["all_candidate_scores"] = sorted(
+            all_scores, key=lambda r: r["cv_r2"], reverse=True
+        )
 
-        if hasattr(best_model, 'feature_importances_'):
-            importances = best_model.feature_importances_
+        feature_names = readable_feature_names(
+            best_pipeline.named_steps["preprocess"]
+        )
+        fitted_model = best_pipeline.named_steps["model"]
+
+        if hasattr(fitted_model, 'feature_importances_'):
+            importances = fitted_model.feature_importances_
             feature_imp = sorted(
-                zip(X.columns, importances),
+                zip(feature_names, importances),
+                key=lambda x: x[1],
+                reverse=True
+            )
+            results["feature_importance"] = [
+                {
+                    "feature": f,
+                    "importance": round(float(imp), 3)
+                }
+                for f, imp in feature_imp[:6]
+            ]
+        elif hasattr(fitted_model, 'coef_'):
+            raw = np.abs(fitted_model.coef_)
+            denom = raw.max() if raw.max() > 0 else 1
+            feature_imp = sorted(
+                zip(feature_names, raw / denom),
                 key=lambda x: x[1],
                 reverse=True
             )
@@ -413,20 +528,23 @@ def run_regression(df, target_col, results):
             ]
 
         results["ml_insights"].append(
-            f"Best model: {best_name}"
+            f"Best model: {best_name} (selected by 5-fold cross-validation)"
         )
         results["ml_insights"].append(
-            f"Prediction accuracy (R²): {best_r2 * 100:.1f}%"
+            f"Cross-validated accuracy (R2): {best_cv_score * 100:.1f}%"
+        )
+        results["ml_insights"].append(
+            f"Held-out test accuracy (R2): {test_r2 * 100:.1f}%"
         )
         results["ml_insights"].append(
             f"Average prediction error (MAE): {mae:.2f}"
         )
 
-        if best_r2 > 0.8:
+        if best_cv_score > 0.8:
             results["ml_insights"].append(
                 "Excellent prediction accuracy ✅"
             )
-        elif best_r2 > 0.5:
+        elif best_cv_score > 0.5:
             results["ml_insights"].append(
                 "Good accuracy — reasonable predictions possible"
             )
@@ -438,8 +556,7 @@ def run_regression(df, target_col, results):
         if results["feature_importance"]:
             top = results["feature_importance"][0]
             results["ml_insights"].append(
-                f"Strongest predictor: "
-                f"'{top['feature'].replace('_', ' ')}'"
+                f"Strongest predictor: '{top['feature']}'"
             )
 
     except Exception as e:
@@ -456,7 +573,7 @@ def run_clustering(df, results):
     try:
         df_num = df.select_dtypes(
             include=['number']
-        ).fillna(0)
+        )
 
         if df_num.shape[1] < 2:
             results["status"] = "insufficient_features"
@@ -464,6 +581,8 @@ def run_clustering(df, results):
                 "Need 2+ numeric columns for clustering"
             )
             return results
+
+        df_num = df_num.fillna(df_num.median())
 
         scaler = StandardScaler()
         X_scaled = scaler.fit_transform(df_num)
