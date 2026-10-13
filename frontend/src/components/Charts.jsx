@@ -25,7 +25,8 @@ function ChartItem({ col, data }) {
   const ref = useRef(null)
 
   useEffect(() => {
-    if (!ref.current) return
+    const node = ref.current
+    if (!node) return
 
     const darkLayout = {
       paper_bgcolor: '#1f2937',
@@ -61,7 +62,7 @@ function ChartItem({ col, data }) {
     }
 
     if (data.type === 'numeric') {
-      Plotly.newPlot(ref.current, [{
+      Plotly.newPlot(node, [{
         x: data.values,
         type: 'histogram',
         marker: {
@@ -75,7 +76,7 @@ function ChartItem({ col, data }) {
         displayModeBar: false
       })
     } else {
-      Plotly.newPlot(ref.current, [{
+      Plotly.newPlot(node, [{
         x: data.labels,
         y: data.values,
         type: 'bar',
@@ -91,7 +92,7 @@ function ChartItem({ col, data }) {
     }
 
     return () => {
-      if (ref.current) Plotly.purge(ref.current)
+      Plotly.purge(node)
     }
   }, [col, data])
 
