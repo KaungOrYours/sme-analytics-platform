@@ -11,11 +11,79 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.cluster import KMeans
 from sklearn.metrics import accuracy_score, r2_score, mean_absolute_error
 
+# Reliability-warning thresholds. Design choices, not validated standards —
+# see docs/evaluation_protocol.md Section 2. State as design choices in the
+# report and be ready to justify the numbers in the viva (same treatment as
+# calculate_quality_score and the "poor performance" thresholds).
+MIN_ROWS_PER_FEATURE = 10
+MAX_CV_STD = 0.10
+MAX_PLAUSIBLE_CV_SCORE = 0.98
 
-def run_automl(df, problem_type, target_col):
+
+def build_reliability_warnings(rows_to_features_ratio, cv_std, cv_score):
+    """
+    Score the three reliability warnings from evaluation_protocol.md Section 2
+    as binary predictors, each carrying the value checked and the threshold
+    used, so the warnings evaluation can consume them directly.
+    """
+    warnings_list = []
+
+    low_ratio = rows_to_features_ratio < MIN_ROWS_PER_FEATURE
+    warnings_list.append({
+        "name": "low_rows_to_features_ratio",
+        "triggered": bool(low_ratio),
+        "value": round(float(rows_to_features_ratio), 2),
+        "threshold": MIN_ROWS_PER_FEATURE,
+        "message": (
+            f"Only {rows_to_features_ratio:.1f} rows per feature "
+            f"(below {MIN_ROWS_PER_FEATURE}) — model may be overfit."
+            if low_ratio else
+            f"{rows_to_features_ratio:.1f} rows per feature — adequate."
+        )
+    })
+
+    unstable_cv = cv_std is not None and cv_std > MAX_CV_STD
+    warnings_list.append({
+        "name": "unstable_cross_validation",
+        "triggered": bool(unstable_cv),
+        "value": round(float(cv_std), 3) if cv_std is not None else None,
+        "threshold": MAX_CV_STD,
+        "message": (
+            f"Cross-validation score varies by {cv_std:.3f} across folds "
+            f"(above {MAX_CV_STD}) — model selection may not be reliable."
+            if unstable_cv else
+            "Cross-validation score is stable across folds."
+        )
+    })
+
+    suspected_leakage = cv_score is not None and cv_score > MAX_PLAUSIBLE_CV_SCORE
+    warnings_list.append({
+        "name": "suspected_leakage",
+        "triggered": bool(suspected_leakage),
+        "value": round(float(cv_score), 3) if cv_score is not None else None,
+        "threshold": MAX_PLAUSIBLE_CV_SCORE,
+        "message": (
+            f"Cross-validated score ({cv_score:.3f}) is implausibly high "
+            f"(above {MAX_PLAUSIBLE_CV_SCORE}) — check for leakage or a "
+            f"near-duplicate target."
+            if suspected_leakage else
+            "Cross-validated score is within a plausible range."
+        )
+    })
+
+    return warnings_list
+
+
+def run_automl(df, problem_type, target_col, seed=42):
     """
     Run AutoML using scikit-learn
     Automatically selects best model
+
+    seed controls the train/test split and every model's random_state.
+    Defaults to 42 so the live app's behaviour is unchanged; the evaluation
+    harness (evaluation/) passes different seeds to satisfy the locked
+    protocol's "repeated at multiple fixed random seeds" requirement
+    (docs/evaluation_protocol.md Section 3).
     """
     results = {
         "status": "success",
@@ -25,6 +93,7 @@ def run_automl(df, problem_type, target_col):
         "performance": {},
         "feature_importance": [],
         "all_candidate_scores": [],
+        "reliability_warnings": [],
         "ml_insights": []
     }
 
@@ -46,15 +115,15 @@ def run_automl(df, problem_type, target_col):
 
         # Sample large datasets for speed
         if len(df) > 3000:
-            df = df.sample(3000, random_state=42)
+            df = df.sample(3000, random_state=seed)
 
         if problem_type == "classification":
             results = run_classification(
-                df, target_col, results
+                df, target_col, results, seed=seed
             )
         elif problem_type == "regression":
             results = run_regression(
-                df, target_col, results
+                df, target_col, results, seed=seed
             )
         elif problem_type == "clustering":
             results = run_clustering(
@@ -250,7 +319,7 @@ def readable_feature_names(preprocessor):
     return [n.split("__", 1)[-1] for n in names]
 
 
-def run_classification(df, target_col, results):
+def run_classification(df, target_col, results, seed=42):
     """
     Run classification with multiple models.
     Models are selected by cross-validated score on the training fold only
@@ -271,36 +340,37 @@ def run_classification(df, target_col, results):
         stratify_arg = y if class_counts.min() >= 2 else None
 
         X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42, stratify=stratify_arg
+            X, y, test_size=0.2, random_state=seed, stratify=stratify_arg
         )
 
         preprocessor = build_preprocessor(X_train)
 
         candidates = {
             "Random Forest": RandomForestClassifier(
-                n_estimators=50, random_state=42
+                n_estimators=50, random_state=seed
             ),
             "Logistic Regression": LogisticRegression(
-                random_state=42, max_iter=200
+                random_state=seed, max_iter=200
             ),
             "Decision Tree": DecisionTreeClassifier(
-                random_state=42
+                random_state=seed
             ),
             "Gradient Boosting": GradientBoostingClassifier(
-                n_estimators=50, random_state=42
+                n_estimators=50, random_state=seed
             )
         }
 
         min_train_class_count = int(pd.Series(y_train).value_counts().min())
         if min_train_class_count >= 2:
             cv_folds = min(5, min_train_class_count)
-            cv = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
+            cv = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=seed)
         else:
             cv_folds = min(5, len(y_train))
-            cv = KFold(n_splits=cv_folds, shuffle=True, random_state=42)
+            cv = KFold(n_splits=cv_folds, shuffle=True, random_state=seed)
 
         all_scores = []
         best_cv_score = -1
+        best_cv_std = None
         best_name = None
         best_pipeline = None
 
@@ -321,6 +391,7 @@ def run_classification(df, target_col, results):
 
                 if mean_cv > best_cv_score:
                     best_cv_score = mean_cv
+                    best_cv_std = float(cv_scores.std())
                     best_name = name
                     best_pipeline = pipeline
             except Exception:
@@ -351,6 +422,13 @@ def run_classification(df, target_col, results):
             best_pipeline.named_steps["preprocess"]
         )
         fitted_model = best_pipeline.named_steps["model"]
+
+        rows_to_features_ratio = (
+            len(X_train) / len(feature_names) if feature_names else float('inf')
+        )
+        results["reliability_warnings"] = build_reliability_warnings(
+            rows_to_features_ratio, best_cv_std, best_cv_score
+        )
 
         importances = None
         if hasattr(fitted_model, 'feature_importances_'):
@@ -411,7 +489,7 @@ def run_classification(df, target_col, results):
     return results
 
 
-def run_regression(df, target_col, results):
+def run_regression(df, target_col, results, seed=42):
     """
     Run regression with multiple models.
     Models are selected by cross-validated R2 on the training fold only.
@@ -428,23 +506,24 @@ def run_regression(df, target_col, results):
             return results
 
         X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42
+            X, y, test_size=0.2, random_state=seed
         )
 
         preprocessor = build_preprocessor(X_train)
 
         candidates = {
             "Random Forest": RandomForestRegressor(
-                n_estimators=50, random_state=42
+                n_estimators=50, random_state=seed
             ),
             "Linear Regression": LinearRegression(),
             "Ridge Regression": Ridge(alpha=1.0)
         }
 
-        cv = KFold(n_splits=5, shuffle=True, random_state=42)
+        cv = KFold(n_splits=5, shuffle=True, random_state=seed)
 
         all_scores = []
         best_cv_score = -np.inf
+        best_cv_std = None
         best_name = None
         best_pipeline = None
 
@@ -465,6 +544,7 @@ def run_regression(df, target_col, results):
 
                 if mean_cv > best_cv_score:
                     best_cv_score = mean_cv
+                    best_cv_std = float(cv_scores.std())
                     best_name = name
                     best_pipeline = pipeline
             except Exception:
@@ -496,6 +576,13 @@ def run_regression(df, target_col, results):
             best_pipeline.named_steps["preprocess"]
         )
         fitted_model = best_pipeline.named_steps["model"]
+
+        rows_to_features_ratio = (
+            len(X_train) / len(feature_names) if feature_names else float('inf')
+        )
+        results["reliability_warnings"] = build_reliability_warnings(
+            rows_to_features_ratio, best_cv_std, best_cv_score
+        )
 
         if hasattr(fitted_model, 'feature_importances_'):
             importances = fitted_model.feature_importances_
