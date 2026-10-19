@@ -17,24 +17,29 @@ empirical framework for evaluating whether an automated pipeline's reliability w
 failures. The pipeline and the manual-baseline comparison are the testbed that makes that question
 answerable, not a parallel contribution.
 
-## 2. Prerequisite: the warnings being evaluated don't exist in code yet
+## 2. The three warning signals (implemented 2026-10-19)
 
-Checked 2026-10-16: `backend/services/automl.py` and `cleaner.py` have no reliability-warning signals today.
-What exists: `calculate_quality_score` (cleaner.py, completeness/uniqueness/type-consistency mean) and a
-`confidence` field used only for problem-type detection (cleaner.py:316-382) — neither is a warning about
-model-selection reliability.
+Checked 2026-10-16: at that point `backend/services/automl.py` and `cleaner.py` had no reliability-warning
+signals. What existed was `calculate_quality_score` (cleaner.py, completeness/uniqueness/type-consistency
+mean) and a `confidence` field used only for problem-type detection (cleaner.py:316-382) — neither is a
+warning about model-selection reliability.
 
-Before the Week 4 warnings evaluation can run, three signals need to be added to `automl.py`, each cheap
-because the groundwork is already there:
+Implemented 2026-10-19 in `automl.py` (`build_reliability_warnings`, called from both `run_classification`
+and `run_regression` after the best model is fit). Each warning is returned per-run in
+`results["reliability_warnings"]` as `{name, triggered, value, threshold, message}`, so the evaluation
+harness can consume it directly as a binary predictor:
 
-| Warning | Signal | Why it's cheap |
+| Warning | Signal | Threshold (design choice — justify in viva) |
 |---|---|---|
-| Low rows-to-features ratio | `n_rows / n_features_after_encoding` below a threshold | One line from `X_train.shape` |
-| Unstable cross-validation | std of `cross_val_score` across folds, already computed per candidate model at automl.py:313 (classification) / :457 (regression), currently discarded | Just needs to be kept and returned instead of thrown away |
-| Suspected leakage | CV score (or train-vs-CV gap) implausibly high, e.g. CV accuracy/R² above a fixed ceiling | Heuristic on a number already computed |
+| `low_rows_to_features_ratio` | `len(X_train) / n_features_after_encoding` | triggered if < 10 rows per feature |
+| `unstable_cross_validation` | std of `cross_val_score` across folds for the *selected* model (previously computed then discarded at automl.py:313/:457, now kept) | triggered if std > 0.10 |
+| `suspected_leakage` | the selected model's mean CV score | triggered if > 0.98 (same ceiling for accuracy and R², both 0-1-ish scales) |
 
-This is tracked as a separate, scoped code task before Week 4 (not a redesign) — see
-`.claude/skills/SMEAnalysis/MEMORY.md` Change Log for when it lands.
+These thresholds are not validated standards, same treatment as `calculate_quality_score` and the "poor
+performance" definition in Section 4 below — state as a stated design choice in the report, not a given.
+Unit-tested manually against synthetic data (low ratio: 2 categorical columns with 40-50 levels over 120
+rows triggered correctly; leakage: a feature built from `target + tiny noise` triggered correctly; both
+off on a clean random dataset). No automated test suite exists yet (see CLAUDE.md Section 5 "still open").
 
 ## 3. The three evaluation axes
 
@@ -80,7 +85,12 @@ finding to report, not a reason to quietly loosen the thresholds and rerun.
 
 ## 5. Not yet decided here (next steps)
 
-- Exact dataset list (OpenML-CC18 + UCI picks) and the full-protocol-vs-lighter-pass split — Section 4
-  task for this week, goes in `docs/datasets.md`.
-- Tuning-budget specifics for the manual baseline — goes in `evaluation/README.md` when the harness is
-  scaffolded.
+- Exact dataset list (OpenML-CC18 + UCI picks) and the full-protocol-vs-lighter-pass split — a candidate
+  shortlist is now drafted in `docs/datasets.md` (2026-10-19) but still needs the student's final
+  confirmation and the licence/provenance checks before it's locked.
+- The harness itself is now built (2026-10-19, ahead of the Week 2 schedule) — see `evaluation/README.md`
+  for what exists and what's smoke-tested vs. what still needs the locked dataset shortlist to run for
+  real. Tuning-budget for the manual baseline is already stated there (`comparison_runner.RF_PARAM_GRID`),
+  not still pending.
+- Still open: the exact sample-size levels and seed count for the full run (Section 3 point 3) aren't
+  decided — needs stating explicitly, same treatment as everything else here, before the full run.

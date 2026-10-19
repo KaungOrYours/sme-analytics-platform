@@ -1,0 +1,24 @@
+Week,Start Date,End Date,Task,Milestone
+1,2026-10-13,2026-10-19,Finalize & present PDM plan,Milestone: PDM plan + presentation due 2026-10-14 (10%)
+1,2026-10-13,2026-10-19,Targeted lit review for novelty check and the 3+ references,
+1,2026-10-13,2026-10-19,Write and lock docs/evaluation_protocol.md (RQ wording, metrics, poor-performance definition),
+1,2026-10-13,2026-10-19,Implement 3 reliability-warning signals in backend/services/automl.py,
+1,2026-10-13,2026-10-19,Draft dataset shortlist with licences in docs/datasets.md,
+2,2026-10-20,2026-10-26,Build evaluation/ harness: error injector functions,
+2,2026-10-20,2026-10-26,Build evaluation/ harness: shared comparison runner (same splits/metrics/tuning budget),
+2,2026-10-20,2026-10-26,Build evaluation/ harness: warning-scoring functions,
+2,2026-10-20,2026-10-26,Revise for data ethics quiz,Milestone: prep for data ethics quiz due 2026-10-27 (10%)
+3,2026-10-27,2026-11-02,Sit data ethics quiz,Milestone: data ethics quiz due 2026-10-27 (10%)
+3,2026-10-27,2026-11-02,One-cycle timing test of the harness,
+3,2026-10-27,2026-11-02,Run full protocol on 3-4 deep-dive datasets,
+4,2026-11-03,2026-11-09,Lighter single-pass run on remaining datasets,
+4,2026-11-03,2026-11-09,Begin drafting FPR background/methodology (confirmed facts only),
+5,2026-11-10,2026-11-16,Analyse results: warning precision/recall/false-alarm rate,
+5,2026-11-10,2026-11-16,Analyse results: cleaning reconstruction accuracy per error type,
+5,2026-11-10,2026-11-16,Analyse results: automated-vs-manual comparison tables,
+5,2026-11-10,2026-11-16,Draft results/discussion chapters,
+6,2026-11-17,2026-11-20,Final polish and formatting,
+6,2026-11-17,2026-11-20,Assemble code appendix,
+6,2026-11-17,2026-11-20,Submit Final Project Report,Milestone: FPR due 2026-11-20 (70%)
+7,2026-11-21,2026-11-23,Viva prep: rehearse explaining every parameter choice and the warning-scoring logic,
+7,2026-11-21,2026-11-23,Attend viva,Milestone: viva due 2026-11-23 (10%, must pass)

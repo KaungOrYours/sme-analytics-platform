@@ -213,3 +213,12 @@ __pycache__/
 
 # Virtual environment
 venv/
+
+# Claude Code local project config — skill + memory, never commit/push
+.claude/
+
+# Evaluation harness: datasets fetched by evaluation/datasets.py (reproducible
+# from source URLs, no need to version the raw files) and generated result
+# dumps from evaluation/run_experiment.py
+evaluation/data/
+evaluation/results/
