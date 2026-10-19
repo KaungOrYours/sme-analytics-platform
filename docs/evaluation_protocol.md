@@ -1,96 +1,178 @@
-# Evaluation Protocol
+# Evaluation Protocol — FROZEN 2026-10-19
 
-Written and locked 2026-10-16, before any evaluation experiment runs, per Dr. Rama's corrective action #2
-(see `CLAUDE.md` Section 4). Any change to the research question, metrics, or the "poor performance"
-definition below after experiments start must be noted in the Change Log of
-`.claude/skills/SMEAnalysis/MEMORY.md` with a reason, since changing the target definition after seeing
-results would undermine the evaluation.
+Supersedes the earlier draft entirely. Rewritten to match the approved PDM plan
+(`Project and Data Management Plan (Kaung Htet).pdf`, submitted and approved by Dr. Rama, 14 Oct 2026),
+after running the required pilot (`evaluation/pilot.py`, results in `evaluation/results/pilot_results.json`
+— not committed, regenerate by rerunning the script). Per Cawley & Talbot (2010), every numeric choice below
+was fixed from the pilot and literature alone, before any full-protocol outcome was observed. If a later run
+makes any of these look wrong (e.g. almost everything or nothing gets labelled "poor"), that is a finding to
+report, not a reason to go back and adjust the numbers.
 
-## 1. Research question (locked)
+## 1. Research questions (locked, verbatim from the approved plan)
 
-How closely does an automated cleaning and model-selection pipeline match manually tuned models on small,
-messy tabular datasets, and how well do its built-in reliability warnings predict when its results will be
-poor?
+**RQ1 (contextual benchmark)**: What is the difference in the automated pipeline's performance, compared to
+the manual baseline, in small-data and training-corruption scenarios? Both pipelines run on the same outer
+partitions, the same pre-declared metrics, and a fixed wall-clock budget B per dataset; manual-baseline
+preprocessing and model family are fully prespecified in advance.
 
-Framing for the report and viva (per Rama, 2026-10-13): lead with the second half. The contribution is an
-empirical framework for evaluating whether an automated pipeline's reliability warnings predict its own
-failures. The pipeline and the manual-baseline comparison are the testbed that makes that question
-answerable, not a parallel contribution.
+**RQ2 (primary contribution)**: Do runs with excessive validation-to-test optimism differ in sigma_CV (std
+of cross-validation scores), and does sigma_CV provide additional discriminative information over n/p alone?
+`G = S_CV,selected - S_test`; `poor = 1[G > delta_G]`; delta_G is fixed in advance, independent of n/p and
+sigma_CV. Each diagnostic is scored independently; a combined signal is not assumed superior to either alone.
 
-## 2. The three warning signals (implemented 2026-10-19)
+**RQ3 (preliminary transfer)**: Do the diagnostics plus a combination rule, fit on the development group,
+show similar discrimination on the disjoint final-evaluation group? Explicitly a preliminary assessment, not
+a confirmatory generalisation test (only 7 datasets total).
 
-Checked 2026-10-16: at that point `backend/services/automl.py` and `cleaner.py` had no reliability-warning
-signals. What existed was `calculate_quality_score` (cleaner.py, completeness/uniqueness/type-consistency
-mean) and a `confidence` field used only for problem-type detection (cleaner.py:316-382) — neither is a
-warning about model-selection reliability.
+## 2. Diagnostics measured (exactly 2 — no leakage warning)
 
-Implemented 2026-10-19 in `automl.py` (`build_reliability_warnings`, called from both `run_classification`
-and `run_regression` after the best model is fit). Each warning is returned per-run in
-`results["reliability_warnings"]` as `{name, triggered, value, threshold, message}`, so the evaluation
-harness can consume it directly as a binary predictor:
+Per `docs/literature_matrix.md`: no valid, deployable leakage detector was found in the literature review, so
+per the approved plan's own rule, **no leakage-flag diagnostic is included in this formal evaluation.** The
+`suspected_leakage` warning in `backend/services/automl.py` remains in the live app (a UX feature, defensible
+on its own terms) but is explicitly out of scope for RQ1-RQ3.
 
-| Warning | Signal | Threshold (design choice — justify in viva) |
+| Diagnostic | Definition | Computed by |
 |---|---|---|
-| `low_rows_to_features_ratio` | `len(X_train) / n_features_after_encoding` | triggered if < 10 rows per feature |
-| `unstable_cross_validation` | std of `cross_val_score` across folds for the *selected* model (previously computed then discarded at automl.py:313/:457, now kept) | triggered if std > 0.10 |
-| `suspected_leakage` | the selected model's mean CV score | triggered if > 0.98 (same ceiling for accuracy and R², both 0-1-ish scales) |
+| n/p | outer-training rows / post-encoding feature count, both frozen before outcome observation | `evaluation/diagnostics.py: run_automated/run_manual_baseline` (`n`, `p`) |
+| sigma_CV | std (ddof=1) of the selected model's per-fold CV AUROC scores | `evaluation/diagnostics.py: cv_scores_for_model` |
 
-These thresholds are not validated standards, same treatment as `calculate_quality_score` and the "poor
-performance" definition in Section 4 below — state as a stated design choice in the report, not a given.
-Unit-tested manually against synthetic data (low ratio: 2 categorical columns with 40-50 levels over 120
-rows triggered correctly; leakage: a feature built from `target + tiny noise` triggered correctly; both
-off on a clean random dataset). No automated test suite exists yet (see CLAUDE.md Section 5 "still open").
+## 3. Metric
 
-## 3. The three evaluation axes
+**AUROC** for both S_CV (mean across folds for the selected/only model) and S_test — threshold-free, robust
+to the class imbalance present in several selected datasets (e.g. `appendicitis`, 85/21). Frozen choice, not
+revisited per dataset.
 
-Maps directly to Rama's per-component rigor table (`CLAUDE.md` Section 4).
+## 4. "Poor" outcome — frozen definition
 
-1. **Cleaning-detection evaluation.** Inject missing values, duplicates, inconsistent categories, and
-   outliers *separately* at 5/10/20%, on datasets with known ground truth. Measure: detection precision,
-   detection recall, reconstruction accuracy vs. ground truth, and downstream effect on model performance.
-2. **Model-selection benchmark.** Automated pipeline (fixed `n_estimators=50`, no hyperparameter search) vs.
-   a manually tuned scikit-learn baseline (grid/random search). Same data splits, same metrics, same stated
-   tuning budget, same information available to both — fixed here, before any run:
-   - Splits: repeated stratified K-fold CV (classification) / K-fold (regression), fixed seeds, train/test
-     held out once at the end exactly as the live pipeline already does.
-   - Metrics: F1 (macro) and accuracy for classification; RMSE and R² for regression. Report mean and
-     variance across seeds, not just mean.
-   - Tuning budget for the manual baseline: stated explicitly in `evaluation/README.md` once the harness
-     exists (e.g. a fixed grid, fixed number of random-search iterations) — written down before results are
-     seen, so the comparison can't be tuned after the fact.
-3. **Reliability-warnings evaluation (the novelty claim).** Each warning from Section 2, treated as a binary
-   predictor of the "poor performance" outcome defined below. Scored by precision, recall, false-alarm rate,
-   and discrimination (AUROC/AUPRC against the continuous held-out metric). Run across predefined
-   sample-size levels, repeated at multiple fixed random seeds — not ad hoc subsampling.
+```
+G = S_CV,selected - S_test
+poor = 1 if G > delta_G else 0
+delta_G = 0.05  (AUROC points)
+```
 
-## 4. Written definition of "poor performance" (locked)
+Signed, not absolute — this measures *optimism* (validation looked better than test), the specific construct
+RQ2 is about, not instability in either direction (a model that validates *worse* than it tests is not what
+"validation-to-test optimism" means, even though it would trip an absolute-gap rule).
 
-A run (one dataset × one size level × one seed × one error condition) is labelled **poor** if either holds,
-checked on the held-out test fold only:
+**delta_G = 0.05 is a round number fixed before seeing the full-protocol results**, chosen only from the
+pilot's observation that it labels a non-trivial minority (~11% of 27 pilot runs) as poor — neither near-zero
+(no signal to study) nor near-100% (no contrast to study). It is not derived from n/p or sigma_CV, per the
+approved plan's independence requirement. State this number as a stated design choice in the report, and be
+ready to justify 0.05 specifically in the viva (same treatment as every other fixed threshold in this
+project — see `CLAUDE.md` Section 5's note on `calculate_quality_score`).
 
-- **Weak:** mean held-out metric is at or below a trivial baseline — majority-class F1/accuracy for
-  classification, or R² ≤ 0 (worse than predicting the mean) for regression.
-- **Unstable:** the gap between the cross-validated selection score (what the pipeline used to pick the
-  model) and the held-out test score exceeds 0.10 absolute (classification metrics, 0-1 scale) or 0.15
-  absolute (R²) — signalling the selection step overfit or got lucky.
+## 5. Diagnostic thresholds (for precision/recall/false-alarm/MCC scoring)
 
-Either condition alone is sufficient; a run can be weak without being unstable and vice versa. These
-thresholds are a stated design choice, not a validated standard — flag this explicitly in the report's
-methodology chapter (same treatment as `calculate_quality_score` in `CLAUDE.md` Section 5) and be ready to
-justify the specific numbers in the viva.
+RQ2 needs each diagnostic binarised ("triggered" / not) to score precision, recall, false-alarm rate, and
+MCC against the poor/not-poor label. Both thresholds below are anchored to an external source, not fit to
+this project's own pilot data, to avoid the same optimistic-bias risk delta_G is designed to avoid:
 
-This definition is what Section 3's warnings get scored against. It must not change after experiments
-start; if it turns out to be wrong (e.g. everything gets labelled poor, or nothing does), that is itself a
-finding to report, not a reason to quietly loosen the thresholds and rerun.
+- **n/p < 10** — the classic "events per variable" heuristic for logistic-regression reliability (Peduzzi et
+  al., 1996; a long-standing biostatistics rule of thumb, cited here as an external anchor, not invented for
+  this project). Flag any run below this.
+- **sigma_CV > 0.10** — adapted from EvalML's own `AutoMLSearch._check_for_high_variance` (Alteryx, n.d.;
+  the literal real-world precedent RQ2 is testing the validity of), which flags high CV variance when the
+  score *range* (max-min across folds) exceeds 50% of the metric's full possible range. Range and standard
+  deviation measure related but different things, and the approved plan specifies sigma_CV, so this is an
+  adapted analogue, not a direct reuse of EvalML's number — stated explicitly as an adaptation, not claimed
+  as identical to EvalML's rule. 0.10 is 10% of the full 0-1 AUROC range, fixed as a round number before
+  seeing full-protocol results.
 
-## 5. Not yet decided here (next steps)
+Both are genuine external anchors, but both required a judgement call to adapt to this project's exact
+setup — flag this honestly in the report's methodology chapter and be ready to defend the adaptation
+reasoning in the viva, not just the literature citation.
 
-- Exact dataset list (OpenML-CC18 + UCI picks) and the full-protocol-vs-lighter-pass split — a candidate
-  shortlist is now drafted in `docs/datasets.md` (2026-10-19) but still needs the student's final
-  confirmation and the licence/provenance checks before it's locked.
-- The harness itself is now built (2026-10-19, ahead of the Week 2 schedule) — see `evaluation/README.md`
-  for what exists and what's smoke-tested vs. what still needs the locked dataset shortlist to run for
-  real. Tuning-budget for the manual baseline is already stated there (`comparison_runner.RF_PARAM_GRID`),
-  not still pending.
-- Still open: the exact sample-size levels and seed count for the full run (Section 3 point 3) aren't
-  decided — needs stating explicitly, same treatment as everything else here, before the full run.
+## 6. MCC edge-case rule
+
+If any marginal sum of the 2x2 confusion matrix (triggered x poor) is zero — e.g. a diagnostic never
+triggers, or every run is poor — the MCC denominator is zero and MCC is undefined by the raw formula.
+**Frozen rule**: MCC = 0 in this case, matching scikit-learn's `matthews_corrcoef` convention and the
+recommendation in Chicco & Jurman (2020) for degenerate confusion matrices. Report when this rule fires —
+it is itself informative (e.g. a diagnostic that never triggers across the whole development group is a
+finding, not a scoring artifact to hide).
+
+## 7. Corruption design
+
+- **One corruption family: missing values (MCAR)** — simplest, most standard, avoids extra assumptions
+  about *why* data is missing; also the error type most directly tied to n (missingness reduces usable rows
+  if list-wise deletion were used, though this pipeline imputes rather than drops, per `cleaner.py`).
+- **Two non-zero levels, plus clean**: 0% (clean), 15%, 35% — the exact two non-zero rates piloted; chosen
+  to be moderate and severe without re-running the pilot at other rates, consistent with freezing from
+  pilot evidence rather than open-ended tuning.
+- **Corruption applies only to the outer-training partition.** The held-out test partition is never
+  corrupted, at any level, for any run — enforced in code by splitting outer train/test *before* calling
+  the injector (`evaluation/pilot.py: run_one`, same pattern to be reused for the full run).
+- **One sample-size level**: each dataset's full natural size (no subsampling). "Sample size" is not varied
+  as an experimental factor in this design — each dataset contributes its own frozen n.
+- **Three seeds**: 1, 2, 3. Controls the outer train/test split and all model/CV randomness.
+- Conditional, not committed: a second corruption family or sample-size level may be added only if time and
+  the development-group results allow — capped so the worst-case workload stays near 90-120 jobs, not the
+  360-480 an unconstrained design would need. Not started; revisit after the development-group run.
+
+## 8. Wall-clock budget B
+
+**B = 30 seconds per dataset per pipeline.** Generous, not a binding constraint at this scale — the pilot's
+actual runtime was ~0.2-0.3s per run (27 runs, 6.4s total), so B exists to satisfy the approved plan's
+"fixed wall clock budget" requirement and to catch a genuine runaway run, not because compute is scarce here.
+
+## 9. Bootstrap CI procedure
+
+Per-run uncertainty on S_test (not on G, and not on aggregate warning precision/recall — kept conceptually
+separate, per the approved plan):
+
+- 1000 resamples.
+- **Paired**: each resample draws (label, prediction) pairs together, preserving the label-prediction
+  correspondence — never resample labels and predictions independently.
+- **Stratified by class**: resample within each class separately (preserving the original test-set class
+  proportions) and recombine, rather than a single unstratified draw — this is what the approved plan's
+  "stratified sampling if a resample calls for drawing a single class" requires, and stratifying always
+  (not just conditionally) is the simplest way to guarantee it never happens, for any test-set size.
+- Report the 95% interval (2.5th/97.5th percentile of the 1000 resampled AUROC values) alongside the raw
+  S_test and the thresholded "poor" label.
+- **Explicitly an interval on test-set sampling uncertainty only** — it does not account for variance from
+  the training-sample draw, fold composition, or the AutoML model-selection process, all of which also
+  contribute to how much a single G value should be trusted. State this caveat every time the interval is
+  reported, not just once in the methods section.
+
+Aggregate precision/recall/MCC uncertainty (across the whole development or final-evaluation group) is a
+separate quantity from the per-run S_test interval above — not yet specified; decide before the RQ2/RQ3
+analysis step, not before.
+
+## 10. Datasets
+
+See `docs/datasets.md` for the full manifest (7 PMLBmini/TabMini datasets, 4 development + 3
+final-evaluation, selected to span n/p from 1.86 to 100).
+
+## 11. Pipelines
+
+- **Automated**: selects among {Random Forest, Logistic Regression, Decision Tree} by mean CV AUROC, no
+  hyperparameter search (same no-tuning philosophy as the live app's `automl.py`). Implemented in
+  `evaluation/diagnostics.py: run_automated`.
+- **Manual baseline**: a single, fully prespecified model — plain logistic regression, no model-selection
+  step (there is only one candidate). Chosen because TabMini's own published finding is that a plain
+  logistic regression is a strong, standard baseline other methods are measured against on exactly this
+  kind of small tabular data — an externally-grounded choice, not an arbitrary pick. Implemented in
+  `evaluation/diagnostics.py: run_manual_baseline`.
+- Both share the same outer train/test split, the same preprocessing (`automl.py`'s `build_preprocessor`,
+  fit on the training fold only), and the same CV scheme.
+
+## 12. What's NOT yet run
+
+This document freezes the design. It does not itself contain results. Next steps, in order:
+1. Full run on the 4 development datasets across {clean, 15%, 35%} x 3 seeds = up to ~36-48 jobs
+   (2 pipelines x 4 datasets x 3 rates x 3 seeds, before any conditional expansion) — answers RQ1 and scores
+   the diagnostics for RQ2 on the development group.
+2. Repeat on the 3 final-evaluation datasets — answers RQ3 (preliminary transfer).
+3. Compute aggregate precision/recall/false-alarm/MCC for each diagnostic, with the bootstrap CI treatment
+   from Section 9.
+4. Only then consider the conditional second corruption family / sample-size level (Section 7), if time and
+   results allow.
+
+## Design choices to defend in the viva (collected from the sections above)
+
+- delta_G = 0.05 AUROC points (Section 4)
+- n/p < 10 and sigma_CV > 0.10 thresholds, and why each is an *adaptation* of an external source rather than
+  a direct reuse (Section 5)
+- MCC = 0 edge-case convention (Section 6)
+- Missing values as the one corruption family, and 15%/35% as the two levels (Section 7)
+- Plain logistic regression as the manual baseline (Section 11)

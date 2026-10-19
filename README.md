@@ -210,6 +210,14 @@ No environment variables are currently required on Render.
 
 ---
 
+## Development Notes
+
+AI-assisted tooling was used during development for parts of the code and project documentation, under
+supervisor-approved academic use. A detailed assistance record is maintained privately and available on
+request.
+
+---
+
 ## Author
 
 **Kaung Htet**  

@@ -1,3 +1,9 @@
+> **SUPERSEDED 2026-10-19.** The PDM plan actually submitted and approved by Dr. Rama
+> (`Project and Data Management Plan (Kaung Htet).pdf`, 14 Oct) uses 7 different, already-read, already-cited
+> references — see `docs/literature_matrix.md`. None of the 3 candidates below were used in the approved plan.
+> Left here only as a record of what was searched before the submitted plan was shared with this session; do
+> not cite from this file.
+
 # Reference candidates — drafted 2026-10-19, NOT yet verified by the student
 
 Found via web search against the three angles in `docs/pdm_plan_outline.md` Section 1 (AutoML

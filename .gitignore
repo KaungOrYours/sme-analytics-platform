@@ -217,6 +217,12 @@ venv/
 # Claude Code local project config — skill + memory, never commit/push
 .claude/
 
+# Strictly local-only, never commit/push: student's explicit instruction
+# (2026-10-19) that no AI-assistance-related file appears in the git repo.
+# Content preserved locally for the student's own declaration purposes.
+/CLAUDE.md
+docs/ai_assistance_log.md
+
 # Evaluation harness: datasets fetched by evaluation/datasets.py (reproducible
 # from source URLs, no need to version the raw files) and generated result
 # dumps from evaluation/run_experiment.py
