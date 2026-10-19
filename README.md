@@ -37,11 +37,6 @@ Small business owners in Myanmar have valuable data sitting unused in Excel file
 - Detailed statistical breakdown
 - Data quality comparison (before vs after cleaning)
 
-**AI Business Advisor**
-- Powered by Claude (claude-opus-5)
-- Ask questions about your data in plain English
-- Receive actionable business recommendations
-
 **Privacy**
 - Zero data retention — nothing is saved to any database
 - All processing occurs in memory
@@ -81,7 +76,6 @@ Small business owners in Myanmar have valuable data sitting unused in Excel file
 - FastAPI (Python 3.13)
 - pandas + numpy
 - scikit-learn
-- Anthropic API (Claude)
 
 ---
 
@@ -101,11 +95,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Create a `.env` file inside the `backend` folder:
-
-```
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
-```
+No environment variables are required at the moment.
 
 Start the backend server:
 
@@ -135,7 +125,6 @@ sme-analytics-platform/
 ├── backend/
 │   ├── main.py                 FastAPI application and endpoints
 │   ├── requirements.txt        Python dependencies
-│   ├── .env                    Environment variables (not committed)
 │   └── services/
 │       ├── cleaner.py          Automated data cleaning pipeline
 │       ├── analyzer.py         Statistics and insight generation
@@ -151,8 +140,7 @@ sme-analytics-platform/
 │   │       ├── MLResults.jsx
 │   │       ├── Insights.jsx
 │   │       ├── Statistics.jsx
-│   │       ├── Charts.jsx
-│   │       └── AIExplanation.jsx
+│   │       └── Charts.jsx
 │   └── package.json
 ├── render.yaml                 Render deployment configuration
 └── README.md
@@ -167,7 +155,6 @@ sme-analytics-platform/
 | GET | / | Project info and status |
 | GET | /health | Health check |
 | POST | /upload | Main analysis endpoint |
-| POST | /explain | AI explanation via Groq |
 
 ---
 
@@ -198,9 +185,6 @@ Chart generation
 Insight and statistics generation
          |
          v
-AI explanation (Claude)
-         |
-         v
 All data and models deleted
 ```
 
@@ -211,11 +195,7 @@ All data and models deleted
 **Backend:** Render (Free tier)  
 **Frontend:** Vercel (Free tier)
 
-Environment variables required on Render:
-
-| Key | Description |
-|---|---|
-| ANTHROPIC_API_KEY | Your Anthropic API key from console.anthropic.com |
+No environment variables are currently required on Render.
 
 ---
 

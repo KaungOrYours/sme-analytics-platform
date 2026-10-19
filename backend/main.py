@@ -6,10 +6,8 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from services.automl import run_automl
 from services.cleaner import detect_problems, auto_clean, calculate_quality_score, detect_problem_type, make_readable_name
-from anthropic import Anthropic
 import pandas as pd
 import io
-import os
 
 app = FastAPI()
 
@@ -135,82 +133,3 @@ async def upload_file(file: UploadFile = File(...)):
     }
 
     return result
-
-
-    
-@app.post("/explain")
-async def explain_data(request: dict):
-    """
-    Use Claude to explain analysis results
-    """
-    try:
-        key = os.environ.get("ANTHROPIC_API_KEY")
-
-        if not key:
-            return {
-                "explanation": "API key not found.",
-                "status": "error"
-            }
-
-        client = Anthropic(api_key=key)
-
-        context = f"""
-        Dataset: {request.get('filename', 'Unknown')}
-        Rows: {request.get('rows', 0)}
-        Columns: {request.get('columns', 0)}
-        Quality Score: {request.get('quality_after', 0)}%
-        Problem Type: {request.get('problem_detection', {}).get('problem_type', 'unknown')}
-        ML Model: {request.get('automl_results', {}).get('model_name', 'None')}
-        ML Performance: {request.get('automl_results', {}).get('performance', {})}
-        Key Insights: {request.get('insights', [])}
-        """
-
-        user_question = request.get(
-            'question',
-            'Explain this business data in simple terms. What are the key findings and what actions should I take?'
-        )
-
-        response = client.messages.create(
-            model="claude-opus-5",
-            max_tokens=2048,
-            output_config={"effort": "low"},
-            system="""You are a friendly business analyst
-            helping Myanmar small business owners understand
-            their data. Explain insights in simple plain English.
-            No technical jargon. Be concise and actionable.
-            Maximum 3-4 sentences per point.""",
-            messages=[
-                {
-                    "role": "user",
-                    "content": f"""
-                    Here is the analysis of a business dataset:
-                    {context}
-
-                    Question: {user_question}
-                    """
-                }
-            ]
-        )
-
-        if response.stop_reason == "refusal":
-            return {
-                "explanation": "Could not generate an explanation for this request.",
-                "status": "error"
-            }
-
-        explanation = next(
-            (block.text for block in response.content if block.type == "text"),
-            None
-        )
-
-        return {
-            "explanation": explanation or "No explanation generated.",
-            "status": "success"
-        }
-
-    except Exception as e:
-        print(f"Error: {str(e)}")
-        return {
-            "explanation": f"Could not generate explanation: {str(e)[:100]}",
-            "status": "error"
-        }
