@@ -2,12 +2,14 @@
 from dotenv import load_dotenv
 load_dotenv()
 from services.analyzer import generate_statistics, generate_insights
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from services.automl import run_automl
 from services.cleaner import detect_problems, auto_clean, calculate_quality_score, detect_problem_type, make_readable_name
 import pandas as pd
 import io
+
+MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10MB, matches the frontend's own check
 
 app = FastAPI()
 
@@ -45,14 +47,53 @@ async def upload_file(file: UploadFile = File(...)):
     # Read file into memory
     contents = await file.read()
 
+    if len(contents) > MAX_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=400,
+            detail="File exceeds the 10MB limit. Please reduce the file size and try again."
+        )
+
     # Read with pandas
     if file.filename.endswith('.csv'):
-        df = pd.read_csv(io.BytesIO(contents))
+        try:
+            df = pd.read_csv(io.BytesIO(contents))
+        except (pd.errors.ParserError, UnicodeDecodeError, ValueError) as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Could not read this CSV file: {str(e)[:150]}"
+            )
     elif file.filename.endswith(('.xlsx', '.xls')):
-        df = pd.read_excel(io.BytesIO(contents))
+        try:
+            df = pd.read_excel(io.BytesIO(contents))
+        except ValueError as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Could not read this Excel file: {str(e)[:150]}"
+            )
     else:
-        return {"error": "Unsupported file type"}
+        raise HTTPException(
+            status_code=400,
+            detail="Unsupported file type. Please upload a CSV or Excel file (.csv, .xlsx, .xls)."
+        )
 
+    if df.empty or len(df.columns) == 0:
+        raise HTTPException(
+            status_code=400,
+            detail="The uploaded file has no data to analyze."
+        )
+
+    try:
+        return _analyze(df, file.filename)
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Something went wrong while analyzing this file: {str(e)[:150]}"
+        )
+
+
+def _analyze(df, filename):
     # Calculate quality before cleaning
     quality_before = calculate_quality_score(df)
 
@@ -106,6 +147,19 @@ async def upload_file(file: UploadFile = File(...)):
             "values": counts.values.tolist()
         }
 
+    # Correlation heatmap across numeric columns, so the "key driver"
+    # insight from generate_insights has a chart to back it up
+    numeric_df = df_clean.select_dtypes(include=['number'])
+    if len(numeric_df.columns) >= 2:
+        corr = numeric_df.corr().round(3)
+        chart_data["_correlation"] = {
+            "type": "correlation",
+            "columns": [
+                readable_columns.get(c, c) for c in corr.columns
+            ],
+            "matrix": corr.values.tolist()
+        }
+
     # Run AutoML
     automl_results = run_automl(
         df_clean,
@@ -115,7 +169,7 @@ async def upload_file(file: UploadFile = File(...)):
 
     # Build response
     result = {
-        "filename": file.filename,
+        "filename": filename,
         "rows": len(df_clean),
         "columns": len(df_clean.columns),
         "readable_columns": readable_columns,

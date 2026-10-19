@@ -73,5 +73,5 @@ for r in sorted_data:
     print(f"  {r['product']}: {r['price']:,} MMK")
 
 print("\n" + "=" * 40)
-print("Practice Complete! ")
+print("Practice Complete!")
 print("=" * 40)

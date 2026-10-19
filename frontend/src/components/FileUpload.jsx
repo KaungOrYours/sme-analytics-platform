@@ -80,9 +80,6 @@ function FileUpload({ onFileUpload }) {
           }
         `}
       >
-        {/* Upload Icon */}
-        <div className="text-5xl mb-4"></div>
-
         {/* Main Text */}
         <h3 className="text-white text-xl font-semibold mb-2">
           {isDragging ? 'Drop your file here!' : 'Upload your business data'}
@@ -113,7 +110,7 @@ function FileUpload({ onFileUpload }) {
       {/* Error Message */}
       {error && (
         <div className="mt-4 bg-red-900/50 border border-red-500 rounded-lg p-4">
-          <p className="text-red-400 text-sm"> {error}</p>
+          <p className="text-red-400 text-sm">{error}</p>
           <p className="text-gray-400 text-xs mt-1">
             Accepted formats: .csv, .xlsx, .xls
           </p>
@@ -124,10 +121,10 @@ function FileUpload({ onFileUpload }) {
       {selectedFile && (
         <div className="mt-4 bg-green-900/50 border border-green-500 rounded-lg p-4">
           <p className="text-green-400 text-sm font-semibold">
-             File selected!
+            File selected!
           </p>
           <p className="text-gray-300 text-sm mt-1">
-             {selectedFile.name}
+            {selectedFile.name}
           </p>
           <p className="text-gray-400 text-xs mt-1">
             Size: {(selectedFile.size / 1024).toFixed(1)} KB

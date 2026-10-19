@@ -28,8 +28,10 @@ function App() {
         formData
       )
       setFileData(response.data)
-    } catch {
-      setError('Failed to process file. Please try again.')
+    } catch (err) {
+      setError(
+        err.response?.data?.detail || 'Failed to process file. Please try again.'
+      )
     } finally {
       setLoading(false)
     }
@@ -56,13 +58,13 @@ function App() {
         {loading && (
           <div className="mt-8 text-center">
             <p className="text-blue-400 text-lg animate-pulse mb-2">
-               Analyzing your data...
+              Analyzing your data...
             </p>
             <p className="text-gray-500 text-sm">
               Building ML model — takes 10-30 seconds
             </p>
             <p className="text-gray-600 text-xs mt-1">
-              Please wait 
+              Please wait
             </p>
           </div>
         )}
@@ -71,7 +73,7 @@ function App() {
         {error && (
           <div className="mt-8 bg-red-900/50 border
           border-red-500 rounded-lg p-4">
-            <p className="text-red-400"> {error}</p>
+            <p className="text-red-400">{error}</p>
           </div>
         )}
 
@@ -149,7 +151,7 @@ function App() {
             <div className="bg-gray-800 rounded-lg
             p-4 mb-6">
               <p className="text-white font-semibold mb-2">
-                 Columns Detected:
+                Columns Detected:
               </p>
               <div className="flex flex-wrap gap-2">
                 {fileData.column_names.map((col, i) => (
@@ -169,7 +171,7 @@ function App() {
             <div className="bg-gray-800 rounded-lg
             p-4 mb-6">
               <p className="text-white font-semibold mb-4">
-                 Data Preview (First 5 rows):
+                Data Preview (First 5 rows):
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
@@ -219,7 +221,7 @@ function App() {
                 text-white px-6 py-3 rounded-lg
                 transition-colors text-sm"
               >
-                 Upload Another File
+                Upload Another File
               </button>
             </div>
 

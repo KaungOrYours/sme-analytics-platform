@@ -1,13 +1,6 @@
 function ProblemType({ detection }) {
   if (!detection) return null
 
-  const icons = {
-    time_series: '',
-    classification: '',
-    regression: '',
-    clustering: ''
-  }
-
   const labels = {
     time_series: 'Sales Forecasting',
     classification: 'Pattern Classification',
@@ -24,18 +17,13 @@ function ProblemType({ detection }) {
 
   return (
     <div className={`border-2 rounded-lg p-6 mb-6 ${colors[detection.problem_type]}`}>
-      <div className="flex items-center gap-3 mb-3">
-        <span className="text-3xl">
-          {icons[detection.problem_type]}
-        </span>
-        <div>
-          <p className="text-white font-semibold text-lg">
-            {labels[detection.problem_type]}
-          </p>
-          <p className="text-gray-400 text-sm">
-            Confidence: {detection.confidence}%
-          </p>
-        </div>
+      <div className="mb-3">
+        <p className="text-white font-semibold text-lg">
+          {labels[detection.problem_type]}
+        </p>
+        <p className="text-gray-400 text-sm">
+          Confidence: {detection.confidence}%
+        </p>
       </div>
       <p className="text-gray-300 text-sm">
         {detection.reason}

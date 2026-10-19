@@ -58,5 +58,5 @@ print(f"Before: {len(df)} rows")
 print(f"After: {len(df_clean)} rows")
 
 print("\n" + "=" * 40)
-print("pandas Practice Complete! ")
+print("pandas Practice Complete!")
 print("=" * 40)

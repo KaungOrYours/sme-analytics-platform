@@ -101,7 +101,6 @@ def generate_insights(df, stats, problem_type, readable_columns=None):
     # Insight 1: Dataset overview
     insights.append({
         "type": "info",
-        "icon": "",
         "text": f"Analyzing {rows:,} business records with {cols} data points each"
     })
 
@@ -133,13 +132,11 @@ def generate_insights(df, stats, problem_type, readable_columns=None):
                             ratio = top_val / bot_val
                             insights.append({
                                 "type": "positive",
-                                "icon": "",
                                 "text": f"'{top}' customers have {ratio:.1f}x higher average {col_name} ({top_val:,.0f}) compared to '{bot}' ({bot_val:,.0f})"
                             })
                         else:
                             insights.append({
                                 "type": "positive",
-                                "icon": "",
                                 "text": f"'{top}' has the highest average {col_name} at {top_val:,.0f}"
                             })
                 except:
@@ -174,7 +171,6 @@ def generate_insights(df, stats, problem_type, readable_columns=None):
 
                     insights.append({
                         "type": "positive",
-                        "icon": "",
                         "text": f"'{top}' is your most valuable {cat_name} group — contributing {pct:.1f}% of total {col_name} ({top_val:,.0f})"
                     })
                 except:
@@ -187,7 +183,6 @@ def generate_insights(df, stats, problem_type, readable_columns=None):
         col_name = readable(value_col)
         insights.append({
             "type": "info",
-            "icon": "",
             "text": f"Average {col_name} per record: {num_stats['mean']:,.2f} — ranging from {num_stats['min']:,.2f} to {num_stats['max']:,.2f}"
         })
 
@@ -212,7 +207,6 @@ def generate_insights(df, stats, problem_type, readable_columns=None):
                     factor_name = readable(top_factor)
                     insights.append({
                         "type": "positive",
-                        "icon": "",
                         "text": f"'{factor_name}' is the strongest driver of {col_name} in your data — focus here for biggest impact"
                     })
         except:
@@ -228,7 +222,6 @@ def generate_insights(df, stats, problem_type, readable_columns=None):
         cat_name = top_cat.replace('_', ' ')
         insights.append({
             "type": "info",
-            "icon": "",
             "text": f"Most common {cat_name}: '{most_common}' — represents {pct}% of all your records ({count:,} records)"
         })
 
@@ -237,13 +230,11 @@ def generate_insights(df, stats, problem_type, readable_columns=None):
     if missing_total == 0:
         insights.append({
             "type": "positive",
-            "icon": "",
             "text": "Your data is clean and complete — ready for reliable analysis"
         })
     else:
         insights.append({
             "type": "warning",
-            "icon": "",
             "text": f"{missing_total:,} incomplete records were automatically filled — results may vary slightly"
         })
 
@@ -267,7 +258,6 @@ def generate_insights(df, stats, problem_type, readable_columns=None):
     if outlier_info:
         insights.append({
             "type": "warning",
-            "icon": "",
             "text": f"Unusual values found in: {', '.join(outlier_info[:2])} — worth reviewing manually"
         })
 
@@ -275,25 +265,21 @@ def generate_insights(df, stats, problem_type, readable_columns=None):
     if problem_type == "time_series":
         insights.append({
             "type": "info",
-            "icon": "",
             "text": "Sales trend patterns detected — upload more months of data for better forecasting accuracy"
         })
     elif problem_type == "classification":
         insights.append({
             "type": "info",
-            "icon": "",
             "text": "Our ML model can predict outcomes for new records — useful for risk assessment and decision making"
         })
     elif problem_type == "regression":
         insights.append({
             "type": "info",
-            "icon": "",
             "text": "Our ML model can estimate values for new records — useful for pricing and forecasting"
         })
     elif problem_type == "clustering":
         insights.append({
             "type": "info",
-            "icon": "",
             "text": "Your records naturally group into segments — useful for targeted marketing and inventory planning"
         })
 

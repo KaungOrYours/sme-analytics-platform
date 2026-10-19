@@ -199,18 +199,32 @@ def run_time_series(df, target_col, results):
         ).reshape(-1, 1)
         forecast = model.predict(future_X)
 
+        # Approximate 95% interval from the backtest residual spread (not a
+        # formal prediction interval — it assumes normally distributed,
+        # constant-variance residuals and ignores parameter uncertainty, but
+        # is cheap and gives an honest sense of forecast spread). Needs at
+        # least 2 backtest points to estimate a standard deviation.
+        if len(y_test) >= 2:
+            residual_std = float(np.std(y_test - y_pred_test, ddof=1))
+            margin = 1.96 * residual_std
+            forecast_lower = [round(float(v - margin), 2) for v in forecast]
+            forecast_upper = [round(float(v + margin), 2) for v in forecast]
+        else:
+            forecast_lower = None
+            forecast_upper = None
+
         # Trend direction
         slope = model.coef_[0]
         if slope > 0:
-            trend = "upward "
+            trend = "upward"
             trend_pct = abs(slope / np.mean(y) * 100)
             trend_msg = f"growing at {trend_pct:.1f}% per period"
         elif slope < 0:
-            trend = "downward "
+            trend = "downward"
             trend_pct = abs(slope / np.mean(y) * 100)
             trend_msg = f"declining at {trend_pct:.1f}% per period"
         else:
-            trend = "stable "
+            trend = "stable"
             trend_msg = "relatively stable over time"
 
         results["model_name"] = "Linear Trend Forecasting"
@@ -221,10 +235,17 @@ def run_time_series(df, target_col, results):
         results["forecast"] = [
             round(float(v), 2) for v in forecast
         ]
+        results["forecast_lower"] = forecast_lower
+        results["forecast_upper"] = forecast_upper
 
         results["ml_insights"].append(
             f"Forecasting column: '{forecast_col}'"
         )
+        if forecast_lower is not None:
+            results["ml_insights"].append(
+                "Forecast range is an approximate 95% interval from backtest "
+                "residual spread, not a formal prediction interval"
+            )
         results["ml_insights"].append(
             f"Overall trend is {trend} — {trend_msg}"
         )
@@ -243,7 +264,7 @@ def run_time_series(df, target_col, results):
 
         if r2 > 0.7:
             results["ml_insights"].append(
-                "Strong trend pattern detected "
+                "Strong trend pattern detected"
             )
         elif r2 > 0.4:
             results["ml_insights"].append(
@@ -463,7 +484,7 @@ def run_classification(df, target_col, results, seed=42):
 
         if best_cv_score > 0.8:
             results["ml_insights"].append(
-                "Strong predictive patterns found "
+                "Strong predictive patterns found"
             )
         elif best_cv_score > 0.6:
             results["ml_insights"].append(
@@ -629,7 +650,7 @@ def run_regression(df, target_col, results, seed=42):
 
         if best_cv_score > 0.8:
             results["ml_insights"].append(
-                "Excellent prediction accuracy "
+                "Excellent prediction accuracy"
             )
         elif best_cv_score > 0.5:
             results["ml_insights"].append(

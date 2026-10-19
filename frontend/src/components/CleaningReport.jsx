@@ -4,7 +4,7 @@ function CleaningReport({ report }) {
   return (
     <div className="bg-gray-800 rounded-lg p-6 mb-6">
       <h3 className="text-white font-semibold text-lg mb-4">
-         Auto Cleaning Report
+        Auto Cleaning Report
       </h3>
       <div className="space-y-2">
         {report.map((item, index) => (

@@ -7,10 +7,10 @@ function MLResults({ results }) {
     return (
       <div className="bg-gray-800 rounded-lg p-6 mb-6">
         <h3 className="text-white font-semibold text-lg mb-2">
-           ML Analysis
+          ML Analysis
         </h3>
         <p className="text-yellow-400 text-sm">
-           {results.ml_insights[0]}
+          {results.ml_insights[0]}
         </p>
       </div>
     )
@@ -20,10 +20,10 @@ function MLResults({ results }) {
     return (
       <div className="bg-gray-800 rounded-lg p-6 mb-6">
         <h3 className="text-white font-semibold text-lg mb-2">
-           ML Analysis
+          ML Analysis
         </h3>
         <p className="text-red-400 text-sm">
-           {results.ml_insights[0] ||
+          {results.ml_insights[0] ||
               'ML analysis could not complete'}
         </p>
       </div>
@@ -34,7 +34,7 @@ function MLResults({ results }) {
     <div className="bg-gray-800 rounded-lg p-6 mb-6">
       <h3 className="text-white font-semibold
       text-lg mb-4">
-         ML Analysis Results
+        ML Analysis Results
       </h3>
 
       {/* Model Name */}
@@ -85,7 +85,7 @@ function MLResults({ results }) {
        results.feature_importance.length > 0 && (
         <div className="mb-4">
           <p className="text-gray-400 text-sm mb-3">
-             Top Influential Factors:
+            Top Influential Factors:
           </p>
           <div className="space-y-2">
             {results.feature_importance
@@ -127,7 +127,7 @@ function MLResults({ results }) {
       results.forecast.length > 0 && (
         <div className="mb-4">
           <p className="text-gray-400 text-sm mb-3">
-             Next 5 Periods Forecast:
+            Next 5 Periods Forecast:
           </p>
           <div className="grid grid-cols-5 gap-2">
             {results.forecast.map((val, i) => (
@@ -141,6 +141,11 @@ function MLResults({ results }) {
                 font-bold text-sm">
                   {val.toLocaleString()}
                 </p>
+                {results.forecast_lower && results.forecast_upper && (
+                  <p className="text-gray-500 text-xs mt-1">
+                    {results.forecast_lower[i].toLocaleString()} - {results.forecast_upper[i].toLocaleString()}
+                  </p>
+                )}
                 <p className="text-gray-500
                 text-xs mt-1">
                   Period {i + 1}
@@ -148,6 +153,11 @@ function MLResults({ results }) {
               </div>
             ))}
           </div>
+          {results.forecast_lower && results.forecast_upper && (
+            <p className="text-gray-500 text-xs mt-2">
+              Range shown is an approximate 95% interval, not a guarantee
+            </p>
+          )}
         </div>
       )}
       {/* All Candidate Models */}
@@ -155,7 +165,7 @@ function MLResults({ results }) {
        results.all_candidate_scores.length > 0 && (
         <div className="mb-4">
           <p className="text-gray-400 text-sm mb-3">
-             All Models Tried (cross-validated):
+            All Models Tried (cross-validated):
           </p>
           <div className="space-y-2">
             {results.all_candidate_scores.map((item, i) => {
@@ -192,7 +202,7 @@ function MLResults({ results }) {
        results.ml_insights.length > 0 && (
         <div>
           <p className="text-gray-400 text-sm mb-2">
-             ML Findings:
+            ML Findings:
           </p>
           <div className="space-y-2">
             {results.ml_insights.map((insight, i) => (

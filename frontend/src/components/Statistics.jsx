@@ -14,7 +14,7 @@ function Statistics({ statistics }) {
   return (
     <div className="mb-6">
       <h3 className="text-white font-semibold text-lg mb-4">
-         Detailed Statistics
+        Detailed Statistics
       </h3>
 
       {/* Numeric Stats */}

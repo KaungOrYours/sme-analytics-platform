@@ -1,3 +1,5 @@
+import re
+
 import pandas as pd
 import numpy as np
 
@@ -76,7 +78,7 @@ def auto_clean(df):
     removed = before - len(df)
     if removed > 0:
         report.append(
-            f" Removed {removed} duplicate rows"
+            f"Removed {removed} duplicate rows"
         )
 
     # 2. Clean column names
@@ -87,7 +89,7 @@ def auto_clean(df):
         .str.replace(' ', '_')
         .str.replace(r'[^a-z0-9_]', '', regex=True)
     )
-    report.append(" Standardized column names")
+    report.append("Standardized column names")
 
     # 3. Deep whitespace cleaning
     for col in df.select_dtypes(include=['object']).columns:
@@ -161,7 +163,7 @@ def auto_clean(df):
 
                 df[col] = df[col].apply(clean_number)
                 report.append(
-                    f" Cleaned numeric values in '{col}'"
+                    f"Cleaned numeric values in '{col}'"
                 )
 
     # 5. Smart date detection and standardization
@@ -193,7 +195,7 @@ def auto_clean(df):
                         if success_rate > 0.5:
                             df[col] = converted
                             report.append(
-                                f" Parsed dates in '{col}'"
+                                f"Parsed dates in '{col}'"
                             )
                             break
                     except Exception:
@@ -229,7 +231,7 @@ def auto_clean(df):
                     .map(bool_map)
                 )
                 report.append(
-                    f" Standardized yes/no values in '{col}'"
+                    f"Standardized yes/no values in '{col}'"
                 )
 
     # 7. Handle missing values
@@ -241,7 +243,7 @@ def auto_clean(df):
             if missing_pct > 0.6:
                 df = df.drop(columns=[col])
                 report.append(
-                    f" Dropped '{col}': "
+                    f"Dropped '{col}': "
                     f"{missing_pct:.0%} missing"
                 )
             elif df[col].dtype in [
@@ -250,7 +252,7 @@ def auto_clean(df):
                 median = df[col].median()
                 df[col] = df[col].fillna(median)
                 report.append(
-                    f" Filled {missing} missing "
+                    f"Filled {missing} missing "
                     f"values in '{col}' "
                     f"with median ({median})"
                 )
@@ -259,7 +261,7 @@ def auto_clean(df):
                 if len(mode) > 0:
                     df[col] = df[col].fillna(mode[0])
                     report.append(
-                        f" Filled {missing} missing "
+                        f"Filled {missing} missing "
                         f"values in '{col}' "
                         f"with most common value"
                     )
@@ -330,13 +332,22 @@ def detect_problem_type(df):
                 return col
         return candidates[-1] if candidates else None
 
-    # Check for datetime columns
+    # Check for datetime columns. Two deliberate guards against false
+    # positives found via testing: (1) only object-dtype columns are
+    # considered — pd.to_datetime silently "succeeds" on any numeric column
+    # by reading it as epoch nanoseconds, which would otherwise misdetect
+    # e.g. a plain revenue column as a date; (2) keyword matching is by
+    # whole underscore-separated token, not substring, so a column like
+    # "monthly_spend" (tokens: "monthly", "spend") doesn't false-match on
+    # "month" the way a raw substring check would.
+    date_keywords = {'date', 'datetime', 'timestamp', 'time', 'month', 'year', 'week'}
     has_datetime = False
     date_col = None
     for col in df.columns:
-        if any(word in col.lower() for word in
-        ['date', 'datetime', 'timestamp',
-        'time_', 'month', 'year', 'week']):
+        if pd.api.types.is_numeric_dtype(df[col]):
+            continue
+        tokens = set(re.split(r'[^a-z0-9]+', col.lower()))
+        if tokens & date_keywords:
             try:
                 pd.to_datetime(df[col])
                 has_datetime = True
@@ -390,8 +401,6 @@ def make_readable_name(col_name):
     Convert technical column names
     to readable business names
     """
-    import re
-
     col = str(col_name)
 
     # Split camelCase

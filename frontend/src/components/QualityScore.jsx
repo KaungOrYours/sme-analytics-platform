@@ -15,7 +15,7 @@ function QualityScore({ before, after }) {
   return (
     <div className="bg-gray-800 rounded-lg p-6 mb-6">
       <h3 className="text-white font-semibold text-lg mb-4">
-         Data Quality Score
+        Data Quality Score
       </h3>
       <div className="grid grid-cols-2 gap-4">
 
@@ -47,7 +47,7 @@ function QualityScore({ before, after }) {
       {after > before && (
         <div className="mt-4 bg-green-900/30 rounded-lg p-3 text-center">
           <p className="text-green-400 text-sm">
-             Improved by {(after - before).toFixed(1)}% after auto cleaning!
+            Improved by {(after - before).toFixed(1)}% after auto cleaning!
           </p>
         </div>
       )}
