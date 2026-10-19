@@ -229,7 +229,9 @@ Repository: https://github.com/KaungOrYours/sme-analytics-platform
 
 ## License
 
-MIT License. Free to use, modify, and distribute.
+[Prosperity Public License 3.0.0](https://prosperitylicense.com/versions/3.0.0). Free for noncommercial
+use (research, personal, educational, nonprofit/government); commercial use gets a free 30-day trial, then
+requires a separate commercial license from the contributor. See `LICENSE`.
 
 ---
 
