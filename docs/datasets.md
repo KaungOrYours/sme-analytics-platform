@@ -89,6 +89,44 @@ Dataset list and exclusion rationale (PII/deprecated/time-series-derived/outlier
 from `tabmini/data/data_info.py` in the TabMini repo (https://github.com/RicardoKnauer/TabMini), inspected
 directly on 2026-10-19, not asserted from memory.
 
+## Known data property: `irish`'s `Educational_level` perfectly determines `target`
+
+Found 2026-10-20 while running the full development-group protocol: the automated pipeline (Random Forest)
+scored AUROC = 1.0 on both CV and test, for all 3 seeds, at the clean (0% corruption) condition — `sigma_cv`
+and `G` both exactly 0. Per `CLAUDE.md`'s "treat 99-100% accuracy as a bug until proven otherwise" rule, this
+was investigated rather than accepted.
+
+**Verified cause**: a crosstab of `Educational_level` x `target` across all 500 rows shows a perfect,
+exceptionless partition — every row with `Educational_level` in {0, 1, 10} has `target=1`; every row with
+`Educational_level` in {2, 3, ..., 9} has `target=0`. This is leakage intrinsic to the raw PMLB `irish`
+dataset, not a bug in this project's pipeline code. The partition is non-monotonic in the raw integer coding,
+which is why the two pipelines diverge sharply on this dataset:
+- **Manual baseline (logistic regression)** treats `Educational_level` as a single continuous numeric feature
+  (PMLB stores it as an int column, so `build_preprocessor` routes it to the numeric/scaled branch, not
+  one-hot). A single linear decision boundary cannot carve out {0, 1, 10} while excluding {2..9}, so logistic
+  regression only partially exploits the leak — S_test lands at a believable 0.82-0.90 across seeds.
+- **Automated pipeline (Random Forest, selected by CV)** uses threshold splits and can carve out the
+  non-monotonic partition exactly, reaching AUROC = 1.0 on every fold and on the test set, every seed.
+
+**Decision (student, 2026-10-20): keep `irish` unchanged in the dataset manifest — do not drop the column or
+swap the dataset.** Report the saturation as a finding rather than engineering it away, since it is a genuine,
+unforced illustration of the dissertation's own thesis: an automated pipeline with no human feature review can
+silently exploit a leaking feature that a simpler model cannot, and would do so undetected in RQ1/RQ2's own
+formal diagnostics (`n/p`, `sigma_cv`) once `sigma_cv` collapses to 0 at saturation, since a diagnostic with
+no variance in its own CV scores gives no warning signal by construction. Explicitly tie this to the live
+app's `suspected_leakage` warning in `backend/services/automl.py` (CV-score ceiling 0.98) — a feature
+excluded from the formal RQ1-3 evaluation per `docs/literature_matrix.md` ("no valid, deployable leakage
+detector found in the literature"), but which *would* have fired here (1.0 > 0.98), had it been in scope.
+This is worth a discussion-section paragraph: the formal evaluation's own exclusion of a leakage diagnostic
+is itself tested by a real case where exactly that kind of signal was the one thing that mattered.
+
+Practical effect on scoring: at the clean condition, `irish`'s automated-pipeline runs have `sigma_cv=0`,
+which means the `sigma_cv > 0.10` diagnostic by construction does not (and structurally cannot) trigger on a
+saturated run — these 3 runs are non-poor by the frozen `G > 0.05` definition (G=0) despite the underlying
+result being arguably the least trustworthy in the whole development group. Flag this explicitly when
+reporting RQ2 precision/recall: it is a real limitation of a purely statistical optimism-gap diagnostic, not
+a scoring bug.
+
 ## Still open
 
 - UH formal ethics process confirmation (ethics question 2 above) — needs the student/supervisor, not

@@ -168,6 +168,32 @@ This document freezes the design. It does not itself contain results. Next steps
 4. Only then consider the conditional second corruption family / sample-size level (Section 7), if time and
    results allow.
 
+## Addendum (2026-10-20): RQ2 scope clarification + full-protocol run
+
+The sections above freeze every *numeric* choice but do not say explicitly whether RQ2's diagnostic scoring
+pools automated-pipeline and manual-baseline runs, or scores the automated pipeline only. Decided when
+building the full-protocol runner (`evaluation/full_run.py`, `evaluation/score_rq2.py`): **automated-pipeline
+runs only.** Reasoning: RQ2 and the dissertation's novelty claim are specifically about whether the automated
+pipeline's own signals predict its own failures, not a pooled sample across both pipelines. The manual
+baseline's G/sigma_CV are still recorded on every run (for RQ1's automated-vs-manual comparison) but are not
+fed into the RQ2 precision/recall/MCC scoring. State this explicitly as an operationalisation decision in the
+methodology chapter, not left implicit.
+
+This also resolves an internal inconsistency in Section 12 above: "2 pipelines x 4 datasets x 3 rates x 3
+seeds" is 72 total pipeline-runs, not the "~36-48 jobs" also stated there. 36 is exactly the automated-only
+run count (4 x 3 x 3) that RQ2 scores; 72 is the total jobs both pipelines produce. The "36-48" range was
+anticipating the conditional expansion in Section 7, which has not been exercised.
+
+**Full-protocol run completed 2026-10-20 — this is Experiment 1** (not just the pilot): `evaluation/full_run.py`
+for both groups, `evaluation/score_rq2.py` for RQ2/RQ3 scoring. Headline results in `docs/results_summary.md`.
+Any later experiment (the Section 7 conditional expansion, a revisited aggregate-uncertainty method, etc.)
+should be numbered Experiment 2 onward, both in this doc and in `docs/results_summary.md`, so the FPR's
+results chapter has a stable numbering to cite. One finding
+surfaced during this run and documented in `docs/datasets.md`: the `irish` dataset's `Educational_level`
+feature perfectly determines `target` (verified by crosstab, zero exceptions across 500 rows) — kept in the
+dataset manifest unchanged per the student's explicit decision, and written up as a discussion-section case
+study rather than engineered away, since it is a genuine illustration of the dissertation's own thesis.
+
 ## Design choices to defend in the viva (collected from the sections above)
 
 - delta_G = 0.05 AUROC points (Section 4)

@@ -108,6 +108,8 @@ def run_automated(X_train, y_train, X_test, y_test, seed):
         "G": float(best_mean - s_test),
         "n": len(X_train),
         "p": post_encoding_feature_count(X_train, preprocessor),
+        "y_test": [int(v) for v in y_test],
+        "test_proba": [float(v) for v in test_proba],
     }
 
 
@@ -133,6 +135,8 @@ def run_manual_baseline(X_train, y_train, X_test, y_test, seed):
         "s_test": float(s_test),
         "G": float(mean_score - s_test),
         "n": len(X_train),
+        "y_test": [int(v) for v in y_test],
+        "test_proba": [float(v) for v in test_proba],
     }
 
 
