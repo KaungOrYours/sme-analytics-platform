@@ -1,4 +1,12 @@
 """
+SUPERSEDED (2026-10-19): the approved PDM plan's dataset source is
+PMLBmini/TabMini, loaded directly via the `pmlb` package's fetch_data()
+inside evaluation/full_run.py and evaluation/full_run_extended.py -- not
+through a loader module. See docs/datasets.md for the locked 7-dataset
+manifest. This file's Wholesale customers (UCI) loader was the pre-approval
+placeholder used only to prove evaluation/run_experiment.py's smoke test;
+it is not part of any current result and is not used by any current script.
+
 Dataset loaders for the evaluation harness. Only one dataset is wired up so
 far: Wholesale customers (UCI), used to build and smoke-test the harness
 itself before docs/datasets.md's full shortlist is locked. Add one loader

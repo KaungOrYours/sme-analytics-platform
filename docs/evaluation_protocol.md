@@ -203,7 +203,15 @@ a no-op. Full results and three substantive findings (duplicates inducing genuin
 correctly flags; outliers' pessimism-not-optimism signature falling outside the one-sided `poor` definition's
 sensitivity; `n/p`'s apparent transfer success turning out to be missing-values-specific, not general) are in
 `docs/results_summary.md`'s "Experiments 2-3" section — not duplicated here, since this document freezes
-design, not results. One finding
+design, not results.
+
+**Section 7's other conditional axis (sample-size level) exercised 2026-10-20 as Experiment 4**, via
+`evaluation/full_run_sample_size.py`: training partition halved (stratified, test set untouched), clean
+condition only, single-factor design. Result: halving training data roughly 7x's the poor-outcome rate
+(4.8% to 33.3%) and increases sigma_cv in the expected direction — a clean confirmatory result for the
+mechanism `n/p<10` is built on, reported descriptively rather than with a confusion matrix (too few runs for
+that to be meaningful). Both of Section 7's named conditional axes are now exercised; see
+`docs/results_summary.md`'s "Experiment 4" section for the full writeup. One finding
 surfaced during this run and documented in `docs/datasets.md`: the `irish` dataset's `Educational_level`
 feature perfectly determines `target` (verified by crosstab, zero exceptions across 500 rows) — kept in the
 dataset manifest unchanged per the student's explicit decision, and written up as a discussion-section case

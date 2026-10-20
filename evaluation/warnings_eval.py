@@ -1,4 +1,15 @@
 """
+SUPERSEDED (2026-10-19): built for the pre-approval research design, which
+scored all 3 of automl.py's live reliability warnings (including
+suspected_leakage). The approved PDM plan's RQ2 excludes any leakage-flag
+diagnostic (docs/literature_matrix.md: no valid, deployable detector found
+in the literature) and scores only n/p and sigma_cv, via
+evaluation/score_rq2.py against evaluation/diagnostics.py's output -- see
+docs/results_summary.md for the current results. This file's scoring logic
+for n/p and sigma_cv was superseded by score_rq2.py's bootstrap-CI version;
+its suspected_leakage scoring has no equivalent in the approved design at
+all. Kept as a working reference, not a source of current results.
+
 RQ2 (the primary novelty claim): scores each reliability warning from
 backend/services/automl.py's build_reliability_warnings() as a binary
 predictor of poor held-out performance.

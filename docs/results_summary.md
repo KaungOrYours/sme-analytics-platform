@@ -178,6 +178,42 @@ leakage-saturated dataset in a 4-dataset pooled average, not of the missing-valu
    any non-degenerate cell across all three corruption families and both groups — the strongest, most
    triangulated claim in the whole evaluation so far.
 
+## Experiment 4 — sample-size sensitivity (the other Section 7 conditional expansion, 2026-10-20)
+
+**Design**: the other half of the Section 7 "conditional expansion if time allows" clause (Experiments 2-3
+exercised the corruption-family half). Clean condition only, no corruption combined in, to keep this a
+single-factor test. For each dataset/seed, the outer test set is kept at full size (never subsampled) and
+only the training partition is halved (stratified, seeded) — isolating "less data to train on" from "less
+data to evaluate on." Safety-checked first (minority class stays >= 8 after halving for every one of the 7
+datasets, comfortably above the 5-fold CV floor) and the runner (`evaluation/full_run_sample_size.py`) also
+carries a runtime guard that skips and logs rather than crashes if any seed's split ever came in under a
+5-example floor. 21 runs total (12 development + 9 final-evaluation), 0 skipped.
+
+| Metric (automated pipeline) | Full-size training | Half-size training |
+|---|---|---|
+| Mean sigma_cv | 0.048 (0.056 excl. `irish`) | 0.080 (0.093 excl. `irish`) |
+| Mean \|G\| | 0.040 | 0.074 |
+| Mean S_test | 0.913 | 0.886 |
+| Poor runs (G > 0.05) | 1/21 (4.8%) | 7/21 (33.3%) |
+
+**This is the cleanest confirmatory result in the whole project, and it validates the core premise behind the
+`n/p` diagnostic directly**, independent of that diagnostic's mixed precision/recall/MCC numbers elsewhere:
+halving the training data, with everything else held constant, makes cross-validation noisier (sigma_cv up,
+consistent direction in 11/18 non-saturated runs), makes the validation-to-test gap more volatile (mean |G|
+nearly doubles), modestly hurts real test performance (S_test down, as expected with less training data), and
+— most importantly for RQ2 — **roughly 7x's the poor-outcome rate** (4.8% → 33.3%). In other words: a lower
+n (same p, so lower n/p) is directly and strongly associated with more of exactly the failure mode `n/p<10` is
+supposed to predict. The diagnostic's underlying *mechanism* is well-supported even where its formal scoring
+on the fixed-size dataset manifest was statistically uncertain — worth stating both halves of that honestly:
+the mechanism clearly operates in the expected direction, but turning that into a reliable per-dataset
+early-warning signal at a FIXED, unknown n/p is a harder, separate question from "does smaller n/p correlate
+with worse outcomes in general," and this experiment answers the general correlational question, not the
+per-run predictive one.
+
+Not formally scored with precision/recall/MCC (21 runs is too few to do that meaningfully once split by
+triggered/not-triggered) — this experiment is reported descriptively, which is itself an honest choice to
+state in the methodology chapter rather than force a confusion matrix onto too few data points.
+
 ## What's still open (per `evaluation_protocol.md` Section 12)
 
 4. Conditional second corruption family / sample-size level — not started, revisit only if time allows after
@@ -195,6 +231,10 @@ leakage-saturated dataset in a 4-dataset pooled average, not of the missing-valu
 - 4th corruption family (`inconsistent_categories`) checked and ruled out, not left unexamined: PMLBmini/
   TabMini is 100% numerically encoded, so that injector would be a no-op on every dataset in the manifest.
   If a future dataset swap ever introduces a genuine categorical/string column, this is worth revisiting.
+- **Done 2026-10-20**: Experiment 4 (sample-size sensitivity), the other Section 7 conditional expansion —
+  see the dedicated section above. Both of Section 7's named conditional-expansion axes (corruption family,
+  sample-size level) are now exercised; no further axis is pre-authorized by the frozen protocol without a
+  fresh decision.
 - **Done 2026-10-20**: sanity-checked `labor`/`mux6`/`bupa` the same way `irish` was checked. `mux6` also
   saturates to S_test=1.0 at the clean condition, but for a different and unconcerning reason: it's the
   classic synthetic 6-bit-multiplexer benchmark, a deterministic nonlinear boolean function with no noise.

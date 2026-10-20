@@ -1,4 +1,12 @@
 """
+SUPERSEDED (2026-10-19): this smoke test exercises the pre-approval harness
+(cleaning_eval.py, comparison_runner.py, warnings_eval.py, datasets.py),
+which is itself superseded -- see those files' own module docstrings. The
+approved design's actual runners are evaluation/full_run.py (Experiment 1)
+and evaluation/full_run_extended.py (Experiments 2-3); its results are in
+docs/results_summary.md. Kept as a working reference for how the original
+harness fits together, not as a current entry point.
+
 End-to-end smoke test for the evaluation harness, NOT the full protocol run.
 
 docs/evaluation_protocol.md Section 3 describes the full grid: ~10-14

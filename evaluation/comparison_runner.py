@@ -1,4 +1,15 @@
 """
+SUPERSEDED (2026-10-19): built for the pre-approval research design. The
+approved PDM plan's actual RQ1 implementation is evaluation/diagnostics.py's
+run_automated/run_manual_baseline, executed via evaluation/full_run.py and
+evaluation/full_run_extended.py, with results in docs/results_summary.md.
+This file's GridSearchCV-tuned-baseline approach was never run under the
+approved design (the approved manual baseline is a fixed, untuned logistic
+regression, not a tuned Random Forest -- see evaluation_protocol.md Section
+11) and should not be cited as a project result. Kept as a working reference
+for a GridSearchCV-based comparison, since docs/results_summary.md's
+manual baseline deliberately has no hyperparameter search of its own.
+
 RQ1: automated pipeline (backend/services/automl.py, fixed n_estimators=50, no
 tuning) vs. a manually tuned scikit-learn baseline. Per docs/evaluation_protocol.md
 Section 3 point 2, both sides get: the same train/test split (same seed), the

@@ -1,4 +1,12 @@
 """
+SUPERSEDED (2026-10-19): built for the pre-approval research design, which had
+a cleaning-detection evaluation axis. The approved PDM plan (shared with this
+session 2026-10-19, see docs/evaluation_protocol.md's "READ THIS FIRST" note)
+does not include this axis in the formal RQ1-RQ3 evaluation at all -- kept
+here, working and documented, as a reference/future-work artifact, not as
+part of the current results. docs/results_summary.md is the current results
+document; this file does not feed into it.
+
 Scores backend/services/cleaner.py's detect_problems() and auto_clean() against
 the ground truth from evaluation/injectors.py, per docs/evaluation_protocol.md
 Section 3 point 1: detection precision/recall and reconstruction accuracy,

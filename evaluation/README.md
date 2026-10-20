@@ -3,8 +3,22 @@
 Supports the locked research design in `docs/evaluation_protocol.md`. Separate from the app
 (`backend/`, `frontend/`) per `CLAUDE.md` Section 7 — this code evaluates the pipeline, it isn't part of it.
 
+**Status (2026-10-20, superseding the note below): the full protocol run has happened.** `cleaning_eval.py`,
+`comparison_runner.py`, `warnings_eval.py`, `datasets.py`, and `run_experiment.py` below were built for an
+earlier, pre-approval research design and are now superseded (each file says so in its own docstring) — kept
+as working reference code, not as a source of current results. **The current, results-producing code is**
+`evaluation/diagnostics.py` (core measurement), `evaluation/full_run.py` (Experiment 1: missing-values),
+`evaluation/full_run_extended.py` (Experiments 2-3: duplicates, outliers), and `evaluation/score_rq2.py`
+(RQ2/RQ3 scoring, including bootstrap CIs). Results are in `docs/results_summary.md`, not in this harness's
+own output. `injectors.py` is shared by both the old and current code and is not superseded.
+
+<details>
+<summary>Original 2026-10-19 status note (superseded, kept for history)</summary>
+
 **Status (2026-10-19): harness built and smoke-tested, full protocol run NOT yet done.** The full run
 needs `docs/datasets.md`'s shortlist locked first (currently candidates only).
+
+</details>
 
 ## What's here
 
