@@ -135,8 +135,14 @@ separate, per the approved plan):
   reported, not just once in the methods section.
 
 Aggregate precision/recall/MCC uncertainty (across the whole development or final-evaluation group) is a
-separate quantity from the per-run S_test interval above — not yet specified; decide before the RQ2/RQ3
-analysis step, not before.
+separate quantity from the per-run S_test interval above. **Decided and implemented 2026-10-20**
+(`evaluation/score_rq2.py: bootstrap_aggregate_metrics`): non-parametric bootstrap over the RUN as the
+resampling unit — resample n runs with replacement (n = group size), recompute the confusion matrix and all
+four metrics each time, report the 2.5th/97.5th percentile across 1000 resamples. **Stated limitation**: runs
+within a group are not fully independent (each dataset contributes 9 correlated runs via 3 rates x 3 seeds),
+so this treats correlated runs as exchangeable. A cluster bootstrap over datasets would respect that
+structure better but with only 3-4 clusters per group would be far noisier, not more rigorous — the run-level
+bootstrap was chosen as the more informative of the two imperfect options, not because it is assumption-free.
 
 ## 10. Datasets
 
@@ -188,7 +194,16 @@ anticipating the conditional expansion in Section 7, which has not been exercise
 for both groups, `evaluation/score_rq2.py` for RQ2/RQ3 scoring. Headline results in `docs/results_summary.md`.
 Any later experiment (the Section 7 conditional expansion, a revisited aggregate-uncertainty method, etc.)
 should be numbered Experiment 2 onward, both in this doc and in `docs/results_summary.md`, so the FPR's
-results chapter has a stable numbering to cite. One finding
+results chapter has a stable numbering to cite.
+
+**Section 7's conditional expansion exercised 2026-10-20 as Experiments 2-3** (duplicates, outliers), via a
+new `evaluation/full_run_extended.py` that leaves `full_run.py`/Experiment 1 untouched. `inconsistent_
+categories` was checked and excluded — all 7 datasets are 100% numerically encoded, so that injector would be
+a no-op. Full results and three substantive findings (duplicates inducing genuine CV-fold leakage that `G`
+correctly flags; outliers' pessimism-not-optimism signature falling outside the one-sided `poor` definition's
+sensitivity; `n/p`'s apparent transfer success turning out to be missing-values-specific, not general) are in
+`docs/results_summary.md`'s "Experiments 2-3" section — not duplicated here, since this document freezes
+design, not results. One finding
 surfaced during this run and documented in `docs/datasets.md`: the `irish` dataset's `Educational_level`
 feature perfectly determines `target` (verified by crosstab, zero exceptions across 500 rows) — kept in the
 dataset manifest unchanged per the student's explicit decision, and written up as a discussion-section case

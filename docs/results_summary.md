@@ -33,33 +33,45 @@ other two datasets the same way `irish` was checked, before leaning on this as a
 
 ## RQ2 — diagnostic scoring (development group, scope = automated-pipeline runs only)
 
-Poor runs (G > 0.05): 3/36 (8.3%).
+Poor runs (G > 0.05): 3/36 (8.3%). MCC/precision/recall 95% CIs are the group-level bootstrap from
+`evaluation_protocol.md` Section 9 (1000 resamples over runs, see that section's stated independence
+limitation) — not the same quantity as the per-run S_test CI below.
 
-| Diagnostic | TP | FP | FN | TN | Precision | Recall | False-alarm rate | MCC |
+| Diagnostic | TP | FP | FN | TN | Precision [95% CI] | Recall [95% CI] | False-alarm rate | MCC [95% CI] |
 |---|---|---|---|---|---|---|---|---|
-| n/p < 10 | 2 | 7 | 1 | 26 | 0.222 | 0.667 | 0.212 | **0.29** |
-| sigma_cv > 0.10 | 0 | 7 | 3 | 26 | 0.0 | 0.0 | 0.212 | **−0.148** |
+| n/p < 10 | 2 | 7 | 1 | 26 | 0.222 [0.00, 0.50] | 0.667 [0.00, 1.00] | 0.212 | **0.29 [−0.11, 0.61]** |
+| sigma_cv > 0.10 | 0 | 7 | 3 | 26 | 0.0 [0.00, 0.00] | 0.0 [0.00, 0.00] | 0.212 | **−0.148 [−0.25, 0.00]** |
 
 ## RQ3 — preliminary transfer (final-evaluation group)
 
 Poor runs (G > 0.05): 3/27 (11.1%).
 
-| Diagnostic | TP | FP | FN | TN | Precision | Recall | False-alarm rate | MCC |
+| Diagnostic | TP | FP | FN | TN | Precision [95% CI] | Recall [95% CI] | False-alarm rate | MCC [95% CI] |
 |---|---|---|---|---|---|---|---|---|
-| n/p < 10 | 3 | 6 | 0 | 18 | 0.333 | 1.0 | 0.25 | **0.50** |
-| sigma_cv > 0.10 | 0 | 4 | 3 | 20 | 0.0 | 0.0 | 0.167 | **−0.147** |
+| n/p < 10 | 3 | 6 | 0 | 18 | 0.333 [0.00, 0.67] | 1.0 [1.00, 1.00] | 0.25 | **0.50 [0.00, 0.77]** |
+| sigma_cv > 0.10 | 0 | 4 | 3 | 20 | 0.0 [0.00, 0.00] | 0.0 [0.00, 0.00] | 0.167 | **−0.147 [−0.26, 0.00]** |
 
-**Headline finding, flag prominently**: this is a clean, coherent preliminary-transfer story and is probably
-the strongest single result to lead the RQ2/RQ3 write-up with. The **n/p < 10** diagnostic shows positive
-discrimination on both disjoint groups and *improves* on transfer (MCC 0.29 → 0.50, recall 0.667 → 1.0). The
-**sigma_cv > 0.10** diagnostic (the one adapted from EvalML, Section 5 of `evaluation_protocol.md`) shows
-essentially zero-to-negative discrimination on both groups (MCC −0.148 → −0.147) — worse than a coin flip,
-consistently, not a fluke of one sample. Caveat to state every time this is reported: only 3 "poor" runs
-exist in each group, so these are small-count confusion matrices and the precision/MCC values have wide
-uncertainty — the *consistency* across two disjoint groups is the interesting part, not the point estimates
-in isolation. (Aggregate precision/recall/MCC uncertainty across the whole group is explicitly listed as "not
-yet specified" in `evaluation_protocol.md` Section 9 — decide a method, e.g. a bootstrap over which runs are
-included, before this goes in the FPR as a confidence claim.)
+**Revised framing after adding the aggregate CIs (2026-10-20) — more hedged than the first pass of this
+doc.** The point estimates still tell the same directional story (`n/p<10` positive and improving, `sigma_cv`
+flat-to-negative), but the uncertainty is wide enough that it needs stating plainly rather than oversold:
+- **`n/p<10`'s MCC CI crosses zero in the development group** ([−0.11, 0.61]) — with only 36 runs and 3
+  "poor" labels, this diagnostic's discrimination is *not* statistically distinguishable from no-skill on the
+  development group alone. The final-evaluation group's CI ([0.00, 0.77]) just touches zero at the lower
+  bound — borderline, not a clean positive result either.
+- **`sigma_cv>0.10` is the more confident finding of the two**: its MCC CI excludes positive values entirely
+  in both groups ([−0.25, 0.00] and [−0.26, 0.00]) — the evidence is reasonably confident this diagnostic
+  provides *no* positive discrimination, not just that its point estimate happens to be low.
+- The right way to state this in the FPR: *"the adapted EvalML high-variance warning (`sigma_cv`) shows no
+  reliable discriminative value in either dataset group, while the classic events-per-variable heuristic
+  (`n/p`) shows a directionally positive but not yet statistically confident signal that is at least
+  consistent, not reversing sign, across two disjoint groups."* That is still a real, defensible answer to
+  RQ2/RQ3 — it just isn't a clean "n/p works" result, and shouldn't be written as one.
+- Recall's CI collapsing to a single point in several cells (e.g. final-evaluation `n/p<10` recall [1.00,
+  1.00]) is a visible artifact of only 3 poor-labelled runs existing in the base sample, not a strong claim —
+  flag this plainly if recall numbers are quoted anywhere.
+- Caveat to repeat every time this is reported, from `evaluation_protocol.md`'s own stated limitation: the
+  bootstrap resamples individual runs as if they were independent, when each dataset actually contributes 9
+  correlated runs (3 rates × 3 seeds) — a genuine simplification, not an assumption-free interval.
 
 ## Case study: `irish`'s `Educational_level` leakage (see `docs/datasets.md` for full writeup)
 
@@ -83,13 +95,106 @@ caught this; the formally-scored diagnostics in this evaluation would not have, 
 is worth a paragraph in the discussion chapter — it's a real limitation of the chosen diagnostic set, surfaced
 by an actual run rather than argued in the abstract.
 
+## Experiments 2-3 — duplicates and outliers (extension beyond the committed design, 2026-10-20)
+
+**Status**: run the same day as the aggregate-CI revision above, at the student's explicit request to go
+beyond the PDM minimum and use spare compute budget ("you can run for 2 hours if you need"). These are *not*
+part of `evaluation_protocol.md`'s committed, frozen design — that document commits to missing-values only
+(Section 7) and explicitly allows a conditional expansion "only if time and results allow." This is that
+expansion, clearly labelled as such, built in a separate script (`evaluation/full_run_extended.py`) that
+leaves `full_run.py` (Experiment 1) untouched. `inconsistent_categories` (the 4th available injector) was
+checked and excluded: all 7 PMLBmini/TabMini datasets are 100% numerically encoded with zero object-dtype
+columns, so that injector (which only perturbs object-dtype columns) would be a complete no-op on this
+dataset source — worth a sentence in the methodology chapter on why that error type isn't tested here, not
+silently skipped.
+
+Same grid shape as Experiment 1 otherwise: {15%, 35%} corruption rate × 3 seeds × {automated, manual}, per
+dataset per group. (0% isn't re-run — it's already the Experiment 1 clean condition.) RQ2 diagnostic scoring
+scope, thresholds, delta_G, and the aggregate/per-run bootstrap methods are all identical to Experiment 1 and
+the revision above — nothing about the *scoring* changed, only the corruption applied to the training data.
+
+### RQ1 — automated vs. manual, by corruption type (S_test mean diff, automated − manual)
+
+| Corruption family | Development (all 4) | Development (excl. `irish`) | Final-evaluation |
+|---|---|---|---|
+| Missing values (Experiment 1) | +0.0172 | −0.0240 | +0.0694 |
+| Duplicates (Experiment 2) | +0.0148 | −0.0284 | +0.0607 |
+| Outliers (Experiment 3) | **+0.1338** | **+0.1067** | **+0.1687** |
+
+**Strongest, most mechanistically well-grounded RQ1 finding in the whole project so far**: under outlier
+corruption, the automated pipeline beats the manual baseline clearly and robustly, with or without `irish` in
+the sample, and the win margin is 6-12x larger than under missing-values or duplicate corruption. This has a
+clean, citable explanation, not a mystery: Random Forest (the automated pipeline's usual pick) is well known
+to be far more robust to outliers than logistic regression fit on `StandardScaler`-scaled features (an
+8-sigma outlier distorts the scaler's mean/variance estimate and therefore every coefficient, not just the
+corrupted cells) — this is textbook, not a project-specific artifact, and should be cited as such rather than
+presented as a novel observation. Missing-values and duplicates both show the same `irish`-sensitive
+fragility documented for Experiment 1 (positive with it in, negative without it) — the pattern is not
+specific to one corruption type, which is itself worth stating: it's a property of including a
+leakage-saturated dataset in a 4-dataset pooled average, not of the missing-values protocol specifically.
+
+### RQ2/RQ3 — diagnostic scoring, by corruption type (automated-pipeline runs, MCC [95% bootstrap CI])
+
+| Corruption | Group | n_poor/n_runs | n/p MCC [CI] | sigma_cv MCC [CI] |
+|---|---|---|---|---|
+| Missing values | Development | 3/36 (8.3%) | 0.29 [−0.11, 0.61] | −0.148 [−0.25, 0.00] |
+| Missing values | Final-eval | 3/27 (11.1%) | 0.50 [0.00, 0.77] | −0.147 [−0.26, 0.00] |
+| Duplicates | Development | 7/24 (29.2%) | 0.265 [−0.16, 0.70] | −0.193 [−0.36, 0.00] |
+| Duplicates | Final-eval | 7/18 (38.9%) | **−0.322 [−0.67, 0.12]** | 0.0 (degenerate — never triggers, 0/18) |
+| Outliers | Development | **0/24 (0.0%)** | 0.0 (degenerate — no poor cases at all) | 0.0 (degenerate — no poor cases at all) |
+| Outliers | Final-eval | 2/18 (11.1%) | 0.125 [−0.29, 0.57] | −0.219 [−0.40, 0.00] |
+
+**Three findings here, all real, all worth separate treatment in the discussion chapter:**
+
+1. **Duplicates produce far more "poor" runs than the other two families** (29-39% vs 8-11%), and the reason
+   is mechanistic, not noise: duplicate rows are injected into the training partition *before* the CV split
+   inside `run_automated`/`run_manual_baseline`, so a duplicated row can land in a training fold and its
+   near-identical twin in that fold's validation split within the same CV run — genuine fold-level leakage,
+   which inflates `S_CV` relative to the untouched test set and is exactly the kind of validation-to-test
+   optimism `G` is designed to catch. This is good news for the diagnostics' construct validity (the signed-G
+   definition correctly flags a real leakage mechanism when one is actually present) and a clean, defensible
+   point for the methodology chapter: *the corruption family that most resembles a genuine leakage pathway
+   produces the richest "poor" signal, exactly as the theory predicts.*
+2. **Outlier corruption almost never triggers "poor" at all** (0% in development, 11% in final-eval) — because
+   outliers, in this training setup, predominantly push `G` *negative* (the CV estimate becomes pessimistic
+   relative to test, not optimistic — an outlier-corrupted fold's CV score degrades more than the clean test
+   score does). Since the frozen "poor" definition (`G > delta_G`) is deliberately one-sided — it targets
+   optimism specifically, not instability in either direction, per `evaluation_protocol.md` Section 4's own
+   stated reasoning — it has essentially no sensitivity to this particular corruption family's typical failure
+   signature. This is not a bug in the definition; it is a scope limitation that should be stated plainly: the
+   formal RQ2/RQ3 evaluation, as frozen, is well-suited to detecting leakage-like optimism (missing-values,
+   duplicates) and poorly suited to detecting outlier-induced instability, even though outliers clearly do
+   disrupt the manual baseline badly (see the RQ1 table above).
+3. **`n/p<10`'s discrimination does not transfer cleanly across corruption types**: positive on missing-values
+   (both groups) and duplicates-development, but reverses to a confidently negative MCC on
+   duplicates-final-evaluation (CI [−0.67, 0.12], point estimate −0.322). This complicates the clean
+   "preliminary transfer" story from the aggregate-CI revision above — `n/p`'s apparent transfer success was
+   specific to the missing-values family, not a general property of the diagnostic. State this as the honest
+   finding it is: *n/p's validity appears to depend on which error type is present, which is itself informative
+   about the limits of a single, static threshold-based diagnostic — and arguably strengthens the overall
+   thesis (the dissertation's reframed novelty claim) rather than weakening it, since "under what conditions do
+   built-in diagnostics fail to transfer" is a more interesting question than "does this one diagnostic work."*
+   `sigma_cv>0.10` remains the more consistent finding throughout: its MCC point estimate is never positive in
+   any non-degenerate cell across all three corruption families and both groups — the strongest, most
+   triangulated claim in the whole evaluation so far.
+
 ## What's still open (per `evaluation_protocol.md` Section 12)
 
 4. Conditional second corruption family / sample-size level — not started, revisit only if time allows after
    the above is written up; current full-protocol runtime (~14s total across both groups) means compute is
    not the constraint, time-to-write-up is.
-- Aggregate precision/recall/MCC uncertainty (as opposed to the per-run S_test bootstrap CI already computed)
-  — method not yet decided, see RQ2/RQ3 caveat above.
+- **Done 2026-10-20**: aggregate precision/recall/MCC uncertainty via a run-level bootstrap (see RQ2/RQ3
+  tables above and `evaluation_protocol.md` Section 9) — this changed the headline framing from "n/p works,
+  sigma_cv doesn't" to the more honest "sigma_cv confidently doesn't help, n/p is directionally promising but
+  not yet statistically confident."
+- **Done 2026-10-20**: Experiments 2-3 (duplicates, outliers) as the Section 7 conditional expansion — see the
+  dedicated section above. This is now the strongest cross-corruption-type evidence in the project and
+  changes the RQ2/RQ3 story again: `n/p`'s apparent transfer success in the aggregate-CI revision turns out
+  to be specific to missing-values, not general; `sigma_cv`'s lack of positive discrimination is now
+  confirmed across 3 corruption families, not 1.
+- 4th corruption family (`inconsistent_categories`) checked and ruled out, not left unexamined: PMLBmini/
+  TabMini is 100% numerically encoded, so that injector would be a no-op on every dataset in the manifest.
+  If a future dataset swap ever introduces a genuine categorical/string column, this is worth revisiting.
 - **Done 2026-10-20**: sanity-checked `labor`/`mux6`/`bupa` the same way `irish` was checked. `mux6` also
   saturates to S_test=1.0 at the clean condition, but for a different and unconcerning reason: it's the
   classic synthetic 6-bit-multiplexer benchmark, a deterministic nonlinear boolean function with no noise.
