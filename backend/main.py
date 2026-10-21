@@ -2,16 +2,29 @@
 from dotenv import load_dotenv
 load_dotenv()
 from services.analyzer import generate_statistics, generate_insights
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from security import (
+    SecurityHeadersMiddleware,
+    SlidingWindowRateLimiter,
+    assert_archive_within_limits,
+    assert_frame_within_limits,
+    read_upload_limited,
+    resolve_file_kind,
+    safe_display_filename,
+)
 from services.automl import run_automl
-from services.cleaner import detect_problems, auto_clean, calculate_quality_score, quality_score_breakdown, detect_problem_type, make_readable_name
+from services.cleaner import detect_problems, auto_clean, calculate_quality_score, quality_score_breakdown, detect_problem_type, make_readable_name, text_columns
 import pandas as pd
 import io
-
-MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10MB, matches the frontend's own check
+import zipfile
 
 app = FastAPI()
+
+# Upload-path controls live in security.py; see its module docstring for the
+# threat model each one addresses and for what is deliberately out of scope.
+rate_limiter = SlidingWindowRateLimiter()
+app.add_middleware(SecurityHeadersMiddleware)
 
 app.add_middleware(
     CORSMiddleware,
@@ -20,9 +33,13 @@ app.add_middleware(
         "http://localhost:5174",
         "https://sme-analytics-platform.vercel.app"
     ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    # Narrowed from allow_methods/allow_headers=["*"] and
+    # allow_credentials=True. The API is stateless and uses no cookies or
+    # Authorization header, so credentialed cross-origin requests are not
+    # needed, and permitting them alongside wildcards is needlessly broad.
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
 )
 
 @app.get("/")
@@ -42,39 +59,48 @@ def health():
     }
 
 @app.post("/upload")
-async def upload_file(file: UploadFile = File(...)):
+async def upload_file(request: Request, file: UploadFile = File(...)):
+    """Analyse one uploaded spreadsheet.
 
-    # Read file into memory
-    contents = await file.read()
+    The order of the checks below is deliberate and is the cheap-before-
+    expensive principle: rate limit first (costs nothing), then bound the bytes
+    accepted, then establish the real format, then bound the decompressed and
+    parsed size, and only then run the ML pipeline. Every rejection happens
+    before the work it would otherwise pay for.
+    """
+    rate_limiter.check(request)
 
-    if len(contents) > MAX_UPLOAD_BYTES:
+    contents = await read_upload_limited(file)
+    if not contents:
         raise HTTPException(
             status_code=400,
-            detail="File exceeds the 10MB limit. Please reduce the file size and try again."
+            detail="The uploaded file is empty."
         )
 
-    # Read with pandas
-    if file.filename.endswith('.csv'):
+    kind = resolve_file_kind(contents, file.filename)
+
+    if kind == "csv":
         try:
             df = pd.read_csv(io.BytesIO(contents))
-        except (pd.errors.ParserError, UnicodeDecodeError, ValueError) as e:
+        except (pd.errors.ParserError, pd.errors.EmptyDataError,
+                UnicodeDecodeError, ValueError) as e:
             raise HTTPException(
                 status_code=400,
                 detail=f"Could not read this CSV file: {str(e)[:150]}"
             )
-    elif file.filename.endswith(('.xlsx', '.xls')):
+    else:
+        # Measure the archive's declared expansion before openpyxl performs it.
+        assert_archive_within_limits(contents)
         try:
             df = pd.read_excel(io.BytesIO(contents))
-        except ValueError as e:
+        except (ValueError, KeyError, zipfile.BadZipFile) as e:
+            # openpyxl raises more than ValueError on a malformed workbook;
+            # catching only ValueError previously sent those to the generic
+            # 500 handler, reporting a server fault for a bad client file.
             raise HTTPException(
                 status_code=400,
                 detail=f"Could not read this Excel file: {str(e)[:150]}"
             )
-    else:
-        raise HTTPException(
-            status_code=400,
-            detail="Unsupported file type. Please upload a CSV or Excel file (.csv, .xlsx, .xls)."
-        )
 
     if df.empty or len(df.columns) == 0:
         raise HTTPException(
@@ -82,8 +108,10 @@ async def upload_file(file: UploadFile = File(...)):
             detail="The uploaded file has no data to analyze."
         )
 
+    assert_frame_within_limits(df)
+
     try:
-        return _analyze(df, file.filename)
+        return _analyze(df, safe_display_filename(file.filename))
     except HTTPException:
         raise
     except Exception as e:
@@ -141,9 +169,10 @@ def _analyze(df, filename):
             "values": df_clean[col].dropna().tolist()[:500]
         }
 
-    for col in df_clean.select_dtypes(
-        include=['object']
-    ).columns[:2]:
+    # text_columns, not select_dtypes(include=['object']): the latter only
+    # matches pandas 3 string columns through a deprecated path scheduled for
+    # removal (see cleaner._is_text_dtype).
+    for col in text_columns(df_clean)[:2]:
         counts = df_clean[col].value_counts().head(8)
         chart_data[col] = {
             "type": "categorical",

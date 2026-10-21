@@ -233,3 +233,9 @@ evaluation/results/
 # CLAUDE.md and the assistance log: no AI-authored material in the git repo.
 # Kept locally; the student rewrites in their own voice before submission.
 docs/fpr/
+
+# OS and editor cruft (removed from tracking 2026-10-21)
+.DS_Store
+**/.DS_Store
+.vscode/
+.idea/

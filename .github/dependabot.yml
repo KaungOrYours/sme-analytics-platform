@@ -1,0 +1,14 @@
+# Automated dependency vulnerability alerts and update PRs.
+# Works without any CI workflow, so this is enabled ahead of the pipeline.
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
