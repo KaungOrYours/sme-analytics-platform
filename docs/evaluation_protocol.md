@@ -86,8 +86,12 @@ reasoning in the viva, not just the literature citation.
 
 If any marginal sum of the 2x2 confusion matrix (triggered x poor) is zero — e.g. a diagnostic never
 triggers, or every run is poor — the MCC denominator is zero and MCC is undefined by the raw formula.
-**Frozen rule**: MCC = 0 in this case, matching scikit-learn's `matthews_corrcoef` convention and the
-recommendation in Chicco & Jurman (2020) for degenerate confusion matrices. Report when this rule fires —
+**Frozen rule**: MCC = 0 in this case, matching scikit-learn's `matthews_corrcoef` convention —
+verified directly against sklearn 1.8.0 on 2026-10-21 (returns exactly 0.0 in all three degenerate
+cases: diagnostic never triggers, every run poor, no poor runs at all). *(Attribution corrected
+2026-10-21: this sentence previously also credited Chicco & Jurman (2020) with a degenerate-matrix
+recommendation. See the correction note at the end of this document — the rule itself is unchanged.)*
+Report when this rule fires —
 it is itself informative (e.g. a diagnostic that never triggers across the whole development group is a
 finding, not a scoring artifact to hide).
 
@@ -242,3 +246,34 @@ study rather than engineered away, since it is a genuine illustration of the dis
 - MCC = 0 edge-case convention (Section 6)
 - Missing values as the one corruption family, and 15%/35% as the two levels (Section 7)
 - Plain logistic regression as the manual baseline (Section 11)
+
+## Correction note (2026-10-21): citation accuracy, no design change
+
+Found while drafting the FPR methodology chapter, which required checking that every frozen threshold's
+cited anchor actually says what this document claims it says. **No numeric choice, threshold, scoring rule
+or result changes as a result of this note.** The freeze protects the design against post-hoc tuning; it does
+not protect a mis-attributed citation from being corrected.
+
+Two references are cited in this document but are not among `docs/literature_matrix.md`'s 7 locked
+references from the approved plan. Both were verified as real publications on 2026-10-21, and full Harvard
+entries are now recorded in `docs/literature_matrix.md` under "Additional references cited in the evaluation
+protocol". Neither has been read by the student yet, and both must be before the FPR cites them.
+
+1. **Peduzzi et al. (1996)**, cited in Section 5 for the `n/p < 10` anchor — verified and well matched. The
+   paper is a Monte Carlo simulation of events-per-variable in logistic regression; it finds no major
+   problems at EPV >= 10 and coefficients biased in both directions below 10. The threshold value, the
+   direction of the finding, and the quantity being measured all align with this project's use of it.
+
+2. **Chicco & Jurman (2020)**, cited in Section 6 for the MCC = 0 degenerate-matrix convention —
+   **attribution narrowed.** The paper is real and correctly identified (*BMC Genomics*, 21, Art. No. 6),
+   but its subject is the advantage of MCC over F1 and accuracy under class imbalance, and it could not be
+   confirmed to contain a recommendation about zero-denominator confusion matrices specifically. Section 6
+   now rests the MCC = 0 convention on scikit-learn's behaviour alone, which was verified directly rather
+   than assumed. The paper is still cited, correctly, for the separate and more load-bearing claim that MCC
+   is the appropriate headline metric when the positive class is a small minority — which is exactly the
+   situation here, with 3 poor runs out of 36.
+
+The practical point for the viva: the MCC = 0 rule is defensible on reproducible grounds (run
+`matthews_corrcoef` on a degenerate input and it returns 0.0), and did not need the second citation to
+stand up. Had the mis-attribution gone into the report unchecked, it would have been a reference that does
+not support the claim made of it.

@@ -44,3 +44,44 @@ https://evalml.alteryx.com/en/stable/_modules/evalml/automl/automl_search.html (
 Paraschakis, K., Castellani, A., Borboudakis, G. and Tsamardinos, I. (2024) 'Confidence Interval Estimation
 of Predictive Performance in the Context of AutoML', *Proceedings of Machine Learning Research*, vol. 256.
 Paris, France: PMLR.
+
+---
+
+## Additional references cited in the evaluation protocol (NOT from the approved plan)
+
+Added 2026-10-21. These two are cited in `docs/evaluation_protocol.md` to justify frozen thresholds
+but are **not among the 7 locked references above**, so they were not part of the approved plan's
+literature review. Both have been verified as real, correctly-attributed publications. **Neither has
+been read by the student yet.** Read both before the FPR cites them, per `CLAUDE.md` Section 3 — and
+note the attribution caveat on the second one, which is not a formality.
+
+**Peduzzi, P., Concato, J., Kemper, E., Holford, T. R. and Feinstein, A. R. (1996) 'A simulation
+study of the number of events per variable in logistic regression analysis', *Journal of Clinical
+Epidemiology*, 49(12), pp. 1373-1379.**
+
+- Verified: PubMed 8970487. A Monte Carlo simulation based on a cardiac trial of 673 patients with
+  252 deaths and seven predictors (EPV = 36 in the full sample), drawing 500 samples at EPV levels
+  of 2, 5, 10, 15, 20 and 25 and comparing bias, precision and significance testing against the
+  full-sample model.
+- Finding: at EPV of 10 or greater no major problems occurred; below 10, regression coefficients were
+  biased in both the positive and negative directions.
+- **Supports the `n/p < 10` anchor well.** The paper's own threshold is 10, the direction of its
+  finding is the one this project assumes, and the quantity (events per variable) maps onto n/p here.
+  Usable as cited once read.
+
+**Chicco, D. and Jurman, G. (2020) 'The advantages of the Matthews correlation coefficient (MCC)
+over F1 score and accuracy in binary classification evaluation', *BMC Genomics*, 21, Art. No. 6.
+doi: 10.1186/s12864-019-6413-7.**
+
+- Verified: real paper, correct journal, volume and article number.
+- Finding: accuracy and F1 can give over-optimistic inflated results on imbalanced data, while MCC
+  scores high only when all four confusion-matrix cells are good; the authors argue MCC should be
+  preferred for binary classification evaluation.
+- **Attribution caveat — this matters.** `evaluation_protocol.md` Section 6 originally cited this
+  paper as recommending **MCC = 0 for degenerate confusion matrices**. That specific recommendation
+  could not be confirmed to be in this paper, whose subject is MCC versus F1 and accuracy, not
+  zero-denominator edge cases. The paper **does** directly support the separate and more important
+  claim that MCC is the right headline metric under class imbalance, which is how the methodology
+  chapter now uses it. The MCC = 0 convention itself now rests on scikit-learn's verified behaviour
+  instead — see the protocol's 2026-10-21 correction note. Do not cite this paper for the
+  edge-case rule without first finding the recommendation in its text.
