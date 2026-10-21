@@ -1,0 +1,34 @@
+{
+ "group_B_development_extension": [
+  "backache",
+  "hepatitis",
+  "postoperative_patient_data",
+  "analcatdata_bankruptcy",
+  "analcatdata_aids",
+  "breast_cancer",
+  "lupus",
+  "prnn_crabs",
+  "haberman"
+ ],
+ "group_C_confirmation": [
+  "analcatdata_fraud",
+  "analcatdata_japansolvent",
+  "parity5",
+  "analcatdata_creditscore",
+  "glass2",
+  "corral",
+  "analcatdata_asbestos",
+  "saheart",
+  "prnn_synth"
+ ],
+ "group_A_exploratory_burned": [
+  "molecular_biology_promoters",
+  "labor",
+  "appendicitis",
+  "mux6",
+  "biomed",
+  "bupa",
+  "irish"
+ ],
+ "split_rule": "18 unused TabMini datasets sorted by EPV ascending (ties by name), alternating assignment: even index -> B, odd -> C. Deterministic, no randomness, fixed before any Study 2 run."
+}

@@ -104,6 +104,11 @@ def run_automated(X_train, y_train, X_test, y_test, seed):
         "model_name": best_name,
         "s_cv_selected": float(best_mean),
         "sigma_cv": sigma_cv,
+        # Raw per-fold CV scores. Added 2026-10-21 for Study 2's D3/D4
+        # (docs/study2_protocol.md), which need the score vector itself, not
+        # just its std -- EvalML's shipped rules are a coefficient of variation
+        # and a range. Additive only: no Study 1 value is affected.
+        "cv_scores": [float(v) for v in best_scores],
         "s_test": float(s_test),
         "G": float(best_mean - s_test),
         "n": len(X_train),
@@ -132,6 +137,7 @@ def run_manual_baseline(X_train, y_train, X_test, y_test, seed):
         "model_name": "Logistic Regression (manual baseline)",
         "s_cv_selected": float(mean_score),
         "sigma_cv": sigma_cv,
+        "cv_scores": [float(v) for v in scores],  # see run_automated's note
         "s_test": float(s_test),
         "G": float(mean_score - s_test),
         "n": len(X_train),
