@@ -211,7 +211,24 @@ condition only, single-factor design. Result: halving training data roughly 7x's
 (4.8% to 33.3%) and increases sigma_cv in the expected direction — a clean confirmatory result for the
 mechanism `n/p<10` is built on, reported descriptively rather than with a confusion matrix (too few runs for
 that to be meaningful). Both of Section 7's named conditional axes are now exercised; see
-`docs/results_summary.md`'s "Experiment 4" section for the full writeup. One finding
+`docs/results_summary.md`'s "Experiment 4" section for the full writeup.
+
+**RQ3's "combination rule" scored 2026-10-20** (`evaluation/score_rq3_combination.py`), closing a gap in the
+already-committed design rather than adding scope -- RQ3's own wording asks for diagnostics "plus a
+combination rule," which had never actually been built. OR/AND rules (no trained meta-learner) scored on
+development, locked (OR won, dev MCC=0.153), then tested on final-evaluation (MCC=0.367, transfers and
+improves). It does not beat `n/p` alone on final-evaluation (MCC=0.50) -- OR-ing in `sigma_cv` adds false
+alarms without adding true positives, empirically confirming this section's own "a combined signal is not
+assumed superior to either alone" caution. Full writeup in `docs/results_summary.md`.
+
+**Re-analysis of `n/p`'s duplicates failure (2026-10-20, no new runs)**: tested and rejected the hypothesis
+that duplication-inflated `n` crosses the `<10` threshold (reconstructed honest pre-duplication `n` for all
+42 duplicate-condition runs -- zero trigger disagreements). The real pattern, found by inspecting which runs
+`n/p` misses: every false negative occurs in a dataset where `n/p` is already above 10 (`appendicitis`,
+`biomed`, `bupa`, including `bupa` at 100% poor across all 6 of its runs despite n/p=63-75). This is a
+construct-validity finding -- `n/p` measures sample-size adequacy, duplicate-induced CV-fold leakage is an
+orthogonal data-integrity failure that more rows cannot protect against. Full writeup, with the hypothesis
+stated and tested in order, in `docs/results_summary.md`. One finding
 surfaced during this run and documented in `docs/datasets.md`: the `irish` dataset's `Educational_level`
 feature perfectly determines `target` (verified by crosstab, zero exceptions across 500 rows) — kept in the
 dataset manifest unchanged per the student's explicit decision, and written up as a discussion-section case

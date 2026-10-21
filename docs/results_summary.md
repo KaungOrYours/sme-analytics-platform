@@ -95,6 +95,77 @@ caught this; the formally-scored diagnostics in this evaluation would not have, 
 is worth a paragraph in the discussion chapter — it's a real limitation of the chosen diagnostic set, surfaced
 by an actual run rather than argued in the abstract.
 
+## RQ3's combination rule (2026-10-20) — closing a gap in the committed design, not a new experiment
+
+`evaluation_protocol.md`'s RQ3 wording was never fully scored until now: *"Do the diagnostics **plus a
+combination rule**, fit on the development group, show similar discrimination on the disjoint
+final-evaluation group?"* Earlier passes scored `n/p` and `sigma_cv` individually but never built the
+combination rule that sentence actually asks for. No new experiment runs were needed — this reuses
+Experiment 1's existing results. Built as `evaluation/score_rq3_combination.py`.
+
+**Rule candidates**: logical OR (triggered if either diagnostic fires) and logical AND (triggered only if
+both fire) — no trained meta-learner, deliberately, since that would blur the exact distinction
+`docs/literature_matrix.md` draws against Lahoti, Gummadi & Weikum (2023)'s trained Risk Advisor. **Procedure**:
+score both rules on the development group only, lock whichever has the higher MCC there, then apply that
+one locked rule — untouched — to the final-evaluation group and report its transfer.
+
+| Step | Rule | MCC | Precision | Recall | False-alarm rate |
+|---|---|---|---|---|---|
+| Fit (development) | OR | **0.153** [CI −0.18, 0.44] | 0.133 | 0.667 | 0.394 |
+| Fit (development) | AND | −0.051 [CI −0.12, 0.00] | 0.0 | 0.0 | 0.03 |
+| **Locked rule = OR** → tested on final-evaluation | OR | **0.367** [CI 0.00, 0.59] | 0.231 | **1.0** | 0.417 |
+
+**The honest finding**: the locked OR rule transfers well — it even improves on the disjoint
+final-evaluation group (MCC 0.153 → 0.367, catching every single poor run, recall=1.0). That's a genuine
+positive RQ3 answer: the combination rule is not a fluke of the development group, it generalises.
+
+**But it does not beat `n/p` alone.** `n/p<10` by itself on the final-evaluation group scores MCC=0.50 (see
+the RQ2/RQ3 table earlier in this document) — *better* than the OR-combined rule's 0.367. The reason is
+visible directly in the confusion matrices: both achieve the same recall (1.0, 3/3 poor runs caught), but
+the combined rule has 10 false alarms where `n/p` alone has only 6 — OR-ing in `sigma_cv` adds four extra
+false triggers and catches zero additional true positives. This is exactly what the rest of today's findings
+predict: `sigma_cv` has shown no positive discriminative value anywhere in this project, so logically-OR-ing
+it into a combination rule can only ever add noise, never signal. **This directly validates the frozen
+protocol's own stated caution (Section 1): "a combined signal is not assumed superior to either alone" — and
+here, empirically, it measurably is not.** Good news for the write-up: this isn't a null result, it's a
+mechanistically explained one that ties every strand of today's evaluation together in one place.
+
+## Why does `n/p` fail under duplicate corruption? A re-analysis, no new runs (2026-10-20)
+
+Motivating question: `n/p<10` goes from a defensible MCC=0.265 on development-duplicates to a confidently
+negative MCC=−0.322 on final-evaluation-duplicates (see the Experiments 2-3 table above). Original
+hypothesis: duplicate rows inflate `n` without adding real information, so maybe `n/p` is being fooled by
+fake sample-size growth crossing the `<10` boundary. Tested directly against data already collected (no new
+experiment runs) by reconstructing each run's "honest" `n` — the pre-duplication training-set size, looked
+up from Experiment 1's own clean-condition result for the same dataset+seed — and comparing whether the
+`n/p<10` trigger would have fired differently using honest `n` instead of the duplication-inflated `n`.
+
+**The hypothesis is false**: across all 42 duplicate-condition runs (both groups), the trigger outcome is
+identical whether honest or inflated `n` is used — zero disagreements. Duplication at 15-35% simply isn't
+large enough to push any of these 7 datasets' `n/p` across the `<10` line either way. Worth stating plainly:
+a plausible-sounding mechanism, tested and ruled out, not assumed away.
+
+**The real mechanism, found by then asking which specific runs `n/p` misses**: every single false negative
+under duplicate corruption — `appendicitis` (n/p 14-16), `biomed` (n/p 38-45), `bupa` (n/p 63-75), 10 of 10
+across both groups — occurs in a dataset where `n/p` is already comfortably *above* 10, the threshold meant
+to signal "safe." Conversely, the one dataset with triggers that sometimes land on real poor runs
+(`molecular_biology_promoters`, n/p 1.7-2.0) triggers on every single run regardless of outcome, because its
+baseline `n/p` is so low the diagnostic has no room to discriminate at all there. `bupa` is the starkest case:
+**100% of its 6 duplicate-condition runs are poor** (G up to +0.26), all with `n/p` in the 63-75 range — a
+dataset that looks maximally "safe" by the sample-size-adequacy logic `n/p` encodes, failing every single
+time under a corruption type that has nothing to do with sample-size adequacy.
+
+**This is a construct-validity finding, not a calibration one.** `n/p` measures whether a dataset has enough
+rows relative to features — a reasonable proxy for *estimation* instability. Duplicate-induced CV-fold
+leakage (Finding #2 under Experiments 2-3 above: a duplicated row landing in both a training fold and its
+own validation fold) is a *data-integrity* failure, not a sample-size one — more rows, even fake duplicated
+ones, cannot protect against it, and may make it easier (more opportunities for a duplicate pair to straddle
+a fold boundary). The diagnostic isn't miscalibrated for this failure mode; it's answering a question that
+isn't the one duplicate corruption asks. This is a sharper, more defensible explanation than "the threshold
+needs tuning," and it's the kind of finding that only shows up by testing a specific, falsifiable hypothesis
+and following the data when it says no — worth presenting in the discussion chapter exactly in that order
+(hypothesis stated, tested, rejected, replaced), not just as the conclusion on its own.
+
 ## Experiments 2-3 — duplicates and outliers (extension beyond the committed design, 2026-10-20)
 
 **Status**: run the same day as the aggregate-CI revision above, at the student's explicit request to go
@@ -235,6 +306,9 @@ state in the methodology chapter rather than force a confusion matrix onto too f
   see the dedicated section above. Both of Section 7's named conditional-expansion axes (corruption family,
   sample-size level) are now exercised; no further axis is pre-authorized by the frozen protocol without a
   fresh decision.
+- **Done 2026-10-20**: RQ3's combination rule (see its dedicated section above) — this was always part of
+  the committed design, not an extension, and had simply never been built. Closes the last piece of RQ1-RQ3
+  that was still outstanding against the frozen protocol's own wording.
 - **Done 2026-10-20**: sanity-checked `labor`/`mux6`/`bupa` the same way `irish` was checked. `mux6` also
   saturates to S_test=1.0 at the clean condition, but for a different and unconcerning reason: it's the
   classic synthetic 6-bit-multiplexer benchmark, a deterministic nonlinear boolean function with no noise.
