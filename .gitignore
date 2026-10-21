@@ -228,3 +228,8 @@ docs/ai_assistance_log.md
 # dumps from evaluation/run_experiment.py
 evaluation/data/
 evaluation/results/
+
+# FPR draft chapters written with AI assistance (docs/fpr/). Same rule as
+# CLAUDE.md and the assistance log: no AI-authored material in the git repo.
+# Kept locally; the student rewrites in their own voice before submission.
+docs/fpr/
