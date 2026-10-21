@@ -5,7 +5,7 @@ from services.analyzer import generate_statistics, generate_insights
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from services.automl import run_automl
-from services.cleaner import detect_problems, auto_clean, calculate_quality_score, detect_problem_type, make_readable_name
+from services.cleaner import detect_problems, auto_clean, calculate_quality_score, quality_score_breakdown, detect_problem_type, make_readable_name
 import pandas as pd
 import io
 
@@ -103,8 +103,12 @@ def _analyze(df, filename):
     # Auto clean
     df_clean, cleaning_report = auto_clean(df)
 
-    # Calculate quality after cleaning
-    quality_after = calculate_quality_score(df_clean)
+    # Calculate quality after cleaning. The breakdown is kept alongside the
+    # scalar so the response can show which dimension drove the score rather
+    # than only the composite -- the score is a project heuristic, not a
+    # validated metric (see quality_score_breakdown's docstring).
+    quality_after_detail = quality_score_breakdown(df_clean)
+    quality_after = quality_after_detail["score"]
 
     # Detect problem type
     problem_detection = detect_problem_type(df_clean)
@@ -181,6 +185,7 @@ def _analyze(df, filename):
         "preview": df_clean.head(5).to_dict(orient='records'),
         "quality_before": quality_before,
         "quality_after": quality_after,
+        "quality_breakdown": quality_after_detail,
         "problems_found": problems,
         "chart_data": chart_data,
         "cleaning_report": cleaning_report

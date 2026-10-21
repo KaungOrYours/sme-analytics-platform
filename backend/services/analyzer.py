@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+from services.cleaner import text_columns
+
 
 def generate_statistics(df):
     """
@@ -38,9 +40,10 @@ def generate_statistics(df):
             }
 
     # Categorical column stats
-    cat_cols = df.select_dtypes(
-        include=['object']
-    ).columns
+    # text_columns rather than select_dtypes(include=['object']): the latter
+    # only matches pandas 3 string columns via a deprecated path that is
+    # scheduled for removal (see cleaner._is_text_dtype).
+    cat_cols = text_columns(df)
 
     for col in cat_cols:
         col_data = df[col].dropna()

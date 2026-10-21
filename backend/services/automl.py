@@ -300,7 +300,13 @@ def select_features(df, target_col):
     # Drop columns with no values at all — nothing to learn from them
     X = X.dropna(axis=1, how='all')
 
-    if y.dtype == 'object':
+    # pandas 3 gives text columns StringDtype, not object, so the previous
+    # `y.dtype == 'object'` check never fired on a string target -- fixed
+    # 2026-10-21 (see cleaner._is_text_dtype for the full explanation).
+    # build_preprocessor is deliberately NOT touched: the evaluation harness
+    # for docs/study*_results.md imports it, and changing it would invalidate
+    # 693 completed runs.
+    if pd.api.types.is_object_dtype(y) or pd.api.types.is_string_dtype(y):
         le = LabelEncoder()
         y = le.fit_transform(y.astype(str))
 
