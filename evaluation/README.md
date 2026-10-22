@@ -1,26 +1,58 @@
 # Evaluation harness
 
-Supports the locked research design in `docs/evaluation_protocol.md`. Separate from the app
-(`backend/`, `frontend/`) per `CLAUDE.md` Section 7 — this code evaluates the pipeline, it isn't part of it.
+Research harness for this project's evaluation studies. Deliberately separate from the application
+(`backend/`, `frontend/`): this code evaluates the pipeline, it is not part of it. It imports the
+application's own `build_preprocessor` rather than reimplementing preprocessing, so what is measured
+is the real pipeline.
 
-**Status (2026-10-20, superseding the note below): the full protocol run has happened.** `cleaning_eval.py`,
-`comparison_runner.py`, `warnings_eval.py`, `datasets.py`, and `run_experiment.py` below were built for an
-earlier, pre-approval research design and are now superseded (each file says so in its own docstring) — kept
-as working reference code, not as a source of current results. **The current, results-producing code is**
-`evaluation/diagnostics.py` (core measurement), `evaluation/full_run.py` (Experiment 1: missing-values),
-`evaluation/full_run_extended.py` (Experiments 2-3: duplicates, outliers), and `evaluation/score_rq2.py`
-(RQ2/RQ3 scoring, including bootstrap CIs). Results are in `docs/results_summary.md`, not in this harness's
-own output. `injectors.py` is shared by both the old and current code and is not superseded.
+**Start with [`../docs/findings.md`](../docs/findings.md)** for what the studies concluded. Each
+study record carries a banner stating what in it has been superseded.
+
+## Current, results-producing code
+
+| File | Purpose |
+|---|---|
+| `diagnostics.py` | Core measurement: one pipeline run, automated and manual, returning n, p, cross-validation scores, `sigma_CV`, signed `G = S_CV - S_test`, and the raw test labels and probabilities so intervals can be recomputed without rerunning a model. |
+| `diagnostics2.py` | Study 2's four added diagnostics (`EPV`, `fold_contamination`, `evalml_cov`, `evalml_range`) and the two-sided failure labels. |
+| `injectors.py` | Four seeded error injectors, each returning the corrupted frame plus exact ground truth. Shared by old and current code; not superseded. |
+| `full_run.py` | Study 1 Experiment 1 (missing values). `python -m evaluation.full_run {development\|final-evaluation}` |
+| `full_run_extended.py` | Study 1 Experiments 2-3 (duplicates, outliers). |
+| `full_run_sample_size.py` | Study 1 Experiment 4 (training-partition halving). |
+| `full_run_study2.py` | Study 2. Group C requires an explicit `--confirm` flag so the confirmation holdout cannot be opened by reflex. |
+| `full_run_study3_transfer.py` | Study 3's external transfer sample (8 datasets, 500 < n <= 1000). |
+| `recalibrate_study3.py` | Study 3's leave-one-dataset-out threshold recalibration. |
+| `score_rq2.py` | Study 1 scoring: confusion matrices, MCC with the degenerate-case rule, run-level bootstrap. |
+| `score_rq3_combination.py` | The OR/AND combination rule, fitted on development and locked before being applied to final-evaluation. |
+| `score_study2.py` | Study 2 scoring, reusing `score_rq2.py`'s primitives unchanged so figures stay comparable. |
+| `score_stratified.py` | **Post-hoc stratified re-analysis (not pre-registered).** Between- versus within-dataset discrimination, dataset-clustered bootstrap, estimable-cluster accounting. Also recomputes the previously ad-hoc AUROC tables so they are auditable. |
+| `study2_dataset_split.json` | The deterministic Study 2 group assignment. |
+| `backend_path.py` | Puts `backend/` on `sys.path` so this code imports `services.*` the same way `backend/main.py` does, without making `backend/` a package. |
+
+Results are written to `results/` as JSON, one record per run. `results/` and `data/` are not
+committed: results are regenerable and datasets are fetched on demand.
+
+## Superseded code, retained deliberately
+
+`cleaning_eval.py`, `comparison_runner.py`, `warnings_eval.py`, `datasets.py` and
+`run_experiment.py` were built for an earlier, pre-approval research design. Each says so in its own
+docstring. They are kept as working reference code rather than deleted, so that a reader of the code
+appendix encountering them is not left guessing why they disagree with the current protocol. **They
+are not a source of current results.**
 
 <details>
-<summary>Original 2026-10-19 status note (superseded, kept for history)</summary>
+<summary>Original 2026-10-19 and 2026-10-20 status notes (superseded, kept for history)</summary>
 
-**Status (2026-10-19): harness built and smoke-tested, full protocol run NOT yet done.** The full run
-needs `docs/datasets.md`'s shortlist locked first (currently candidates only).
+2026-10-19: harness built and smoke-tested, full protocol run not yet done; needed the dataset
+shortlist locked first.
+
+2026-10-20: the full protocol run has happened; the pre-approval files listed above became
+superseded at that point.
 
 </details>
 
-## What's here
+## Legacy file reference
+
+### Pre-approval harness, file by file
 
 | File | Purpose |
 |---|---|
@@ -61,4 +93,4 @@ been through the selection/ethics checks in `docs/datasets.md`.
   {50,100,200} x max_depth in {None,5,10,20}, 12 points) is a stated, fixed design choice for runtime
   reasons across many datasets — not an exhaustive search. State this as a scope limit in the report.
 - No automated test suite — correctness so far is from the manual sanity checks described in each
-  module's docstring and in `docs/ai_assistance_log.md`'s 2026-10-19 entries, not `pytest`.
+  module's docstring, not `pytest`.

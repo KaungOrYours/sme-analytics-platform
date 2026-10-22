@@ -52,7 +52,8 @@ Paris, France: PMLR.
 Added 2026-10-21. These two are cited in `docs/evaluation_protocol.md` to justify frozen thresholds
 but are **not among the 7 locked references above**, so they were not part of the approved plan's
 literature review. Both have been verified as real, correctly-attributed publications. **Neither has
-been read by the student yet.** Read both before the FPR cites them, per `CLAUDE.md` Section 3 — and
+been read by the student yet.** Read both before the FPR cites them, per this project's standing rule
+that nothing is cited unread — and
 note the attribution caveat on the second one, which is not a formality.
 
 **Peduzzi, P., Concato, J., Kemper, E., Holford, T. R. and Feinstein, A. R. (1996) 'A simulation

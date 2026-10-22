@@ -59,7 +59,7 @@ pilot's observation that it labels a non-trivial minority (~11% of 27 pilot runs
 (no signal to study) nor near-100% (no contrast to study). It is not derived from n/p or sigma_CV, per the
 approved plan's independence requirement. State this number as a stated design choice in the report, and be
 ready to justify 0.05 specifically in the viva (same treatment as every other fixed threshold in this
-project — see `CLAUDE.md` Section 5's note on `calculate_quality_score`).
+project — the application's `calculate_quality_score` is an unvalidated heuristic, as the README states).
 
 ## 5. Diagnostic thresholds (for precision/recall/false-alarm/MCC scoring)
 

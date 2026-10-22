@@ -105,7 +105,7 @@ each.
 
 **ReadMe statement** (what it will contain by project end): project description, setup instructions (already
 largely written), how to reproduce the evaluation experiments, dataset sources and licences, and a pointer to
-`docs/ai_assistance_log.md`.
+a privately maintained assistance record (see the README's development notes).
 
 **Security & storage**
 - Primary: GitHub. Backup: OneDrive. **[YOU SUPPLY]** your actual OneDrive backup cadence (e.g. weekly, synced

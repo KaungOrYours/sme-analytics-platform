@@ -10,7 +10,8 @@ Found via web search against the three angles in `docs/pdm_plan_outline.md` Sect
 benchmarking for small tabular data; automated cleaning evaluation against ground truth; reliability/
 uncertainty estimation — the one closest to the actual novelty claim).
 
-**These are real, searchable papers with real DOIs — not fabricated — but per `CLAUDE.md` Section 3,
+**These are real, searchable papers with real DOIs — not fabricated — but per this project's
+standing rule that nothing is cited unread,
 nothing goes in the PDM plan or FPR until the student has actually opened the paper, confirmed the
 citation details below are accurate from the primary source, and can explain its method in the viva.**
 Treat this file as a shortlist to read, not a finished reference list.
