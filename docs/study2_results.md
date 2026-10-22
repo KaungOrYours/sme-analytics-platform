@@ -9,6 +9,16 @@
 > *worse* than the published anchors, because the optimal cut is itself sample-dependent. The
 > replacement claim is that the diagnostics are informative as relative rankings and unreliable as
 > absolute warnings. See `docs/findings.md`.
+>
+> **ALSO: the AUROC tables below are between-dataset ordering, not per-run discrimination.**
+> A post-hoc stratified re-analysis (`docs/stratified_reanalysis.md`, 2026-10-22) shows that once
+> runs are compared only against other runs from the *same dataset*, Group C concordance falls from
+> 0.694-0.711 pooled to 0.174-0.253 within dataset, and those intervals sit below chance; `n/p` is literally constant within a
+> dataset. The measurements below reproduce exactly from `evaluation/score_stratified.py` -- it is
+> their interpretation as a per-run signal that is withdrawn. Note also that the bootstrap
+> intervals below resample runs, not datasets, and are therefore narrower than they should be:
+> under a dataset-clustered bootstrap, Group C's `sigma_cv` pooled figure is 0.706 [0.43, 0.88],
+> which includes chance.
 
 Pre-registered in `docs/study2_protocol.md` before any run; Amendment 1 recorded after Group B was
 scored and before Group C was executed. 525 runs total (Group A 147, B 189, C 189), 0 skipped,

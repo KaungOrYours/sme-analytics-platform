@@ -89,18 +89,34 @@ Dataset list and exclusion rationale (PII/deprecated/time-series-derived/outlier
 from `tabmini/data/data_info.py` in the TabMini repo (https://github.com/RicardoKnauer/TabMini), inspected
 directly on 2026-10-19, not asserted from memory.
 
-## Known data property: `irish`'s `Educational_level` perfectly determines `target`
+## Known data property: `irish`'s `Educational_level` determines `target` exactly
 
 Found 2026-10-20 while running the full development-group protocol: the automated pipeline (Random Forest)
 scored AUROC = 1.0 on both CV and test, for all 3 seeds, at the clean (0% corruption) condition — `sigma_cv`
-and `G` both exactly 0. Per `CLAUDE.md`'s "treat 99-100% accuracy as a bug until proven otherwise" rule, this
+and `G` both exactly 0. Per this project's standing "treat 99-100% accuracy as a bug until proven
+otherwise" rule, this
 was investigated rather than accepted.
 
 **Verified cause**: a crosstab of `Educational_level` x `target` across all 500 rows shows a perfect,
-exceptionless partition — every row with `Educational_level` in {0, 1, 10} has `target=1`; every row with
-`Educational_level` in {2, 3, ..., 9} has `target=0`. This is leakage intrinsic to the raw PMLB `irish`
-dataset, not a bug in this project's pipeline code. The partition is non-monotonic in the raw integer coding,
-which is why the two pipelines diverge sharply on this dataset:
+exceptionless partition — every row with `Educational_level` in {0, 1, 10} has `target=1` (222 rows); every
+row with `Educational_level` in {2, 3, ..., 9} has `target=0` (278 rows). This is a property of the raw PMLB
+`irish` dataset, not a bug in this project's pipeline code.
+
+**Wording, corrected 2026-10-22: call this *suspected target-derived coding*, not proven leakage.** A
+feature that perfectly predicts the target in-sample is equally consistent with (a) being derived from or
+definitionally overlapping the target, (b) being a legitimate near-perfect covariate, or (c) coincidence of
+dataset design. Only (a) is leakage, and distinguishing them requires the original codebook — the variable's
+meaning, the target's definition, and whether the feature would be available at prediction time. **PMLB does
+not distribute a codebook with this dataset and it has not been obtained**, so the provenance is unresolved
+and the stronger word is not earned.
+
+What *is* evidence, and can be stated: the mapping is **non-monotonic** in the raw integer coding — codes
+{0, 1, 10} against {2..9} — which is hard to reconcile with an ordinal educational-attainment scale that
+merely correlates strongly with the outcome, and is what one would expect if the codes partition on the
+target's own definition. That observation is reportable; the inference to leakage is pending provenance.
+Reading the original source codebook is an open action.
+
+The non-monotonicity is also why the two pipelines diverge sharply on this dataset:
 - **Manual baseline (logistic regression)** treats `Educational_level` as a single continuous numeric feature
   (PMLB stores it as an int column, so `build_preprocessor` routes it to the numeric/scaled branch, not
   one-hot). A single linear decision boundary cannot carve out {0, 1, 10} while excluding {2..9}, so logistic
@@ -111,7 +127,7 @@ which is why the two pipelines diverge sharply on this dataset:
 **Decision (student, 2026-10-20): keep `irish` unchanged in the dataset manifest — do not drop the column or
 swap the dataset.** Report the saturation as a finding rather than engineering it away, since it is a genuine,
 unforced illustration of the dissertation's own thesis: an automated pipeline with no human feature review can
-silently exploit a leaking feature that a simpler model cannot, and would do so undetected in RQ1/RQ2's own
+silently exploit a target-saturated feature that a simpler model cannot, and would do so undetected in RQ1/RQ2's own
 formal diagnostics (`n/p`, `sigma_cv`) once `sigma_cv` collapses to 0 at saturation, since a diagnostic with
 no variance in its own CV scores gives no warning signal by construction. Explicitly tie this to the live
 app's `suspected_leakage` warning in `backend/services/automl.py` (CV-score ceiling 0.98) — a feature

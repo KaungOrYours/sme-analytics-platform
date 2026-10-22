@@ -9,6 +9,13 @@
 > poor-labelled runs per group here against 78 and 42 in Study 2. The numbers below are correct; the
 > inference drawn from them was over-confident. The "`n/p` transfers" framing is also superseded.
 > `docs/findings.md` states the project's final position.
+>
+> **Also note** that `n/p` is near-constant within a dataset (3 distinct values across a dataset's
+> 21 runs, 2.3% of its variance within-dataset), so any discrimination credited to it here is
+> between-dataset ordering, not per-run prediction -- see `docs/stratified_reanalysis.md`. And the
+> `irish` finding below should be described as **suspected target-derived coding**, not proven
+> leakage: the provenance needed to tell a definitional artefact from a legitimate perfect
+> covariate has not been obtained.
 
 **Status: first full run, 2026-10-20. This is Experiment 1** of the FPR's evaluation chapter — the full
 missing-values-only, 3-seed, {clean,15%,35%} protocol frozen in `docs/evaluation_protocol.md`, run once on

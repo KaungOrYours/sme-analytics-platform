@@ -1,7 +1,19 @@
 # Study 3 results — 2026-10-21
 
-> **Most current study record. For the project's consolidated position across all three studies,
-> read `docs/findings.md` (added 2026-10-22).** Nothing in this document is superseded.
+> **RQ9's TRANSFER CONCLUSION IS DOWNGRADED -- read `docs/findings.md` first (updated 2026-10-22).**
+>
+> The RQ8 recalibration result below stands and is the project's sharpest surviving finding.
+> **RQ9's "the signal transfers" conclusion does not.** A post-hoc stratified re-analysis
+> (`docs/stratified_reanalysis.md`) found that all 9 poor-labelled runs in the 168-run transfer
+> sample come from a single dataset (`profb`); the other seven contain none. Only 2 of 32
+> dataset x corruption-family cells hold both outcome classes, and 36% of dataset-clustered
+> bootstrap resamples contain no positive case at all, so the transfer intervals below are
+> conditional on drawing that one dataset. What was observed is that one dataset of eight was
+> correctly ranked riskiest -- not that the signal transfers to a larger-n population.
+>
+> The same re-analysis shows the AUROC figures throughout are **between-dataset** ordering: within
+> a dataset, concordance is at or below chance. All 18 transfer AUROC figures below reproduce
+> exactly from `evaluation/score_stratified.py`; it is their interpretation that is revised.
 
 Pre-registered in `docs/study3_protocol.md` before any threshold was fitted. 693 runs in total:
 525 from Study 2 reused for RQ8 (no new runs needed), plus 168 new runs on the 8 transfer datasets.
