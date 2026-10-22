@@ -1,5 +1,15 @@
 # Study 2 results — 2026-10-21
 
+> **CLAIM 2 WITHDRAWN — read `docs/findings.md` first (added 2026-10-22).**
+>
+> Study 2's measurements all stand, including the `sigma_CV` replication, the `fold_contamination`
+> refutation and the power diagnosis of Study 1. **But "Claim 2 (new)" below — that the failure is
+> threshold calibration rather than construct — is withdrawn.** Study 3 pre-registered what would
+> falsify it and then observed exactly that: thresholds fitted by leave-one-dataset-out generalise
+> *worse* than the published anchors, because the optimal cut is itself sample-dependent. The
+> replacement claim is that the diagnostics are informative as relative rankings and unreliable as
+> absolute warnings. See `docs/findings.md`.
+
 Pre-registered in `docs/study2_protocol.md` before any run; Amendment 1 recorded after Group B was
 scored and before Group C was executed. 525 runs total (Group A 147, B 189, C 189), 0 skipped,
 ~117s total wall-clock. Scope: automated-pipeline runs only, carried forward from Study 1.

@@ -1,5 +1,8 @@
 # Study 3 results — 2026-10-21
 
+> **Most current study record. For the project's consolidated position across all three studies,
+> read `docs/findings.md` (added 2026-10-22).** Nothing in this document is superseded.
+
 Pre-registered in `docs/study3_protocol.md` before any threshold was fitted. 693 runs in total:
 525 from Study 2 reused for RQ8 (no new runs needed), plus 168 new runs on the 8 transfer datasets.
 0 skipped. Regenerate with `evaluation/recalibrate_study3.py` and

@@ -1,5 +1,15 @@
 # Experiment 1 — development + final-evaluation full-protocol run
 
+> **SUPERSEDED IN PART — read `docs/findings.md` first (added 2026-10-22).**
+>
+> This remains the accurate record of Study 1's runs, and its RQ1 results, the `irish` leakage case
+> study, the duplicates re-analysis and Experiments 2-4 all stand. **But its central conclusion about
+> `sigma_CV` does not replicate.** Study 2 measured MCC +0.180 [0.04, 0.32] and +0.262 [0.12, 0.40]
+> where this document reports intervals excluding positive values. The cause is power: 3
+> poor-labelled runs per group here against 78 and 42 in Study 2. The numbers below are correct; the
+> inference drawn from them was over-confident. The "`n/p` transfers" framing is also superseded.
+> `docs/findings.md` states the project's final position.
+
 **Status: first full run, 2026-10-20. This is Experiment 1** of the FPR's evaluation chapter — the full
 missing-values-only, 3-seed, {clean,15%,35%} protocol frozen in `docs/evaluation_protocol.md`, run once on
 both dataset groups. Later experiments (e.g. the conditional second corruption family/sample-size level from
