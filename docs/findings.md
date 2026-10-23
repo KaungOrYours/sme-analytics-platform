@@ -22,11 +22,18 @@ Automated machine-learning tools ship built-in reliability warnings whose predic
 never, as far as the reviewed literature shows, been empirically tested. Testing them across 525
 runs on 25 small binary tabular datasets, plus 168 further runs on 8 datasets outside that size
 regime, under pre-registered protocols with an untouched holdout group, gives a two-part answer.
+(A fourth study re-measured those same 525 runs under more precise variance estimators; it added no
+new pipeline runs and no new datasets, so the project's totals remain 861 runs over 33 datasets.)
 **The warnings measure something real, but coarser than they claim to**: the cross-validation-variance
 signals underlying them rank *datasets* by how likely the pipeline is to be over-optimistic
 (between-dataset Spearman rho +0.88 to +0.94), and carry essentially no ability to tell which
 *individual run* within a dataset will disappoint (within-dataset concordance 0.14–0.44 across the
-three samples, intervals at or below chance). **And that signal cannot be converted into a fixed threshold that transfers**: the
+three samples, intervals at or below chance). That per-run null is not an artefact of a crude
+estimator: re-measuring the same 525 runs with the cross-validation repeated ten and twenty times
+left it flat to declining (0.332, 0.301, 0.265), and the residual within-dataset association runs
+*backwards* for a mechanical reason — AUROC is capped at 1, so a high cross-validation mean forces
+low fold variance while raising the optimism outcome by construction. **And that signal cannot be
+converted into a fixed threshold that transfers**: the
 threshold a vendor ships discards it almost entirely, thresholds taken from the literature reach
 MCC 0.10–0.24 at best, and a threshold fitted optimally by leave-one-dataset-out performs *worse* on
 the held-out dataset than the published value it replaced, because the best cut moves by up to an
@@ -58,7 +65,12 @@ while carrying no usable within-dataset discrimination. This distinction is not 
 literature these rules come from, and it matters commercially: a warning attached to a single
 pipeline run is sold as a per-run signal and is being computed from a dataset-level property.
 Established on pre-registered holdout measurements; the between/within decomposition itself is
-post-hoc (`docs/stratified_reanalysis.md`).
+post-hoc (`docs/stratified_reanalysis.md`). **Study 4 tested and eliminated the obvious objection to
+it**: the per-run null is not an artefact of estimating a standard deviation from five fold scores.
+Repeating the cross-validation ten and twenty times, which cut the diagnostic's within-dataset
+variance share from 0.399 to 0.238 and moved per-run values by about 30 per cent of their own
+magnitude, left within-dataset concordance at 0.332, 0.301 and 0.265 — flat to declining, every
+interval below chance (`docs/study4_results.md`).
 
 **Contribution 2 — the signals are not thresholdable, and Contribution 1 explains why.** The
 information cannot be converted into a fixed global cut that generalises across dataset samples.
@@ -81,7 +93,10 @@ requirement.
 ## 4. The correction sequence, and why it is a strength
 
 Three conclusions were overturned by this project's own later work. Present them in this order; it
-is more defensible than presenting only the final answer.
+is more defensible than presenting only the final answer. **Study 4 is deliberately not on this list:
+it tested a fourth possible correction, pre-registered what would constitute one, and found none.
+That is a confirmation, and it should be presented as the sequence's one case where the project tried
+to break its own claim and failed.**
 
 **Correction 1 (Study 1 → Study 2): `sigma_CV` does discriminate.**
 Study 1 reported MCC intervals excluding positive values on both groups ([−0.25, 0.00] and
@@ -144,6 +159,17 @@ leave-one-dataset-out, which it did, to 0.246.
   structure and labels, not only in `n`.
 - **`n/p` is unstable across dataset samples.** +0.29, +0.50, −0.322, −0.004, +0.540 across five
   independently scored groups, and 0.246 under leave-one-dataset-out. Same rule, same threshold.
+- **The sub-chance within-dataset concordance is a bounded-metric confound, and the two earlier
+  candidate explanations are refuted.** Within-dataset concordance sits consistently *below* 0.5, not
+  merely at it. Study 4 eliminated estimator imprecision (Section 3 above) and eliminated shared fold
+  noise by computing `sigma` and `G` from disjoint sets of repeats, which left the figure unchanged at
+  0.265 [0.18, 0.36]. The supported explanation is post-hoc and mechanical: AUROC is bounded at 1, so
+  within one dataset a run whose CV mean lands near the ceiling is forced toward low fold variance
+  while the same high mean raises `G = S_CV − S_test` by construction. Measured within dataset, median
+  over 25 datasets: CV mean against `sigma` −0.813 (24 of 25 negative), CV mean against `G` +0.688
+  (25 of 25 positive), `sigma` against `G` −0.630 raw but **−0.075 once the CV mean is partialled
+  out**. Twenty per cent of runs have a CV mean above 0.95. See `docs/study4_results.md` section 6;
+  that section is post-hoc.
 
 ## 6. Methodological findings
 
@@ -161,6 +187,13 @@ Worth reporting in their own right; three came from catching mistakes rather tha
 - **Low-powered evaluation yields confident wrong answers** — see Correction 1.
 - **The in-regime dataset sample is exhausted.** Verified by enumerating all 162 PMLB classification
   datasets: no binary dataset with n ≤ 500 exists outside the 44 PMLBmini candidates.
+- **A question about an estimator does not need fresh data.** The sample exhaustion above blocks any
+  claim about generalising to new datasets, but not a claim about the estimator, because that
+  comparison is within run and each run is its own control. Study 4 was possible for this reason.
+- **A bounded score plus a difference-of-means outcome manufactures a confound.** With AUROC capped
+  at 1 and `G` defined as `S_CV − S_test`, the CV mean pushes the variance diagnostic down and the
+  outcome up simultaneously. Any per-run association between a variance diagnostic and `G` must
+  control for the mean; this project's early figures did not.
 
 ## 7. Consolidated limitations
 
@@ -172,6 +205,10 @@ Worth reporting in their own right; three came from catching mistakes rather tha
 - Studies 1–3 reported run-level bootstrap intervals, which are anti-conservative. The clustered
   intervals in `stratified_reanalysis.md` supersede them for any cross-dataset claim; the earlier
   per-run `S_test` intervals remain valid for their own narrower purpose.
+- **`G`'s own construction carries a confound.** Because AUROC is bounded above and `G` is a
+  difference of means, the CV mean is associated with the variance diagnostic negatively and with `G`
+  positively within every dataset. This is a property of this project's chosen outcome measure, not of
+  CV-variance diagnostics generally, and it bounds every per-run claim about `G`.
 - `delta_G = 0.05` is a stated design choice, not a validated constant. The label records
   **observed validation-to-test optimism on one noisy held-out score** — not "the pipeline's own
   failures" in any broader sense, and it is one-sided by construction.
@@ -190,7 +227,8 @@ Worth reporting in their own right; three came from catching mistakes rather tha
 
 What was frozen when, and what each conclusion is entitled to claim. **Honest limitation: Studies 2
 and 3 had their protocol and results files committed in the same commit, so git history does not by
-itself prove the protocol predated the run.** The supporting evidence is the `--confirm` gate that
+itself prove the protocol predated the run.** **Study 4 is the one study where it does**: `7cab9db`
+contains the protocol and nothing else, and the runner and results were committed afterwards. The supporting evidence is the `--confirm` gate that
 `full_run_study2.py` requires before Group C can be run, and Study 2's Amendment 1 being recorded
 before Group C's results file existed. Future studies commit the protocol before running.
 
@@ -201,6 +239,7 @@ before Group C's results file existed. Future studies commit the protocol before
 | Study 2 Amendment 1 | appended to `study2_protocol.md` | same | Groups A and B scored | Group C | Added threshold-free AUROC as a declared secondary measure, recorded before Group C ran |
 | Study 3 | `study3_protocol.md`, pre-registered 2026-10-21 | `154fb3a` (protocol **and** results together) | all 25 (leave-one-out is re-analysis) | the 8 transfer datasets | Recalibration result stands; transfer claim **downgraded** (1 estimable dataset) |
 | Stratified re-analysis | `stratified_reanalysis.md` | 2026-10-22 | everything | nothing | **Post-hoc, externally prompted, exploratory.** Revises claims; confirms nothing |
+| Study 4 | `study4_protocol.md`, pre-registered 2026-10-23 | **`7cab9db` — protocol ALONE, before the runner or any result existed** | all 25 (no holdout claimed) | nothing | Confirms Contribution 1 against its strongest objection; P11 and P14 refuted, P12 and P13 held. Its Section 6 mechanism is post-hoc |
 
 Refuted predictions are retained in `study2_results.md` §"Status of each pre-registered prediction"
 and `study3_results.md`, and are not quietly dropped.
@@ -208,7 +247,9 @@ and `study3_results.md`, and are not quietly dropped.
 ## 9. The obvious next study, deliberately not run
 
 Relative or within-dataset calibration: flag the worst-ranking fraction of runs *for a given
-dataset* rather than applying an absolute cut. **Note that Correction 3 weakens the case for this**
+dataset* rather than applying an absolute cut. **Correction 3 weakens the case for this and Study 4
+weakens it further** — the within-dataset signal survived neither a 20x more precise estimator nor
+decoupling, and what residual association exists runs the wrong way for mechanical reasons.
 — the within-dataset ranking signal is at or below chance, so the natural candidate rule now looks
 unpromising on this project's own evidence. The better-supported next step is to test whether the
 *dataset-level* signal, which is strong, can be turned into a dataset-level admission decision
@@ -224,4 +265,6 @@ unpromising on this project's own evidence. The better-supported next step is to
 | `docs/study2_results.md` | Study 2's measurements and the `fold_contamination` refutation | Its Claim 2 (Correction 2); its pooled AUROC *interpretation* (Correction 3) |
 | `docs/study3_protocol.md` | Study 3's pre-registration, incl. the falsification criterion | — |
 | `docs/study3_results.md` | The recalibration result | Its RQ9 transfer conclusion (Correction 3) |
-| `docs/stratified_reanalysis.md` | The between/within decomposition and clustered intervals | — (most current) |
+| `docs/stratified_reanalysis.md` | The between/within decomposition and clustered intervals | — |
+| `docs/study4_protocol.md` | Study 4's pre-registration, provably frozen before the run | — |
+| `docs/study4_results.md` | The estimator-precision test, the decoupling refutation, and the bounded-metric mechanism | — (most current) |
