@@ -85,7 +85,7 @@ is more defensible than presenting only the final answer.
 
 **Correction 1 (Study 1 → Study 2): `sigma_CV` does discriminate.**
 Study 1 reported MCC intervals excluding positive values on both groups ([−0.25, 0.00] and
-[−0.26, 0.00]) and concluded the diagnostic had no positive discrimination. Study 2 measured +0.180
+[−0.25, 0.00]) and concluded the diagnostic had no positive discrimination. Study 2 measured +0.180
 [0.04, 0.32] and +0.262 [0.12, 0.40]. The cause is statistical power: Study 1 had **3 poor-labelled
 runs per group**; Study 2 had 78 and 42. A diagnostic cannot be shown to discriminate against three
 positive cases. Study 1's numbers are correct; the inference was over-confident. **This is the

@@ -66,7 +66,7 @@ Poor runs (G > 0.05): 3/27 (11.1%).
 | Diagnostic | TP | FP | FN | TN | Precision [95% CI] | Recall [95% CI] | False-alarm rate | MCC [95% CI] |
 |---|---|---|---|---|---|---|---|---|
 | n/p < 10 | 3 | 6 | 0 | 18 | 0.333 [0.00, 0.67] | 1.0 [1.00, 1.00] | 0.25 | **0.50 [0.00, 0.77]** |
-| sigma_cv > 0.10 | 0 | 4 | 3 | 20 | 0.0 [0.00, 0.00] | 0.0 [0.00, 0.00] | 0.167 | **−0.147 [−0.26, 0.00]** |
+| sigma_cv > 0.10 | 0 | 4 | 3 | 20 | 0.0 [0.00, 0.00] | 0.0 [0.00, 0.00] | 0.167 | **−0.147 [−0.25, 0.00]** |
 
 **Revised framing after adding the aggregate CIs (2026-10-20) — more hedged than the first pass of this
 doc.** The point estimates still tell the same directional story (`n/p<10` positive and improving, `sigma_cv`
@@ -76,7 +76,7 @@ flat-to-negative), but the uncertainty is wide enough that it needs stating plai
   development group alone. The final-evaluation group's CI ([0.00, 0.77]) just touches zero at the lower
   bound — borderline, not a clean positive result either.
 - **`sigma_cv>0.10` is the more confident finding of the two**: its MCC CI excludes positive values entirely
-  in both groups ([−0.25, 0.00] and [−0.26, 0.00]) — the evidence is reasonably confident this diagnostic
+  in both groups ([−0.25, 0.00] and [−0.25, 0.00]) — the evidence is reasonably confident this diagnostic
   provides *no* positive discrimination, not just that its point estimate happens to be low.
 - The right way to state this in the FPR: *"the adapted EvalML high-variance warning (`sigma_cv`) shows no
   reliable discriminative value in either dataset group, while the classic events-per-variable heuristic
@@ -226,7 +226,7 @@ leakage-saturated dataset in a 4-dataset pooled average, not of the missing-valu
 | Corruption | Group | n_poor/n_runs | n/p MCC [CI] | sigma_cv MCC [CI] |
 |---|---|---|---|---|
 | Missing values | Development | 3/36 (8.3%) | 0.29 [−0.11, 0.61] | −0.148 [−0.25, 0.00] |
-| Missing values | Final-eval | 3/27 (11.1%) | 0.50 [0.00, 0.77] | −0.147 [−0.26, 0.00] |
+| Missing values | Final-eval | 3/27 (11.1%) | 0.50 [0.00, 0.77] | −0.147 [−0.25, 0.00] |
 | Duplicates | Development | 7/24 (29.2%) | 0.265 [−0.16, 0.70] | −0.193 [−0.36, 0.00] |
 | Duplicates | Final-eval | 7/18 (38.9%) | **−0.322 [−0.67, 0.12]** | 0.0 (degenerate — never triggers, 0/18) |
 | Outliers | Development | **0/24 (0.0%)** | 0.0 (degenerate — no poor cases at all) | 0.0 (degenerate — no poor cases at all) |

@@ -32,13 +32,13 @@ holdout, run once, with every threshold exactly as frozen.**
 ## Headline: Study 1's central negative finding does not replicate
 
 Study 1 concluded that `sigma_CV > 0.10` provides no positive discrimination, with bootstrap MCC
-intervals excluding positive values on both of its groups ([-0.25, 0.00] and [-0.26, 0.00]). That
+intervals excluding positive values on both of its groups ([-0.25, 0.00] and [-0.25, 0.00]). That
 conclusion does not survive a larger sample.
 
 | Group | n runs | poor_optimism | `sigma_cv` MCC [95% CI] |
 |---|---|---|---|
 | Study 1 development | 36 | 3 (8.3%) | -0.148 [-0.25, 0.00] |
-| Study 1 final-evaluation | 27 | 3 (11.1%) | -0.147 [-0.26, 0.00] |
+| Study 1 final-evaluation | 27 | 3 (11.1%) | -0.147 [-0.25, 0.00] |
 | **Study 2 Group B** | 189 | 78 (41.3%) | **+0.180 [0.04, 0.32]** |
 | **Study 2 Group C (confirmation)** | 189 | 42 (22.2%) | **+0.262 [0.12, 0.40]** |
 
