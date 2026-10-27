@@ -211,7 +211,10 @@ Worth reporting in their own right; three came from catching mistakes rather tha
   CV-variance diagnostics generally, and it bounds every per-run claim about `G`.
 - `delta_G = 0.05` is a stated design choice, not a validated constant. The label records
   **observed validation-to-test optimism on one noisy held-out score** — not "the pipeline's own
-  failures" in any broader sense, and it is one-sided by construction.
+  failures" in any broader sense, and it is one-sided by construction. A post-hoc, sensitivity-only
+  re-analysis (`docs/sensitivity_and_difference_reanalysis.md` §1) checked this is not load-bearing:
+  the within/between-dataset granularity pattern and the sign of every fixed-threshold MCC are
+  unchanged across `delta_G` in [0.025, 0.15], a 6x range bracketing the anchor.
 - The "automated pipeline" is three scikit-learn models at default hyperparameters with no search.
   **EvalML's warning *rules* were reimplemented and tested; EvalML itself was never run.** This is
   not a benchmark of any deployed AutoML platform's warnings in its native workflow.
@@ -268,3 +271,4 @@ unpromising on this project's own evidence. The better-supported next step is to
 | `docs/stratified_reanalysis.md` | The between/within decomposition and clustered intervals | — |
 | `docs/study4_protocol.md` | Study 4's pre-registration, provably frozen before the run | — |
 | `docs/study4_results.md` | The estimator-precision test, the decoupling refutation, and the bounded-metric mechanism | — (most current) |
+| `docs/sensitivity_and_difference_reanalysis.md` | The `delta_G` sensitivity check and the paired between-diagnostic difference CIs | — (post-hoc, sensitivity-only; closes review-response open items 1, 2) |
