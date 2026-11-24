@@ -5,8 +5,8 @@ results allow" clause (the first half, corruption family, was exercised as
 Experiments 2-3 in full_run_extended.py). Tests whether n/p's and sigma_cv's
 discrimination ability (the RQ2/RQ3 question) changes when the automated
 pipeline has less training data to work with -- directly on-topic for a
-dissertation about small SME datasets, and the dimension CLAUDE.md's rigor
-table explicitly asked for ("predefined sample-size levels, repeated at
+dissertation about small SME datasets, and the dimension the project's rigour
+criteria explicitly asked for ("predefined sample-size levels, repeated at
 multiple random seeds").
 
 Design: the OUTER TEST SET IS NEVER SUBSAMPLED. Only the training partition

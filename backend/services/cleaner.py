@@ -515,8 +515,8 @@ def quality_score_breakdown(df):
     instead, where it needs no weight.
 
     Returned separately from `calculate_quality_score` so the API can show the
-    components rather than a single opaque number -- the transparency
-    convention in CLAUDE.md Section 7.
+    components rather than a single opaque number -- the project's
+    transparency convention.
     """
     # Completeness: proportion of cells that are present.
     total_cells = int(df.size)
@@ -542,7 +542,7 @@ def quality_score_breakdown(df):
         # pd.to_numeric, so "1,200,000" counts as numbers-stored-as-text just
         # as `detect_problems` already treated it. The previous bare `except:`
         # here also swallowed KeyboardInterrupt and SystemExit, against the
-        # no-bare-except convention in CLAUDE.md Section 7.
+        # project's no-bare-except convention.
         if _is_text_dtype(df[col]) and looks_like_numeric_text(df[col]):
             consistency -= 10
             numeric_looking_text.append(col)

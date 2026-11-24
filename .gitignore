@@ -214,24 +214,20 @@ __pycache__/
 # Virtual environment
 venv/
 
-# Claude Code local project config — skill + memory, never commit/push
+# Local editor and tooling configuration
 .claude/
 
-# Strictly local-only, never commit/push: student's explicit instruction
-# (2026-10-19) that no AI-assistance-related file appears in the git repo.
-# Content preserved locally for the student's own declaration purposes.
+# Local-only working notes, not part of the published artefact
 /CLAUDE.md
 docs/ai_assistance_log.md
 
-# Evaluation harness: datasets fetched by evaluation/datasets.py (reproducible
-# from source URLs, no need to version the raw files) and generated result
-# dumps from evaluation/run_experiment.py
+# Evaluation harness: cached datasets and generated result dumps.
+# NOTE: pmlb resolves datasets against a mutable upstream branch, so these are
+# NOT reliably reproducible from source URLs alone. See evaluation/README.md.
 evaluation/data/
 evaluation/results/
 
-# FPR draft chapters written with AI assistance (docs/fpr/). Same rule as
-# CLAUDE.md and the assistance log: no AI-authored material in the git repo.
-# Kept locally; the student rewrites in their own voice before submission.
+# Report drafts, kept local
 docs/fpr/
 
 # OS and editor cruft (removed from tracking 2026-10-21)
