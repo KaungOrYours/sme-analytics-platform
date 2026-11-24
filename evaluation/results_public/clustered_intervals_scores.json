@@ -1,0 +1,3439 @@
+{
+  "analysis": "headline intervals at the correct unit of analysis (POST-HOC)",
+  "post_hoc": true,
+  "pre_registered": false,
+  "label": "poor_optimism",
+  "n_bootstrap": 2000,
+  "bootstrap_seed": 0,
+  "min_clusters_for_interval": 3,
+  "supersedes": "score_rq2.bootstrap_aggregate_metrics for every reported interval, and recalibrate_study3's bare mcc_gain point estimates",
+  "validation_gate": {
+    "ran": true,
+    "checks": [
+      {
+        "diagnostic": "np",
+        "published_anchor_mcc": 0.23848981788781023,
+        "recomputed": 0.23848981788781023,
+        "agrees": true,
+        "declared_deviation": false,
+        "deviation_reason": null
+      },
+      {
+        "diagnostic": "epv",
+        "published_anchor_mcc": 0.15561059063352925,
+        "recomputed": 0.15561059063352925,
+        "agrees": true,
+        "declared_deviation": false,
+        "deviation_reason": null
+      },
+      {
+        "diagnostic": "sigma_cv",
+        "published_anchor_mcc": 0.18351497146578025,
+        "recomputed": 0.18351497146578025,
+        "agrees": true,
+        "declared_deviation": false,
+        "deviation_reason": null
+      },
+      {
+        "diagnostic": "fold_contamination",
+        "published_anchor_mcc": 0.185266013226884,
+        "recomputed": 0.185266013226884,
+        "agrees": true,
+        "declared_deviation": false,
+        "deviation_reason": null
+      },
+      {
+        "diagnostic": "evalml_cov",
+        "published_anchor_mcc": 0.23186975617173722,
+        "recomputed": 0.23186975617173722,
+        "agrees": true,
+        "declared_deviation": false,
+        "deviation_reason": null
+      },
+      {
+        "diagnostic": "evalml_range",
+        "published_anchor_mcc": 0.10355991374178843,
+        "recomputed": 0.08914492781380205,
+        "agrees": false,
+        "declared_deviation": true,
+        "deviation_reason": "published figure uses a strict '>' comparator; the pre-registered rule is '>=' and is used here. 14 of 525 runs sit at exactly the anchor."
+      }
+    ],
+    "mismatches": 0,
+    "declared_deviations": 1
+  },
+  "part_a": {
+    "A": {
+      "n_runs": 147,
+      "n_datasets": 7,
+      "n_poor": 22,
+      "diagnostics": {
+        "np": {
+          "label": "n/p < t",
+          "anchor": 10.0,
+          "mcc": 0.1567858991804371,
+          "n_scored": 147,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": -0.01862151114542506,
+            "ci_high": 0.3318407546474857,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": 0.0,
+            "ci_high": 0.35940870651753926,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 186,
+            "share_degenerate": 0.093,
+            "bound_set_by_degenerate": true,
+            "n_clusters": 7,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": false,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": false
+        },
+        "epv": {
+          "label": "EPV < t",
+          "anchor": 10.0,
+          "mcc": 0.07198272077799645,
+          "n_scored": 147,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": -0.09332936225559667,
+            "ci_high": 0.22560527859578086,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.1697319137903139,
+            "ci_high": 0.3035766668420329,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 12,
+            "share_degenerate": 0.006,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 7,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": false,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": false
+        },
+        "sigma_cv": {
+          "label": "sigma_cv > t",
+          "anchor": 0.1,
+          "mcc": -0.185314498662771,
+          "n_scored": 147,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": -0.23963256760114102,
+            "ci_high": -0.13464683803330257,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.31203913384803444,
+            "ci_high": -0.08384205932041462,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 7,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": true,
+          "significance_lost_under_clustering": false
+        },
+        "fold_contamination": {
+          "label": "fold_contamination > t",
+          "anchor": 0.1,
+          "mcc": 0.2623181210401873,
+          "n_scored": 147,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.10620952978256909,
+            "ci_high": 0.4314879119764749,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.004840472917944415,
+            "ci_high": 0.5555555555555556,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 7,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "evalml_cov": {
+          "label": "evalml_cov > t",
+          "anchor": 0.2,
+          "mcc": -0.07016464154456234,
+          "n_scored": 147,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": -0.10846522890932808,
+            "ci_high": -0.030914695237867173,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.12179925116127438,
+            "ci_high": -0.019854601073760383,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 36,
+            "share_degenerate": 0.018,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 7,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": true,
+          "significance_lost_under_clustering": false
+        },
+        "evalml_range": {
+          "label": "evalml_range > t",
+          "anchor": 0.5,
+          "mcc": 0.0,
+          "n_scored": 147,
+          "degenerate": true,
+          "run_level_ci": {
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 2000,
+            "share_degenerate": 1.0,
+            "bound_set_by_degenerate": true,
+            "n_clusters": 7,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": false,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": false
+        }
+      }
+    },
+    "B": {
+      "n_runs": 189,
+      "n_datasets": 9,
+      "n_poor": 78,
+      "diagnostics": {
+        "np": {
+          "label": "n/p < t",
+          "anchor": 10.0,
+          "mcc": -0.004158004158004158,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": -0.14805212266496598,
+            "ci_high": 0.1366708676201687,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.3238733259419695,
+            "ci_high": 0.2807877189609012,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 7,
+            "share_degenerate": 0.0035,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": false,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": false
+        },
+        "epv": {
+          "label": "EPV < t",
+          "anchor": 10.0,
+          "mcc": 0.1616576806141639,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.02536481903953923,
+            "ci_high": 0.28953711063869103,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.1423076923076923,
+            "ci_high": 0.48609546514525276,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 11,
+            "share_degenerate": 0.0055,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "sigma_cv": {
+          "label": "sigma_cv > t",
+          "anchor": 0.1,
+          "mcc": 0.18023431272764762,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.0400639637504682,
+            "ci_high": 0.3164468361962245,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.052934377218563505,
+            "ci_high": 0.3669696556010944,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "fold_contamination": {
+          "label": "fold_contamination > t",
+          "anchor": 0.1,
+          "mcc": 0.21120243823346793,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.06482961460727737,
+            "ci_high": 0.34340830523644217,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": 0.08879521168694524,
+            "ci_high": 0.3355525137160135,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": true,
+          "significance_lost_under_clustering": false
+        },
+        "evalml_cov": {
+          "label": "evalml_cov > t",
+          "anchor": 0.2,
+          "mcc": 0.2497413862814226,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.10617537166910045,
+            "ci_high": 0.3875278586185306,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.047605221532633496,
+            "ci_high": 0.4063712768871578,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "evalml_range": {
+          "label": "evalml_range > t",
+          "anchor": 0.5,
+          "mcc": 0.134318686588774,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": -0.013866198888747426,
+            "ci_high": 0.2667467828369185,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.06540699401677286,
+            "ci_high": 0.2153419267958459,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 39,
+            "share_degenerate": 0.0195,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": false,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": false
+        }
+      }
+    },
+    "C": {
+      "n_runs": 189,
+      "n_datasets": 9,
+      "n_poor": 42,
+      "diagnostics": {
+        "np": {
+          "label": "n/p < t",
+          "anchor": 10.0,
+          "mcc": 0.5399492471560389,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.40722318328299384,
+            "ci_high": 0.6661527638571458,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": 0.0,
+            "ci_high": 0.7102342457813032,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 61,
+            "share_degenerate": 0.0305,
+            "bound_set_by_degenerate": true,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "epv": {
+          "label": "EPV < t",
+          "anchor": 10.0,
+          "mcc": 0.14085904245475275,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.015750986384301523,
+            "ci_high": 0.25788648665754704,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.1964025029288234,
+            "ci_high": 0.3730550099996379,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 5,
+            "share_degenerate": 0.0025,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "sigma_cv": {
+          "label": "sigma_cv > t",
+          "anchor": 0.1,
+          "mcc": 0.26207120918047955,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.12060453783110545,
+            "ci_high": 0.40416590344664133,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.0992152141356386,
+            "ci_high": 0.5587269501092168,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "fold_contamination": {
+          "label": "fold_contamination > t",
+          "anchor": 0.1,
+          "mcc": 0.1561581697648396,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.004762701312011343,
+            "ci_high": 0.3001437924328368,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.03026137663344012,
+            "ci_high": 0.42126147552583465,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "evalml_cov": {
+          "label": "evalml_cov > t",
+          "anchor": 0.2,
+          "mcc": 0.24760383248120776,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.08386017315490825,
+            "ci_high": 0.40939089121042094,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.1730321350514957,
+            "ci_high": 0.6231966484993721,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 9,
+            "share_degenerate": 0.0045,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "evalml_range": {
+          "label": "evalml_range > t",
+          "anchor": 0.5,
+          "mcc": 0.08126360553720012,
+          "n_scored": 189,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": -0.07026782461878524,
+            "ci_high": 0.23870118441722168,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.25992029193223903,
+            "ci_high": 0.43424329566035474,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 9,
+            "share_degenerate": 0.0045,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 9,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": false,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": false
+        }
+      }
+    },
+    "all25": {
+      "n_runs": 525,
+      "n_datasets": 25,
+      "n_poor": 142,
+      "diagnostics": {
+        "np": {
+          "label": "n/p < t",
+          "anchor": 10.0,
+          "mcc": 0.23848981788781023,
+          "n_scored": 525,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.15082087441982606,
+            "ci_high": 0.32655224730514426,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": 0.048543264727018774,
+            "ci_high": 0.40640481292813785,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 25,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": true,
+          "significance_lost_under_clustering": false
+        },
+        "epv": {
+          "label": "EPV < t",
+          "anchor": 10.0,
+          "mcc": 0.15561059063352925,
+          "n_scored": 525,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.0755156163426045,
+            "ci_high": 0.23286197730135946,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.021011471709255766,
+            "ci_high": 0.3232101627802718,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 25,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "sigma_cv": {
+          "label": "sigma_cv > t",
+          "anchor": 0.1,
+          "mcc": 0.18351497146578025,
+          "n_scored": 525,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.09474754756682374,
+            "ci_high": 0.27001075457078705,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.013650806366195003,
+            "ci_high": 0.35830996457283165,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 25,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "fold_contamination": {
+          "label": "fold_contamination > t",
+          "anchor": 0.1,
+          "mcc": 0.185266013226884,
+          "n_scored": 525,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.09942561121620164,
+            "ci_high": 0.2741163609882912,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": 0.06428785635743144,
+            "ci_high": 0.3174143627171156,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 25,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": true,
+          "significance_lost_under_clustering": false
+        },
+        "evalml_cov": {
+          "label": "evalml_cov > t",
+          "anchor": 0.2,
+          "mcc": 0.23186975617173722,
+          "n_scored": 525,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": 0.13846902753758575,
+            "ci_high": 0.3313702347267389,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.029107100105378446,
+            "ci_high": 0.4228699717619182,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 0,
+            "share_degenerate": 0.0,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 25,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": true,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": true
+        },
+        "evalml_range": {
+          "label": "evalml_range > t",
+          "anchor": 0.5,
+          "mcc": 0.08914492781380205,
+          "n_scored": 525,
+          "degenerate": false,
+          "run_level_ci": {
+            "ci_low": -0.0008218616724652995,
+            "ci_high": 0.1907905599306339,
+            "n_draws": 2000,
+            "unit": "run"
+          },
+          "clustered_ci": {
+            "ci_low": -0.10382874255543181,
+            "ci_high": 0.25556605733515503,
+            "n_draws": 2000,
+            "n_dropped": 0,
+            "n_degenerate_resamples": 1,
+            "share_degenerate": 0.0005,
+            "bound_set_by_degenerate": false,
+            "n_clusters": 25,
+            "unit": "dataset"
+          },
+          "run_level_excludes_zero": false,
+          "clustered_excludes_zero": false,
+          "significance_lost_under_clustering": false
+        }
+      }
+    }
+  },
+  "part_b": {
+    "np": {
+      "label": "n/p < t",
+      "anchor_threshold": 10.0,
+      "anchor_mcc": 0.23848981788781023,
+      "recalibrated_oos_mcc": 0.24636874445205587,
+      "mcc_gain": 0.00787892656424563,
+      "paired_clustered_ci": {
+        "ci_low": -0.1181332690223246,
+        "ci_high": 0.14529427506454468,
+        "n_draws": 2000,
+        "n_dropped": 0,
+        "n_clusters": 25,
+        "unit": "dataset (paired)"
+      },
+      "gain_excludes_zero": false,
+      "fitted_threshold_spread": {
+        "min": 10.11934673366834,
+        "max": 14.222427929119279,
+        "median": 11.538481883099708,
+        "fold_range": 1.4054689797118494
+      },
+      "per_dataset": [
+        {
+          "held_out": "analcatdata_aids",
+          "fitted_threshold": 10.196508860089923,
+          "fit_mcc_on_rest": 0.3086119174140601,
+          "recal": {
+            "tp": 11,
+            "fp": 4,
+            "fn": 5,
+            "tn": 1
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 5
+          }
+        },
+        {
+          "held_out": "analcatdata_asbestos",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3145377530219664,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          }
+        },
+        {
+          "held_out": "analcatdata_bankruptcy",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.36585723514563784,
+          "recal": {
+            "tp": 1,
+            "fp": 20,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 20,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "analcatdata_creditscore",
+          "fitted_threshold": 14.222427929119279,
+          "fit_mcc_on_rest": 0.31690621521403833,
+          "recal": {
+            "tp": 0,
+            "fp": 15,
+            "fn": 0,
+            "tn": 6
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "analcatdata_fraud",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.32491776692652496,
+          "recal": {
+            "tp": 9,
+            "fp": 12,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 9,
+            "fp": 12,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "analcatdata_japansolvent",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3197307329098371,
+          "recal": {
+            "tp": 10,
+            "fp": 11,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 10,
+            "fp": 11,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "appendicitis",
+          "fitted_threshold": 12.2094683946046,
+          "fit_mcc_on_rest": 0.34660014796848454,
+          "recal": {
+            "tp": 1,
+            "fp": 14,
+            "fn": 3,
+            "tn": 3
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 4,
+            "tn": 17
+          }
+        },
+        {
+          "held_out": "backache",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3093052668625889,
+          "recal": {
+            "tp": 12,
+            "fp": 9,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 12,
+            "fp": 9,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "biomed",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3145377530219664,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          }
+        },
+        {
+          "held_out": "breast_cancer",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3276402288726144,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 4,
+            "tn": 17
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 4,
+            "tn": 17
+          }
+        },
+        {
+          "held_out": "bupa",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3409953142591125,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 7,
+            "tn": 14
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 7,
+            "tn": 14
+          }
+        },
+        {
+          "held_out": "corral",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.310223776028399,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "glass2",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3145377530219664,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          }
+        },
+        {
+          "held_out": "haberman",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3500469371780022,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 9,
+            "tn": 12
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 9,
+            "tn": 12
+          }
+        },
+        {
+          "held_out": "hepatitis",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.33008829596221123,
+          "recal": {
+            "tp": 8,
+            "fp": 13,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 8,
+            "fp": 13,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "irish",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.310223776028399,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "labor",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.34550539206714986,
+          "recal": {
+            "tp": 5,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 5,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "lupus",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.35922301254049066,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 11,
+            "tn": 10
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 11,
+            "tn": 10
+          }
+        },
+        {
+          "held_out": "molecular_biology_promoters",
+          "fitted_threshold": 10.11934673366834,
+          "fit_mcc_on_rest": 0.3357312794469552,
+          "recal": {
+            "tp": 5,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 5,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "mux6",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.310223776028399,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "parity5",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.29353123969240913,
+          "recal": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "postoperative_patient_data",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3034275273280947,
+          "recal": {
+            "tp": 14,
+            "fp": 4,
+            "fn": 3,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 11,
+            "fp": 4,
+            "fn": 6,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "prnn_crabs",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.310223776028399,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "prnn_synth",
+          "fitted_threshold": 11.803667460107555,
+          "fit_mcc_on_rest": 0.3288373152873343,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "saheart",
+          "fitted_threshold": 11.538481883099708,
+          "fit_mcc_on_rest": 0.3365145822829417,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "tn": 15
+          }
+        }
+      ]
+    },
+    "epv": {
+      "label": "EPV < t",
+      "anchor_threshold": 10.0,
+      "anchor_mcc": 0.15561059063352925,
+      "recalibrated_oos_mcc": 0.16101589383069903,
+      "mcc_gain": 0.005405303197169781,
+      "paired_clustered_ci": {
+        "ci_low": -0.19324460025599255,
+        "ci_high": 0.18169864543786596,
+        "n_draws": 2000,
+        "n_dropped": 0,
+        "n_clusters": 25,
+        "unit": "dataset (paired)"
+      },
+      "gain_excludes_zero": false,
+      "fitted_threshold_spread": {
+        "min": 3.3134422110552766,
+        "max": 7.3461055276381915,
+        "median": 6.673994974874372,
+        "fold_range": 2.2170616113744077
+      },
+      "per_dataset": [
+        {
+          "held_out": "analcatdata_aids",
+          "fitted_threshold": 3.649497487437186,
+          "fit_mcc_on_rest": 0.32673201960653564,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 5
+          },
+          "anchor": {
+            "tp": 16,
+            "fp": 5,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "analcatdata_asbestos",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.27210454900748654,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 15,
+            "fn": 1,
+            "tn": 5
+          }
+        },
+        {
+          "held_out": "analcatdata_bankruptcy",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.31640694597035324,
+          "recal": {
+            "tp": 1,
+            "fp": 20,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 20,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "analcatdata_creditscore",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.3205401284978285,
+          "recal": {
+            "tp": 0,
+            "fp": 21,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 21,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "analcatdata_fraud",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.2829436665119764,
+          "recal": {
+            "tp": 9,
+            "fp": 12,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 9,
+            "fp": 12,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "analcatdata_japansolvent",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.27870587576566597,
+          "recal": {
+            "tp": 10,
+            "fp": 11,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 10,
+            "fp": 11,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "appendicitis",
+          "fitted_threshold": 3.3134422110552766,
+          "fit_mcc_on_rest": 0.3048103220540777,
+          "recal": {
+            "tp": 3,
+            "fp": 17,
+            "fn": 1,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 4,
+            "fp": 17,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "backache",
+          "fitted_threshold": 6.775720708807193,
+          "fit_mcc_on_rest": 0.276851808055278,
+          "recal": {
+            "tp": 12,
+            "fp": 9,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 12,
+            "fp": 9,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "biomed",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.27210454900748654,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          }
+        },
+        {
+          "held_out": "breast_cancer",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.28721264779846994,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 4,
+            "tn": 17
+          },
+          "anchor": {
+            "tp": 3,
+            "fp": 16,
+            "fn": 1,
+            "tn": 1
+          }
+        },
+        {
+          "held_out": "bupa",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.3025915873689499,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 7,
+            "tn": 14
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 7,
+            "tn": 14
+          }
+        },
+        {
+          "held_out": "corral",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.26712582129022716,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 15,
+            "fn": 0,
+            "tn": 6
+          }
+        },
+        {
+          "held_out": "glass2",
+          "fitted_threshold": 7.3461055276381915,
+          "fit_mcc_on_rest": 0.27846952922325324,
+          "recal": {
+            "tp": 0,
+            "fp": 15,
+            "fn": 1,
+            "tn": 5
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 20,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "haberman",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.3130033552480336,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 9,
+            "tn": 12
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 9,
+            "tn": 12
+          }
+        },
+        {
+          "held_out": "hepatitis",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.2871684277557787,
+          "recal": {
+            "tp": 8,
+            "fp": 13,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 8,
+            "fp": 13,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "irish",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.26712582129022716,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "labor",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.2997681789508583,
+          "recal": {
+            "tp": 5,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 5,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "lupus",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.3235488776456711,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 11,
+            "tn": 10
+          },
+          "anchor": {
+            "tp": 7,
+            "fp": 8,
+            "fn": 4,
+            "tn": 2
+          }
+        },
+        {
+          "held_out": "molecular_biology_promoters",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.2997681789508583,
+          "recal": {
+            "tp": 5,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 5,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "mux6",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.26712582129022716,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 18,
+            "fn": 0,
+            "tn": 3
+          }
+        },
+        {
+          "held_out": "parity5",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.25730803723485735,
+          "recal": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "postoperative_patient_data",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.2486438944057444,
+          "recal": {
+            "tp": 17,
+            "fp": 4,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 17,
+            "fp": 4,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "prnn_crabs",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.26712582129022716,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "prnn_synth",
+          "fitted_threshold": 6.777638190954774,
+          "fit_mcc_on_rest": 0.27345963641678894,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "saheart",
+          "fitted_threshold": 6.673994974874372,
+          "fit_mcc_on_rest": 0.2974341155789027,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "tn": 15
+          }
+        }
+      ]
+    },
+    "sigma_cv": {
+      "label": "sigma_cv > t",
+      "anchor_threshold": 0.1,
+      "anchor_mcc": 0.18351497146578025,
+      "recalibrated_oos_mcc": 0.0433414054687816,
+      "mcc_gain": -0.14017356599699865,
+      "paired_clustered_ci": {
+        "ci_low": -0.2671300733317219,
+        "ci_high": -0.013657390168605163,
+        "n_draws": 2000,
+        "n_dropped": 0,
+        "n_clusters": 25,
+        "unit": "dataset (paired)"
+      },
+      "gain_excludes_zero": true,
+      "fitted_threshold_spread": {
+        "min": 0.013944157714082018,
+        "max": 0.1394415771408202,
+        "median": 0.08134091999881178,
+        "fold_range": 10.000000000000002
+      },
+      "per_dataset": [
+        {
+          "held_out": "analcatdata_aids",
+          "fitted_threshold": 0.013944157714082018,
+          "fit_mcc_on_rest": 0.20206800181396814,
+          "recal": {
+            "tp": 16,
+            "fp": 5,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 13,
+            "fp": 4,
+            "fn": 3,
+            "tn": 1
+          }
+        },
+        {
+          "held_out": "analcatdata_asbestos",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.24967996625864333,
+          "recal": {
+            "tp": 1,
+            "fp": 18,
+            "fn": 0,
+            "tn": 2
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 13,
+            "fn": 1,
+            "tn": 7
+          }
+        },
+        {
+          "held_out": "analcatdata_bankruptcy",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.2294558496987827,
+          "recal": {
+            "tp": 0,
+            "fp": 8,
+            "fn": 1,
+            "tn": 12
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 5,
+            "fn": 1,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "analcatdata_creditscore",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.20686380199272253,
+          "recal": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 0,
+            "tn": 20
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 0,
+            "tn": 20
+          }
+        },
+        {
+          "held_out": "analcatdata_fraud",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.23361007993038266,
+          "recal": {
+            "tp": 6,
+            "fp": 11,
+            "fn": 3,
+            "tn": 1
+          },
+          "anchor": {
+            "tp": 6,
+            "fp": 11,
+            "fn": 3,
+            "tn": 1
+          }
+        },
+        {
+          "held_out": "analcatdata_japansolvent",
+          "fitted_threshold": 0.1394415771408202,
+          "fit_mcc_on_rest": 0.25428872684065346,
+          "recal": {
+            "tp": 0,
+            "fp": 9,
+            "fn": 10,
+            "tn": 2
+          },
+          "anchor": {
+            "tp": 5,
+            "fp": 11,
+            "fn": 5,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "appendicitis",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.25194741155008155,
+          "recal": {
+            "tp": 1,
+            "fp": 14,
+            "fn": 3,
+            "tn": 3
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 11,
+            "fn": 4,
+            "tn": 6
+          }
+        },
+        {
+          "held_out": "backache",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.22591681703410607,
+          "recal": {
+            "tp": 8,
+            "fp": 8,
+            "fn": 4,
+            "tn": 1
+          },
+          "anchor": {
+            "tp": 8,
+            "fp": 8,
+            "fn": 4,
+            "tn": 1
+          }
+        },
+        {
+          "held_out": "biomed",
+          "fitted_threshold": 0.013944157714082018,
+          "fit_mcc_on_rest": 0.21812950712575055,
+          "recal": {
+            "tp": 1,
+            "fp": 20,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 1,
+            "tn": 19
+          }
+        },
+        {
+          "held_out": "breast_cancer",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.23113084682764035,
+          "recal": {
+            "tp": 1,
+            "fp": 6,
+            "fn": 3,
+            "tn": 11
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 4,
+            "tn": 13
+          }
+        },
+        {
+          "held_out": "bupa",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.24345080136020672,
+          "recal": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 7,
+            "tn": 11
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 7,
+            "tn": 13
+          }
+        },
+        {
+          "held_out": "corral",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.21204351978712607,
+          "recal": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 0,
+            "tn": 18
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 2,
+            "fn": 0,
+            "tn": 19
+          }
+        },
+        {
+          "held_out": "glass2",
+          "fitted_threshold": 0.013944157714082018,
+          "fit_mcc_on_rest": 0.21812950712575055,
+          "recal": {
+            "tp": 1,
+            "fp": 20,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 1,
+            "tn": 19
+          }
+        },
+        {
+          "held_out": "haberman",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.23801957613306102,
+          "recal": {
+            "tp": 3,
+            "fp": 5,
+            "fn": 6,
+            "tn": 7
+          },
+          "anchor": {
+            "tp": 2,
+            "fp": 4,
+            "fn": 7,
+            "tn": 8
+          }
+        },
+        {
+          "held_out": "hepatitis",
+          "fitted_threshold": 0.10922923542697581,
+          "fit_mcc_on_rest": 0.23081413930777553,
+          "recal": {
+            "tp": 0,
+            "fp": 2,
+            "fn": 8,
+            "tn": 11
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 5,
+            "fn": 7,
+            "tn": 8
+          }
+        },
+        {
+          "held_out": "irish",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.2042822116671244,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "labor",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.23302001227028482,
+          "recal": {
+            "tp": 1,
+            "fp": 5,
+            "fn": 4,
+            "tn": 11
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 5,
+            "tn": 13
+          }
+        },
+        {
+          "held_out": "lupus",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.227231513696886,
+          "recal": {
+            "tp": 6,
+            "fp": 5,
+            "fn": 5,
+            "tn": 5
+          },
+          "anchor": {
+            "tp": 4,
+            "fp": 4,
+            "fn": 7,
+            "tn": 6
+          }
+        },
+        {
+          "held_out": "molecular_biology_promoters",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.23689438206267055,
+          "recal": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 5,
+            "tn": 12
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 5,
+            "tn": 13
+          }
+        },
+        {
+          "held_out": "mux6",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.21985650027575257,
+          "recal": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 0,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 5,
+            "fn": 0,
+            "tn": 16
+          }
+        },
+        {
+          "held_out": "parity5",
+          "fitted_threshold": 0.014367817543211855,
+          "fit_mcc_on_rest": 0.2031371521436631,
+          "recal": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "postoperative_patient_data",
+          "fitted_threshold": 0.013944157714082018,
+          "fit_mcc_on_rest": 0.20099885144468108,
+          "recal": {
+            "tp": 17,
+            "fp": 4,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 15,
+            "fp": 4,
+            "fn": 2,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "prnn_crabs",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.214641920854312,
+          "recal": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 0,
+            "tn": 17
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 0,
+            "tn": 18
+          }
+        },
+        {
+          "held_out": "prnn_synth",
+          "fitted_threshold": 0.013944157714082018,
+          "fit_mcc_on_rest": 0.21470371090898835,
+          "recal": {
+            "tp": 0,
+            "fp": 19,
+            "fn": 0,
+            "tn": 2
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "saheart",
+          "fitted_threshold": 0.08134091999881178,
+          "fit_mcc_on_rest": 0.23888536253237672,
+          "recal": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 6,
+            "tn": 12
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 6,
+            "tn": 14
+          }
+        }
+      ]
+    },
+    "fold_contamination": {
+      "label": "fold_contamination > t",
+      "anchor_threshold": 0.1,
+      "anchor_mcc": 0.185266013226884,
+      "recalibrated_oos_mcc": 0.19232766160922396,
+      "mcc_gain": 0.007061648382339969,
+      "paired_clustered_ci": {
+        "ci_low": -0.057091051216511896,
+        "ci_high": 0.06444642016109557,
+        "n_draws": 2000,
+        "n_dropped": 0,
+        "n_clusters": 25,
+        "unit": "dataset (paired)"
+      },
+      "gain_excludes_zero": false,
+      "fitted_threshold_spread": {
+        "min": 0.027186351927705757,
+        "max": 0.19998803541517107,
+        "median": 0.19936658080317554,
+        "fold_range": 7.356192399295846
+      },
+      "per_dataset": [
+        {
+          "held_out": "analcatdata_aids",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.23936947583204268,
+          "recal": {
+            "tp": 4,
+            "fp": 1,
+            "fn": 12,
+            "tn": 4
+          },
+          "anchor": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 11,
+            "tn": 4
+          }
+        },
+        {
+          "held_out": "analcatdata_asbestos",
+          "fitted_threshold": 0.027186351927705757,
+          "fit_mcc_on_rest": 0.23219899231877514,
+          "recal": {
+            "tp": 1,
+            "fp": 17,
+            "fn": 0,
+            "tn": 3
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 10,
+            "fn": 0,
+            "tn": 10
+          }
+        },
+        {
+          "held_out": "analcatdata_bankruptcy",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.2286844769576588,
+          "recal": {
+            "tp": 0,
+            "fp": 5,
+            "fn": 1,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 1,
+            "tn": 14
+          }
+        },
+        {
+          "held_out": "analcatdata_creditscore",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.22542992763209088,
+          "recal": {
+            "tp": 0,
+            "fp": 5,
+            "fn": 0,
+            "tn": 16
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 0,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "analcatdata_fraud",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.21854724666435454,
+          "recal": {
+            "tp": 4,
+            "fp": 2,
+            "fn": 5,
+            "tn": 10
+          },
+          "anchor": {
+            "tp": 4,
+            "fp": 2,
+            "fn": 5,
+            "tn": 10
+          }
+        },
+        {
+          "held_out": "analcatdata_japansolvent",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.22189099407084661,
+          "recal": {
+            "tp": 4,
+            "fp": 2,
+            "fn": 6,
+            "tn": 9
+          },
+          "anchor": {
+            "tp": 4,
+            "fp": 2,
+            "fn": 6,
+            "tn": 9
+          }
+        },
+        {
+          "held_out": "appendicitis",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.212058835771594,
+          "recal": {
+            "tp": 3,
+            "fp": 3,
+            "fn": 1,
+            "tn": 14
+          },
+          "anchor": {
+            "tp": 3,
+            "fp": 3,
+            "fn": 1,
+            "tn": 14
+          }
+        },
+        {
+          "held_out": "backache",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.22247947026561848,
+          "recal": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 8,
+            "tn": 9
+          },
+          "anchor": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 6,
+            "tn": 9
+          }
+        },
+        {
+          "held_out": "biomed",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.21885864776868524,
+          "recal": {
+            "tp": 1,
+            "fp": 4,
+            "fn": 0,
+            "tn": 16
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 5,
+            "fn": 0,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "breast_cancer",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.212058835771594,
+          "recal": {
+            "tp": 3,
+            "fp": 3,
+            "fn": 1,
+            "tn": 14
+          },
+          "anchor": {
+            "tp": 3,
+            "fp": 3,
+            "fn": 1,
+            "tn": 14
+          }
+        },
+        {
+          "held_out": "bupa",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.1988409311408566,
+          "recal": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 2,
+            "tn": 14
+          },
+          "anchor": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 1,
+            "tn": 14
+          }
+        },
+        {
+          "held_out": "corral",
+          "fitted_threshold": 0.19998803541517107,
+          "fit_mcc_on_rest": 0.2452610365384999,
+          "recal": {
+            "tp": 0,
+            "fp": 11,
+            "fn": 0,
+            "tn": 10
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 15,
+            "fn": 0,
+            "tn": 6
+          }
+        },
+        {
+          "held_out": "glass2",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.22208545806224722,
+          "recal": {
+            "tp": 1,
+            "fp": 5,
+            "fn": 0,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 5,
+            "fn": 0,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "haberman",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.22857618341377042,
+          "recal": {
+            "tp": 3,
+            "fp": 3,
+            "fn": 6,
+            "tn": 9
+          },
+          "anchor": {
+            "tp": 3,
+            "fp": 4,
+            "fn": 6,
+            "tn": 8
+          }
+        },
+        {
+          "held_out": "hepatitis",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.21210780214520367,
+          "recal": {
+            "tp": 4,
+            "fp": 1,
+            "fn": 4,
+            "tn": 12
+          },
+          "anchor": {
+            "tp": 4,
+            "fp": 2,
+            "fn": 4,
+            "tn": 11
+          }
+        },
+        {
+          "held_out": "irish",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.2286844769576588,
+          "recal": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 0,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 0,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "labor",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.2288083456684881,
+          "recal": {
+            "tp": 1,
+            "fp": 3,
+            "fn": 4,
+            "tn": 13
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 5,
+            "fn": 4,
+            "tn": 11
+          }
+        },
+        {
+          "held_out": "lupus",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.22525698322225837,
+          "recal": {
+            "tp": 4,
+            "fp": 2,
+            "fn": 7,
+            "tn": 8
+          },
+          "anchor": {
+            "tp": 4,
+            "fp": 2,
+            "fn": 7,
+            "tn": 8
+          }
+        },
+        {
+          "held_out": "molecular_biology_promoters",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.22207627733803773,
+          "recal": {
+            "tp": 2,
+            "fp": 3,
+            "fn": 3,
+            "tn": 13
+          },
+          "anchor": {
+            "tp": 3,
+            "fp": 3,
+            "fn": 2,
+            "tn": 13
+          }
+        },
+        {
+          "held_out": "mux6",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.23856797710493655,
+          "recal": {
+            "tp": 0,
+            "fp": 9,
+            "fn": 0,
+            "tn": 12
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 14,
+            "fn": 0,
+            "tn": 7
+          }
+        },
+        {
+          "held_out": "parity5",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.228771966979978,
+          "recal": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 10,
+            "tn": 5
+          },
+          "anchor": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 10,
+            "tn": 5
+          }
+        },
+        {
+          "held_out": "postoperative_patient_data",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.21403854216396284,
+          "recal": {
+            "tp": 8,
+            "fp": 1,
+            "fn": 9,
+            "tn": 3
+          },
+          "anchor": {
+            "tp": 8,
+            "fp": 1,
+            "fn": 9,
+            "tn": 3
+          }
+        },
+        {
+          "held_out": "prnn_crabs",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.218978358022866,
+          "recal": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 0,
+            "tn": 18
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 0,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "prnn_synth",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.22219468409207238,
+          "recal": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 0,
+            "tn": 17
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 0,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "saheart",
+          "fitted_threshold": 0.19936658080317554,
+          "fit_mcc_on_rest": 0.1887287578003027,
+          "recal": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 15
+          }
+        }
+      ]
+    },
+    "evalml_cov": {
+      "label": "evalml_cov > t",
+      "anchor_threshold": 0.2,
+      "anchor_mcc": 0.23186975617173722,
+      "recalibrated_oos_mcc": 0.15781768241071084,
+      "mcc_gain": -0.07405207376102638,
+      "paired_clustered_ci": {
+        "ci_low": -0.2518341201566803,
+        "ci_high": 0.0317643394131871,
+        "n_draws": 2000,
+        "n_dropped": 0,
+        "n_clusters": 25,
+        "unit": "dataset (paired)"
+      },
+      "gain_excludes_zero": false,
+      "fitted_threshold_spread": {
+        "min": 0.01613301522916539,
+        "max": 0.4094976385177544,
+        "median": 0.22112872479958737,
+        "fold_range": 25.382585505619645
+      },
+      "per_dataset": [
+        {
+          "held_out": "analcatdata_aids",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.21053390172743813,
+          "recal": {
+            "tp": 9,
+            "fp": 2,
+            "fn": 7,
+            "tn": 3
+          },
+          "anchor": {
+            "tp": 10,
+            "fp": 2,
+            "fn": 6,
+            "tn": 3
+          }
+        },
+        {
+          "held_out": "analcatdata_asbestos",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.25843879074509674,
+          "recal": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 1,
+            "tn": 16
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 1,
+            "tn": 14
+          }
+        },
+        {
+          "held_out": "analcatdata_bankruptcy",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.24380590895534146,
+          "recal": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 1,
+            "tn": 19
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 1,
+            "tn": 19
+          }
+        },
+        {
+          "held_out": "analcatdata_creditscore",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.23667646973088574,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "analcatdata_fraud",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.28802305740030654,
+          "recal": {
+            "tp": 2,
+            "fp": 9,
+            "fn": 7,
+            "tn": 3
+          },
+          "anchor": {
+            "tp": 3,
+            "fp": 9,
+            "fn": 6,
+            "tn": 3
+          }
+        },
+        {
+          "held_out": "analcatdata_japansolvent",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.2805680777860381,
+          "recal": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 10,
+            "tn": 7
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 5,
+            "fn": 10,
+            "tn": 6
+          }
+        },
+        {
+          "held_out": "appendicitis",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.2558513797594016,
+          "recal": {
+            "tp": 0,
+            "fp": 2,
+            "fn": 4,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 2,
+            "fn": 4,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "backache",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.2679680685461873,
+          "recal": {
+            "tp": 1,
+            "fp": 2,
+            "fn": 11,
+            "tn": 7
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 3,
+            "fn": 11,
+            "tn": 6
+          }
+        },
+        {
+          "held_out": "biomed",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.23906390341835937,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          }
+        },
+        {
+          "held_out": "breast_cancer",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.25105468585883584,
+          "recal": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 4,
+            "tn": 16
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 4,
+            "tn": 16
+          }
+        },
+        {
+          "held_out": "bupa",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.25373991288786246,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 7,
+            "tn": 14
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 7,
+            "tn": 14
+          }
+        },
+        {
+          "held_out": "corral",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.23667646973088574,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "glass2",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.23906390341835937,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          }
+        },
+        {
+          "held_out": "haberman",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.25090598677740306,
+          "recal": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 8,
+            "tn": 12
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 8,
+            "tn": 12
+          }
+        },
+        {
+          "held_out": "hepatitis",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.25624766269220095,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 8,
+            "tn": 13
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 8,
+            "tn": 13
+          }
+        },
+        {
+          "held_out": "irish",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.23667646973088574,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "labor",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.25350504179995736,
+          "recal": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 5,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 5,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "lupus",
+          "fitted_threshold": 0.22931867756994245,
+          "fit_mcc_on_rest": 0.26225432277331007,
+          "recal": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 11,
+            "tn": 9
+          },
+          "anchor": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 10,
+            "tn": 9
+          }
+        },
+        {
+          "held_out": "molecular_biology_promoters",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.24877874424125498,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 5,
+            "tn": 16
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 5,
+            "tn": 15
+          }
+        },
+        {
+          "held_out": "mux6",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.23667646973088574,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "parity5",
+          "fitted_threshold": 0.01613301522916539,
+          "fit_mcc_on_rest": 0.2031371521436631,
+          "recal": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 0,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "postoperative_patient_data",
+          "fitted_threshold": 0.4094976385177544,
+          "fit_mcc_on_rest": 0.21275090945884673,
+          "recal": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 16,
+            "tn": 3
+          },
+          "anchor": {
+            "tp": 13,
+            "fp": 4,
+            "fn": 4,
+            "tn": 0
+          }
+        },
+        {
+          "held_out": "prnn_crabs",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.23667646973088574,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 2,
+            "fn": 0,
+            "tn": 19
+          }
+        },
+        {
+          "held_out": "prnn_synth",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.23667646973088574,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "saheart",
+          "fitted_threshold": 0.22112872479958737,
+          "fit_mcc_on_rest": 0.2512503939420054,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "tn": 15
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "tn": 15
+          }
+        }
+      ]
+    },
+    "evalml_range": {
+      "label": "evalml_range > t",
+      "anchor_threshold": 0.5,
+      "anchor_mcc": 0.08914492781380205,
+      "recalibrated_oos_mcc": -0.05749578924824056,
+      "mcc_gain": -0.14664071706204262,
+      "paired_clustered_ci": {
+        "ci_low": -0.3048951970836471,
+        "ci_high": 0.02880802102860482,
+        "n_draws": 2000,
+        "n_dropped": 0,
+        "n_clusters": 25,
+        "unit": "dataset (paired)"
+      },
+      "gain_excludes_zero": false,
+      "fitted_threshold_spread": {
+        "min": 0.052763819095477386,
+        "max": 0.4020100502512563,
+        "median": 0.05527638190954774,
+        "fold_range": 7.6190476190476195
+      },
+      "per_dataset": [
+        {
+          "held_out": "analcatdata_aids",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.20744682847446502,
+          "recal": {
+            "tp": 16,
+            "fp": 5,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 4,
+            "fp": 1,
+            "fn": 12,
+            "tn": 4
+          }
+        },
+        {
+          "held_out": "analcatdata_asbestos",
+          "fitted_threshold": 0.3969849246231156,
+          "fit_mcc_on_rest": 0.22949534240887218,
+          "recal": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 1,
+            "tn": 14
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 1,
+            "tn": 16
+          }
+        },
+        {
+          "held_out": "analcatdata_bankruptcy",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.22473721366050814,
+          "recal": {
+            "tp": 1,
+            "fp": 19,
+            "fn": 0,
+            "tn": 1
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 1,
+            "tn": 19
+          }
+        },
+        {
+          "held_out": "analcatdata_creditscore",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.20299718314846094,
+          "recal": {
+            "tp": 0,
+            "fp": 10,
+            "fn": 0,
+            "tn": 11
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "analcatdata_fraud",
+          "fitted_threshold": 0.4020100502512563,
+          "fit_mcc_on_rest": 0.23501109513369453,
+          "recal": {
+            "tp": 2,
+            "fp": 9,
+            "fn": 7,
+            "tn": 3
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 9,
+            "fn": 9,
+            "tn": 3
+          }
+        },
+        {
+          "held_out": "analcatdata_japansolvent",
+          "fitted_threshold": 0.36180904522613067,
+          "fit_mcc_on_rest": 0.24544493719236463,
+          "recal": {
+            "tp": 0,
+            "fp": 7,
+            "fn": 10,
+            "tn": 4
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 10,
+            "tn": 7
+          }
+        },
+        {
+          "held_out": "appendicitis",
+          "fitted_threshold": 0.22110552763819097,
+          "fit_mcc_on_rest": 0.23397293350670814,
+          "recal": {
+            "tp": 0,
+            "fp": 13,
+            "fn": 4,
+            "tn": 4
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 4,
+            "tn": 17
+          }
+        },
+        {
+          "held_out": "backache",
+          "fitted_threshold": 0.3969849246231156,
+          "fit_mcc_on_rest": 0.22822030194470957,
+          "recal": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 12,
+            "tn": 8
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 12,
+            "tn": 9
+          }
+        },
+        {
+          "held_out": "biomed",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.2225021663680784,
+          "recal": {
+            "tp": 1,
+            "fp": 18,
+            "fn": 0,
+            "tn": 2
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          }
+        },
+        {
+          "held_out": "breast_cancer",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.22306717468275442,
+          "recal": {
+            "tp": 4,
+            "fp": 17,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 4,
+            "tn": 17
+          }
+        },
+        {
+          "held_out": "bupa",
+          "fitted_threshold": 0.18090452261306533,
+          "fit_mcc_on_rest": 0.22579963008946805,
+          "recal": {
+            "tp": 0,
+            "fp": 5,
+            "fn": 7,
+            "tn": 9
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 7,
+            "tn": 14
+          }
+        },
+        {
+          "held_out": "corral",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.2077142986541646,
+          "recal": {
+            "tp": 0,
+            "fp": 12,
+            "fn": 0,
+            "tn": 9
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "glass2",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.22473721366050814,
+          "recal": {
+            "tp": 1,
+            "fp": 19,
+            "fn": 0,
+            "tn": 1
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 20
+          }
+        },
+        {
+          "held_out": "haberman",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.22744270984220272,
+          "recal": {
+            "tp": 8,
+            "fp": 12,
+            "fn": 1,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 9,
+            "tn": 12
+          }
+        },
+        {
+          "held_out": "hepatitis",
+          "fitted_threshold": 0.24623115577889448,
+          "fit_mcc_on_rest": 0.22141880884867687,
+          "recal": {
+            "tp": 0,
+            "fp": 5,
+            "fn": 8,
+            "tn": 8
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 8,
+            "tn": 13
+          }
+        },
+        {
+          "held_out": "irish",
+          "fitted_threshold": 0.3969849246231156,
+          "fit_mcc_on_rest": 0.19646824564096746,
+          "recal": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "labor",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.21518176784189008,
+          "recal": {
+            "tp": 5,
+            "fp": 13,
+            "fn": 0,
+            "tn": 3
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 5,
+            "tn": 16
+          }
+        },
+        {
+          "held_out": "lupus",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.21396782847444326,
+          "recal": {
+            "tp": 11,
+            "fp": 10,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 11,
+            "tn": 10
+          }
+        },
+        {
+          "held_out": "molecular_biology_promoters",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.23036262490776924,
+          "recal": {
+            "tp": 4,
+            "fp": 15,
+            "fn": 1,
+            "tn": 1
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 5,
+            "tn": 16
+          }
+        },
+        {
+          "held_out": "mux6",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.21005018465021583,
+          "recal": {
+            "tp": 0,
+            "fp": 13,
+            "fn": 0,
+            "tn": 8
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "parity5",
+          "fitted_threshold": 0.052763819095477386,
+          "fit_mcc_on_rest": 0.20456912742813033,
+          "recal": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 9,
+            "fp": 4,
+            "fn": 6,
+            "tn": 2
+          }
+        },
+        {
+          "held_out": "postoperative_patient_data",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.20613959390222247,
+          "recal": {
+            "tp": 17,
+            "fp": 4,
+            "fn": 0,
+            "tn": 0
+          },
+          "anchor": {
+            "tp": 4,
+            "fp": 2,
+            "fn": 13,
+            "tn": 2
+          }
+        },
+        {
+          "held_out": "prnn_crabs",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.2077142986541646,
+          "recal": {
+            "tp": 0,
+            "fp": 12,
+            "fn": 0,
+            "tn": 9
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "prnn_synth",
+          "fitted_threshold": 0.05527638190954774,
+          "fit_mcc_on_rest": 0.21925464411205317,
+          "recal": {
+            "tp": 0,
+            "fp": 17,
+            "fn": 0,
+            "tn": 4
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21
+          }
+        },
+        {
+          "held_out": "saheart",
+          "fitted_threshold": 0.18090452261306533,
+          "fit_mcc_on_rest": 0.22097741428481335,
+          "recal": {
+            "tp": 0,
+            "fp": 5,
+            "fn": 6,
+            "tn": 10
+          },
+          "anchor": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "tn": 15
+          }
+        }
+      ]
+    }
+  }
+}

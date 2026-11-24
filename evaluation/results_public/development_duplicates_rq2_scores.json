@@ -1,0 +1,494 @@
+{
+  "group": "development_duplicates",
+  "delta_g": 0.05,
+  "np_threshold": 10,
+  "sigma_cv_threshold": 0.1,
+  "n_runs": 24,
+  "n_poor": 7,
+  "np_diagnostic": {
+    "name": "n/p < 10",
+    "tp": 3,
+    "fp": 3,
+    "fn": 4,
+    "tn": 14,
+    "precision": 0.5,
+    "recall": 0.42857142857142855,
+    "false_alarm_rate": 0.17647058823529413,
+    "mcc": 0.26462806201248157,
+    "degenerate": false,
+    "aggregate_bootstrap_ci": {
+      "precision": {
+        "bootstrap_mean": 0.5112091214341214,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      },
+      "recall": {
+        "bootstrap_mean": 0.44113846431346426,
+        "ci_lower": 0.0,
+        "ci_upper": 0.8571428571428571,
+        "n_valid_resamples": 1000
+      },
+      "false_alarm_rate": {
+        "bootstrap_mean": 0.17483504069366568,
+        "ci_lower": 0.0,
+        "ci_upper": 0.375,
+        "n_valid_resamples": 1000
+      },
+      "mcc": {
+        "bootstrap_mean": 0.27514575678242303,
+        "ci_lower": -0.15877683720748895,
+        "ci_upper": 0.6969320524371696,
+        "n_valid_resamples": 1000
+      }
+    }
+  },
+  "sigma_cv_diagnostic": {
+    "name": "sigma_cv > 0.1",
+    "tp": 0,
+    "fp": 2,
+    "fn": 7,
+    "tn": 15,
+    "precision": 0.0,
+    "recall": 0.0,
+    "false_alarm_rate": 0.11764705882352941,
+    "mcc": -0.19347649748797374,
+    "degenerate": false,
+    "aggregate_bootstrap_ci": {
+      "precision": {
+        "bootstrap_mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 889
+      },
+      "recall": {
+        "bootstrap_mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 1000
+      },
+      "false_alarm_rate": {
+        "bootstrap_mean": 0.12294014979352172,
+        "ci_lower": 0.0,
+        "ci_upper": 0.2942647058823528,
+        "n_valid_resamples": 1000
+      },
+      "mcc": {
+        "bootstrap_mean": -0.18149628425425185,
+        "ci_lower": -0.3629316540990676,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 1000
+      }
+    }
+  },
+  "per_run": [
+    {
+      "dataset": "molecular_biology_promoters",
+      "seed": 1,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 0.9256198347107438,
+      "G": 0.03538016528925614,
+      "poor": 0,
+      "n": 97,
+      "p": 57,
+      "sigma_cv": 0.03544775324158842,
+      "ci": {
+        "ci_lower": 0.8016528925619835,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "molecular_biology_promoters",
+      "seed": 2,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 0.8760330578512397,
+      "G": 0.06841138659320467,
+      "poor": 1,
+      "n": 97,
+      "p": 57,
+      "sigma_cv": 0.05879447357921312,
+      "ci": {
+        "ci_lower": 0.7024793388429753,
+        "ci_upper": 0.9958677685950413,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "molecular_biology_promoters",
+      "seed": 3,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 1.0,
+      "G": -0.02633333333333332,
+      "poor": 0,
+      "n": 97,
+      "p": 57,
+      "sigma_cv": 0.02404214406740848,
+      "ci": {
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "molecular_biology_promoters",
+      "seed": 1,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 0.8966942148760331,
+      "G": 0.08140495867768593,
+      "poor": 1,
+      "n": 113,
+      "p": 57,
+      "sigma_cv": 0.03680676861829401,
+      "ci": {
+        "ci_lower": 0.7271694214876033,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "molecular_biology_promoters",
+      "seed": 2,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 0.8842975206611571,
+      "G": 0.09566115702479339,
+      "poor": 1,
+      "n": 113,
+      "p": 57,
+      "sigma_cv": 0.018531802476438965,
+      "ci": {
+        "ci_lower": 0.731404958677686,
+        "ci_upper": 0.9958677685950413,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "molecular_biology_promoters",
+      "seed": 3,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 1.0,
+      "G": -0.028787878787878918,
+      "poor": 0,
+      "n": 113,
+      "p": 57,
+      "sigma_cv": 0.034048795536733706,
+      "ci": {
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "appendicitis",
+      "seed": 1,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 0.8472222222222222,
+      "G": 0.039444444444444504,
+      "poor": 0,
+      "n": 97,
+      "p": 7,
+      "sigma_cv": 0.09338586691190959,
+      "ci": {
+        "ci_lower": 0.5833333333333333,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "appendicitis",
+      "seed": 2,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 0.9722222222222223,
+      "G": -0.12253472222222239,
+      "poor": 0,
+      "n": 97,
+      "p": 7,
+      "sigma_cv": 0.12464010690784894,
+      "ci": {
+        "ci_lower": 0.875,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "appendicitis",
+      "seed": 3,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 0.8055555555555556,
+      "G": 0.11319444444444438,
+      "poor": 1,
+      "n": 97,
+      "p": 7,
+      "sigma_cv": 0.090705782960625,
+      "ci": {
+        "ci_lower": 0.3958333333333333,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "appendicitis",
+      "seed": 1,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 0.8472222222222222,
+      "G": 0.06236928104575157,
+      "poor": 1,
+      "n": 113,
+      "p": 7,
+      "sigma_cv": 0.0667191998741816,
+      "ci": {
+        "ci_lower": 0.5833333333333333,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "appendicitis",
+      "seed": 2,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 0.9722222222222222,
+      "G": -0.09730994152046779,
+      "poor": 0,
+      "n": 113,
+      "p": 7,
+      "sigma_cv": 0.12728195617648744,
+      "ci": {
+        "ci_lower": 0.875,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "appendicitis",
+      "seed": 3,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 0.8055555555555556,
+      "G": 0.12138888888888877,
+      "poor": 1,
+      "n": 113,
+      "p": 7,
+      "sigma_cv": 0.06996747480697153,
+      "ci": {
+        "ci_lower": 0.3958333333333333,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "biomed",
+      "seed": 1,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 0.8975308641975309,
+      "G": 0.04181437389770737,
+      "poor": 0,
+      "n": 192,
+      "p": 5,
+      "sigma_cv": 0.03297441760749216,
+      "ci": {
+        "ci_lower": 0.7579938271604938,
+        "ci_upper": 0.9925925925925926,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "biomed",
+      "seed": 2,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 0.9950617283950617,
+      "G": -0.05677432349227207,
+      "poor": 0,
+      "n": 192,
+      "p": 5,
+      "sigma_cv": 0.048867951718280886,
+      "ci": {
+        "ci_lower": 0.9777777777777777,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "biomed",
+      "seed": 3,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 0.9395061728395062,
+      "G": 0.020985890652557293,
+      "poor": 0,
+      "n": 192,
+      "p": 5,
+      "sigma_cv": 0.026345569528132315,
+      "ci": {
+        "ci_lower": 0.8641666666666666,
+        "ci_upper": 0.9951234567901234,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "biomed",
+      "seed": 1,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 0.9098765432098765,
+      "G": 0.05563686675180923,
+      "poor": 1,
+      "n": 225,
+      "p": 5,
+      "sigma_cv": 0.035956373739153995,
+      "ci": {
+        "ci_lower": 0.7900617283950617,
+        "ci_upper": 0.9925925925925926,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "biomed",
+      "seed": 2,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 0.9851851851851852,
+      "G": -0.004784576665915363,
+      "poor": 0,
+      "n": 225,
+      "p": 5,
+      "sigma_cv": 0.020732576304296303,
+      "ci": {
+        "ci_lower": 0.9505864197530864,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "biomed",
+      "seed": 3,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 0.9555555555555556,
+      "G": 0.017702107279693347,
+      "poor": 0,
+      "n": 225,
+      "p": 5,
+      "sigma_cv": 0.022544504574589865,
+      "ci": {
+        "ci_lower": 0.8938271604938272,
+        "ci_upper": 0.9975925925925926,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "irish",
+      "seed": 1,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 1.0,
+      "G": 0.0,
+      "poor": 0,
+      "n": 460,
+      "p": 5,
+      "sigma_cv": 0.0,
+      "ci": {
+        "ci_lower": 0.9999999999999999,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "irish",
+      "seed": 2,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 1.0,
+      "G": 0.0,
+      "poor": 0,
+      "n": 460,
+      "p": 5,
+      "sigma_cv": 0.0,
+      "ci": {
+        "ci_lower": 0.9999999999999999,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "irish",
+      "seed": 3,
+      "corruption_type": "duplicates",
+      "rate": 0.15,
+      "s_test": 1.0,
+      "G": 0.0,
+      "poor": 0,
+      "n": 460,
+      "p": 5,
+      "sigma_cv": 0.0,
+      "ci": {
+        "ci_lower": 0.9999999999999999,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "irish",
+      "seed": 1,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 1.0,
+      "G": 0.0,
+      "poor": 0,
+      "n": 540,
+      "p": 5,
+      "sigma_cv": 0.0,
+      "ci": {
+        "ci_lower": 0.9999999999999999,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "irish",
+      "seed": 2,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 1.0,
+      "G": 0.0,
+      "poor": 0,
+      "n": 540,
+      "p": 5,
+      "sigma_cv": 0.0,
+      "ci": {
+        "ci_lower": 0.9999999999999999,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "irish",
+      "seed": 3,
+      "corruption_type": "duplicates",
+      "rate": 0.35,
+      "s_test": 1.0,
+      "G": 0.0,
+      "poor": 0,
+      "n": 540,
+      "p": 5,
+      "sigma_cv": 0.0,
+      "ci": {
+        "ci_lower": 0.9999999999999999,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    }
+  ]
+}

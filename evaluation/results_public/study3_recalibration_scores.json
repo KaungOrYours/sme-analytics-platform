@@ -1,0 +1,1900 @@
+{
+  "protocol": "docs/study3_protocol.md (pre-registered 2026-10-21)",
+  "label": "poor_optimism",
+  "n_runs": 525,
+  "n_datasets": 25,
+  "method": "leave-one-dataset-out; threshold fitted on 24, evaluated on the held-out 1",
+  "rq8": {
+    "np": {
+      "label": "n/p < t",
+      "anchor": {
+        "tp": 76,
+        "fp": 107,
+        "fn": 66,
+        "tn": 276,
+        "precision": 0.41530054644808745,
+        "recall": 0.5352112676056338,
+        "false_alarm_rate": 0.2793733681462141,
+        "mcc": 0.23848981788781023,
+        "degenerate": false,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.41498982630009756,
+            "ci_lower": 0.34996428571428567,
+            "ci_upper": 0.4864864864864865,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.5347523401658789,
+            "ci_lower": 0.4489393125671321,
+            "ci_upper": 0.6159797198716077,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.28062654880316323,
+            "ci_lower": 0.23636005726556908,
+            "ci_upper": 0.32620462701598607,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.23692269937648183,
+            "ci_lower": 0.1524103547143421,
+            "ci_upper": 0.32505601748833907,
+            "n_valid_resamples": 1000
+          }
+        },
+        "threshold": 10.0
+      },
+      "recalibrated_oos": {
+        "tp": 91,
+        "fp": 140,
+        "fn": 51,
+        "tn": 243,
+        "precision": 0.3939393939393939,
+        "recall": 0.6408450704225352,
+        "false_alarm_rate": 0.36553524804177545,
+        "mcc": 0.24636874445205587,
+        "n_runs": 525,
+        "n_poor": 142,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.3924220868641148,
+            "ci_lower": 0.3318636007409519,
+            "ci_upper": 0.45259633804892424,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.636703719054462,
+            "ci_lower": 0.559400123685838,
+            "ci_upper": 0.7132352941176471,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.3656595329605267,
+            "ci_lower": 0.31470619501953384,
+            "ci_upper": 0.41398523278576904,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.2425526796625583,
+            "ci_lower": 0.15940025461563775,
+            "ci_upper": 0.3215297493439581,
+            "n_valid_resamples": 1000
+          }
+        },
+        "fitted_thresholds": {
+          "min": 10.11934673366834,
+          "max": 14.222427929119279,
+          "median": 11.538481883099708
+        },
+        "per_dataset": [
+          {
+            "held_out": "analcatdata_aids",
+            "fitted_threshold": 10.196508860089923,
+            "fit_mcc_on_24": 0.3086119174140601,
+            "n_test_runs": 21,
+            "n_test_poor": 16
+          },
+          {
+            "held_out": "analcatdata_asbestos",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3145377530219664,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_bankruptcy",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.36585723514563784,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_creditscore",
+            "fitted_threshold": 14.222427929119279,
+            "fit_mcc_on_24": 0.31690621521403833,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "analcatdata_fraud",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.32491776692652496,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "analcatdata_japansolvent",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3197307329098371,
+            "n_test_runs": 21,
+            "n_test_poor": 10
+          },
+          {
+            "held_out": "appendicitis",
+            "fitted_threshold": 12.2094683946046,
+            "fit_mcc_on_24": 0.34660014796848454,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "backache",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3093052668625889,
+            "n_test_runs": 21,
+            "n_test_poor": 12
+          },
+          {
+            "held_out": "biomed",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3145377530219664,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "breast_cancer",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3276402288726144,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "bupa",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3409953142591125,
+            "n_test_runs": 21,
+            "n_test_poor": 7
+          },
+          {
+            "held_out": "corral",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.310223776028399,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "glass2",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3145377530219664,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "haberman",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3500469371780022,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "hepatitis",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.33008829596221123,
+            "n_test_runs": 21,
+            "n_test_poor": 8
+          },
+          {
+            "held_out": "irish",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.310223776028399,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "labor",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.34550539206714986,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "lupus",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.35922301254049066,
+            "n_test_runs": 21,
+            "n_test_poor": 11
+          },
+          {
+            "held_out": "molecular_biology_promoters",
+            "fitted_threshold": 10.11934673366834,
+            "fit_mcc_on_24": 0.3357312794469552,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "mux6",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.310223776028399,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "parity5",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.29353123969240913,
+            "n_test_runs": 21,
+            "n_test_poor": 15
+          },
+          {
+            "held_out": "postoperative_patient_data",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3034275273280947,
+            "n_test_runs": 21,
+            "n_test_poor": 17
+          },
+          {
+            "held_out": "prnn_crabs",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.310223776028399,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "prnn_synth",
+            "fitted_threshold": 11.803667460107555,
+            "fit_mcc_on_24": 0.3288373152873343,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "saheart",
+            "fitted_threshold": 11.538481883099708,
+            "fit_mcc_on_24": 0.3365145822829417,
+            "n_test_runs": 21,
+            "n_test_poor": 6
+          }
+        ]
+      },
+      "mcc_gain": 0.00787892656424563
+    },
+    "epv": {
+      "label": "EPV < t",
+      "anchor": {
+        "tp": 113,
+        "fp": 242,
+        "fn": 29,
+        "tn": 141,
+        "precision": 0.3183098591549296,
+        "recall": 0.795774647887324,
+        "false_alarm_rate": 0.6318537859007833,
+        "mcc": 0.15561059063352925,
+        "degenerate": false,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.3192550606538808,
+            "ci_lower": 0.2707051508949045,
+            "ci_upper": 0.36600135714764426,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.7983295877477935,
+            "ci_lower": 0.7278756957328386,
+            "ci_upper": 0.8609368202252622,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.6336762775731054,
+            "ci_lower": 0.5862743615370454,
+            "ci_upper": 0.682515422077922,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.15665218226911315,
+            "ci_lower": 0.07567572650536368,
+            "ci_upper": 0.23268556092558756,
+            "n_valid_resamples": 1000
+          }
+        },
+        "threshold": 10.0
+      },
+      "recalibrated_oos": {
+        "tp": 85,
+        "fp": 160,
+        "fn": 57,
+        "tn": 223,
+        "precision": 0.3469387755102041,
+        "recall": 0.5985915492957746,
+        "false_alarm_rate": 0.4177545691906005,
+        "mcc": 0.16101589383069903,
+        "n_runs": 525,
+        "n_poor": 142,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.346601195804325,
+            "ci_lower": 0.28394930947897046,
+            "ci_upper": 0.4026660149550662,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.5967420908308854,
+            "ci_lower": 0.5172270114942529,
+            "ci_upper": 0.6748099461514095,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.4171848202204901,
+            "ci_lower": 0.3703286177424108,
+            "ci_upper": 0.46667582417582415,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.15981816455507686,
+            "ci_lower": 0.07458906063109914,
+            "ci_upper": 0.23584540368086615,
+            "n_valid_resamples": 1000
+          }
+        },
+        "fitted_thresholds": {
+          "min": 3.3134422110552766,
+          "max": 7.3461055276381915,
+          "median": 6.673994974874372
+        },
+        "per_dataset": [
+          {
+            "held_out": "analcatdata_aids",
+            "fitted_threshold": 3.649497487437186,
+            "fit_mcc_on_24": 0.32673201960653564,
+            "n_test_runs": 21,
+            "n_test_poor": 16
+          },
+          {
+            "held_out": "analcatdata_asbestos",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.27210454900748654,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_bankruptcy",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.31640694597035324,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_creditscore",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.3205401284978285,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "analcatdata_fraud",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.2829436665119764,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "analcatdata_japansolvent",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.27870587576566597,
+            "n_test_runs": 21,
+            "n_test_poor": 10
+          },
+          {
+            "held_out": "appendicitis",
+            "fitted_threshold": 3.3134422110552766,
+            "fit_mcc_on_24": 0.3048103220540777,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "backache",
+            "fitted_threshold": 6.775720708807193,
+            "fit_mcc_on_24": 0.276851808055278,
+            "n_test_runs": 21,
+            "n_test_poor": 12
+          },
+          {
+            "held_out": "biomed",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.27210454900748654,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "breast_cancer",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.28721264779846994,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "bupa",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.3025915873689499,
+            "n_test_runs": 21,
+            "n_test_poor": 7
+          },
+          {
+            "held_out": "corral",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.26712582129022716,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "glass2",
+            "fitted_threshold": 7.3461055276381915,
+            "fit_mcc_on_24": 0.27846952922325324,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "haberman",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.3130033552480336,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "hepatitis",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.2871684277557787,
+            "n_test_runs": 21,
+            "n_test_poor": 8
+          },
+          {
+            "held_out": "irish",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.26712582129022716,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "labor",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.2997681789508583,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "lupus",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.3235488776456711,
+            "n_test_runs": 21,
+            "n_test_poor": 11
+          },
+          {
+            "held_out": "molecular_biology_promoters",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.2997681789508583,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "mux6",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.26712582129022716,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "parity5",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.25730803723485735,
+            "n_test_runs": 21,
+            "n_test_poor": 15
+          },
+          {
+            "held_out": "postoperative_patient_data",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.2486438944057444,
+            "n_test_runs": 21,
+            "n_test_poor": 17
+          },
+          {
+            "held_out": "prnn_crabs",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.26712582129022716,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "prnn_synth",
+            "fitted_threshold": 6.777638190954774,
+            "fit_mcc_on_24": 0.27345963641678894,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "saheart",
+            "fitted_threshold": 6.673994974874372,
+            "fit_mcc_on_24": 0.2974341155789027,
+            "n_test_runs": 21,
+            "n_test_poor": 6
+          }
+        ]
+      },
+      "mcc_gain": 0.005405303197169781
+    },
+    "sigma_cv": {
+      "label": "sigma_cv > t",
+      "anchor": {
+        "tp": 69,
+        "fp": 111,
+        "fn": 73,
+        "tn": 272,
+        "precision": 0.38333333333333336,
+        "recall": 0.4859154929577465,
+        "false_alarm_rate": 0.2898172323759791,
+        "mcc": 0.18351497146578025,
+        "degenerate": false,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.3836209759317167,
+            "ci_lower": 0.3160621761658031,
+            "ci_upper": 0.44945224719101123,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.48707112462445884,
+            "ci_lower": 0.4039461146314736,
+            "ci_upper": 0.5661828979843686,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.2912447332359059,
+            "ci_lower": 0.24730262639009387,
+            "ci_upper": 0.3386452420191662,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.183150634076605,
+            "ci_lower": 0.09694054314231562,
+            "ci_upper": 0.2679878479185297,
+            "n_valid_resamples": 1000
+          }
+        },
+        "threshold": 0.1
+      },
+      "recalibrated_oos": {
+        "tp": 77,
+        "fp": 189,
+        "fn": 65,
+        "tn": 194,
+        "precision": 0.2894736842105263,
+        "recall": 0.5422535211267606,
+        "false_alarm_rate": 0.4934725848563969,
+        "mcc": 0.0433414054687816,
+        "n_runs": 525,
+        "n_poor": 142,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.2906102611142712,
+            "ci_lower": 0.23439203925845148,
+            "ci_upper": 0.346459535518349,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.542940281526038,
+            "ci_lower": 0.4626578645235362,
+            "ci_upper": 0.6233069832114533,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.49169850060633036,
+            "ci_lower": 0.4426655737704918,
+            "ci_upper": 0.542200359589399,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.045570321530921554,
+            "ci_lower": -0.03765948385586119,
+            "ci_upper": 0.13188409593980077,
+            "n_valid_resamples": 1000
+          }
+        },
+        "fitted_thresholds": {
+          "min": 0.013944157714082018,
+          "max": 0.1394415771408202,
+          "median": 0.08134091999881178
+        },
+        "per_dataset": [
+          {
+            "held_out": "analcatdata_aids",
+            "fitted_threshold": 0.013944157714082018,
+            "fit_mcc_on_24": 0.20206800181396814,
+            "n_test_runs": 21,
+            "n_test_poor": 16
+          },
+          {
+            "held_out": "analcatdata_asbestos",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.24967996625864333,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_bankruptcy",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.2294558496987827,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_creditscore",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.20686380199272253,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "analcatdata_fraud",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.23361007993038266,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "analcatdata_japansolvent",
+            "fitted_threshold": 0.1394415771408202,
+            "fit_mcc_on_24": 0.25428872684065346,
+            "n_test_runs": 21,
+            "n_test_poor": 10
+          },
+          {
+            "held_out": "appendicitis",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.25194741155008155,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "backache",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.22591681703410607,
+            "n_test_runs": 21,
+            "n_test_poor": 12
+          },
+          {
+            "held_out": "biomed",
+            "fitted_threshold": 0.013944157714082018,
+            "fit_mcc_on_24": 0.21812950712575055,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "breast_cancer",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.23113084682764035,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "bupa",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.24345080136020672,
+            "n_test_runs": 21,
+            "n_test_poor": 7
+          },
+          {
+            "held_out": "corral",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.21204351978712607,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "glass2",
+            "fitted_threshold": 0.013944157714082018,
+            "fit_mcc_on_24": 0.21812950712575055,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "haberman",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.23801957613306102,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "hepatitis",
+            "fitted_threshold": 0.10922923542697581,
+            "fit_mcc_on_24": 0.23081413930777553,
+            "n_test_runs": 21,
+            "n_test_poor": 8
+          },
+          {
+            "held_out": "irish",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.2042822116671244,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "labor",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.23302001227028482,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "lupus",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.227231513696886,
+            "n_test_runs": 21,
+            "n_test_poor": 11
+          },
+          {
+            "held_out": "molecular_biology_promoters",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.23689438206267055,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "mux6",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.21985650027575257,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "parity5",
+            "fitted_threshold": 0.014367817543211855,
+            "fit_mcc_on_24": 0.2031371521436631,
+            "n_test_runs": 21,
+            "n_test_poor": 15
+          },
+          {
+            "held_out": "postoperative_patient_data",
+            "fitted_threshold": 0.013944157714082018,
+            "fit_mcc_on_24": 0.20099885144468108,
+            "n_test_runs": 21,
+            "n_test_poor": 17
+          },
+          {
+            "held_out": "prnn_crabs",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.214641920854312,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "prnn_synth",
+            "fitted_threshold": 0.013944157714082018,
+            "fit_mcc_on_24": 0.21470371090898835,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "saheart",
+            "fitted_threshold": 0.08134091999881178,
+            "fit_mcc_on_24": 0.23888536253237672,
+            "n_test_runs": 21,
+            "n_test_poor": 6
+          }
+        ]
+      },
+      "mcc_gain": -0.14017356599699865
+    },
+    "fold_contamination": {
+      "label": "fold_contamination > t",
+      "anchor": {
+        "tp": 68,
+        "fp": 108,
+        "fn": 74,
+        "tn": 275,
+        "precision": 0.38636363636363635,
+        "recall": 0.4788732394366197,
+        "false_alarm_rate": 0.2819843342036554,
+        "mcc": 0.185266013226884,
+        "degenerate": false,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.3855794428459914,
+            "ci_lower": 0.3128321657651267,
+            "ci_upper": 0.457451316263974,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.47678324302569447,
+            "ci_lower": 0.4015151515151515,
+            "ci_upper": 0.5629960317460317,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.2828530921343729,
+            "ci_lower": 0.23769562841530054,
+            "ci_upper": 0.3281866289111138,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.18258685740779895,
+            "ci_lower": 0.09485664676074113,
+            "ci_upper": 0.2697375420536267,
+            "n_valid_resamples": 1000
+          }
+        },
+        "threshold": 0.1
+      },
+      "recalibrated_oos": {
+        "tp": 63,
+        "fp": 94,
+        "fn": 79,
+        "tn": 289,
+        "precision": 0.4012738853503185,
+        "recall": 0.44366197183098594,
+        "false_alarm_rate": 0.2454308093994778,
+        "mcc": 0.19232766160922396,
+        "n_runs": 525,
+        "n_poor": 142,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.40254904663238295,
+            "ci_lower": 0.32862762237762233,
+            "ci_upper": 0.47832092241172225,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.4452823625997027,
+            "ci_lower": 0.3615062111801242,
+            "ci_upper": 0.5238437821171634,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.2450584674665835,
+            "ci_lower": 0.20323652118100127,
+            "ci_upper": 0.2857142857142857,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.19411913686359047,
+            "ci_lower": 0.10689988421565128,
+            "ci_upper": 0.28295476382034696,
+            "n_valid_resamples": 1000
+          }
+        },
+        "fitted_thresholds": {
+          "min": 0.027186351927705757,
+          "max": 0.19998803541517107,
+          "median": 0.19936658080317554
+        },
+        "per_dataset": [
+          {
+            "held_out": "analcatdata_aids",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.23936947583204268,
+            "n_test_runs": 21,
+            "n_test_poor": 16
+          },
+          {
+            "held_out": "analcatdata_asbestos",
+            "fitted_threshold": 0.027186351927705757,
+            "fit_mcc_on_24": 0.23219899231877514,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_bankruptcy",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.2286844769576588,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_creditscore",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.22542992763209088,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "analcatdata_fraud",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.21854724666435454,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "analcatdata_japansolvent",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.22189099407084661,
+            "n_test_runs": 21,
+            "n_test_poor": 10
+          },
+          {
+            "held_out": "appendicitis",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.212058835771594,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "backache",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.22247947026561848,
+            "n_test_runs": 21,
+            "n_test_poor": 12
+          },
+          {
+            "held_out": "biomed",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.21885864776868524,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "breast_cancer",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.212058835771594,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "bupa",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.1988409311408566,
+            "n_test_runs": 21,
+            "n_test_poor": 7
+          },
+          {
+            "held_out": "corral",
+            "fitted_threshold": 0.19998803541517107,
+            "fit_mcc_on_24": 0.2452610365384999,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "glass2",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.22208545806224722,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "haberman",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.22857618341377042,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "hepatitis",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.21210780214520367,
+            "n_test_runs": 21,
+            "n_test_poor": 8
+          },
+          {
+            "held_out": "irish",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.2286844769576588,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "labor",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.2288083456684881,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "lupus",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.22525698322225837,
+            "n_test_runs": 21,
+            "n_test_poor": 11
+          },
+          {
+            "held_out": "molecular_biology_promoters",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.22207627733803773,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "mux6",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.23856797710493655,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "parity5",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.228771966979978,
+            "n_test_runs": 21,
+            "n_test_poor": 15
+          },
+          {
+            "held_out": "postoperative_patient_data",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.21403854216396284,
+            "n_test_runs": 21,
+            "n_test_poor": 17
+          },
+          {
+            "held_out": "prnn_crabs",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.218978358022866,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "prnn_synth",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.22219468409207238,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "saheart",
+            "fitted_threshold": 0.19936658080317554,
+            "fit_mcc_on_24": 0.1887287578003027,
+            "n_test_runs": 21,
+            "n_test_poor": 6
+          }
+        ]
+      },
+      "mcc_gain": 0.007061648382339969
+    },
+    "evalml_cov": {
+      "label": "evalml_cov > t",
+      "anchor": {
+        "tp": 44,
+        "fp": 44,
+        "fn": 98,
+        "tn": 339,
+        "precision": 0.5,
+        "recall": 0.30985915492957744,
+        "false_alarm_rate": 0.11488250652741515,
+        "mcc": 0.23186975617173722,
+        "degenerate": false,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.5006823681820562,
+            "ci_lower": 0.397224600456621,
+            "ci_upper": 0.6068169361468895,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.3118105257552884,
+            "ci_lower": 0.23740430732337206,
+            "ci_upper": 0.3885544804784363,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.11580100745507668,
+            "ci_lower": 0.08333333333333333,
+            "ci_upper": 0.14674912628835446,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.2324192386042064,
+            "ci_lower": 0.14265337043412146,
+            "ci_upper": 0.33040528070731634,
+            "n_valid_resamples": 1000
+          }
+        },
+        "threshold": 0.2
+      },
+      "recalibrated_oos": {
+        "tp": 29,
+        "fp": 34,
+        "fn": 113,
+        "tn": 349,
+        "precision": 0.4603174603174603,
+        "recall": 0.20422535211267606,
+        "false_alarm_rate": 0.08877284595300261,
+        "mcc": 0.15781768241071084,
+        "n_runs": 525,
+        "n_poor": 142,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.46034158240081285,
+            "ci_lower": 0.33811274509803924,
+            "ci_upper": 0.5933021112102289,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.20379407647009534,
+            "ci_lower": 0.14048665578775596,
+            "ci_upper": 0.2720600740296118,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.08866860005336337,
+            "ci_lower": 0.06099990901646802,
+            "ci_upper": 0.11873350923482849,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.1573355145522744,
+            "ci_lower": 0.06173644275834228,
+            "ci_upper": 0.2588090652719566,
+            "n_valid_resamples": 1000
+          }
+        },
+        "fitted_thresholds": {
+          "min": 0.01613301522916539,
+          "max": 0.4094976385177544,
+          "median": 0.22112872479958737
+        },
+        "per_dataset": [
+          {
+            "held_out": "analcatdata_aids",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.21053390172743813,
+            "n_test_runs": 21,
+            "n_test_poor": 16
+          },
+          {
+            "held_out": "analcatdata_asbestos",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.25843879074509674,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_bankruptcy",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.24380590895534146,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_creditscore",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.23667646973088574,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "analcatdata_fraud",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.28802305740030654,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "analcatdata_japansolvent",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.2805680777860381,
+            "n_test_runs": 21,
+            "n_test_poor": 10
+          },
+          {
+            "held_out": "appendicitis",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.2558513797594016,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "backache",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.2679680685461873,
+            "n_test_runs": 21,
+            "n_test_poor": 12
+          },
+          {
+            "held_out": "biomed",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.23906390341835937,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "breast_cancer",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.25105468585883584,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "bupa",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.25373991288786246,
+            "n_test_runs": 21,
+            "n_test_poor": 7
+          },
+          {
+            "held_out": "corral",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.23667646973088574,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "glass2",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.23906390341835937,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "haberman",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.25090598677740306,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "hepatitis",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.25624766269220095,
+            "n_test_runs": 21,
+            "n_test_poor": 8
+          },
+          {
+            "held_out": "irish",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.23667646973088574,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "labor",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.25350504179995736,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "lupus",
+            "fitted_threshold": 0.22931867756994245,
+            "fit_mcc_on_24": 0.26225432277331007,
+            "n_test_runs": 21,
+            "n_test_poor": 11
+          },
+          {
+            "held_out": "molecular_biology_promoters",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.24877874424125498,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "mux6",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.23667646973088574,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "parity5",
+            "fitted_threshold": 0.01613301522916539,
+            "fit_mcc_on_24": 0.2031371521436631,
+            "n_test_runs": 21,
+            "n_test_poor": 15
+          },
+          {
+            "held_out": "postoperative_patient_data",
+            "fitted_threshold": 0.4094976385177544,
+            "fit_mcc_on_24": 0.21275090945884673,
+            "n_test_runs": 21,
+            "n_test_poor": 17
+          },
+          {
+            "held_out": "prnn_crabs",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.23667646973088574,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "prnn_synth",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.23667646973088574,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "saheart",
+            "fitted_threshold": 0.22112872479958737,
+            "fit_mcc_on_24": 0.2512503939420054,
+            "n_test_runs": 21,
+            "n_test_poor": 6
+          }
+        ]
+      },
+      "mcc_gain": -0.07405207376102638
+    },
+    "evalml_range": {
+      "label": "evalml_range > t",
+      "anchor": {
+        "tp": 13,
+        "fp": 15,
+        "fn": 129,
+        "tn": 368,
+        "precision": 0.4642857142857143,
+        "recall": 0.09154929577464789,
+        "false_alarm_rate": 0.0391644908616188,
+        "mcc": 0.10355991374178843,
+        "degenerate": false,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.46356593532641943,
+            "ci_lower": 0.27989655172413797,
+            "ci_upper": 0.6521739130434783,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.09204542194806009,
+            "ci_lower": 0.04963882322038351,
+            "ci_upper": 0.14076832151300234,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.0397611363683389,
+            "ci_lower": 0.021273781380164357,
+            "ci_upper": 0.05974414908008657,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": 0.1027049375645893,
+            "ci_lower": 0.0071863652715453506,
+            "ci_upper": 0.19800249629454372,
+            "n_valid_resamples": 1000
+          }
+        },
+        "threshold": 0.5
+      },
+      "recalibrated_oos": {
+        "tp": 85,
+        "fp": 253,
+        "fn": 57,
+        "tn": 130,
+        "precision": 0.2514792899408284,
+        "recall": 0.5985915492957746,
+        "false_alarm_rate": 0.660574412532637,
+        "mcc": -0.05749578924824056,
+        "n_runs": 525,
+        "n_poor": 142,
+        "aggregate_bootstrap_ci": {
+          "precision": {
+            "bootstrap_mean": 0.2526556960939356,
+            "ci_lower": 0.20634367953309457,
+            "ci_upper": 0.3,
+            "n_valid_resamples": 1000
+          },
+          "recall": {
+            "bootstrap_mean": 0.601056953606666,
+            "ci_lower": 0.5199746835443038,
+            "ci_upper": 0.6842105263157895,
+            "n_valid_resamples": 1000
+          },
+          "false_alarm_rate": {
+            "bootstrap_mean": 0.6595730035308816,
+            "ci_lower": 0.6133916856339537,
+            "ci_upper": 0.7083333333333334,
+            "n_valid_resamples": 1000
+          },
+          "mcc": {
+            "bootstrap_mean": -0.05425618893568608,
+            "ci_lower": -0.14312961358014878,
+            "ci_upper": 0.03486741051237472,
+            "n_valid_resamples": 1000
+          }
+        },
+        "fitted_thresholds": {
+          "min": 0.052763819095477386,
+          "max": 0.4020100502512563,
+          "median": 0.05527638190954774
+        },
+        "per_dataset": [
+          {
+            "held_out": "analcatdata_aids",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.20744682847446502,
+            "n_test_runs": 21,
+            "n_test_poor": 16
+          },
+          {
+            "held_out": "analcatdata_asbestos",
+            "fitted_threshold": 0.3969849246231156,
+            "fit_mcc_on_24": 0.22949534240887218,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_bankruptcy",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.22473721366050814,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "analcatdata_creditscore",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.20299718314846094,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "analcatdata_fraud",
+            "fitted_threshold": 0.4020100502512563,
+            "fit_mcc_on_24": 0.23501109513369453,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "analcatdata_japansolvent",
+            "fitted_threshold": 0.36180904522613067,
+            "fit_mcc_on_24": 0.24544493719236463,
+            "n_test_runs": 21,
+            "n_test_poor": 10
+          },
+          {
+            "held_out": "appendicitis",
+            "fitted_threshold": 0.22110552763819097,
+            "fit_mcc_on_24": 0.23397293350670814,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "backache",
+            "fitted_threshold": 0.3969849246231156,
+            "fit_mcc_on_24": 0.22822030194470957,
+            "n_test_runs": 21,
+            "n_test_poor": 12
+          },
+          {
+            "held_out": "biomed",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.2225021663680784,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "breast_cancer",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.22306717468275442,
+            "n_test_runs": 21,
+            "n_test_poor": 4
+          },
+          {
+            "held_out": "bupa",
+            "fitted_threshold": 0.18090452261306533,
+            "fit_mcc_on_24": 0.22579963008946805,
+            "n_test_runs": 21,
+            "n_test_poor": 7
+          },
+          {
+            "held_out": "corral",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.2077142986541646,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "glass2",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.22473721366050814,
+            "n_test_runs": 21,
+            "n_test_poor": 1
+          },
+          {
+            "held_out": "haberman",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.22744270984220272,
+            "n_test_runs": 21,
+            "n_test_poor": 9
+          },
+          {
+            "held_out": "hepatitis",
+            "fitted_threshold": 0.24623115577889448,
+            "fit_mcc_on_24": 0.22141880884867687,
+            "n_test_runs": 21,
+            "n_test_poor": 8
+          },
+          {
+            "held_out": "irish",
+            "fitted_threshold": 0.3969849246231156,
+            "fit_mcc_on_24": 0.19646824564096746,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "labor",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.21518176784189008,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "lupus",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.21396782847444326,
+            "n_test_runs": 21,
+            "n_test_poor": 11
+          },
+          {
+            "held_out": "molecular_biology_promoters",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.23036262490776924,
+            "n_test_runs": 21,
+            "n_test_poor": 5
+          },
+          {
+            "held_out": "mux6",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.21005018465021583,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "parity5",
+            "fitted_threshold": 0.052763819095477386,
+            "fit_mcc_on_24": 0.20456912742813033,
+            "n_test_runs": 21,
+            "n_test_poor": 15
+          },
+          {
+            "held_out": "postoperative_patient_data",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.20613959390222247,
+            "n_test_runs": 21,
+            "n_test_poor": 17
+          },
+          {
+            "held_out": "prnn_crabs",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.2077142986541646,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "prnn_synth",
+            "fitted_threshold": 0.05527638190954774,
+            "fit_mcc_on_24": 0.21925464411205317,
+            "n_test_runs": 21,
+            "n_test_poor": 0
+          },
+          {
+            "held_out": "saheart",
+            "fitted_threshold": 0.18090452261306533,
+            "fit_mcc_on_24": 0.22097741428481335,
+            "n_test_runs": 21,
+            "n_test_poor": 6
+          }
+        ]
+      },
+      "mcc_gain": -0.16105570299002897
+    }
+  },
+  "rq9": {
+    "fitted_on_25": {
+      "np": 11.538481883099708,
+      "epv": 6.673994974874372,
+      "sigma_cv": 0.08134091999881178,
+      "fold_contamination": 0.19936658080317554,
+      "evalml_cov": 0.22112872479958737,
+      "evalml_range": 0.05527638190954774
+    },
+    "results": {
+      "np": {
+        "fitted_threshold": 11.538481883099708,
+        "transfer_fitted": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 9,
+          "tn": 159,
+          "precision": null,
+          "recall": 0.0,
+          "false_alarm_rate": 0.0,
+          "mcc": 0.0,
+          "degenerate": true,
+          "aggregate_bootstrap_ci": {
+            "precision": null,
+            "recall": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 1000
+            },
+            "false_alarm_rate": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 1000
+            },
+            "mcc": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 1000
+            }
+          }
+        },
+        "transfer_anchor": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 9,
+          "tn": 159,
+          "precision": null,
+          "recall": 0.0,
+          "false_alarm_rate": 0.0,
+          "mcc": 0.0,
+          "degenerate": true
+        }
+      },
+      "epv": {
+        "fitted_threshold": 6.673994974874372,
+        "transfer_fitted": {
+          "tp": 0,
+          "fp": 15,
+          "fn": 9,
+          "tn": 144,
+          "precision": 0.0,
+          "recall": 0.0,
+          "false_alarm_rate": 0.09433962264150944,
+          "mcc": -0.07449422505904477,
+          "degenerate": false,
+          "aggregate_bootstrap_ci": {
+            "precision": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 1000
+            },
+            "recall": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 1000
+            },
+            "false_alarm_rate": {
+              "bootstrap_mean": 0.09531921022832107,
+              "ci_lower": 0.05546536796536797,
+              "ci_upper": 0.14285714285714285,
+              "n_valid_resamples": 1000
+            },
+            "mcc": {
+              "bootstrap_mean": -0.07367513939677114,
+              "ci_lower": -0.10505963827188339,
+              "ci_upper": -0.045743729352768124,
+              "n_valid_resamples": 1000
+            }
+          }
+        },
+        "transfer_anchor": {
+          "tp": 0,
+          "fp": 21,
+          "fn": 9,
+          "tn": 138,
+          "precision": 0.0,
+          "recall": 0.0,
+          "false_alarm_rate": 0.1320754716981132,
+          "mcc": -0.0899235973995271,
+          "degenerate": false
+        }
+      },
+      "sigma_cv": {
+        "fitted_threshold": 0.08134091999881178,
+        "transfer_fitted": {
+          "tp": 0,
+          "fp": 4,
+          "fn": 9,
+          "tn": 155,
+          "precision": 0.0,
+          "recall": 0.0,
+          "false_alarm_rate": 0.025157232704402517,
+          "mcc": -0.03715615485399807,
+          "degenerate": false,
+          "aggregate_bootstrap_ci": {
+            "precision": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 983
+            },
+            "recall": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 1000
+            },
+            "false_alarm_rate": {
+              "bootstrap_mean": 0.02469584602839126,
+              "ci_lower": 0.006134969325153374,
+              "ci_upper": 0.05063291139240506,
+              "n_valid_resamples": 1000
+            },
+            "mcc": {
+              "bootstrap_mean": -0.03520410805663269,
+              "ci_lower": -0.059187707451596704,
+              "ci_upper": -0.01355292279628115,
+              "n_valid_resamples": 1000
+            }
+          }
+        },
+        "transfer_anchor": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 9,
+          "tn": 159,
+          "precision": null,
+          "recall": 0.0,
+          "false_alarm_rate": 0.0,
+          "mcc": 0.0,
+          "degenerate": true
+        }
+      },
+      "fold_contamination": {
+        "fitted_threshold": 0.19936658080317554,
+        "transfer_fitted": {
+          "tp": 5,
+          "fp": 53,
+          "fn": 4,
+          "tn": 106,
+          "precision": 0.08620689655172414,
+          "recall": 0.5555555555555556,
+          "false_alarm_rate": 0.3333333333333333,
+          "mcc": 0.10524390738564054,
+          "degenerate": false,
+          "aggregate_bootstrap_ci": {
+            "precision": {
+              "bootstrap_mean": 0.08728864084675571,
+              "ci_lower": 0.019230769230769232,
+              "ci_upper": 0.16666666666666666,
+              "n_valid_resamples": 1000
+            },
+            "recall": {
+              "bootstrap_mean": 0.5573230634561517,
+              "ci_lower": 0.23076923076923078,
+              "ci_upper": 0.8753472222222219,
+              "n_valid_resamples": 1000
+            },
+            "false_alarm_rate": {
+              "bootstrap_mean": 0.3316529215734859,
+              "ci_lower": 0.2621689063228212,
+              "ci_upper": 0.40884131591678763,
+              "n_valid_resamples": 1000
+            },
+            "mcc": {
+              "bootstrap_mean": 0.10571811792762455,
+              "ci_lower": -0.055519218123262236,
+              "ci_upper": 0.2593929979761564,
+              "n_valid_resamples": 1000
+            }
+          }
+        },
+        "transfer_anchor": {
+          "tp": 6,
+          "fp": 54,
+          "fn": 3,
+          "tn": 105,
+          "precision": 0.1,
+          "recall": 0.6666666666666666,
+          "false_alarm_rate": 0.33962264150943394,
+          "mcc": 0.15368749546191354,
+          "degenerate": false
+        }
+      },
+      "evalml_cov": {
+        "fitted_threshold": 0.22112872479958737,
+        "transfer_fitted": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 9,
+          "tn": 159,
+          "precision": null,
+          "recall": 0.0,
+          "false_alarm_rate": 0.0,
+          "mcc": 0.0,
+          "degenerate": true,
+          "aggregate_bootstrap_ci": {
+            "precision": null,
+            "recall": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 1000
+            },
+            "false_alarm_rate": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 1000
+            },
+            "mcc": {
+              "bootstrap_mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0,
+              "n_valid_resamples": 1000
+            }
+          }
+        },
+        "transfer_anchor": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 9,
+          "tn": 159,
+          "precision": null,
+          "recall": 0.0,
+          "false_alarm_rate": 0.0,
+          "mcc": 0.0,
+          "degenerate": true
+        }
+      },
+      "evalml_range": {
+        "fitted_threshold": 0.05527638190954774,
+        "transfer_fitted": {
+          "tp": 8,
+          "fp": 72,
+          "fn": 1,
+          "tn": 87,
+          "precision": 0.1,
+          "recall": 0.8888888888888888,
+          "false_alarm_rate": 0.4528301886792453,
+          "mcc": 0.19659770476427757,
+          "degenerate": false,
+          "aggregate_bootstrap_ci": {
+            "precision": {
+              "bootstrap_mean": 0.10067080945883743,
+              "ci_lower": 0.03896103896103896,
+              "ci_upper": 0.1739256825075834,
+              "n_valid_resamples": 1000
+            },
+            "recall": {
+              "bootstrap_mean": 0.8896138697087226,
+              "ci_lower": 0.625,
+              "ci_upper": 1.0,
+              "n_valid_resamples": 1000
+            },
+            "false_alarm_rate": {
+              "bootstrap_mean": 0.4536166207751759,
+              "ci_lower": 0.3733990486673481,
+              "ci_upper": 0.53125,
+              "n_valid_resamples": 1000
+            },
+            "mcc": {
+              "bootstrap_mean": 0.1949494082283543,
+              "ci_lower": 0.06932728758463129,
+              "ci_upper": 0.3013495094094496,
+              "n_valid_resamples": 1000
+            }
+          }
+        },
+        "transfer_anchor": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 9,
+          "tn": 159,
+          "precision": null,
+          "recall": 0.0,
+          "false_alarm_rate": 0.0,
+          "mcc": 0.0,
+          "degenerate": true
+        }
+      }
+    },
+    "n_runs": 168,
+    "datasets": [
+      "monk1",
+      "monk2",
+      "monk3",
+      "profb",
+      "threeOf9",
+      "tic_tac_toe",
+      "tokyo1",
+      "xd6"
+    ]
+  }
+}

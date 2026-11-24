@@ -107,10 +107,18 @@ def load_runs():
             a = record.get("automated")
             if not a:
                 continue
+            # Row-level labels are present in the local run records and absent
+            # from the redistributable export, which stores the counts instead
+            # (see export_public_results.py). Only the counts are ever used, so
+            # this module reproduces identically from either.
             y = a.get("y_test") or []
-            codes = sorted(set(y))
-            n_pos = sum(1 for v in y if v == codes[-1]) if len(codes) == 2 else 0
-            n_neg = len(y) - n_pos if len(codes) == 2 else 0
+            if y:
+                codes = sorted(set(y))
+                n_pos = sum(1 for v in y if v == codes[-1]) if len(codes) == 2 else 0
+                n_neg = len(y) - n_pos if len(codes) == 2 else 0
+            else:
+                n_pos = a.get("n_test_pos", 0)
+                n_neg = a.get("n_test_neg", 0)
             rows.append({
                 "dataset": record["dataset"],
                 "family": record["corruption_type"],

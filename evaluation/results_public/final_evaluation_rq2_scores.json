@@ -1,0 +1,518 @@
+{
+  "group": "final-evaluation",
+  "delta_g": 0.05,
+  "np_threshold": 10,
+  "sigma_cv_threshold": 0.1,
+  "n_runs": 27,
+  "n_poor": 3,
+  "np_diagnostic": {
+    "name": "n/p < 10",
+    "tp": 3,
+    "fp": 6,
+    "fn": 0,
+    "tn": 18,
+    "precision": 0.3333333333333333,
+    "recall": 1.0,
+    "false_alarm_rate": 0.25,
+    "mcc": 0.5,
+    "degenerate": false,
+    "aggregate_bootstrap_ci": {
+      "precision": {
+        "bootstrap_mean": 0.3344766984649338,
+        "ci_lower": 0.0,
+        "ci_upper": 0.6666666666666666,
+        "n_valid_resamples": 1000
+      },
+      "recall": {
+        "bootstrap_mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 947
+      },
+      "false_alarm_rate": {
+        "bootstrap_mean": 0.25021629299931364,
+        "ci_lower": 0.08686594202898551,
+        "ci_upper": 0.43478260869565216,
+        "n_valid_resamples": 1000
+      },
+      "mcc": {
+        "bootstrap_mean": 0.47862037081254516,
+        "ci_lower": 0.0,
+        "ci_upper": 0.7715831076915358,
+        "n_valid_resamples": 1000
+      }
+    }
+  },
+  "sigma_cv_diagnostic": {
+    "name": "sigma_cv > 0.1",
+    "tp": 0,
+    "fp": 4,
+    "fn": 3,
+    "tn": 20,
+    "precision": 0.0,
+    "recall": 0.0,
+    "false_alarm_rate": 0.16666666666666666,
+    "mcc": -0.14744195615489714,
+    "degenerate": false,
+    "aggregate_bootstrap_ci": {
+      "precision": {
+        "bootstrap_mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 985
+      },
+      "recall": {
+        "bootstrap_mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 947
+      },
+      "false_alarm_rate": {
+        "bootstrap_mean": 0.16583532259248507,
+        "ci_lower": 0.04,
+        "ci_upper": 0.32,
+        "n_valid_resamples": 1000
+      },
+      "mcc": {
+        "bootstrap_mean": -0.13681079173838032,
+        "ci_lower": -0.2548235957188128,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 1000
+      }
+    }
+  },
+  "per_run": [
+    {
+      "dataset": "labor",
+      "seed": 1,
+      "missing_rate": 0.0,
+      "s_test": 0.96875,
+      "G": 0.03125,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.0,
+      "ci": {
+        "ci_lower": 0.8125,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 2,
+      "missing_rate": 0.0,
+      "s_test": 0.96875,
+      "G": 0.02124999999999999,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.022360679774997918,
+      "ci": {
+        "ci_lower": 0.8125,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 3,
+      "missing_rate": 0.0,
+      "s_test": 0.96875,
+      "G": 0.009027777777777857,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.030429030972509184,
+      "ci": {
+        "ci_lower": 0.8125,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 1,
+      "missing_rate": 0.15,
+      "s_test": 0.96875,
+      "G": -0.00374999999999992,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.07826237921249266,
+      "ci": {
+        "ci_lower": 0.8125,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 2,
+      "missing_rate": 0.15,
+      "s_test": 0.84375,
+      "G": 0.14513888888888893,
+      "poor": 1,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.024845199749997625,
+      "ci": {
+        "ci_lower": 0.56171875,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 3,
+      "missing_rate": 0.15,
+      "s_test": 1.0,
+      "G": -0.04444444444444451,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.06085806194501842,
+      "ci": {
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 1,
+      "missing_rate": 0.35,
+      "s_test": 0.90625,
+      "G": 0.06263888888888902,
+      "poor": 1,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.045406259426005645,
+      "ci": {
+        "ci_lower": 0.6875,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 2,
+      "missing_rate": 0.35,
+      "s_test": 0.859375,
+      "G": 0.09840277777777795,
+      "poor": 1,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.0426006433615129,
+      "ci": {
+        "ci_lower": 0.625,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 3,
+      "missing_rate": 0.35,
+      "s_test": 1.0,
+      "G": -0.12944444444444447,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.07870479302078397,
+      "ci": {
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 1,
+      "missing_rate": 0.0,
+      "s_test": 1.0,
+      "G": -0.028818181818181743,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.0594878277708353,
+      "ci": {
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 2,
+      "missing_rate": 0.0,
+      "s_test": 1.0,
+      "G": -0.011272727272727323,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.016484402846026345,
+      "ci": {
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 3,
+      "missing_rate": 0.0,
+      "s_test": 1.0,
+      "G": -0.0039999999999998925,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.008944271909999166,
+      "ci": {
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 1,
+      "missing_rate": 0.15,
+      "s_test": 0.7988165680473374,
+      "G": -0.04154384077461015,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.07428168411554305,
+      "ci": {
+        "ci_lower": 0.6035502958579881,
+        "ci_upper": 0.9526627218934911,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 2,
+      "missing_rate": 0.15,
+      "s_test": 0.7928994082840237,
+      "G": -0.0008994082840236839,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.11621910413219187,
+      "ci": {
+        "ci_lower": 0.5917159763313609,
+        "ci_upper": 0.9527366863905326,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 3,
+      "missing_rate": 0.15,
+      "s_test": 0.9171597633136094,
+      "G": -0.07152339967724586,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.08062103984764589,
+      "ci": {
+        "ci_lower": 0.7927514792899408,
+        "ci_upper": 0.9942307692307691,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 1,
+      "missing_rate": 0.35,
+      "s_test": 0.6982248520710059,
+      "G": 0.009956966110812204,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.10061997895691117,
+      "ci": {
+        "ci_lower": 0.4911242603550296,
+        "ci_upper": 0.8994082840236687,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 2,
+      "missing_rate": 0.35,
+      "s_test": 0.7455621301775148,
+      "G": -0.11583485745024213,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.051984978758569535,
+      "ci": {
+        "ci_lower": 0.5325443786982249,
+        "ci_upper": 0.9289940828402367,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 3,
+      "missing_rate": 0.35,
+      "s_test": 1.0,
+      "G": -0.41054545454545444,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.10719344142389274,
+      "ci": {
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 1,
+      "missing_rate": 0.0,
+      "s_test": 0.6781512605042017,
+      "G": -0.022550092834068614,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.05994870165434848,
+      "ci": {
+        "ci_lower": 0.5478991596638656,
+        "ci_upper": 0.8067436974789916,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 2,
+      "missing_rate": 0.0,
+      "s_test": 0.6890756302521008,
+      "G": -0.03528982474215736,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.0971161110671533,
+      "ci": {
+        "ci_lower": 0.5571218487394958,
+        "ci_upper": 0.7958193277310923,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 3,
+      "missing_rate": 0.0,
+      "s_test": 0.7176470588235295,
+      "G": -0.07357663371862178,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.05384146047380257,
+      "ci": {
+        "ci_lower": 0.5806512605042017,
+        "ci_upper": 0.836155462184874,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 1,
+      "missing_rate": 0.15,
+      "s_test": 0.6798319327731093,
+      "G": -0.013165266106442641,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.03131598042791463,
+      "ci": {
+        "ci_lower": 0.5520798319327731,
+        "ci_upper": 0.8084033613445377,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 2,
+      "missing_rate": 0.15,
+      "s_test": 0.676470588235294,
+      "G": -0.0475525075930755,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.07209087130292141,
+      "ci": {
+        "ci_lower": 0.5461764705882354,
+        "ci_upper": 0.7840756302521009,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 3,
+      "missing_rate": 0.15,
+      "s_test": 0.6798319327731093,
+      "G": -0.03930100775942558,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.07225575866921885,
+      "ci": {
+        "ci_lower": 0.5386344537815125,
+        "ci_upper": 0.7983403361344538,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 1,
+      "missing_rate": 0.35,
+      "s_test": 0.6588235294117647,
+      "G": 0.028897689343936883,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.06396094141874248,
+      "ci": {
+        "ci_lower": 0.5234243697478991,
+        "ci_upper": 0.7849159663865547,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 2,
+      "missing_rate": 0.35,
+      "s_test": 0.6285714285714286,
+      "G": -0.023070607553366207,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.10023532785905126,
+      "ci": {
+        "ci_lower": 0.49401260504201683,
+        "ci_upper": 0.7504411764705882,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 3,
+      "missing_rate": 0.35,
+      "s_test": 0.7100840336134454,
+      "G": -0.10359799092050603,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.06089005119210092,
+      "ci": {
+        "ci_lower": 0.5705882352941176,
+        "ci_upper": 0.8302731092436975,
+        "n_valid_resamples": 1000
+      }
+    }
+  ]
+}

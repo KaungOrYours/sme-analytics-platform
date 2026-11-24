@@ -1,0 +1,2092 @@
+{
+  "dataset": {
+    "name": "Wholesale customers",
+    "source": "UCI Machine Learning Repository (id 292)",
+    "url": "https://archive.ics.uci.edu/dataset/292/wholesale+customers",
+    "doi": "10.24432/C5030X",
+    "target_col": "Region",
+    "problem_type": "classification",
+    "num_instances": 440,
+    "num_features": 7,
+    "has_categorical_column": false
+  },
+  "cleaning_results": [
+    {
+      "error_type": "missing_values",
+      "rate": 0.05,
+      "seed": 1,
+      "detection": {
+        "error_type": "missing_values",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 176,
+        "predicted_count": 176,
+        "actual_count": 176,
+        "raw_detect_problems_output": {
+          "missing_values": {
+            "Channel": 22,
+            "Region": 22,
+            "Fresh": 22,
+            "Milk": 22,
+            "Grocery": 22,
+            "Frozen": 22,
+            "Detergents_Paper": 22,
+            "Delicassen": 22
+          },
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 19
+            },
+            {
+              "column": "Milk",
+              "count": 25
+            },
+            {
+              "column": "Grocery",
+              "count": 24
+            },
+            {
+              "column": "Frozen",
+              "count": 41
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 29
+            },
+            {
+              "column": "Delicassen",
+              "count": 25
+            }
+          ]
+        },
+        "notes": "detect_problems' missing-value check is an exact isnull().sum() count, not a learned/heuristic detector \u2014 any precision < 1 here means the dataset already had nulls before injection, not a detector mistake."
+      },
+      "reconstruction": {
+        "error_type": "missing_values",
+        "unresolved_still_null": 0,
+        "numeric_mean_absolute_error": 2946.5909,
+        "categorical_exact_match_rate": null,
+        "notes": "Median/mode imputation is not expected to exactly recover the true value for numeric columns \u2014 MAE is the honest metric there; exact-match is reported only for categorical mode-fill.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names",
+          "\u2705 Filled 22 missing values in 'channel' with median (1.0)",
+          "\u2705 Filled 22 missing values in 'region' with median (3.0)",
+          "\u2705 Filled 22 missing values in 'fresh' with median (8180.0)",
+          "\u2705 Filled 22 missing values in 'milk' with median (3616.5)",
+          "\u2705 Filled 22 missing values in 'grocery' with median (4698.5)",
+          "\u2705 Filled 22 missing values in 'frozen' with median (1526.0)",
+          "\u2705 Filled 22 missing values in 'detergents_paper' with median (799.5)",
+          "\u2705 Filled 22 missing values in 'delicassen' with median (982.5)"
+        ]
+      }
+    },
+    {
+      "error_type": "missing_values",
+      "rate": 0.05,
+      "seed": 2,
+      "detection": {
+        "error_type": "missing_values",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 176,
+        "predicted_count": 176,
+        "actual_count": 176,
+        "raw_detect_problems_output": {
+          "missing_values": {
+            "Channel": 22,
+            "Region": 22,
+            "Fresh": 22,
+            "Milk": 22,
+            "Grocery": 22,
+            "Frozen": 22,
+            "Detergents_Paper": 22,
+            "Delicassen": 22
+          },
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 20
+            },
+            {
+              "column": "Milk",
+              "count": 26
+            },
+            {
+              "column": "Grocery",
+              "count": 22
+            },
+            {
+              "column": "Frozen",
+              "count": 40
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 29
+            },
+            {
+              "column": "Delicassen",
+              "count": 25
+            }
+          ]
+        },
+        "notes": "detect_problems' missing-value check is an exact isnull().sum() count, not a learned/heuristic detector \u2014 any precision < 1 here means the dataset already had nulls before injection, not a detector mistake."
+      },
+      "reconstruction": {
+        "error_type": "missing_values",
+        "unresolved_still_null": 0,
+        "numeric_mean_absolute_error": 3507.1648,
+        "categorical_exact_match_rate": null,
+        "notes": "Median/mode imputation is not expected to exactly recover the true value for numeric columns \u2014 MAE is the honest metric there; exact-match is reported only for categorical mode-fill.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names",
+          "\u2705 Filled 22 missing values in 'channel' with median (1.0)",
+          "\u2705 Filled 22 missing values in 'region' with median (3.0)",
+          "\u2705 Filled 22 missing values in 'fresh' with median (8504.0)",
+          "\u2705 Filled 22 missing values in 'milk' with median (3627.0)",
+          "\u2705 Filled 22 missing values in 'grocery' with median (4725.0)",
+          "\u2705 Filled 22 missing values in 'frozen' with median (1498.0)",
+          "\u2705 Filled 22 missing values in 'detergents_paper' with median (815.5)",
+          "\u2705 Filled 22 missing values in 'delicassen' with median (962.5)"
+        ]
+      }
+    },
+    {
+      "error_type": "missing_values",
+      "rate": 0.05,
+      "seed": 3,
+      "detection": {
+        "error_type": "missing_values",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 176,
+        "predicted_count": 176,
+        "actual_count": 176,
+        "raw_detect_problems_output": {
+          "missing_values": {
+            "Channel": 22,
+            "Region": 22,
+            "Fresh": 22,
+            "Milk": 22,
+            "Grocery": 22,
+            "Frozen": 22,
+            "Detergents_Paper": 22,
+            "Delicassen": 22
+          },
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 19
+            },
+            {
+              "column": "Milk",
+              "count": 25
+            },
+            {
+              "column": "Grocery",
+              "count": 23
+            },
+            {
+              "column": "Frozen",
+              "count": 40
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 29
+            },
+            {
+              "column": "Delicassen",
+              "count": 25
+            }
+          ]
+        },
+        "notes": "detect_problems' missing-value check is an exact isnull().sum() count, not a learned/heuristic detector \u2014 any precision < 1 here means the dataset already had nulls before injection, not a detector mistake."
+      },
+      "reconstruction": {
+        "error_type": "missing_values",
+        "unresolved_still_null": 0,
+        "numeric_mean_absolute_error": 3029.1193,
+        "categorical_exact_match_rate": null,
+        "notes": "Median/mode imputation is not expected to exactly recover the true value for numeric columns \u2014 MAE is the honest metric there; exact-match is reported only for categorical mode-fill.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names",
+          "\u2705 Filled 22 missing values in 'channel' with median (1.0)",
+          "\u2705 Filled 22 missing values in 'region' with median (3.0)",
+          "\u2705 Filled 22 missing values in 'fresh' with median (8577.5)",
+          "\u2705 Filled 22 missing values in 'milk' with median (3627.0)",
+          "\u2705 Filled 22 missing values in 'grocery' with median (4927.5)",
+          "\u2705 Filled 22 missing values in 'frozen' with median (1498.0)",
+          "\u2705 Filled 22 missing values in 'detergents_paper' with median (823.0)",
+          "\u2705 Filled 22 missing values in 'delicassen' with median (971.0)"
+        ]
+      }
+    },
+    {
+      "error_type": "missing_values",
+      "rate": 0.1,
+      "seed": 1,
+      "detection": {
+        "error_type": "missing_values",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 352,
+        "predicted_count": 352,
+        "actual_count": 352,
+        "raw_detect_problems_output": {
+          "missing_values": {
+            "Channel": 44,
+            "Region": 44,
+            "Fresh": 44,
+            "Milk": 44,
+            "Grocery": 44,
+            "Frozen": 44,
+            "Detergents_Paper": 44,
+            "Delicassen": 44
+          },
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 19
+            },
+            {
+              "column": "Milk",
+              "count": 24
+            },
+            {
+              "column": "Grocery",
+              "count": 20
+            },
+            {
+              "column": "Frozen",
+              "count": 37
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 26
+            },
+            {
+              "column": "Delicassen",
+              "count": 25
+            }
+          ]
+        },
+        "notes": "detect_problems' missing-value check is an exact isnull().sum() count, not a learned/heuristic detector \u2014 any precision < 1 here means the dataset already had nulls before injection, not a detector mistake."
+      },
+      "reconstruction": {
+        "error_type": "missing_values",
+        "unresolved_still_null": 0,
+        "numeric_mean_absolute_error": 3257.9205,
+        "categorical_exact_match_rate": null,
+        "notes": "Median/mode imputation is not expected to exactly recover the true value for numeric columns \u2014 MAE is the honest metric there; exact-match is reported only for categorical mode-fill.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names",
+          "\u2705 Filled 44 missing values in 'channel' with median (1.0)",
+          "\u2705 Filled 44 missing values in 'region' with median (3.0)",
+          "\u2705 Filled 44 missing values in 'fresh' with median (8504.0)",
+          "\u2705 Filled 44 missing values in 'milk' with median (3575.5)",
+          "\u2705 Filled 44 missing values in 'grocery' with median (4548.0)",
+          "\u2705 Filled 44 missing values in 'frozen' with median (1498.0)",
+          "\u2705 Filled 44 missing values in 'detergents_paper' with median (826.5)",
+          "\u2705 Filled 44 missing values in 'delicassen' with median (946.5)"
+        ]
+      }
+    },
+    {
+      "error_type": "missing_values",
+      "rate": 0.1,
+      "seed": 2,
+      "detection": {
+        "error_type": "missing_values",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 352,
+        "predicted_count": 352,
+        "actual_count": 352,
+        "raw_detect_problems_output": {
+          "missing_values": {
+            "Channel": 44,
+            "Region": 44,
+            "Fresh": 44,
+            "Milk": 44,
+            "Grocery": 44,
+            "Frozen": 44,
+            "Detergents_Paper": 44,
+            "Delicassen": 44
+          },
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 16
+            },
+            {
+              "column": "Milk",
+              "count": 25
+            },
+            {
+              "column": "Grocery",
+              "count": 21
+            },
+            {
+              "column": "Frozen",
+              "count": 37
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 26
+            },
+            {
+              "column": "Delicassen",
+              "count": 24
+            }
+          ]
+        },
+        "notes": "detect_problems' missing-value check is an exact isnull().sum() count, not a learned/heuristic detector \u2014 any precision < 1 here means the dataset already had nulls before injection, not a detector mistake."
+      },
+      "reconstruction": {
+        "error_type": "missing_values",
+        "unresolved_still_null": 0,
+        "numeric_mean_absolute_error": 3634.0739,
+        "categorical_exact_match_rate": null,
+        "notes": "Median/mode imputation is not expected to exactly recover the true value for numeric columns \u2014 MAE is the honest metric there; exact-match is reported only for categorical mode-fill.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names",
+          "\u2705 Filled 44 missing values in 'channel' with median (1.0)",
+          "\u2705 Filled 44 missing values in 'region' with median (3.0)",
+          "\u2705 Filled 44 missing values in 'fresh' with median (8504.0)",
+          "\u2705 Filled 44 missing values in 'milk' with median (3575.5)",
+          "\u2705 Filled 44 missing values in 'grocery' with median (4855.5)",
+          "\u2705 Filled 44 missing values in 'frozen' with median (1519.5)",
+          "\u2705 Filled 44 missing values in 'detergents_paper' with median (833.0)",
+          "\u2705 Filled 44 missing values in 'delicassen' with median (971.0)"
+        ]
+      }
+    },
+    {
+      "error_type": "missing_values",
+      "rate": 0.1,
+      "seed": 3,
+      "detection": {
+        "error_type": "missing_values",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 352,
+        "predicted_count": 352,
+        "actual_count": 352,
+        "raw_detect_problems_output": {
+          "missing_values": {
+            "Channel": 44,
+            "Region": 44,
+            "Fresh": 44,
+            "Milk": 44,
+            "Grocery": 44,
+            "Frozen": 44,
+            "Detergents_Paper": 44,
+            "Delicassen": 44
+          },
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 17
+            },
+            {
+              "column": "Milk",
+              "count": 25
+            },
+            {
+              "column": "Grocery",
+              "count": 19
+            },
+            {
+              "column": "Frozen",
+              "count": 37
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 28
+            },
+            {
+              "column": "Delicassen",
+              "count": 23
+            }
+          ]
+        },
+        "notes": "detect_problems' missing-value check is an exact isnull().sum() count, not a learned/heuristic detector \u2014 any precision < 1 here means the dataset already had nulls before injection, not a detector mistake."
+      },
+      "reconstruction": {
+        "error_type": "missing_values",
+        "unresolved_still_null": 0,
+        "numeric_mean_absolute_error": 3361.696,
+        "categorical_exact_match_rate": null,
+        "notes": "Median/mode imputation is not expected to exactly recover the true value for numeric columns \u2014 MAE is the honest metric there; exact-match is reported only for categorical mode-fill.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names",
+          "\u2705 Filled 44 missing values in 'channel' with median (1.0)",
+          "\u2705 Filled 44 missing values in 'region' with median (3.0)",
+          "\u2705 Filled 44 missing values in 'fresh' with median (8504.0)",
+          "\u2705 Filled 44 missing values in 'milk' with median (3680.0)",
+          "\u2705 Filled 44 missing values in 'grocery' with median (4980.0)",
+          "\u2705 Filled 44 missing values in 'frozen' with median (1456.5)",
+          "\u2705 Filled 44 missing values in 'detergents_paper' with median (816.5)",
+          "\u2705 Filled 44 missing values in 'delicassen' with median (965.5)"
+        ]
+      }
+    },
+    {
+      "error_type": "missing_values",
+      "rate": 0.2,
+      "seed": 1,
+      "detection": {
+        "error_type": "missing_values",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 704,
+        "predicted_count": 704,
+        "actual_count": 704,
+        "raw_detect_problems_output": {
+          "missing_values": {
+            "Channel": 88,
+            "Region": 88,
+            "Fresh": 88,
+            "Milk": 88,
+            "Grocery": 88,
+            "Frozen": 88,
+            "Detergents_Paper": 88,
+            "Delicassen": 88
+          },
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 20
+            },
+            {
+              "column": "Milk",
+              "count": 23
+            },
+            {
+              "column": "Grocery",
+              "count": 18
+            },
+            {
+              "column": "Frozen",
+              "count": 27
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 25
+            },
+            {
+              "column": "Delicassen",
+              "count": 19
+            }
+          ]
+        },
+        "notes": "detect_problems' missing-value check is an exact isnull().sum() count, not a learned/heuristic detector \u2014 any precision < 1 here means the dataset already had nulls before injection, not a detector mistake."
+      },
+      "reconstruction": {
+        "error_type": "missing_values",
+        "unresolved_still_null": 0,
+        "numeric_mean_absolute_error": 2979.652,
+        "categorical_exact_match_rate": null,
+        "notes": "Median/mode imputation is not expected to exactly recover the true value for numeric columns \u2014 MAE is the honest metric there; exact-match is reported only for categorical mode-fill.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names",
+          "\u2705 Filled 88 missing values in 'channel' with median (1.0)",
+          "\u2705 Filled 88 missing values in 'region' with median (3.0)",
+          "\u2705 Filled 88 missing values in 'fresh' with median (8223.5)",
+          "\u2705 Filled 88 missing values in 'milk' with median (3627.0)",
+          "\u2705 Filled 88 missing values in 'grocery' with median (5015.5)",
+          "\u2705 Filled 88 missing values in 'frozen' with median (1538.0)",
+          "\u2705 Filled 88 missing values in 'detergents_paper' with median (829.0)",
+          "\u2705 Filled 88 missing values in 'delicassen' with median (883.0)"
+        ]
+      }
+    },
+    {
+      "error_type": "missing_values",
+      "rate": 0.2,
+      "seed": 2,
+      "detection": {
+        "error_type": "missing_values",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 704,
+        "predicted_count": 704,
+        "actual_count": 704,
+        "raw_detect_problems_output": {
+          "missing_values": {
+            "Channel": 88,
+            "Region": 88,
+            "Fresh": 88,
+            "Milk": 88,
+            "Grocery": 88,
+            "Frozen": 88,
+            "Detergents_Paper": 88,
+            "Delicassen": 88
+          },
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 16
+            },
+            {
+              "column": "Milk",
+              "count": 23
+            },
+            {
+              "column": "Grocery",
+              "count": 21
+            },
+            {
+              "column": "Frozen",
+              "count": 31
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 25
+            },
+            {
+              "column": "Delicassen",
+              "count": 22
+            }
+          ]
+        },
+        "notes": "detect_problems' missing-value check is an exact isnull().sum() count, not a learned/heuristic detector \u2014 any precision < 1 here means the dataset already had nulls before injection, not a detector mistake."
+      },
+      "reconstruction": {
+        "error_type": "missing_values",
+        "unresolved_still_null": 0,
+        "numeric_mean_absolute_error": 3089.7443,
+        "categorical_exact_match_rate": null,
+        "notes": "Median/mode imputation is not expected to exactly recover the true value for numeric columns \u2014 MAE is the honest metric there; exact-match is reported only for categorical mode-fill.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names",
+          "\u2705 Filled 88 missing values in 'channel' with median (1.0)",
+          "\u2705 Filled 88 missing values in 'region' with median (3.0)",
+          "\u2705 Filled 88 missing values in 'fresh' with median (7583.5)",
+          "\u2705 Filled 88 missing values in 'milk' with median (3581.5)",
+          "\u2705 Filled 88 missing values in 'grocery' with median (4827.0)",
+          "\u2705 Filled 88 missing values in 'frozen' with median (1680.0)",
+          "\u2705 Filled 88 missing values in 'detergents_paper' with median (823.0)",
+          "\u2705 Filled 88 missing values in 'delicassen' with median (996.5)"
+        ]
+      }
+    },
+    {
+      "error_type": "missing_values",
+      "rate": 0.2,
+      "seed": 3,
+      "detection": {
+        "error_type": "missing_values",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 704,
+        "predicted_count": 704,
+        "actual_count": 704,
+        "raw_detect_problems_output": {
+          "missing_values": {
+            "Channel": 88,
+            "Region": 88,
+            "Fresh": 88,
+            "Milk": 88,
+            "Grocery": 88,
+            "Frozen": 88,
+            "Detergents_Paper": 88,
+            "Delicassen": 88
+          },
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 17
+            },
+            {
+              "column": "Milk",
+              "count": 23
+            },
+            {
+              "column": "Grocery",
+              "count": 22
+            },
+            {
+              "column": "Frozen",
+              "count": 35
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 28
+            },
+            {
+              "column": "Delicassen",
+              "count": 23
+            }
+          ]
+        },
+        "notes": "detect_problems' missing-value check is an exact isnull().sum() count, not a learned/heuristic detector \u2014 any precision < 1 here means the dataset already had nulls before injection, not a detector mistake."
+      },
+      "reconstruction": {
+        "error_type": "missing_values",
+        "unresolved_still_null": 0,
+        "numeric_mean_absolute_error": 2789.5014,
+        "categorical_exact_match_rate": null,
+        "notes": "Median/mode imputation is not expected to exactly recover the true value for numeric columns \u2014 MAE is the honest metric there; exact-match is reported only for categorical mode-fill.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names",
+          "\u2705 Filled 88 missing values in 'channel' with median (1.0)",
+          "\u2705 Filled 88 missing values in 'region' with median (3.0)",
+          "\u2705 Filled 88 missing values in 'fresh' with median (8598.5)",
+          "\u2705 Filled 88 missing values in 'milk' with median (3627.0)",
+          "\u2705 Filled 88 missing values in 'grocery' with median (4980.0)",
+          "\u2705 Filled 88 missing values in 'frozen' with median (1597.0)",
+          "\u2705 Filled 88 missing values in 'detergents_paper' with median (769.5)",
+          "\u2705 Filled 88 missing values in 'delicassen' with median (965.5)"
+        ]
+      }
+    },
+    {
+      "error_type": "duplicates",
+      "rate": 0.05,
+      "seed": 1,
+      "detection": {
+        "error_type": "duplicates",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 22,
+        "predicted_count": 22,
+        "actual_count": 22,
+        "raw_detect_problems_output": {
+          "duplicates": 22,
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 21
+            },
+            {
+              "column": "Milk",
+              "count": 27
+            },
+            {
+              "column": "Grocery",
+              "count": 25
+            },
+            {
+              "column": "Frozen",
+              "count": 44
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 30
+            },
+            {
+              "column": "Delicassen",
+              "count": 28
+            }
+          ]
+        },
+        "notes": "duplicated() is exact-match detection \u2014 these are injected exact copies, so this measures whether the mechanism works, not whether near-duplicates would be caught (they would not be, by design)."
+      },
+      "reconstruction": {
+        "error_type": "duplicates",
+        "rows_before_clean": 462,
+        "rows_after_clean": 440,
+        "expected_rows_removed": 22,
+        "actual_rows_removed": 22,
+        "removal_matches_injection": true,
+        "notes": "auto_clean uses exact drop_duplicates(); mismatch would mean it removed rows beyond (or short of) the injected copies.",
+        "auto_clean_report": [
+          "\u2705 Removed 22 duplicate rows",
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "duplicates",
+      "rate": 0.05,
+      "seed": 2,
+      "detection": {
+        "error_type": "duplicates",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 22,
+        "predicted_count": 22,
+        "actual_count": 22,
+        "raw_detect_problems_output": {
+          "duplicates": 22,
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 23
+            },
+            {
+              "column": "Milk",
+              "count": 31
+            },
+            {
+              "column": "Grocery",
+              "count": 25
+            },
+            {
+              "column": "Frozen",
+              "count": 42
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 30
+            },
+            {
+              "column": "Delicassen",
+              "count": 29
+            }
+          ]
+        },
+        "notes": "duplicated() is exact-match detection \u2014 these are injected exact copies, so this measures whether the mechanism works, not whether near-duplicates would be caught (they would not be, by design)."
+      },
+      "reconstruction": {
+        "error_type": "duplicates",
+        "rows_before_clean": 462,
+        "rows_after_clean": 440,
+        "expected_rows_removed": 22,
+        "actual_rows_removed": 22,
+        "removal_matches_injection": true,
+        "notes": "auto_clean uses exact drop_duplicates(); mismatch would mean it removed rows beyond (or short of) the injected copies.",
+        "auto_clean_report": [
+          "\u2705 Removed 22 duplicate rows",
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "duplicates",
+      "rate": 0.05,
+      "seed": 3,
+      "detection": {
+        "error_type": "duplicates",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 22,
+        "predicted_count": 22,
+        "actual_count": 22,
+        "raw_detect_problems_output": {
+          "duplicates": 22,
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 20
+            },
+            {
+              "column": "Milk",
+              "count": 29
+            },
+            {
+              "column": "Grocery",
+              "count": 26
+            },
+            {
+              "column": "Frozen",
+              "count": 44
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 31
+            },
+            {
+              "column": "Delicassen",
+              "count": 28
+            }
+          ]
+        },
+        "notes": "duplicated() is exact-match detection \u2014 these are injected exact copies, so this measures whether the mechanism works, not whether near-duplicates would be caught (they would not be, by design)."
+      },
+      "reconstruction": {
+        "error_type": "duplicates",
+        "rows_before_clean": 462,
+        "rows_after_clean": 440,
+        "expected_rows_removed": 22,
+        "actual_rows_removed": 22,
+        "removal_matches_injection": true,
+        "notes": "auto_clean uses exact drop_duplicates(); mismatch would mean it removed rows beyond (or short of) the injected copies.",
+        "auto_clean_report": [
+          "\u2705 Removed 22 duplicate rows",
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "duplicates",
+      "rate": 0.1,
+      "seed": 1,
+      "detection": {
+        "error_type": "duplicates",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 44,
+        "predicted_count": 44,
+        "actual_count": 44,
+        "raw_detect_problems_output": {
+          "duplicates": 44,
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 22
+            },
+            {
+              "column": "Milk",
+              "count": 27
+            },
+            {
+              "column": "Grocery",
+              "count": 25
+            },
+            {
+              "column": "Frozen",
+              "count": 49
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 31
+            },
+            {
+              "column": "Delicassen",
+              "count": 28
+            }
+          ]
+        },
+        "notes": "duplicated() is exact-match detection \u2014 these are injected exact copies, so this measures whether the mechanism works, not whether near-duplicates would be caught (they would not be, by design)."
+      },
+      "reconstruction": {
+        "error_type": "duplicates",
+        "rows_before_clean": 484,
+        "rows_after_clean": 440,
+        "expected_rows_removed": 44,
+        "actual_rows_removed": 44,
+        "removal_matches_injection": true,
+        "notes": "auto_clean uses exact drop_duplicates(); mismatch would mean it removed rows beyond (or short of) the injected copies.",
+        "auto_clean_report": [
+          "\u2705 Removed 44 duplicate rows",
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "duplicates",
+      "rate": 0.1,
+      "seed": 2,
+      "detection": {
+        "error_type": "duplicates",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 44,
+        "predicted_count": 44,
+        "actual_count": 44,
+        "raw_detect_problems_output": {
+          "duplicates": 44,
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 21
+            },
+            {
+              "column": "Milk",
+              "count": 31
+            },
+            {
+              "column": "Grocery",
+              "count": 28
+            },
+            {
+              "column": "Frozen",
+              "count": 50
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 33
+            },
+            {
+              "column": "Delicassen",
+              "count": 31
+            }
+          ]
+        },
+        "notes": "duplicated() is exact-match detection \u2014 these are injected exact copies, so this measures whether the mechanism works, not whether near-duplicates would be caught (they would not be, by design)."
+      },
+      "reconstruction": {
+        "error_type": "duplicates",
+        "rows_before_clean": 484,
+        "rows_after_clean": 440,
+        "expected_rows_removed": 44,
+        "actual_rows_removed": 44,
+        "removal_matches_injection": true,
+        "notes": "auto_clean uses exact drop_duplicates(); mismatch would mean it removed rows beyond (or short of) the injected copies.",
+        "auto_clean_report": [
+          "\u2705 Removed 44 duplicate rows",
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "duplicates",
+      "rate": 0.1,
+      "seed": 3,
+      "detection": {
+        "error_type": "duplicates",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 44,
+        "predicted_count": 44,
+        "actual_count": 44,
+        "raw_detect_problems_output": {
+          "duplicates": 44,
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 24
+            },
+            {
+              "column": "Milk",
+              "count": 30
+            },
+            {
+              "column": "Grocery",
+              "count": 28
+            },
+            {
+              "column": "Frozen",
+              "count": 47
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 34
+            },
+            {
+              "column": "Delicassen",
+              "count": 31
+            }
+          ]
+        },
+        "notes": "duplicated() is exact-match detection \u2014 these are injected exact copies, so this measures whether the mechanism works, not whether near-duplicates would be caught (they would not be, by design)."
+      },
+      "reconstruction": {
+        "error_type": "duplicates",
+        "rows_before_clean": 484,
+        "rows_after_clean": 440,
+        "expected_rows_removed": 44,
+        "actual_rows_removed": 44,
+        "removal_matches_injection": true,
+        "notes": "auto_clean uses exact drop_duplicates(); mismatch would mean it removed rows beyond (or short of) the injected copies.",
+        "auto_clean_report": [
+          "\u2705 Removed 44 duplicate rows",
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "duplicates",
+      "rate": 0.2,
+      "seed": 1,
+      "detection": {
+        "error_type": "duplicates",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 88,
+        "predicted_count": 88,
+        "actual_count": 88,
+        "raw_detect_problems_output": {
+          "duplicates": 88,
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 24
+            },
+            {
+              "column": "Milk",
+              "count": 32
+            },
+            {
+              "column": "Grocery",
+              "count": 25
+            },
+            {
+              "column": "Frozen",
+              "count": 51
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 32
+            },
+            {
+              "column": "Delicassen",
+              "count": 32
+            }
+          ]
+        },
+        "notes": "duplicated() is exact-match detection \u2014 these are injected exact copies, so this measures whether the mechanism works, not whether near-duplicates would be caught (they would not be, by design)."
+      },
+      "reconstruction": {
+        "error_type": "duplicates",
+        "rows_before_clean": 528,
+        "rows_after_clean": 440,
+        "expected_rows_removed": 88,
+        "actual_rows_removed": 88,
+        "removal_matches_injection": true,
+        "notes": "auto_clean uses exact drop_duplicates(); mismatch would mean it removed rows beyond (or short of) the injected copies.",
+        "auto_clean_report": [
+          "\u2705 Removed 88 duplicate rows",
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "duplicates",
+      "rate": 0.2,
+      "seed": 2,
+      "detection": {
+        "error_type": "duplicates",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 88,
+        "predicted_count": 88,
+        "actual_count": 88,
+        "raw_detect_problems_output": {
+          "duplicates": 88,
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 24
+            },
+            {
+              "column": "Milk",
+              "count": 30
+            },
+            {
+              "column": "Grocery",
+              "count": 30
+            },
+            {
+              "column": "Frozen",
+              "count": 53
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 38
+            },
+            {
+              "column": "Delicassen",
+              "count": 30
+            }
+          ]
+        },
+        "notes": "duplicated() is exact-match detection \u2014 these are injected exact copies, so this measures whether the mechanism works, not whether near-duplicates would be caught (they would not be, by design)."
+      },
+      "reconstruction": {
+        "error_type": "duplicates",
+        "rows_before_clean": 528,
+        "rows_after_clean": 440,
+        "expected_rows_removed": 88,
+        "actual_rows_removed": 88,
+        "removal_matches_injection": true,
+        "notes": "auto_clean uses exact drop_duplicates(); mismatch would mean it removed rows beyond (or short of) the injected copies.",
+        "auto_clean_report": [
+          "\u2705 Removed 88 duplicate rows",
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "duplicates",
+      "rate": 0.2,
+      "seed": 3,
+      "detection": {
+        "error_type": "duplicates",
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positives": 88,
+        "predicted_count": 88,
+        "actual_count": 88,
+        "raw_detect_problems_output": {
+          "duplicates": 88,
+          "outliers": [
+            {
+              "column": "Fresh",
+              "count": 23
+            },
+            {
+              "column": "Milk",
+              "count": 32
+            },
+            {
+              "column": "Grocery",
+              "count": 28
+            },
+            {
+              "column": "Frozen",
+              "count": 54
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 36
+            },
+            {
+              "column": "Delicassen",
+              "count": 33
+            }
+          ]
+        },
+        "notes": "duplicated() is exact-match detection \u2014 these are injected exact copies, so this measures whether the mechanism works, not whether near-duplicates would be caught (they would not be, by design)."
+      },
+      "reconstruction": {
+        "error_type": "duplicates",
+        "rows_before_clean": 528,
+        "rows_after_clean": 440,
+        "expected_rows_removed": 88,
+        "actual_rows_removed": 88,
+        "removal_matches_injection": true,
+        "notes": "auto_clean uses exact drop_duplicates(); mismatch would mean it removed rows beyond (or short of) the injected copies.",
+        "auto_clean_report": [
+          "\u2705 Removed 88 duplicate rows",
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "outliers",
+      "rate": 0.05,
+      "seed": 1,
+      "detection": {
+        "error_type": "outliers",
+        "precision": 0.5303030303030303,
+        "recall": 0.9943181818181818,
+        "true_positives": 175,
+        "predicted_count": 330,
+        "actual_count": 176,
+        "raw_detect_problems_output": {
+          "outliers": [
+            {
+              "column": "Channel",
+              "count": 22
+            },
+            {
+              "column": "Region",
+              "count": 22
+            },
+            {
+              "column": "Fresh",
+              "count": 41
+            },
+            {
+              "column": "Milk",
+              "count": 45
+            },
+            {
+              "column": "Grocery",
+              "count": 44
+            },
+            {
+              "column": "Frozen",
+              "count": 59
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 48
+            },
+            {
+              "column": "Delicassen",
+              "count": 49
+            }
+          ]
+        },
+        "notes": "cell identity recovered by replicating detect_problems' IQR formula (it only returns a per-column count in production) \u2014 keep this in sync with cleaner.py if that formula changes."
+      },
+      "reconstruction": {
+        "error_type": "outliers",
+        "fraction_left_unchanged_by_clean": 1.0,
+        "notes": "auto_clean has no outlier-treatment step at all (detect_problems flags outliers but auto_clean never caps/removes/winsorizes them) \u2014 expect this fraction to be 1.0. That is a real, reportable pipeline gap, not a test bug.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "outliers",
+      "rate": 0.05,
+      "seed": 2,
+      "detection": {
+        "error_type": "outliers",
+        "precision": 0.546583850931677,
+        "recall": 1.0,
+        "true_positives": 176,
+        "predicted_count": 322,
+        "actual_count": 176,
+        "raw_detect_problems_output": {
+          "outliers": [
+            {
+              "column": "Channel",
+              "count": 22
+            },
+            {
+              "column": "Region",
+              "count": 22
+            },
+            {
+              "column": "Fresh",
+              "count": 41
+            },
+            {
+              "column": "Milk",
+              "count": 48
+            },
+            {
+              "column": "Grocery",
+              "count": 43
+            },
+            {
+              "column": "Frozen",
+              "count": 52
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 46
+            },
+            {
+              "column": "Delicassen",
+              "count": 48
+            }
+          ]
+        },
+        "notes": "cell identity recovered by replicating detect_problems' IQR formula (it only returns a per-column count in production) \u2014 keep this in sync with cleaner.py if that formula changes."
+      },
+      "reconstruction": {
+        "error_type": "outliers",
+        "fraction_left_unchanged_by_clean": 1.0,
+        "notes": "auto_clean has no outlier-treatment step at all (detect_problems flags outliers but auto_clean never caps/removes/winsorizes them) \u2014 expect this fraction to be 1.0. That is a real, reportable pipeline gap, not a test bug.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "outliers",
+      "rate": 0.05,
+      "seed": 3,
+      "detection": {
+        "error_type": "outliers",
+        "precision": 0.5534591194968553,
+        "recall": 1.0,
+        "true_positives": 176,
+        "predicted_count": 318,
+        "actual_count": 176,
+        "raw_detect_problems_output": {
+          "outliers": [
+            {
+              "column": "Channel",
+              "count": 22
+            },
+            {
+              "column": "Region",
+              "count": 22
+            },
+            {
+              "column": "Fresh",
+              "count": 39
+            },
+            {
+              "column": "Milk",
+              "count": 46
+            },
+            {
+              "column": "Grocery",
+              "count": 44
+            },
+            {
+              "column": "Frozen",
+              "count": 51
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 48
+            },
+            {
+              "column": "Delicassen",
+              "count": 46
+            }
+          ]
+        },
+        "notes": "cell identity recovered by replicating detect_problems' IQR formula (it only returns a per-column count in production) \u2014 keep this in sync with cleaner.py if that formula changes."
+      },
+      "reconstruction": {
+        "error_type": "outliers",
+        "fraction_left_unchanged_by_clean": 1.0,
+        "notes": "auto_clean has no outlier-treatment step at all (detect_problems flags outliers but auto_clean never caps/removes/winsorizes them) \u2014 expect this fraction to be 1.0. That is a real, reportable pipeline gap, not a test bug.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "outliers",
+      "rate": 0.1,
+      "seed": 1,
+      "detection": {
+        "error_type": "outliers",
+        "precision": 0.732776617954071,
+        "recall": 0.9971590909090909,
+        "true_positives": 351,
+        "predicted_count": 479,
+        "actual_count": 352,
+        "raw_detect_problems_output": {
+          "outliers": [
+            {
+              "column": "Channel",
+              "count": 44
+            },
+            {
+              "column": "Region",
+              "count": 44
+            },
+            {
+              "column": "Fresh",
+              "count": 59
+            },
+            {
+              "column": "Milk",
+              "count": 66
+            },
+            {
+              "column": "Grocery",
+              "count": 62
+            },
+            {
+              "column": "Frozen",
+              "count": 69
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 67
+            },
+            {
+              "column": "Delicassen",
+              "count": 68
+            }
+          ]
+        },
+        "notes": "cell identity recovered by replicating detect_problems' IQR formula (it only returns a per-column count in production) \u2014 keep this in sync with cleaner.py if that formula changes."
+      },
+      "reconstruction": {
+        "error_type": "outliers",
+        "fraction_left_unchanged_by_clean": 1.0,
+        "notes": "auto_clean has no outlier-treatment step at all (detect_problems flags outliers but auto_clean never caps/removes/winsorizes them) \u2014 expect this fraction to be 1.0. That is a real, reportable pipeline gap, not a test bug.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "outliers",
+      "rate": 0.1,
+      "seed": 2,
+      "detection": {
+        "error_type": "outliers",
+        "precision": 0.7318087318087318,
+        "recall": 1.0,
+        "true_positives": 352,
+        "predicted_count": 481,
+        "actual_count": 352,
+        "raw_detect_problems_output": {
+          "outliers": [
+            {
+              "column": "Channel",
+              "count": 44
+            },
+            {
+              "column": "Region",
+              "count": 44
+            },
+            {
+              "column": "Fresh",
+              "count": 59
+            },
+            {
+              "column": "Milk",
+              "count": 66
+            },
+            {
+              "column": "Grocery",
+              "count": 63
+            },
+            {
+              "column": "Frozen",
+              "count": 69
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 67
+            },
+            {
+              "column": "Delicassen",
+              "count": 69
+            }
+          ]
+        },
+        "notes": "cell identity recovered by replicating detect_problems' IQR formula (it only returns a per-column count in production) \u2014 keep this in sync with cleaner.py if that formula changes."
+      },
+      "reconstruction": {
+        "error_type": "outliers",
+        "fraction_left_unchanged_by_clean": 1.0,
+        "notes": "auto_clean has no outlier-treatment step at all (detect_problems flags outliers but auto_clean never caps/removes/winsorizes them) \u2014 expect this fraction to be 1.0. That is a real, reportable pipeline gap, not a test bug.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "outliers",
+      "rate": 0.1,
+      "seed": 3,
+      "detection": {
+        "error_type": "outliers",
+        "precision": 0.7276507276507277,
+        "recall": 0.9943181818181818,
+        "true_positives": 350,
+        "predicted_count": 481,
+        "actual_count": 352,
+        "raw_detect_problems_output": {
+          "outliers": [
+            {
+              "column": "Channel",
+              "count": 44
+            },
+            {
+              "column": "Region",
+              "count": 44
+            },
+            {
+              "column": "Fresh",
+              "count": 61
+            },
+            {
+              "column": "Milk",
+              "count": 65
+            },
+            {
+              "column": "Grocery",
+              "count": 62
+            },
+            {
+              "column": "Frozen",
+              "count": 70
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 66
+            },
+            {
+              "column": "Delicassen",
+              "count": 69
+            }
+          ]
+        },
+        "notes": "cell identity recovered by replicating detect_problems' IQR formula (it only returns a per-column count in production) \u2014 keep this in sync with cleaner.py if that formula changes."
+      },
+      "reconstruction": {
+        "error_type": "outliers",
+        "fraction_left_unchanged_by_clean": 1.0,
+        "notes": "auto_clean has no outlier-treatment step at all (detect_problems flags outliers but auto_clean never caps/removes/winsorizes them) \u2014 expect this fraction to be 1.0. That is a real, reportable pipeline gap, not a test bug.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "outliers",
+      "rate": 0.2,
+      "seed": 1,
+      "detection": {
+        "error_type": "outliers",
+        "precision": 0.9014084507042254,
+        "recall": 1.0,
+        "true_positives": 704,
+        "predicted_count": 781,
+        "actual_count": 704,
+        "raw_detect_problems_output": {
+          "outliers": [
+            {
+              "column": "Channel",
+              "count": 88
+            },
+            {
+              "column": "Region",
+              "count": 88
+            },
+            {
+              "column": "Fresh",
+              "count": 97
+            },
+            {
+              "column": "Milk",
+              "count": 105
+            },
+            {
+              "column": "Grocery",
+              "count": 100
+            },
+            {
+              "column": "Frozen",
+              "count": 105
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 98
+            },
+            {
+              "column": "Delicassen",
+              "count": 100
+            }
+          ]
+        },
+        "notes": "cell identity recovered by replicating detect_problems' IQR formula (it only returns a per-column count in production) \u2014 keep this in sync with cleaner.py if that formula changes."
+      },
+      "reconstruction": {
+        "error_type": "outliers",
+        "fraction_left_unchanged_by_clean": 1.0,
+        "notes": "auto_clean has no outlier-treatment step at all (detect_problems flags outliers but auto_clean never caps/removes/winsorizes them) \u2014 expect this fraction to be 1.0. That is a real, reportable pipeline gap, not a test bug.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "outliers",
+      "rate": 0.2,
+      "seed": 2,
+      "detection": {
+        "error_type": "outliers",
+        "precision": 0.8852459016393442,
+        "recall": 0.9971590909090909,
+        "true_positives": 702,
+        "predicted_count": 793,
+        "actual_count": 704,
+        "raw_detect_problems_output": {
+          "outliers": [
+            {
+              "column": "Channel",
+              "count": 88
+            },
+            {
+              "column": "Region",
+              "count": 88
+            },
+            {
+              "column": "Fresh",
+              "count": 94
+            },
+            {
+              "column": "Milk",
+              "count": 107
+            },
+            {
+              "column": "Grocery",
+              "count": 101
+            },
+            {
+              "column": "Frozen",
+              "count": 101
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 106
+            },
+            {
+              "column": "Delicassen",
+              "count": 108
+            }
+          ]
+        },
+        "notes": "cell identity recovered by replicating detect_problems' IQR formula (it only returns a per-column count in production) \u2014 keep this in sync with cleaner.py if that formula changes."
+      },
+      "reconstruction": {
+        "error_type": "outliers",
+        "fraction_left_unchanged_by_clean": 1.0,
+        "notes": "auto_clean has no outlier-treatment step at all (detect_problems flags outliers but auto_clean never caps/removes/winsorizes them) \u2014 expect this fraction to be 1.0. That is a real, reportable pipeline gap, not a test bug.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names"
+        ]
+      }
+    },
+    {
+      "error_type": "outliers",
+      "rate": 0.2,
+      "seed": 3,
+      "detection": {
+        "error_type": "outliers",
+        "precision": 0.8895939086294417,
+        "recall": 0.9957386363636364,
+        "true_positives": 701,
+        "predicted_count": 788,
+        "actual_count": 704,
+        "raw_detect_problems_output": {
+          "outliers": [
+            {
+              "column": "Channel",
+              "count": 88
+            },
+            {
+              "column": "Region",
+              "count": 88
+            },
+            {
+              "column": "Fresh",
+              "count": 95
+            },
+            {
+              "column": "Milk",
+              "count": 100
+            },
+            {
+              "column": "Grocery",
+              "count": 104
+            },
+            {
+              "column": "Frozen",
+              "count": 100
+            },
+            {
+              "column": "Detergents_Paper",
+              "count": 107
+            },
+            {
+              "column": "Delicassen",
+              "count": 106
+            }
+          ]
+        },
+        "notes": "cell identity recovered by replicating detect_problems' IQR formula (it only returns a per-column count in production) \u2014 keep this in sync with cleaner.py if that formula changes."
+      },
+      "reconstruction": {
+        "error_type": "outliers",
+        "fraction_left_unchanged_by_clean": 1.0,
+        "notes": "auto_clean has no outlier-treatment step at all (detect_problems flags outliers but auto_clean never caps/removes/winsorizes them) \u2014 expect this fraction to be 1.0. That is a real, reportable pipeline gap, not a test bug.",
+        "auto_clean_report": [
+          "\u2705 Standardized column names"
+        ]
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "problem_type": "classification",
+      "target_col": "Region",
+      "seed": 1,
+      "automated": {
+        "status": "success",
+        "problem_type": "classification",
+        "target_column": "Region",
+        "model_name": "Logistic Regression",
+        "performance": {
+          "cv_accuracy": 0.71,
+          "test_accuracy": 0.716
+        },
+        "feature_importance": [
+          {
+            "feature": "Channel",
+            "importance": 1.0
+          },
+          {
+            "feature": "Detergents_Paper",
+            "importance": 0.486
+          },
+          {
+            "feature": "Milk",
+            "importance": 0.369
+          },
+          {
+            "feature": "Grocery",
+            "importance": 0.311
+          },
+          {
+            "feature": "Delicassen",
+            "importance": 0.154
+          },
+          {
+            "feature": "Fresh",
+            "importance": 0.081
+          }
+        ],
+        "all_candidate_scores": [
+          {
+            "model": "Logistic Regression",
+            "cv_accuracy": 0.71
+          },
+          {
+            "model": "Random Forest",
+            "cv_accuracy": 0.693
+          },
+          {
+            "model": "Gradient Boosting",
+            "cv_accuracy": 0.682
+          },
+          {
+            "model": "Decision Tree",
+            "cv_accuracy": 0.526
+          }
+        ],
+        "reliability_warnings": [
+          {
+            "name": "low_rows_to_features_ratio",
+            "triggered": false,
+            "value": 50.29,
+            "threshold": 10,
+            "message": "50.3 rows per feature \u2014 adequate."
+          },
+          {
+            "name": "unstable_cross_validation",
+            "triggered": false,
+            "value": 0.019,
+            "threshold": 0.1,
+            "message": "Cross-validation score is stable across folds."
+          },
+          {
+            "name": "suspected_leakage",
+            "triggered": false,
+            "value": 0.71,
+            "threshold": 0.98,
+            "message": "Cross-validated score is within a plausible range."
+          }
+        ],
+        "ml_insights": [
+          "Best model: Logistic Regression (selected by 5-fold cross-validation)",
+          "Cross-validated accuracy: 71.0%",
+          "Held-out test accuracy: 71.6%",
+          "Moderate patterns \u2014 more data may improve accuracy",
+          "Most important factor: 'Channel'"
+        ]
+      },
+      "manual_baseline": {
+        "status": "success",
+        "model_name": "Tuned Random Forest (GridSearchCV)",
+        "best_params": {
+          "model__max_depth": 5,
+          "model__n_estimators": 200
+        },
+        "performance": {
+          "cv_score": 0.719,
+          "test_score": 0.716
+        }
+      },
+      "comparison": {
+        "automated_cv_score": 0.71,
+        "automated_test_score": 0.716,
+        "manual_cv_score": 0.719,
+        "manual_test_score": 0.716,
+        "majority_baseline": 0.7159090909090909
+      }
+    },
+    {
+      "problem_type": "classification",
+      "target_col": "Region",
+      "seed": 2,
+      "automated": {
+        "status": "success",
+        "problem_type": "classification",
+        "target_column": "Region",
+        "model_name": "Logistic Regression",
+        "performance": {
+          "cv_accuracy": 0.719,
+          "test_accuracy": 0.705
+        },
+        "feature_importance": [
+          {
+            "feature": "Channel",
+            "importance": 1.0
+          },
+          {
+            "feature": "Milk",
+            "importance": 0.953
+          },
+          {
+            "feature": "Grocery",
+            "importance": 0.766
+          },
+          {
+            "feature": "Detergents_Paper",
+            "importance": 0.379
+          },
+          {
+            "feature": "Fresh",
+            "importance": 0.18
+          },
+          {
+            "feature": "Frozen",
+            "importance": 0.167
+          }
+        ],
+        "all_candidate_scores": [
+          {
+            "model": "Logistic Regression",
+            "cv_accuracy": 0.719
+          },
+          {
+            "model": "Random Forest",
+            "cv_accuracy": 0.696
+          },
+          {
+            "model": "Gradient Boosting",
+            "cv_accuracy": 0.665
+          },
+          {
+            "model": "Decision Tree",
+            "cv_accuracy": 0.577
+          }
+        ],
+        "reliability_warnings": [
+          {
+            "name": "low_rows_to_features_ratio",
+            "triggered": false,
+            "value": 50.29,
+            "threshold": 10,
+            "message": "50.3 rows per feature \u2014 adequate."
+          },
+          {
+            "name": "unstable_cross_validation",
+            "triggered": false,
+            "value": 0.009,
+            "threshold": 0.1,
+            "message": "Cross-validation score is stable across folds."
+          },
+          {
+            "name": "suspected_leakage",
+            "triggered": false,
+            "value": 0.719,
+            "threshold": 0.98,
+            "message": "Cross-validated score is within a plausible range."
+          }
+        ],
+        "ml_insights": [
+          "Best model: Logistic Regression (selected by 5-fold cross-validation)",
+          "Cross-validated accuracy: 71.9%",
+          "Held-out test accuracy: 70.5%",
+          "Moderate patterns \u2014 more data may improve accuracy",
+          "Most important factor: 'Channel'"
+        ]
+      },
+      "manual_baseline": {
+        "status": "success",
+        "model_name": "Tuned Random Forest (GridSearchCV)",
+        "best_params": {
+          "model__max_depth": 5,
+          "model__n_estimators": 200
+        },
+        "performance": {
+          "cv_score": 0.722,
+          "test_score": 0.716
+        }
+      },
+      "comparison": {
+        "automated_cv_score": 0.719,
+        "automated_test_score": 0.705,
+        "manual_cv_score": 0.722,
+        "manual_test_score": 0.716,
+        "majority_baseline": 0.7159090909090909
+      }
+    },
+    {
+      "problem_type": "classification",
+      "target_col": "Region",
+      "seed": 3,
+      "automated": {
+        "status": "success",
+        "problem_type": "classification",
+        "target_column": "Region",
+        "model_name": "Logistic Regression",
+        "performance": {
+          "cv_accuracy": 0.708,
+          "test_accuracy": 0.705
+        },
+        "feature_importance": [
+          {
+            "feature": "Channel",
+            "importance": 1.0
+          },
+          {
+            "feature": "Grocery",
+            "importance": 0.964
+          },
+          {
+            "feature": "Milk",
+            "importance": 0.941
+          },
+          {
+            "feature": "Detergents_Paper",
+            "importance": 0.765
+          },
+          {
+            "feature": "Frozen",
+            "importance": 0.366
+          },
+          {
+            "feature": "Fresh",
+            "importance": 0.206
+          }
+        ],
+        "all_candidate_scores": [
+          {
+            "model": "Logistic Regression",
+            "cv_accuracy": 0.708
+          },
+          {
+            "model": "Random Forest",
+            "cv_accuracy": 0.688
+          },
+          {
+            "model": "Gradient Boosting",
+            "cv_accuracy": 0.648
+          },
+          {
+            "model": "Decision Tree",
+            "cv_accuracy": 0.565
+          }
+        ],
+        "reliability_warnings": [
+          {
+            "name": "low_rows_to_features_ratio",
+            "triggered": false,
+            "value": 50.29,
+            "threshold": 10,
+            "message": "50.3 rows per feature \u2014 adequate."
+          },
+          {
+            "name": "unstable_cross_validation",
+            "triggered": false,
+            "value": 0.025,
+            "threshold": 0.1,
+            "message": "Cross-validation score is stable across folds."
+          },
+          {
+            "name": "suspected_leakage",
+            "triggered": false,
+            "value": 0.708,
+            "threshold": 0.98,
+            "message": "Cross-validated score is within a plausible range."
+          }
+        ],
+        "ml_insights": [
+          "Best model: Logistic Regression (selected by 5-fold cross-validation)",
+          "Cross-validated accuracy: 70.8%",
+          "Held-out test accuracy: 70.5%",
+          "Moderate patterns \u2014 more data may improve accuracy",
+          "Most important factor: 'Channel'"
+        ]
+      },
+      "manual_baseline": {
+        "status": "success",
+        "model_name": "Tuned Random Forest (GridSearchCV)",
+        "best_params": {
+          "model__max_depth": 5,
+          "model__n_estimators": 100
+        },
+        "performance": {
+          "cv_score": 0.708,
+          "test_score": 0.716
+        }
+      },
+      "comparison": {
+        "automated_cv_score": 0.708,
+        "automated_test_score": 0.705,
+        "manual_cv_score": 0.708,
+        "manual_test_score": 0.716,
+        "majority_baseline": 0.7159090909090909
+      }
+    }
+  ],
+  "run_records": [
+    {
+      "seed": 1,
+      "reliability_warnings": [
+        {
+          "name": "low_rows_to_features_ratio",
+          "triggered": false,
+          "value": 50.29,
+          "threshold": 10,
+          "message": "50.3 rows per feature \u2014 adequate."
+        },
+        {
+          "name": "unstable_cross_validation",
+          "triggered": false,
+          "value": 0.019,
+          "threshold": 0.1,
+          "message": "Cross-validation score is stable across folds."
+        },
+        {
+          "name": "suspected_leakage",
+          "triggered": false,
+          "value": 0.71,
+          "threshold": 0.98,
+          "message": "Cross-validated score is within a plausible range."
+        }
+      ],
+      "poor": false,
+      "poor_detail": {
+        "weak": false,
+        "unstable": false
+      }
+    },
+    {
+      "seed": 2,
+      "reliability_warnings": [
+        {
+          "name": "low_rows_to_features_ratio",
+          "triggered": false,
+          "value": 50.29,
+          "threshold": 10,
+          "message": "50.3 rows per feature \u2014 adequate."
+        },
+        {
+          "name": "unstable_cross_validation",
+          "triggered": false,
+          "value": 0.009,
+          "threshold": 0.1,
+          "message": "Cross-validation score is stable across folds."
+        },
+        {
+          "name": "suspected_leakage",
+          "triggered": false,
+          "value": 0.719,
+          "threshold": 0.98,
+          "message": "Cross-validated score is within a plausible range."
+        }
+      ],
+      "poor": true,
+      "poor_detail": {
+        "weak": true,
+        "unstable": false
+      }
+    },
+    {
+      "seed": 3,
+      "reliability_warnings": [
+        {
+          "name": "low_rows_to_features_ratio",
+          "triggered": false,
+          "value": 50.29,
+          "threshold": 10,
+          "message": "50.3 rows per feature \u2014 adequate."
+        },
+        {
+          "name": "unstable_cross_validation",
+          "triggered": false,
+          "value": 0.025,
+          "threshold": 0.1,
+          "message": "Cross-validation score is stable across folds."
+        },
+        {
+          "name": "suspected_leakage",
+          "triggered": false,
+          "value": 0.708,
+          "threshold": 0.98,
+          "message": "Cross-validated score is within a plausible range."
+        }
+      ],
+      "poor": true,
+      "poor_detail": {
+        "weak": true,
+        "unstable": false
+      }
+    }
+  ]
+}

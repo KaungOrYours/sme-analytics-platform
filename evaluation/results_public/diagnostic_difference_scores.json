@@ -1,0 +1,1026 @@
+{
+  "pre_registered": false,
+  "label": "post-hoc paired-difference re-analysis, per review_response_2026-10-22.md open item 2",
+  "sources": {
+    "study2_B": {
+      "source": "study2_B",
+      "n_datasets": 9,
+      "strata": {
+        "pooled": [
+          {
+            "a": "sigma_cv",
+            "b": "evalml_cov",
+            "concordance_a": 0.6564449064449065,
+            "concordance_b": 0.6379071379071379,
+            "diff": 0.018537768537768562,
+            "ci_low": -0.017546567174270344,
+            "ci_high": 0.07090093258639624,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "evalml_range",
+            "concordance_a": 0.6564449064449065,
+            "concordance_b": 0.6602564102564102,
+            "diff": -0.003811503811503747,
+            "ci_low": -0.01946386961767598,
+            "ci_high": 0.010942417682419969,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "fold_contamination",
+            "concordance_a": 0.6564449064449065,
+            "concordance_b": 0.6376761376761376,
+            "diff": 0.018768768768768873,
+            "ci_low": -0.1585158110379605,
+            "ci_high": 0.15766382589770145,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "epv",
+            "concordance_a": 0.6564449064449065,
+            "concordance_b": 0.5900900900900901,
+            "diff": 0.06635481635481644,
+            "ci_low": -0.06388848822198342,
+            "ci_high": 0.2199630417107607,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "n_over_p",
+            "concordance_a": 0.6564449064449065,
+            "concordance_b": 0.5346500346500347,
+            "diff": 0.1217948717948718,
+            "ci_low": -0.022065927820403553,
+            "ci_high": 0.30709876543209874,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "evalml_range",
+            "concordance_a": 0.6379071379071379,
+            "concordance_b": 0.6602564102564102,
+            "diff": -0.02234927234927231,
+            "ci_low": -0.07864746872728993,
+            "ci_high": 0.015648783369610172,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "fold_contamination",
+            "concordance_a": 0.6379071379071379,
+            "concordance_b": 0.6376761376761376,
+            "diff": 0.0002310002310003112,
+            "ci_low": -0.20920366304931362,
+            "ci_high": 0.15358206743515515,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "epv",
+            "concordance_a": 0.6379071379071379,
+            "concordance_b": 0.5900900900900901,
+            "diff": 0.047817047817047875,
+            "ci_low": -0.10551746301468104,
+            "ci_high": 0.2139908176655697,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "n_over_p",
+            "concordance_a": 0.6379071379071379,
+            "concordance_b": 0.5346500346500347,
+            "diff": 0.10325710325710324,
+            "ci_low": -0.08009815682171119,
+            "ci_high": 0.3173236248950035,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "fold_contamination",
+            "concordance_a": 0.6602564102564102,
+            "concordance_b": 0.6376761376761376,
+            "diff": 0.02258027258027262,
+            "ci_low": -0.15394006878113559,
+            "ci_high": 0.1628706531661828,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "epv",
+            "concordance_a": 0.6602564102564102,
+            "concordance_b": 0.5900900900900901,
+            "diff": 0.07016632016632018,
+            "ci_low": -0.05087010667418253,
+            "ci_high": 0.22864893257825972,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "n_over_p",
+            "concordance_a": 0.6602564102564102,
+            "concordance_b": 0.5346500346500347,
+            "diff": 0.12560637560637555,
+            "ci_low": -0.020802247507188076,
+            "ci_high": 0.31597905612280236,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "fold_contamination",
+            "b": "epv",
+            "concordance_a": 0.6376761376761376,
+            "concordance_b": 0.5900900900900901,
+            "diff": 0.047586047586047564,
+            "ci_low": -0.11555644378321436,
+            "ci_high": 0.22718759242827555,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "fold_contamination",
+            "b": "n_over_p",
+            "concordance_a": 0.6376761376761376,
+            "concordance_b": 0.5346500346500347,
+            "diff": 0.10302610302610293,
+            "ci_low": -0.056327103643655264,
+            "ci_high": 0.29522072951491,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "epv",
+            "b": "n_over_p",
+            "concordance_a": 0.5900900900900901,
+            "concordance_b": 0.5346500346500347,
+            "diff": 0.05544005544005537,
+            "ci_low": -0.032211448494409954,
+            "ci_high": 0.19308088468920678,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          }
+        ],
+        "within_dataset": [
+          {
+            "a": "sigma_cv",
+            "b": "evalml_cov",
+            "concordance_a": 0.4294294294294294,
+            "concordance_b": 0.36036036036036034,
+            "diff": 0.06906906906906907,
+            "ci_low": 0.029273596991486933,
+            "ci_high": 0.11238633896096845,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "sigma_cv",
+            "b": "evalml_range",
+            "concordance_a": 0.4294294294294294,
+            "concordance_b": 0.4346846846846847,
+            "diff": -0.005255255255255276,
+            "ci_low": -0.018773222947867086,
+            "ci_high": 0.010112166394335521,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "fold_contamination",
+            "concordance_a": 0.4294294294294294,
+            "concordance_b": 0.6426426426426426,
+            "diff": -0.21321321321321318,
+            "ci_low": -0.32920205433480654,
+            "ci_high": -0.1043865207373273,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "sigma_cv",
+            "b": "epv",
+            "concordance_a": 0.4294294294294294,
+            "concordance_b": 0.35735735735735735,
+            "diff": 0.07207207207207206,
+            "ci_low": -0.01065156857370676,
+            "ci_high": 0.1387115172329204,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "n_over_p",
+            "concordance_a": 0.4294294294294294,
+            "concordance_b": 0.35585585585585583,
+            "diff": 0.07357357357357358,
+            "ci_low": -0.007954064088507906,
+            "ci_high": 0.13931951987007055,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "evalml_range",
+            "concordance_a": 0.36036036036036034,
+            "concordance_b": 0.4346846846846847,
+            "diff": -0.07432432432432434,
+            "ci_low": -0.12333641975308643,
+            "ci_high": -0.027755801687763846,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_cov",
+            "b": "fold_contamination",
+            "concordance_a": 0.36036036036036034,
+            "concordance_b": 0.6426426426426426,
+            "diff": -0.28228228228228225,
+            "ci_low": -0.43663225565514296,
+            "ci_high": -0.14156855432780852,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_cov",
+            "b": "epv",
+            "concordance_a": 0.36036036036036034,
+            "concordance_b": 0.35735735735735735,
+            "diff": 0.003003003003002991,
+            "ci_low": -0.07061745049866922,
+            "ci_high": 0.05696942629644746,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "n_over_p",
+            "concordance_a": 0.36036036036036034,
+            "concordance_b": 0.35585585585585583,
+            "diff": 0.004504504504504514,
+            "ci_low": -0.06707458220415538,
+            "ci_high": 0.056430975361950714,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "fold_contamination",
+            "concordance_a": 0.4346846846846847,
+            "concordance_b": 0.6426426426426426,
+            "diff": -0.2079579579579579,
+            "ci_low": -0.32332816977296663,
+            "ci_high": -0.10116436925647464,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_range",
+            "b": "epv",
+            "concordance_a": 0.4346846846846847,
+            "concordance_b": 0.35735735735735735,
+            "diff": 0.07732732732732733,
+            "ci_low": -0.018704627949183292,
+            "ci_high": 0.15342001748251746,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "n_over_p",
+            "concordance_a": 0.4346846846846847,
+            "concordance_b": 0.35585585585585583,
+            "diff": 0.07882882882882886,
+            "ci_low": -0.016226242690058495,
+            "ci_high": 0.153847287735849,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "fold_contamination",
+            "b": "epv",
+            "concordance_a": 0.6426426426426426,
+            "concordance_b": 0.35735735735735735,
+            "diff": 0.28528528528528524,
+            "ci_low": 0.1272524711006869,
+            "ci_high": 0.44299674267100975,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "fold_contamination",
+            "b": "n_over_p",
+            "concordance_a": 0.6426426426426426,
+            "concordance_b": 0.35585585585585583,
+            "diff": 0.28678678678678676,
+            "ci_low": 0.1292487796645376,
+            "ci_high": 0.4444529652351738,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "epv",
+            "b": "n_over_p",
+            "concordance_a": 0.35735735735735735,
+            "concordance_b": 0.35585585585585583,
+            "diff": 0.0015015015015015232,
+            "ci_low": -0.002551347462061779,
+            "ci_high": 0.005297986964183879,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          }
+        ]
+      }
+    },
+    "study2_C": {
+      "source": "study2_C",
+      "n_datasets": 9,
+      "strata": {
+        "pooled": [
+          {
+            "a": "sigma_cv",
+            "b": "evalml_cov",
+            "concordance_a": 0.7055393586005831,
+            "concordance_b": 0.7105604146420473,
+            "diff": -0.005021056041464189,
+            "ci_low": -0.026547589919256098,
+            "ci_high": 0.034874125874125916,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "evalml_range",
+            "concordance_a": 0.7055393586005831,
+            "concordance_b": 0.6942014901198574,
+            "diff": 0.01133786848072571,
+            "ci_low": -0.014019710998877685,
+            "ci_high": 0.03658447211924159,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "fold_contamination",
+            "concordance_a": 0.7055393586005831,
+            "concordance_b": 0.5739390994493035,
+            "diff": 0.1316002591512796,
+            "ci_low": -0.3613156726822425,
+            "ci_high": 0.3958658042775763,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "epv",
+            "concordance_a": 0.7055393586005831,
+            "concordance_b": 0.7412536443148688,
+            "diff": -0.0357142857142857,
+            "ci_low": -0.21573022295731845,
+            "ci_high": 0.13850969093766344,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "n_over_p",
+            "concordance_a": 0.7055393586005831,
+            "concordance_b": 0.7424684159378037,
+            "diff": -0.03692905733722052,
+            "ci_low": -0.21756524799653454,
+            "ci_high": 0.1391317042794067,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "evalml_range",
+            "concordance_a": 0.7105604146420473,
+            "concordance_b": 0.6942014901198574,
+            "diff": 0.0163589245221899,
+            "ci_low": -0.027464108764893268,
+            "ci_high": 0.033966788783182385,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "fold_contamination",
+            "concordance_a": 0.7105604146420473,
+            "concordance_b": 0.5739390994493035,
+            "diff": 0.1366213151927438,
+            "ci_low": -0.3896964017991005,
+            "ci_high": 0.39891910820810994,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "epv",
+            "concordance_a": 0.7105604146420473,
+            "concordance_b": 0.7412536443148688,
+            "diff": -0.03069322967282151,
+            "ci_low": -0.23389506172839503,
+            "ci_high": 0.1318072082524833,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "n_over_p",
+            "concordance_a": 0.7105604146420473,
+            "concordance_b": 0.7424684159378037,
+            "diff": -0.03190800129575633,
+            "ci_low": -0.23411841895551538,
+            "ci_high": 0.1320302318341103,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "fold_contamination",
+            "concordance_a": 0.6942014901198574,
+            "concordance_b": 0.5739390994493035,
+            "diff": 0.12026239067055389,
+            "ci_low": -0.3436539477871479,
+            "ci_high": 0.3941601021753458,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "epv",
+            "concordance_a": 0.6942014901198574,
+            "concordance_b": 0.7412536443148688,
+            "diff": -0.04705215419501141,
+            "ci_low": -0.23925486156888598,
+            "ci_high": 0.14527478072240554,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "n_over_p",
+            "concordance_a": 0.6942014901198574,
+            "concordance_b": 0.7424684159378037,
+            "diff": -0.04826692581794623,
+            "ci_low": -0.24267886521780763,
+            "ci_high": 0.14567090295017104,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "fold_contamination",
+            "b": "epv",
+            "concordance_a": 0.5739390994493035,
+            "concordance_b": 0.7412536443148688,
+            "diff": -0.1673145448655653,
+            "ci_low": -0.417233560090703,
+            "ci_high": 0.48308619601184066,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "fold_contamination",
+            "b": "n_over_p",
+            "concordance_a": 0.5739390994493035,
+            "concordance_b": 0.7424684159378037,
+            "diff": -0.1685293164885001,
+            "ci_low": -0.4147211180639503,
+            "ci_high": 0.48331363200975075,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "epv",
+            "b": "n_over_p",
+            "concordance_a": 0.7412536443148688,
+            "concordance_b": 0.7424684159378037,
+            "diff": -0.0012147716229348182,
+            "ci_low": -0.004635509271018523,
+            "ci_high": 0.0033245049417370996,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          }
+        ],
+        "within_dataset": [
+          {
+            "a": "sigma_cv",
+            "b": "evalml_cov",
+            "concordance_a": 0.2534246575342466,
+            "concordance_b": 0.1735159817351598,
+            "diff": 0.07990867579908678,
+            "ci_low": 0.007130952380952378,
+            "ci_high": 0.17692307692307696,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "sigma_cv",
+            "b": "evalml_range",
+            "concordance_a": 0.2534246575342466,
+            "concordance_b": 0.2465753424657534,
+            "diff": 0.006849315068493178,
+            "ci_low": -0.0370967741935484,
+            "ci_high": 0.03033088235294118,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "fold_contamination",
+            "concordance_a": 0.2534246575342466,
+            "concordance_b": 0.7226027397260274,
+            "diff": -0.4691780821917808,
+            "ci_low": -0.7025416666666667,
+            "ci_high": -0.22058908045977066,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "sigma_cv",
+            "b": "epv",
+            "concordance_a": 0.2534246575342466,
+            "concordance_b": 0.2785388127853881,
+            "diff": -0.025114155251141523,
+            "ci_low": -0.24637121212121213,
+            "ci_high": 0.23548387096774193,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "n_over_p",
+            "concordance_a": 0.2534246575342466,
+            "concordance_b": 0.273972602739726,
+            "diff": -0.020547945205479423,
+            "ci_low": -0.2533333333333333,
+            "ci_high": 0.24249266862170052,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "evalml_range",
+            "concordance_a": 0.1735159817351598,
+            "concordance_b": 0.2465753424657534,
+            "diff": -0.0730593607305936,
+            "ci_low": -0.20005102040816328,
+            "ci_high": 0.007384399983344428,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "fold_contamination",
+            "concordance_a": 0.1735159817351598,
+            "concordance_b": 0.7226027397260274,
+            "diff": -0.5490867579908676,
+            "ci_low": -0.8,
+            "ci_high": -0.3848390366015892,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_cov",
+            "b": "epv",
+            "concordance_a": 0.1735159817351598,
+            "concordance_b": 0.2785388127853881,
+            "diff": -0.1050228310502283,
+            "ci_low": -0.26087512984122274,
+            "ci_high": 0.11764705882352942,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "n_over_p",
+            "concordance_a": 0.1735159817351598,
+            "concordance_b": 0.273972602739726,
+            "diff": -0.1004566210045662,
+            "ci_low": -0.2662139226888262,
+            "ci_high": 0.12502976190476175,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "fold_contamination",
+            "concordance_a": 0.2465753424657534,
+            "concordance_b": 0.7226027397260274,
+            "diff": -0.476027397260274,
+            "ci_low": -0.7090909090909091,
+            "ci_high": -0.2023538961038962,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_range",
+            "b": "epv",
+            "concordance_a": 0.2465753424657534,
+            "concordance_b": 0.2785388127853881,
+            "diff": -0.0319634703196347,
+            "ci_low": -0.2527920696324951,
+            "ci_high": 0.23848404255319136,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "n_over_p",
+            "concordance_a": 0.2465753424657534,
+            "concordance_b": 0.273972602739726,
+            "diff": -0.0273972602739726,
+            "ci_low": -0.25798933935276236,
+            "ci_high": 0.24677419354838714,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          },
+          {
+            "a": "fold_contamination",
+            "b": "epv",
+            "concordance_a": 0.7226027397260274,
+            "concordance_b": 0.2785388127853881,
+            "diff": 0.4440639269406393,
+            "ci_low": 0.2359361441832308,
+            "ci_high": 0.9053161764705864,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "fold_contamination",
+            "b": "n_over_p",
+            "concordance_a": 0.7226027397260274,
+            "concordance_b": 0.273972602739726,
+            "diff": 0.4486301369863014,
+            "ci_low": 0.2443039772727273,
+            "ci_high": 0.8902499999999985,
+            "n_valid_resamples": 2000,
+            "excludes_zero": true
+          },
+          {
+            "a": "epv",
+            "b": "n_over_p",
+            "concordance_a": 0.2785388127853881,
+            "concordance_b": 0.273972602739726,
+            "diff": 0.0045662100456621,
+            "ci_low": -0.007608695652173925,
+            "ci_high": 0.0222222222222222,
+            "n_valid_resamples": 2000,
+            "excludes_zero": false
+          }
+        ]
+      }
+    },
+    "study3_transfer": {
+      "source": "study3_transfer",
+      "n_datasets": 8,
+      "strata": {
+        "pooled": [
+          {
+            "a": "sigma_cv",
+            "b": "evalml_cov",
+            "concordance_a": 0.6960167714884696,
+            "concordance_b": 0.6918238993710691,
+            "diff": 0.004192872117400492,
+            "ci_low": -0.010482180293501009,
+            "ci_high": 0.03405516154452318,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "evalml_range",
+            "concordance_a": 0.6960167714884696,
+            "concordance_b": 0.7099930118798043,
+            "diff": -0.013976240391334716,
+            "ci_low": -0.022951930654058317,
+            "ci_high": -0.007686932215234088,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "sigma_cv",
+            "b": "fold_contamination",
+            "concordance_a": 0.6960167714884696,
+            "concordance_b": 0.583508036338225,
+            "diff": 0.11250873515024462,
+            "ci_low": -0.08293380614657206,
+            "ci_high": 0.21268343815513613,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "epv",
+            "concordance_a": 0.6960167714884696,
+            "concordance_b": 0.7253668763102725,
+            "diff": -0.02935010482180289,
+            "ci_low": -0.2634521313766597,
+            "ci_high": 0.3044723969252268,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "sigma_cv",
+            "b": "n_over_p",
+            "concordance_a": 0.6960167714884696,
+            "concordance_b": 0.5849056603773585,
+            "diff": 0.11111111111111116,
+            "ci_low": -0.16838714185884004,
+            "ci_high": 0.4262082459818302,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "evalml_range",
+            "concordance_a": 0.6918238993710691,
+            "concordance_b": 0.7099930118798043,
+            "diff": -0.018169112508735208,
+            "ci_low": -0.053333333333333344,
+            "ci_high": -0.002795248078266932,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_cov",
+            "b": "fold_contamination",
+            "concordance_a": 0.6918238993710691,
+            "concordance_b": 0.583508036338225,
+            "diff": 0.10831586303284413,
+            "ci_low": -0.10614736012608356,
+            "ci_high": 0.21586303284416475,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "epv",
+            "concordance_a": 0.6918238993710691,
+            "concordance_b": 0.7253668763102725,
+            "diff": -0.033542976939203384,
+            "ci_low": -0.27882599580712797,
+            "ci_high": 0.2948986722571629,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_cov",
+            "b": "n_over_p",
+            "concordance_a": 0.6918238993710691,
+            "concordance_b": 0.5849056603773585,
+            "diff": 0.10691823899371067,
+            "ci_low": -0.18355555555555556,
+            "ci_high": 0.41604740027060383,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "fold_contamination",
+            "concordance_a": 0.7099930118798043,
+            "concordance_b": 0.583508036338225,
+            "diff": 0.12648497554157934,
+            "ci_low": -0.06135618597320723,
+            "ci_high": 0.2222222222222222,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "epv",
+            "concordance_a": 0.7099930118798043,
+            "concordance_b": 0.7253668763102725,
+            "diff": -0.015373864430468176,
+            "ci_low": -0.2494060097833683,
+            "ci_high": 0.3179594689028651,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "evalml_range",
+            "b": "n_over_p",
+            "concordance_a": 0.7099930118798043,
+            "concordance_b": 0.5849056603773585,
+            "diff": 0.12508735150244588,
+            "ci_low": -0.1550300489168414,
+            "ci_high": 0.4408106219426972,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "fold_contamination",
+            "b": "epv",
+            "concordance_a": 0.583508036338225,
+            "concordance_b": 0.7253668763102725,
+            "diff": -0.1418588399720475,
+            "ci_low": -0.4025157232704403,
+            "ci_high": 0.23413299663299625,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "fold_contamination",
+            "b": "n_over_p",
+            "concordance_a": 0.583508036338225,
+            "concordance_b": 0.5849056603773585,
+            "diff": -0.0013976240391334604,
+            "ci_low": -0.2672327044025157,
+            "ci_high": 0.3855345911949678,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          },
+          {
+            "a": "epv",
+            "b": "n_over_p",
+            "concordance_a": 0.7253668763102725,
+            "concordance_b": 0.5849056603773585,
+            "diff": 0.14046121593291405,
+            "ci_low": 0.03163522012578616,
+            "ci_high": 0.23899371069182396,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          }
+        ],
+        "within_dataset": [
+          {
+            "a": "sigma_cv",
+            "b": "evalml_cov",
+            "concordance_a": 0.25925925925925924,
+            "concordance_b": 0.1388888888888889,
+            "diff": 0.12037037037037035,
+            "ci_low": 0.12037037037037035,
+            "ci_high": 0.12037037037037035,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "sigma_cv",
+            "b": "evalml_range",
+            "concordance_a": 0.25925925925925924,
+            "concordance_b": 0.2962962962962963,
+            "diff": -0.037037037037037035,
+            "ci_low": -0.037037037037037035,
+            "ci_high": -0.037037037037037035,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "sigma_cv",
+            "b": "fold_contamination",
+            "concordance_a": 0.25925925925925924,
+            "concordance_b": 0.8333333333333334,
+            "diff": -0.5740740740740742,
+            "ci_low": -0.5740740740740742,
+            "ci_high": -0.5740740740740742,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "sigma_cv",
+            "b": "epv",
+            "concordance_a": 0.25925925925925924,
+            "concordance_b": 0.16666666666666666,
+            "diff": 0.09259259259259259,
+            "ci_low": 0.09259259259259259,
+            "ci_high": 0.09259259259259259,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "sigma_cv",
+            "b": "n_over_p",
+            "concordance_a": 0.25925925925925924,
+            "concordance_b": 0.16666666666666666,
+            "diff": 0.09259259259259259,
+            "ci_low": 0.09259259259259259,
+            "ci_high": 0.09259259259259259,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_cov",
+            "b": "evalml_range",
+            "concordance_a": 0.1388888888888889,
+            "concordance_b": 0.2962962962962963,
+            "diff": -0.15740740740740738,
+            "ci_low": -0.15740740740740738,
+            "ci_high": -0.15740740740740738,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_cov",
+            "b": "fold_contamination",
+            "concordance_a": 0.1388888888888889,
+            "concordance_b": 0.8333333333333334,
+            "diff": -0.6944444444444444,
+            "ci_low": -0.6944444444444444,
+            "ci_high": -0.6944444444444444,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_cov",
+            "b": "epv",
+            "concordance_a": 0.1388888888888889,
+            "concordance_b": 0.16666666666666666,
+            "diff": -0.027777777777777762,
+            "ci_low": -0.027777777777777762,
+            "ci_high": -0.027777777777777762,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_cov",
+            "b": "n_over_p",
+            "concordance_a": 0.1388888888888889,
+            "concordance_b": 0.16666666666666666,
+            "diff": -0.027777777777777762,
+            "ci_low": -0.027777777777777762,
+            "ci_high": -0.027777777777777762,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_range",
+            "b": "fold_contamination",
+            "concordance_a": 0.2962962962962963,
+            "concordance_b": 0.8333333333333334,
+            "diff": -0.5370370370370371,
+            "ci_low": -0.5370370370370371,
+            "ci_high": -0.5370370370370371,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_range",
+            "b": "epv",
+            "concordance_a": 0.2962962962962963,
+            "concordance_b": 0.16666666666666666,
+            "diff": 0.12962962962962962,
+            "ci_low": 0.12962962962962962,
+            "ci_high": 0.12962962962962962,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "evalml_range",
+            "b": "n_over_p",
+            "concordance_a": 0.2962962962962963,
+            "concordance_b": 0.16666666666666666,
+            "diff": 0.12962962962962962,
+            "ci_low": 0.12962962962962962,
+            "ci_high": 0.12962962962962962,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "fold_contamination",
+            "b": "epv",
+            "concordance_a": 0.8333333333333334,
+            "concordance_b": 0.16666666666666666,
+            "diff": 0.6666666666666667,
+            "ci_low": 0.6666666666666667,
+            "ci_high": 0.6666666666666667,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "fold_contamination",
+            "b": "n_over_p",
+            "concordance_a": 0.8333333333333334,
+            "concordance_b": 0.16666666666666666,
+            "diff": 0.6666666666666667,
+            "ci_low": 0.6666666666666667,
+            "ci_high": 0.6666666666666667,
+            "n_valid_resamples": 1285,
+            "excludes_zero": true
+          },
+          {
+            "a": "epv",
+            "b": "n_over_p",
+            "concordance_a": 0.16666666666666666,
+            "concordance_b": 0.16666666666666666,
+            "diff": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n_valid_resamples": 1285,
+            "excludes_zero": false
+          }
+        ]
+      }
+    }
+  }
+}

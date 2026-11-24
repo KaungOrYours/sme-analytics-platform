@@ -315,6 +315,82 @@ def size_confound(rows):
 
 
 # ---------------------------------------------------------------------------
+# 4. Is the between-dataset ordering separable from the injected corruption,
+#    and from the choice of delta_G?
+# ---------------------------------------------------------------------------
+def condition_and_threshold_sensitivity(rows):
+    """Two sensitivities the headline rho has not previously carried.
+
+    (a) BY CORRUPTION FAMILY. The headline is pooled over seven conditions, two
+        of which we injected ourselves and which carry much higher positive
+        rates than the rest. The condition a user actually faces is `clean`, so
+        the clean-only estimate is the one that speaks to deployment. It rests
+        on three runs per dataset and is correspondingly imprecise -- which is
+        the point: the headline is not separable from the corruption design, and
+        saying so is cheaper than being asked.
+
+    (b) BY delta_G. The outcome threshold was chosen so that roughly 11% of 27
+        pilot runs were positive, i.e. by selection on the dependent variable
+        from three positive cases. Appendix C reports that the granularity
+        pattern is stable across the pre-specified grid; it is the MAGNITUDE of
+        the between-dataset correlation that is not, and that was never printed.
+    """
+    by_dataset = {}
+    for row in rows:
+        by_dataset.setdefault(row["dataset"], []).append(row)
+
+    def rho_over(subset_rows, delta):
+        groups = {}
+        for row in subset_rows:
+            groups.setdefault(row["dataset"], []).append(row)
+        sigma, rate, estimable = [], [], 0
+        for _d, group in sorted(groups.items()):
+            poor = [(r["s_cv"] - r["s_test"]) > delta for r in group]
+            sigma.append(sum(r["sigma_cv"] for r in group) / len(group))
+            rate.append(sum(poor) / len(poor))
+            if any(poor):
+                estimable += 1
+        if len(sigma) < 3:
+            return None, len(sigma), estimable
+        rs, rr = _ranks(sigma), _ranks(rate)
+        return _pearson(rs, rr), len(sigma), estimable
+
+    def rho_estimable(subset_rows, delta):
+        groups = {}
+        for row in subset_rows:
+            groups.setdefault(row["dataset"], []).append(row)
+        keep = [d for d, g in groups.items()
+                if any((r["s_cv"] - r["s_test"]) > delta for r in g)]
+        return rho_over([r for r in subset_rows if r["dataset"] in keep], delta)[0]
+
+    families = {}
+    for family in sorted({r["family"] for r in rows}):
+        subset = [r for r in rows if r["family"] == family]
+        value, k, est = rho_over(subset, DELTA_G)
+        families[family] = {
+            "rho_all": value,
+            "n_datasets": k,
+            "n_estimable": est,
+            "rho_estimable": rho_estimable(subset, DELTA_G),
+            "n_runs": len(subset),
+            "positive_rate": sum(1 for r in subset if r["poor"]) / len(subset),
+        }
+
+    deltas = {}
+    for delta in (0.025, 0.05, 0.075, 0.10, 0.15):
+        value, k, est = rho_over(rows, delta)
+        deltas[str(delta)] = {
+            "rho_all": value,
+            "n_datasets": k,
+            "n_estimable": est,
+            "rho_estimable": rho_estimable(rows, delta),
+            "n_positive": sum(1 for r in rows if (r["s_cv"] - r["s_test"]) > delta),
+        }
+    return {"by_corruption_family": families, "by_delta_g": deltas,
+            "anchor_delta_g": DELTA_G}
+
+
+# ---------------------------------------------------------------------------
 # Analysis
 # ---------------------------------------------------------------------------
 def analyse():
@@ -341,6 +417,7 @@ def analyse():
         "permutation_null": {},
         "residualised": {},
         "between_dataset": {},
+        "sensitivity": {},
     }
 
     for name in COMPONENTS:
@@ -377,6 +454,7 @@ def analyse():
         )
 
     result["between_dataset"] = size_confound(rows)
+    result["sensitivity"] = condition_and_threshold_sensitivity(rows)
 
     # The primary comparison is about sigma_cv (R=1), the estimator the library
     # actually computes. SIGMA_FIELD is sigma_R20, so residualise BOTH and report
@@ -468,6 +546,18 @@ def report(result):
     print("    rho(sigma_cv, poor rate)     %s" % fmt(bd["spearman_sigma_cv_vs_poor_rate"]))
     print("    rho(sigma_cv, n_train)       %s" % fmt(bd["spearman_sigma_cv_vs_n_train"]))
     print("    partial, n_train controlled  %s" % fmt(bd["partial_controlling_n_train"]))
+    print()
+    sv = result["sensitivity"]
+    print("  between-dataset rho by corruption family (headline is pooled over all):")
+    for fam, b in sv["by_corruption_family"].items():
+        print("    %-16s rho %s  estimable %s  (%s of %d runs positive)"
+              % (fam, fmt(b["rho_all"]), fmt(b["rho_estimable"]),
+                 ("%.0f%%" % (100 * b["positive_rate"])), b["n_runs"]))
+    print()
+    print("  between-dataset rho by delta_G (anchor %.3f):" % sv["anchor_delta_g"])
+    for d, b in sv["by_delta_g"].items():
+        print("    delta_G %-6s rho %s  estimable-only %s  (%d datasets estimable)"
+              % (d, fmt(b["rho_all"]), fmt(b["rho_estimable"]), b["n_estimable"]))
     print()
     print("  If the residual returns to ~0.5, the sub-chance raw reading is the")
     print("  CV-mean confound and the honest report is a null, not a direction.")

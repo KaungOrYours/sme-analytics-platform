@@ -1,0 +1,81 @@
+{
+  "group": "final_evaluation",
+  "locked_rule": "OR",
+  "locked_rule_dev_mcc": {
+    "locked_rule": "OR",
+    "development_or_mcc": 0.15289415743128767,
+    "development_and_mcc": -0.050964719143762556,
+    "reason": "higher MCC on development group (ties toward OR)"
+  },
+  "or_scored": {
+    "name": "OR (n/p<10 OR sigma_cv>0.10)",
+    "tp": 3,
+    "fp": 10,
+    "fn": 0,
+    "tn": 14,
+    "precision": 0.23076923076923078,
+    "recall": 1.0,
+    "false_alarm_rate": 0.4166666666666667,
+    "mcc": 0.3668996928526714,
+    "degenerate": false,
+    "aggregate_bootstrap_ci": {
+      "precision": {
+        "bootstrap_mean": 0.2312442629824596,
+        "ci_lower": 0.0,
+        "ci_upper": 0.4666666666666667,
+        "n_valid_resamples": 1000
+      },
+      "recall": {
+        "bootstrap_mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 947
+      },
+      "false_alarm_rate": {
+        "bootstrap_mean": 0.4160516155917986,
+        "ci_lower": 0.22210144927536232,
+        "ci_upper": 0.6086956521739131,
+        "n_valid_resamples": 1000
+      },
+      "mcc": {
+        "bootstrap_mean": 0.3498310214894546,
+        "ci_lower": 0.0,
+        "ci_upper": 0.5897678246195885,
+        "n_valid_resamples": 1000
+      }
+    }
+  },
+  "and_scored": {
+    "name": "AND (n/p<10 AND sigma_cv>0.10)",
+    "tp": 0,
+    "fp": 0,
+    "fn": 3,
+    "tn": 24,
+    "precision": null,
+    "recall": 0.0,
+    "false_alarm_rate": 0.0,
+    "mcc": 0.0,
+    "degenerate": true,
+    "aggregate_bootstrap_ci": {
+      "precision": null,
+      "recall": {
+        "bootstrap_mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 947
+      },
+      "false_alarm_rate": {
+        "bootstrap_mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 1000
+      },
+      "mcc": {
+        "bootstrap_mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 1000
+      }
+    }
+  }
+}

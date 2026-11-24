@@ -1,0 +1,170 @@
+{
+  "analysis": "algebraic floor on within-dataset concordance (POST-HOC)",
+  "post_hoc": true,
+  "pre_registered": false,
+  "source_file": "study4_estimators_results.json",
+  "source_pre_registered_commit": "7cab9db",
+  "sigma_field": "sigma_R20",
+  "delta_g": 0.05,
+  "label": "poor_optimism",
+  "n_runs": 525,
+  "n_datasets": 25,
+  "stratification": "within_dataset",
+  "n_permutations": 400,
+  "permutation_seed": 0,
+  "n_bootstrap": 2000,
+  "bootstrap_seed": 0,
+  "observed": {
+    "cv_mean": {
+      "concordance": 0.8313793103448276,
+      "n_pairs": 1450,
+      "n_strata_used": 19,
+      "n_strata_excluded": 6,
+      "ci_low": 0.7693769406589616,
+      "ci_high": 0.887801655036286
+    },
+    "neg_s_test": {
+      "concordance": 0.8724137931034482,
+      "n_pairs": 1450,
+      "n_strata_used": 19,
+      "n_strata_excluded": 6,
+      "ci_low": 0.8406247471682847,
+      "ci_high": 0.9071691470682384
+    },
+    "sigma_R20": {
+      "concordance": 0.26482758620689656,
+      "n_pairs": 1450,
+      "n_strata_used": 19,
+      "n_strata_excluded": 6,
+      "ci_low": 0.17407991528807018,
+      "ci_high": 0.37056979538914
+    }
+  },
+  "permutation_null": {
+    "cv_mean": {
+      "mean": 0.8201840835738473,
+      "lo": 0.7769938650306748,
+      "hi": 0.8580827067669173,
+      "n_draws": 400,
+      "dropped": 0,
+      "excess_over_null": 0.011195226770980282,
+      "observed_inside_null_interval": true
+    },
+    "neg_s_test": {
+      "mean": 0.8621271898074784,
+      "lo": 0.8240521327014217,
+      "hi": 0.8937259923175416,
+      "n_draws": 400,
+      "dropped": 0,
+      "excess_over_null": 0.010286603295969865,
+      "observed_inside_null_interval": true
+    },
+    "sigma_R20": {
+      "mean": 0.25813575943360534,
+      "lo": 0.21352941176470588,
+      "hi": 0.30498177399756987,
+      "n_draws": 400,
+      "dropped": 0,
+      "excess_over_null": 0.006691826773291221,
+      "observed_inside_null_interval": true
+    }
+  },
+  "residualised": {
+    "sigma_cv_on_cv_mean": {
+      "concordance": 0.4482758620689655,
+      "n_pairs": 1450,
+      "n_strata_used": 19,
+      "estimator": "sigma_cv (R=1), as shipped"
+    },
+    "sigma_on_cv_mean": {
+      "concordance": 0.4496551724137931,
+      "n_pairs": 1450,
+      "n_strata_used": 19,
+      "ci_low": 0.38528014089249446,
+      "ci_high": 0.5337190584823998,
+      "raw_sigma_concordance": 0.26482758620689656
+    }
+  },
+  "between_dataset": {
+    "n_datasets": 25,
+    "spearman_sigma_cv_vs_poor_rate": 0.8113706188709995,
+    "spearman_sigma_cv_vs_n_train": -0.6664102070816172,
+    "spearman_poor_rate_vs_n_train": -0.3811802543784779,
+    "partial_controlling_n_train": 0.8085781673754001,
+    "interpretation": "dataset size does not explain the between-dataset association if the partial is close to the unadjusted correlation"
+  },
+  "sensitivity": {
+    "by_corruption_family": {
+      "clean": {
+        "rho_all": 0.6380258012627099,
+        "n_datasets": 25,
+        "n_estimable": 12,
+        "rho_estimable": 0.2693092507276208,
+        "n_runs": 75,
+        "positive_rate": 0.22666666666666666
+      },
+      "duplicates": {
+        "rho_all": 0.7555238006247561,
+        "n_datasets": 25,
+        "n_estimable": 18,
+        "rho_estimable": 0.42603520538553175,
+        "n_runs": 150,
+        "positive_rate": 0.44
+      },
+      "missing_values": {
+        "rho_all": 0.6136628912523908,
+        "n_datasets": 25,
+        "n_estimable": 12,
+        "rho_estimable": 0.43639249277009806,
+        "n_runs": 150,
+        "positive_rate": 0.20666666666666667
+      },
+      "outliers": {
+        "rho_all": 0.6001068280966357,
+        "n_datasets": 25,
+        "n_estimable": 10,
+        "rho_estimable": 0.23916405548229763,
+        "n_runs": 150,
+        "positive_rate": 0.18666666666666668
+      }
+    },
+    "by_delta_g": {
+      "0.025": {
+        "rho_all": 0.7413633141686446,
+        "n_datasets": 25,
+        "n_estimable": 22,
+        "rho_estimable": 0.6636485955471358,
+        "n_positive": 173
+      },
+      "0.05": {
+        "rho_all": 0.8113706188709995,
+        "n_datasets": 25,
+        "n_estimable": 19,
+        "rho_estimable": 0.6158019203998961,
+        "n_positive": 142
+      },
+      "0.075": {
+        "rho_all": 0.7121364580725472,
+        "n_datasets": 25,
+        "n_estimable": 15,
+        "rho_estimable": 0.5022472023339227,
+        "n_positive": 116
+      },
+      "0.1": {
+        "rho_all": 0.7227755404562018,
+        "n_datasets": 25,
+        "n_estimable": 15,
+        "rho_estimable": 0.5430364606919974,
+        "n_positive": 102
+      },
+      "0.15": {
+        "rho_all": 0.6755400377877008,
+        "n_datasets": 25,
+        "n_estimable": 12,
+        "rho_estimable": 0.6102530049577598,
+        "n_positive": 72
+      }
+    },
+    "anchor_delta_g": 0.05
+  }
+}

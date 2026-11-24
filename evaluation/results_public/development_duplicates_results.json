@@ -1,0 +1,917 @@
+{
+ "runs": [
+  {
+   "dataset": "molecular_biology_promoters",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.27,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.961,
+    "sigma_cv": 0.03544775324158842,
+    "s_test": 0.9256198347107438,
+    "G": 0.03538016528925614,
+    "n": 97,
+    "p": 57,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.8915555555555554,
+    "sigma_cv": 0.025062883875327464,
+    "s_test": 0.9090909090909091,
+    "G": -0.017535353535353626,
+    "n": 97,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "molecular_biology_promoters",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.23,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9444444444444444,
+    "sigma_cv": 0.05879447357921312,
+    "s_test": 0.8760330578512397,
+    "G": 0.06841138659320467,
+    "n": 97,
+    "p": 57,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9133333333333334,
+    "sigma_cv": 0.0427813851292854,
+    "s_test": 0.9008264462809917,
+    "G": 0.012506887052341709,
+    "n": 97,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "molecular_biology_promoters",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.23,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9736666666666667,
+    "sigma_cv": 0.02404214406740848,
+    "s_test": 1.0,
+    "G": -0.02633333333333332,
+    "n": 97,
+    "p": 57,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.8613333333333333,
+    "sigma_cv": 0.0706338148656091,
+    "s_test": 1.0,
+    "G": -0.13866666666666672,
+    "n": 97,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "molecular_biology_promoters",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.24,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.978099173553719,
+    "sigma_cv": 0.03680676861829401,
+    "s_test": 0.8966942148760331,
+    "G": 0.08140495867768593,
+    "n": 113,
+    "p": 57,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9209366391184574,
+    "sigma_cv": 0.07820125870467237,
+    "s_test": 0.9008264462809916,
+    "G": 0.020110192837465735,
+    "n": 113,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "molecular_biology_promoters",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.24,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9799586776859505,
+    "sigma_cv": 0.018531802476438965,
+    "s_test": 0.8842975206611571,
+    "G": 0.09566115702479339,
+    "n": 113,
+    "p": 57,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9552341597796143,
+    "sigma_cv": 0.04213502900259622,
+    "s_test": 0.9173553719008264,
+    "G": 0.037878787878787956,
+    "n": 113,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "molecular_biology_promoters",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.23,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9712121212121211,
+    "sigma_cv": 0.034048795536733706,
+    "s_test": 1.0,
+    "G": -0.028787878787878918,
+    "n": 113,
+    "p": 57,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9239669421487603,
+    "sigma_cv": 0.03215818364753604,
+    "s_test": 1.0,
+    "G": -0.0760330578512397,
+    "n": 113,
+    "n_test_pos": 11,
+    "n_test_neg": 11,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "appendicitis",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.25,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.8866666666666667,
+    "sigma_cv": 0.09338586691190959,
+    "s_test": 0.8472222222222222,
+    "G": 0.039444444444444504,
+    "n": 97,
+    "p": 7,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.820625,
+    "sigma_cv": 0.14121865433905442,
+    "s_test": 0.986111111111111,
+    "G": -0.165486111111111,
+    "n": 97,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "appendicitis",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.21,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.8496874999999999,
+    "sigma_cv": 0.12464010690784894,
+    "s_test": 0.9722222222222223,
+    "G": -0.12253472222222239,
+    "n": 97,
+    "p": 7,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.8035416666666666,
+    "sigma_cv": 0.1394620119522796,
+    "s_test": 0.9722222222222222,
+    "G": -0.1686805555555556,
+    "n": 97,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "appendicitis",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.22,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.91875,
+    "sigma_cv": 0.090705782960625,
+    "s_test": 0.8055555555555556,
+    "G": 0.11319444444444438,
+    "n": 97,
+    "p": 7,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.840625,
+    "sigma_cv": 0.1592421832199831,
+    "s_test": 0.9166666666666667,
+    "G": -0.07604166666666679,
+    "n": 97,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "appendicitis",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.22,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9095915032679738,
+    "sigma_cv": 0.0667191998741816,
+    "s_test": 0.8472222222222222,
+    "G": 0.06236928104575157,
+    "n": 113,
+    "p": 7,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.81218954248366,
+    "sigma_cv": 0.13777134012195236,
+    "s_test": 0.9722222222222222,
+    "G": -0.16003267973856217,
+    "n": 113,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "appendicitis",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.22,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.8749122807017544,
+    "sigma_cv": 0.12728195617648744,
+    "s_test": 0.9722222222222222,
+    "G": -0.09730994152046779,
+    "n": 113,
+    "p": 7,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.8651754385964912,
+    "sigma_cv": 0.15457262937905533,
+    "s_test": 0.9722222222222222,
+    "G": -0.10704678362573106,
+    "n": 113,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "appendicitis",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.24,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9269444444444443,
+    "sigma_cv": 0.06996747480697153,
+    "s_test": 0.8055555555555556,
+    "G": 0.12138888888888877,
+    "n": 113,
+    "p": 7,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.7744444444444445,
+    "sigma_cv": 0.19374278162579056,
+    "s_test": 0.9166666666666667,
+    "G": -0.14222222222222225,
+    "n": 113,
+    "n_test_pos": 4,
+    "n_test_neg": 18,
+    "n_test": 22,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "biomed",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.24,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9393452380952383,
+    "sigma_cv": 0.03297441760749216,
+    "s_test": 0.8975308641975309,
+    "G": 0.04181437389770737,
+    "n": 192,
+    "p": 5,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.931547619047619,
+    "sigma_cv": 0.04134655949241012,
+    "s_test": 0.9481481481481482,
+    "G": -0.016600529100529227,
+    "n": 192,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "biomed",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.22,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9382874049027896,
+    "sigma_cv": 0.048867951718280886,
+    "s_test": 0.9950617283950617,
+    "G": -0.05677432349227207,
+    "n": 192,
+    "p": 5,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9010211327134403,
+    "sigma_cv": 0.07297660923781568,
+    "s_test": 0.9901234567901235,
+    "G": -0.08910232407668317,
+    "n": 192,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "biomed",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.23,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9604920634920635,
+    "sigma_cv": 0.026345569528132315,
+    "s_test": 0.9395061728395062,
+    "G": 0.020985890652557293,
+    "n": 192,
+    "p": 5,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9365476190476191,
+    "sigma_cv": 0.04623279848039486,
+    "s_test": 0.8962962962962963,
+    "G": 0.040251322751322816,
+    "n": 192,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "biomed",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.23,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9655134099616858,
+    "sigma_cv": 0.035956373739153995,
+    "s_test": 0.9098765432098765,
+    "G": 0.05563686675180923,
+    "n": 225,
+    "p": 5,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9122241379310345,
+    "sigma_cv": 0.026661579644266766,
+    "s_test": 0.9407407407407408,
+    "G": -0.02851660280970625,
+    "n": 225,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "biomed",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.23,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9804006085192698,
+    "sigma_cv": 0.020732576304296303,
+    "s_test": 0.9851851851851852,
+    "G": -0.004784576665915363,
+    "n": 225,
+    "p": 5,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9038104897131266,
+    "sigma_cv": 0.03725687372180028,
+    "s_test": 0.9876543209876544,
+    "G": -0.08384383127452777,
+    "n": 225,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "biomed",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.23,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.973257662835249,
+    "sigma_cv": 0.022544504574589865,
+    "s_test": 0.9555555555555556,
+    "G": 0.017702107279693347,
+    "n": 225,
+    "p": 5,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9464463601532568,
+    "sigma_cv": 0.03910396474048955,
+    "s_test": 0.8987654320987655,
+    "G": 0.04768092805449131,
+    "n": 225,
+    "n_test_pos": 27,
+    "n_test_neg": 15,
+    "n_test": 42,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "irish",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.25,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 1.0,
+    "sigma_cv": 0.0,
+    "s_test": 1.0,
+    "G": 0.0,
+    "n": 460,
+    "p": 5,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.8491755141080823,
+    "sigma_cv": 0.03585429000000113,
+    "s_test": 0.8218344155844156,
+    "G": 0.02734109852366673,
+    "n": 460,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "irish",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.22,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 1.0,
+    "sigma_cv": 0.0,
+    "s_test": 1.0,
+    "G": 0.0,
+    "n": 460,
+    "p": 5,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.8397142857142856,
+    "sigma_cv": 0.03657316464133353,
+    "s_test": 0.8948863636363636,
+    "G": -0.05517207792207801,
+    "n": 460,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "irish",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.22,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 1.0,
+    "sigma_cv": 0.0,
+    "s_test": 1.0,
+    "G": 0.0,
+    "n": 460,
+    "p": 5,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.8429492697641908,
+    "sigma_cv": 0.06290522625480781,
+    "s_test": 0.851461038961039,
+    "G": -0.008511769196848151,
+    "n": 460,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "irish",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.22,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 1.0,
+    "sigma_cv": 0.0,
+    "s_test": 1.0,
+    "G": 0.0,
+    "n": 540,
+    "p": 5,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.8362540208502887,
+    "sigma_cv": 0.037588413117977226,
+    "s_test": 0.8238636363636364,
+    "G": 0.012390384486652306,
+    "n": 540,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "irish",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.22,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 1.0,
+    "sigma_cv": 0.0,
+    "s_test": 1.0,
+    "G": 0.0,
+    "n": 540,
+    "p": 5,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.8288674039840329,
+    "sigma_cv": 0.04294861143811207,
+    "s_test": 0.8920454545454546,
+    "G": -0.06317805056142167,
+    "n": 540,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "irish",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.23,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 1.0,
+    "sigma_cv": 0.0,
+    "s_test": 1.0,
+    "G": 0.0,
+    "n": 540,
+    "p": 5,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.830972101289376,
+    "sigma_cv": 0.025887296317966678,
+    "s_test": 0.8502435064935064,
+    "G": -0.0192714052041304,
+    "n": 540,
+    "n_test_pos": 44,
+    "n_test_neg": 56,
+    "n_test": 100,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  }
+ ],
+ "_redistribution_note": "Per-row arrays removed. The source datasets do not uniformly permit redistribution of row-level content, and one carries an explicit restriction. Summary counts retained; all diagnostics, scores and labels are intact, so every scoring module reproduces its published output from this file."
+}

@@ -1,0 +1,392 @@
+{
+  "group": "final_evaluation_outliers",
+  "delta_g": 0.05,
+  "np_threshold": 10,
+  "sigma_cv_threshold": 0.1,
+  "n_runs": 18,
+  "n_poor": 2,
+  "np_diagnostic": {
+    "name": "n/p < 10",
+    "tp": 1,
+    "fp": 5,
+    "fn": 1,
+    "tn": 11,
+    "precision": 0.16666666666666666,
+    "recall": 0.5,
+    "false_alarm_rate": 0.3125,
+    "mcc": 0.125,
+    "degenerate": false,
+    "aggregate_bootstrap_ci": {
+      "precision": {
+        "bootstrap_mean": 0.17481087801087802,
+        "ci_lower": 0.0,
+        "ci_upper": 0.5017857142857126,
+        "n_valid_resamples": 1000
+      },
+      "recall": {
+        "bootstrap_mean": 0.5002343030500027,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 879
+      },
+      "false_alarm_rate": {
+        "bootstrap_mean": 0.31095823065823064,
+        "ci_lower": 0.1111111111111111,
+        "ci_upper": 0.5557291666666665,
+        "n_valid_resamples": 1000
+      },
+      "mcc": {
+        "bootstrap_mean": 0.11785253241284409,
+        "ci_lower": -0.2857142857142857,
+        "ci_upper": 0.570087712549569,
+        "n_valid_resamples": 1000
+      }
+    }
+  },
+  "sigma_cv_diagnostic": {
+    "name": "sigma_cv > 0.1",
+    "tp": 0,
+    "fp": 5,
+    "fn": 2,
+    "tn": 11,
+    "precision": 0.0,
+    "recall": 0.0,
+    "false_alarm_rate": 0.3125,
+    "mcc": -0.21926450482675733,
+    "degenerate": false,
+    "aggregate_bootstrap_ci": {
+      "precision": {
+        "bootstrap_mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 995
+      },
+      "recall": {
+        "bootstrap_mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 879
+      },
+      "false_alarm_rate": {
+        "bootstrap_mean": 0.30716722085104436,
+        "ci_lower": 0.07142857142857142,
+        "ci_upper": 0.5555555555555556,
+        "n_valid_resamples": 1000
+      },
+      "mcc": {
+        "bootstrap_mean": -0.19790629869093862,
+        "ci_lower": -0.4006600358177805,
+        "ci_upper": 0.0,
+        "n_valid_resamples": 1000
+      }
+    }
+  },
+  "per_run": [
+    {
+      "dataset": "labor",
+      "seed": 1,
+      "corruption_type": "outliers",
+      "rate": 0.15,
+      "s_test": 0.875,
+      "G": 0.057222222222222285,
+      "poor": 1,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.08225224677031887,
+      "ci": {
+        "ci_lower": 0.625,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 2,
+      "corruption_type": "outliers",
+      "rate": 0.15,
+      "s_test": 0.953125,
+      "G": -0.025347222222222188,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.16149379837498481,
+      "ci": {
+        "ci_lower": 0.81171875,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 3,
+      "corruption_type": "outliers",
+      "rate": 0.15,
+      "s_test": 0.96875,
+      "G": -0.03763888888888878,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.08264530787395159,
+      "ci": {
+        "ci_lower": 0.859375,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 1,
+      "corruption_type": "outliers",
+      "rate": 0.35,
+      "s_test": 0.984375,
+      "G": -0.264375,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.13842143557686612,
+      "ci": {
+        "ci_lower": 0.90625,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 2,
+      "corruption_type": "outliers",
+      "rate": 0.35,
+      "s_test": 0.90625,
+      "G": -0.06847222222222216,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.09140535143855054,
+      "ci": {
+        "ci_lower": 0.702734375,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "labor",
+      "seed": 3,
+      "corruption_type": "outliers",
+      "rate": 0.35,
+      "s_test": 0.8125,
+      "G": -0.10861111111111099,
+      "poor": 0,
+      "n": 45,
+      "p": 16,
+      "sigma_cv": 0.15621882405028636,
+      "ci": {
+        "ci_lower": 0.4375,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 1,
+      "corruption_type": "outliers",
+      "rate": 0.15,
+      "s_test": 0.8905325443786982,
+      "G": 0.0027401828940291084,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.04642865316494487,
+      "ci": {
+        "ci_lower": 0.7455621301775147,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 2,
+      "corruption_type": "outliers",
+      "rate": 0.15,
+      "s_test": 1.0,
+      "G": -0.15427272727272734,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.03495067362407862,
+      "ci": {
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 3,
+      "corruption_type": "outliers",
+      "rate": 0.15,
+      "s_test": 0.8994082840236686,
+      "G": -0.11568101129639585,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.1157264157648768,
+      "ci": {
+        "ci_lower": 0.7631656804733729,
+        "ci_upper": 1.0,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 1,
+      "corruption_type": "outliers",
+      "rate": 0.35,
+      "s_test": 0.636094674556213,
+      "G": -0.07173103819257665,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.1017890583348437,
+      "ci": {
+        "ci_lower": 0.4201183431952663,
+        "ci_upper": 0.8520710059171597,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 2,
+      "corruption_type": "outliers",
+      "rate": 0.35,
+      "s_test": 0.6449704142011834,
+      "G": -0.0913340505648198,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.05065582292978978,
+      "ci": {
+        "ci_lower": 0.40532544378698226,
+        "ci_upper": 0.840310650887574,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "mux6",
+      "seed": 3,
+      "corruption_type": "outliers",
+      "rate": 0.35,
+      "s_test": 0.7928994082840236,
+      "G": -0.18253577192038728,
+      "poor": 0,
+      "n": 102,
+      "p": 6,
+      "sigma_cv": 0.0844858049595873,
+      "ci": {
+        "ci_lower": 0.5976331360946746,
+        "ci_upper": 0.9526627218934911,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 1,
+      "corruption_type": "outliers",
+      "rate": 0.15,
+      "s_test": 0.6226890756302521,
+      "G": -0.058991757622589236,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.0452016918457602,
+      "ci": {
+        "ci_lower": 0.4777310924369748,
+        "ci_upper": 0.7571533613445378,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 2,
+      "corruption_type": "outliers",
+      "rate": 0.15,
+      "s_test": 0.5957983193277311,
+      "G": -0.05887987378859594,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.05161575191071431,
+      "ci": {
+        "ci_lower": 0.47894957983193276,
+        "ci_upper": 0.7109243697478991,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 3,
+      "corruption_type": "outliers",
+      "rate": 0.15,
+      "s_test": 0.6798319327731093,
+      "G": -0.09405835130987272,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.017029383920100616,
+      "ci": {
+        "ci_lower": 0.5424054621848741,
+        "ci_upper": 0.8071638655462184,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 1,
+      "corruption_type": "outliers",
+      "rate": 0.35,
+      "s_test": 0.6516806722689076,
+      "G": -0.06590252959421317,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.08653472178270423,
+      "ci": {
+        "ci_lower": 0.5104831932773108,
+        "ci_upper": 0.7769117647058823,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 2,
+      "corruption_type": "outliers",
+      "rate": 0.35,
+      "s_test": 0.6382352941176471,
+      "G": -0.010895392639814538,
+      "poor": 0,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.07806691399115913,
+      "ci": {
+        "ci_lower": 0.507531512605042,
+        "ci_upper": 0.7584033613445378,
+        "n_valid_resamples": 1000
+      }
+    },
+    {
+      "dataset": "bupa",
+      "seed": 3,
+      "corruption_type": "outliers",
+      "rate": 0.35,
+      "s_test": 0.5168067226890756,
+      "G": 0.08600298356890657,
+      "poor": 1,
+      "n": 276,
+      "p": 5,
+      "sigma_cv": 0.04739809831489059,
+      "ci": {
+        "ci_lower": 0.36972689075630255,
+        "ci_upper": 0.6655462184873949,
+        "n_valid_resamples": 1000
+      }
+    }
+  ]
+}

@@ -1,0 +1,1083 @@
+{
+  "source": "study2_A",
+  "label": "poor_optimism",
+  "pre_registered": false,
+  "n_runs": 147,
+  "n_datasets": 7,
+  "n_datasets_estimable": 5,
+  "estimable_datasets": [
+    "appendicitis",
+    "biomed",
+    "bupa",
+    "labor",
+    "molecular_biology_promoters"
+  ],
+  "n_poor": 22,
+  "families": [
+    "clean",
+    "duplicates",
+    "missing_values",
+    "outliers"
+  ],
+  "bootstrap": {
+    "unit": "source dataset (cluster)",
+    "n_resamples": 2000,
+    "seed": 0
+  },
+  "diagnostics": {
+    "sigma_cv": {
+      "stratifications": {
+        "pooled": {
+          "concordance": 0.44945454545454544,
+          "n_pairs": 2750,
+          "n_strata_used": 1,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.27051594819118185,
+          "ci_high": 0.6584224598930482,
+          "bootstrap_median": 0.4346676602086438,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_family": {
+          "concordance": 0.5760709010339734,
+          "n_pairs": 677,
+          "n_strata_used": 4,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.3420738974970203,
+          "ci_high": 0.8130599465779215,
+          "bootstrap_median": 0.5656494647988443,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset": {
+          "concordance": 0.24566473988439305,
+          "n_pairs": 346,
+          "n_strata_used": 5,
+          "n_strata_excluded": 2,
+          "n_undefined_values": 0,
+          "ci_low": 0.15816326530612246,
+          "ci_high": 0.3474025974025974,
+          "bootstrap_median": 0.24497170002021426,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family": {
+          "concordance": 0.3050847457627119,
+          "n_pairs": 59,
+          "n_strata_used": 10,
+          "n_strata_excluded": 18,
+          "n_undefined_values": 0,
+          "ci_low": 0.11538461538461539,
+          "ci_high": 0.5769230769230769,
+          "bootstrap_median": 0.3050847457627119,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family_rate": {
+          "concordance": 0.2692307692307692,
+          "n_pairs": 26,
+          "n_strata_used": 13,
+          "n_strata_excluded": 36,
+          "n_undefined_values": 0,
+          "ci_low": 0.07692307692307693,
+          "ci_high": 0.5,
+          "bootstrap_median": 0.2647058823529412,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        }
+      },
+      "per_family": {
+        "clean": {
+          "pooled": {
+            "concordance": 0.4,
+            "n_pairs": 20,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.0,
+            "n_pairs": 2,
+            "n_strata_used": 1,
+            "n_strata_excluded": 6,
+            "n_undefined_values": 0
+          }
+        },
+        "duplicates": {
+          "pooled": {
+            "concordance": 0.7627551020408163,
+            "n_pairs": 392,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 28,
+            "n_strata_used": 4,
+            "n_strata_excluded": 3,
+            "n_undefined_values": 0
+          }
+        },
+        "missing_values": {
+          "pooled": {
+            "concordance": 0.25405405405405407,
+            "n_pairs": 185,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.10526315789473684,
+            "n_pairs": 19,
+            "n_strata_used": 3,
+            "n_strata_excluded": 4,
+            "n_undefined_values": 0
+          }
+        },
+        "outliers": {
+          "pooled": {
+            "concordance": 0.45,
+            "n_pairs": 80,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.2,
+            "n_pairs": 10,
+            "n_strata_used": 2,
+            "n_strata_excluded": 5,
+            "n_undefined_values": 0
+          }
+        }
+      },
+      "between_dataset_ordering": {
+        "spearman_rho": 0.6546536707079771,
+        "n_datasets": 7
+      },
+      "within_dataset_spread": {
+        "mean_distinct_values_per_dataset": 19.0,
+        "within_dataset_variance_share": 0.5593961558215339
+      }
+    },
+    "evalml_cov": {
+      "stratifications": {
+        "pooled": {
+          "concordance": 0.43636363636363634,
+          "n_pairs": 2750,
+          "n_strata_used": 1,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.2385204081632653,
+          "ci_high": 0.6449904892757808,
+          "bootstrap_median": 0.42197545295149036,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_family": {
+          "concordance": 0.5849335302806499,
+          "n_pairs": 677,
+          "n_strata_used": 4,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.3502991113778483,
+          "ci_high": 0.8284437780305782,
+          "bootstrap_median": 0.5691699604743083,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset": {
+          "concordance": 0.21098265895953758,
+          "n_pairs": 346,
+          "n_strata_used": 5,
+          "n_strata_excluded": 2,
+          "n_undefined_values": 0,
+          "ci_low": 0.11811023622047244,
+          "ci_high": 0.3240223463687151,
+          "bootstrap_median": 0.20973782771535582,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family": {
+          "concordance": 0.2711864406779661,
+          "n_pairs": 59,
+          "n_strata_used": 10,
+          "n_strata_excluded": 18,
+          "n_undefined_values": 0,
+          "ci_low": 0.09615384615384616,
+          "ci_high": 0.500320512820511,
+          "bootstrap_median": 0.2708333333333333,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family_rate": {
+          "concordance": 0.2692307692307692,
+          "n_pairs": 26,
+          "n_strata_used": 13,
+          "n_strata_excluded": 36,
+          "n_undefined_values": 0,
+          "ci_low": 0.07692307692307693,
+          "ci_high": 0.5,
+          "bootstrap_median": 0.2647058823529412,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        }
+      },
+      "per_family": {
+        "clean": {
+          "pooled": {
+            "concordance": 0.4,
+            "n_pairs": 20,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.0,
+            "n_pairs": 2,
+            "n_strata_used": 1,
+            "n_strata_excluded": 6,
+            "n_undefined_values": 0
+          }
+        },
+        "duplicates": {
+          "pooled": {
+            "concordance": 0.7933673469387755,
+            "n_pairs": 392,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 28,
+            "n_strata_used": 4,
+            "n_strata_excluded": 3,
+            "n_undefined_values": 0
+          }
+        },
+        "missing_values": {
+          "pooled": {
+            "concordance": 0.21081081081081082,
+            "n_pairs": 185,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.05263157894736842,
+            "n_pairs": 19,
+            "n_strata_used": 3,
+            "n_strata_excluded": 4,
+            "n_undefined_values": 0
+          }
+        },
+        "outliers": {
+          "pooled": {
+            "concordance": 0.475,
+            "n_pairs": 80,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.1,
+            "n_pairs": 10,
+            "n_strata_used": 2,
+            "n_strata_excluded": 5,
+            "n_undefined_values": 0
+          }
+        }
+      },
+      "between_dataset_ordering": {
+        "spearman_rho": 0.5637295497763136,
+        "n_datasets": 7
+      },
+      "within_dataset_spread": {
+        "mean_distinct_values_per_dataset": 19.0,
+        "within_dataset_variance_share": 0.6145785322123517
+      }
+    },
+    "evalml_range": {
+      "stratifications": {
+        "pooled": {
+          "concordance": 0.45145454545454544,
+          "n_pairs": 2750,
+          "n_strata_used": 1,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.2625592302964435,
+          "ci_high": 0.6581583969465649,
+          "bootstrap_median": 0.4357255106767116,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_family": {
+          "concordance": 0.5864106351550961,
+          "n_pairs": 677,
+          "n_strata_used": 4,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.3682638873315243,
+          "ci_high": 0.831858407079646,
+          "bootstrap_median": 0.5786163522012578,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset": {
+          "concordance": 0.24421965317919075,
+          "n_pairs": 346,
+          "n_strata_used": 5,
+          "n_strata_excluded": 2,
+          "n_undefined_values": 0,
+          "ci_low": 0.14795918367346939,
+          "ci_high": 0.3625,
+          "bootstrap_median": 0.24324324324324326,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family": {
+          "concordance": 0.3559322033898305,
+          "n_pairs": 59,
+          "n_strata_used": 10,
+          "n_strata_excluded": 18,
+          "n_undefined_values": 0,
+          "ci_low": 0.18181818181818182,
+          "ci_high": 0.6129032258064516,
+          "bootstrap_median": 0.3559322033898305,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family_rate": {
+          "concordance": 0.34615384615384615,
+          "n_pairs": 26,
+          "n_strata_used": 13,
+          "n_strata_excluded": 36,
+          "n_undefined_values": 0,
+          "ci_low": 0.20573529411764707,
+          "ci_high": 0.5454545454545454,
+          "bootstrap_median": 0.34210526315789475,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        }
+      },
+      "per_family": {
+        "clean": {
+          "pooled": {
+            "concordance": 0.4,
+            "n_pairs": 20,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.0,
+            "n_pairs": 2,
+            "n_strata_used": 1,
+            "n_strata_excluded": 6,
+            "n_undefined_values": 0
+          }
+        },
+        "duplicates": {
+          "pooled": {
+            "concordance": 0.7729591836734694,
+            "n_pairs": 392,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5357142857142857,
+            "n_pairs": 28,
+            "n_strata_used": 4,
+            "n_strata_excluded": 3,
+            "n_undefined_values": 0
+          }
+        },
+        "missing_values": {
+          "pooled": {
+            "concordance": 0.24864864864864866,
+            "n_pairs": 185,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.10526315789473684,
+            "n_pairs": 19,
+            "n_strata_used": 3,
+            "n_strata_excluded": 4,
+            "n_undefined_values": 0
+          }
+        },
+        "outliers": {
+          "pooled": {
+            "concordance": 0.5,
+            "n_pairs": 80,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.4,
+            "n_pairs": 10,
+            "n_strata_used": 2,
+            "n_strata_excluded": 5,
+            "n_undefined_values": 0
+          }
+        }
+      },
+      "between_dataset_ordering": {
+        "spearman_rho": 0.6546536707079771,
+        "n_datasets": 7
+      },
+      "within_dataset_spread": {
+        "mean_distinct_values_per_dataset": 18.571428571428573,
+        "within_dataset_variance_share": 0.5727439141534962
+      }
+    },
+    "fold_contamination": {
+      "stratifications": {
+        "pooled": {
+          "concordance": 0.6396363636363637,
+          "n_pairs": 2750,
+          "n_strata_used": 1,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.4470084690511554,
+          "ci_high": 0.8023168750441476,
+          "bootstrap_median": 0.6491596638655462,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_family": {
+          "concordance": 0.3892171344165436,
+          "n_pairs": 677,
+          "n_strata_used": 4,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.22628951747088186,
+          "ci_high": 0.5494713678672601,
+          "bootstrap_median": 0.39955676496040565,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset": {
+          "concordance": 0.7398843930635838,
+          "n_pairs": 346,
+          "n_strata_used": 5,
+          "n_strata_excluded": 2,
+          "n_undefined_values": 0,
+          "ci_low": 0.5548780487804879,
+          "ci_high": 0.8947368421052632,
+          "bootstrap_median": 0.7445887445887446,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family": {
+          "concordance": 0.559322033898305,
+          "n_pairs": 59,
+          "n_strata_used": 10,
+          "n_strata_excluded": 18,
+          "n_undefined_values": 0,
+          "ci_low": 0.5,
+          "ci_high": 0.7,
+          "bootstrap_median": 0.5564516129032258,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family_rate": {
+          "concordance": 0.4230769230769231,
+          "n_pairs": 26,
+          "n_strata_used": 13,
+          "n_strata_excluded": 36,
+          "n_undefined_values": 0,
+          "ci_low": 0.35714285714285715,
+          "ci_high": 0.625,
+          "bootstrap_median": 0.4166666666666667,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        }
+      },
+      "per_family": {
+        "clean": {
+          "pooled": {
+            "concordance": 0.275,
+            "n_pairs": 20,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 2,
+            "n_strata_used": 1,
+            "n_strata_excluded": 6,
+            "n_undefined_values": 0
+          }
+        },
+        "duplicates": {
+          "pooled": {
+            "concordance": 0.3852040816326531,
+            "n_pairs": 392,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.6428571428571429,
+            "n_pairs": 28,
+            "n_strata_used": 4,
+            "n_strata_excluded": 3,
+            "n_undefined_values": 0
+          }
+        },
+        "missing_values": {
+          "pooled": {
+            "concordance": 0.40540540540540543,
+            "n_pairs": 185,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 19,
+            "n_strata_used": 3,
+            "n_strata_excluded": 4,
+            "n_undefined_values": 0
+          }
+        },
+        "outliers": {
+          "pooled": {
+            "concordance": 0.4,
+            "n_pairs": 80,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.45,
+            "n_pairs": 10,
+            "n_strata_used": 2,
+            "n_strata_excluded": 5,
+            "n_undefined_values": 0
+          }
+        }
+      },
+      "between_dataset_ordering": {
+        "spearman_rho": -0.8365019125713041,
+        "n_datasets": 7
+      },
+      "within_dataset_spread": {
+        "mean_distinct_values_per_dataset": 9.571428571428571,
+        "within_dataset_variance_share": 0.8161717336801391
+      }
+    },
+    "epv": {
+      "stratifications": {
+        "pooled": {
+          "concordance": 0.562,
+          "n_pairs": 2750,
+          "n_strata_used": 1,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.26647414271006575,
+          "ci_high": 0.8117615467239527,
+          "bootstrap_median": 0.5347540983606557,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_family": {
+          "concordance": 0.604135893648449,
+          "n_pairs": 677,
+          "n_strata_used": 4,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.33668452072616883,
+          "ci_high": 0.8352791305916303,
+          "bootstrap_median": 0.5966547971046747,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset": {
+          "concordance": 0.273121387283237,
+          "n_pairs": 346,
+          "n_strata_used": 5,
+          "n_strata_excluded": 2,
+          "n_undefined_values": 0,
+          "ci_low": 0.11705250620546082,
+          "ci_high": 0.4479166666666667,
+          "bootstrap_median": 0.2737430167597765,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family": {
+          "concordance": 0.423728813559322,
+          "n_pairs": 59,
+          "n_strata_used": 10,
+          "n_strata_excluded": 18,
+          "n_undefined_values": 0,
+          "ci_low": 0.3771767381416504,
+          "ci_high": 0.4880952380952381,
+          "bootstrap_median": 0.423728813559322,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family_rate": {
+          "concordance": 0.5576923076923077,
+          "n_pairs": 26,
+          "n_strata_used": 13,
+          "n_strata_excluded": 36,
+          "n_undefined_values": 0,
+          "ci_low": 0.4090198863636364,
+          "ci_high": 0.75,
+          "bootstrap_median": 0.5576923076923077,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        }
+      },
+      "per_family": {
+        "clean": {
+          "pooled": {
+            "concordance": 0.95,
+            "n_pairs": 20,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 2,
+            "n_strata_used": 1,
+            "n_strata_excluded": 6,
+            "n_undefined_values": 0
+          }
+        },
+        "duplicates": {
+          "pooled": {
+            "concordance": 0.5038265306122449,
+            "n_pairs": 392,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.3392857142857143,
+            "n_pairs": 28,
+            "n_strata_used": 4,
+            "n_strata_excluded": 3,
+            "n_undefined_values": 0
+          }
+        },
+        "missing_values": {
+          "pooled": {
+            "concordance": 0.8243243243243243,
+            "n_pairs": 185,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 19,
+            "n_strata_used": 3,
+            "n_strata_excluded": 4,
+            "n_undefined_values": 0
+          }
+        },
+        "outliers": {
+          "pooled": {
+            "concordance": 0.5,
+            "n_pairs": 80,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 10,
+            "n_strata_used": 2,
+            "n_strata_excluded": 5,
+            "n_undefined_values": 0
+          }
+        }
+      },
+      "between_dataset_ordering": {
+        "spearman_rho": 0.363696483726654,
+        "n_datasets": 7
+      },
+      "within_dataset_spread": {
+        "mean_distinct_values_per_dataset": 6.285714285714286,
+        "within_dataset_variance_share": 0.026044469746413175
+      }
+    },
+    "n_over_p": {
+      "stratifications": {
+        "pooled": {
+          "concordance": 0.5752727272727273,
+          "n_pairs": 2750,
+          "n_strata_used": 1,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.2775227009602506,
+          "ci_high": 0.807733619763695,
+          "bootstrap_median": 0.5525946704067322,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_family": {
+          "concordance": 0.6019202363367799,
+          "n_pairs": 677,
+          "n_strata_used": 4,
+          "n_strata_excluded": 0,
+          "n_undefined_values": 0,
+          "ci_low": 0.33270585924864843,
+          "ci_high": 0.8280260093786885,
+          "bootstrap_median": 0.592391304347826,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset": {
+          "concordance": 0.24855491329479767,
+          "n_pairs": 346,
+          "n_strata_used": 5,
+          "n_strata_excluded": 2,
+          "n_undefined_values": 0,
+          "ci_low": 0.09539473684210527,
+          "ci_high": 0.4342105263157895,
+          "bootstrap_median": 0.24493927125506074,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family": {
+          "concordance": 0.3983050847457627,
+          "n_pairs": 59,
+          "n_strata_used": 10,
+          "n_strata_excluded": 18,
+          "n_undefined_values": 0,
+          "ci_low": 0.3333333333333333,
+          "ci_high": 0.4375,
+          "bootstrap_median": 0.4,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        },
+        "within_dataset_family_rate": {
+          "concordance": 0.5,
+          "n_pairs": 26,
+          "n_strata_used": 13,
+          "n_strata_excluded": 36,
+          "n_undefined_values": 0,
+          "ci_low": 0.5,
+          "ci_high": 0.5,
+          "bootstrap_median": 0.5,
+          "n_valid_resamples": 2000,
+          "n_clusters": 7
+        }
+      },
+      "per_family": {
+        "clean": {
+          "pooled": {
+            "concordance": 0.95,
+            "n_pairs": 20,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 2,
+            "n_strata_used": 1,
+            "n_strata_excluded": 6,
+            "n_undefined_values": 0
+          }
+        },
+        "duplicates": {
+          "pooled": {
+            "concordance": 0.5,
+            "n_pairs": 392,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.2857142857142857,
+            "n_pairs": 28,
+            "n_strata_used": 4,
+            "n_strata_excluded": 3,
+            "n_undefined_values": 0
+          }
+        },
+        "missing_values": {
+          "pooled": {
+            "concordance": 0.8243243243243243,
+            "n_pairs": 185,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 19,
+            "n_strata_used": 3,
+            "n_strata_excluded": 4,
+            "n_undefined_values": 0
+          }
+        },
+        "outliers": {
+          "pooled": {
+            "concordance": 0.5,
+            "n_pairs": 80,
+            "n_strata_used": 1,
+            "n_strata_excluded": 0,
+            "n_undefined_values": 0
+          },
+          "within_dataset": {
+            "concordance": 0.5,
+            "n_pairs": 10,
+            "n_strata_used": 2,
+            "n_strata_excluded": 5,
+            "n_undefined_values": 0
+          }
+        }
+      },
+      "between_dataset_ordering": {
+        "spearman_rho": 0.363696483726654,
+        "n_datasets": 7
+      },
+      "within_dataset_spread": {
+        "mean_distinct_values_per_dataset": 3.0,
+        "within_dataset_variance_share": 0.028072876419932197
+      }
+    }
+  },
+  "outcome_table": [
+    {
+      "dataset": "appendicitis",
+      "family": "clean",
+      "n_runs": 3,
+      "n_poor": 0,
+      "n_not_poor": 3,
+      "estimable": false
+    },
+    {
+      "dataset": "appendicitis",
+      "family": "duplicates",
+      "n_runs": 6,
+      "n_poor": 3,
+      "n_not_poor": 3,
+      "estimable": true
+    },
+    {
+      "dataset": "appendicitis",
+      "family": "missing_values",
+      "n_runs": 6,
+      "n_poor": 1,
+      "n_not_poor": 5,
+      "estimable": true
+    },
+    {
+      "dataset": "appendicitis",
+      "family": "outliers",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "biomed",
+      "family": "clean",
+      "n_runs": 3,
+      "n_poor": 0,
+      "n_not_poor": 3,
+      "estimable": false
+    },
+    {
+      "dataset": "biomed",
+      "family": "duplicates",
+      "n_runs": 6,
+      "n_poor": 1,
+      "n_not_poor": 5,
+      "estimable": true
+    },
+    {
+      "dataset": "biomed",
+      "family": "missing_values",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "biomed",
+      "family": "outliers",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "bupa",
+      "family": "clean",
+      "n_runs": 3,
+      "n_poor": 0,
+      "n_not_poor": 3,
+      "estimable": false
+    },
+    {
+      "dataset": "bupa",
+      "family": "duplicates",
+      "n_runs": 6,
+      "n_poor": 6,
+      "n_not_poor": 0,
+      "estimable": false
+    },
+    {
+      "dataset": "bupa",
+      "family": "missing_values",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "bupa",
+      "family": "outliers",
+      "n_runs": 6,
+      "n_poor": 1,
+      "n_not_poor": 5,
+      "estimable": true
+    },
+    {
+      "dataset": "irish",
+      "family": "clean",
+      "n_runs": 3,
+      "n_poor": 0,
+      "n_not_poor": 3,
+      "estimable": false
+    },
+    {
+      "dataset": "irish",
+      "family": "duplicates",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "irish",
+      "family": "missing_values",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "irish",
+      "family": "outliers",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "labor",
+      "family": "clean",
+      "n_runs": 3,
+      "n_poor": 0,
+      "n_not_poor": 3,
+      "estimable": false
+    },
+    {
+      "dataset": "labor",
+      "family": "duplicates",
+      "n_runs": 6,
+      "n_poor": 1,
+      "n_not_poor": 5,
+      "estimable": true
+    },
+    {
+      "dataset": "labor",
+      "family": "missing_values",
+      "n_runs": 6,
+      "n_poor": 3,
+      "n_not_poor": 3,
+      "estimable": true
+    },
+    {
+      "dataset": "labor",
+      "family": "outliers",
+      "n_runs": 6,
+      "n_poor": 1,
+      "n_not_poor": 5,
+      "estimable": true
+    },
+    {
+      "dataset": "molecular_biology_promoters",
+      "family": "clean",
+      "n_runs": 3,
+      "n_poor": 1,
+      "n_not_poor": 2,
+      "estimable": true
+    },
+    {
+      "dataset": "molecular_biology_promoters",
+      "family": "duplicates",
+      "n_runs": 6,
+      "n_poor": 3,
+      "n_not_poor": 3,
+      "estimable": true
+    },
+    {
+      "dataset": "molecular_biology_promoters",
+      "family": "missing_values",
+      "n_runs": 6,
+      "n_poor": 1,
+      "n_not_poor": 5,
+      "estimable": true
+    },
+    {
+      "dataset": "molecular_biology_promoters",
+      "family": "outliers",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "mux6",
+      "family": "clean",
+      "n_runs": 3,
+      "n_poor": 0,
+      "n_not_poor": 3,
+      "estimable": false
+    },
+    {
+      "dataset": "mux6",
+      "family": "duplicates",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "mux6",
+      "family": "missing_values",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    },
+    {
+      "dataset": "mux6",
+      "family": "outliers",
+      "n_runs": 6,
+      "n_poor": 0,
+      "n_not_poor": 6,
+      "estimable": false
+    }
+  ]
+}

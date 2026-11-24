@@ -1,0 +1,689 @@
+{
+ "runs": [
+  {
+   "dataset": "labor",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.24,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.975,
+    "sigma_cv": 0.05590169943749474,
+    "s_test": 0.96875,
+    "G": 0.006249999999999978,
+    "n": 52,
+    "p": 16,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.975,
+    "sigma_cv": 0.022821773229381902,
+    "s_test": 0.96875,
+    "G": 0.006249999999999978,
+    "n": 52,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "labor",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.19,
+   "automated": {
+    "model_name": "Logistic Regression",
+    "s_cv_selected": 0.9857142857142858,
+    "sigma_cv": 0.03194382824999698,
+    "s_test": 0.96875,
+    "G": 0.016964285714285765,
+    "n": 52,
+    "p": 16,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9857142857142858,
+    "sigma_cv": 0.03194382824999698,
+    "s_test": 0.96875,
+    "G": 0.016964285714285765,
+    "n": 52,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "labor",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.19,
+   "automated": {
+    "model_name": "Logistic Regression",
+    "s_cv_selected": 0.9785714285714284,
+    "sigma_cv": 0.04791574237499552,
+    "s_test": 0.9375,
+    "G": 0.041071428571428426,
+    "n": 52,
+    "p": 16,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9785714285714284,
+    "sigma_cv": 0.04791574237499552,
+    "s_test": 0.9375,
+    "G": 0.041071428571428426,
+    "n": 52,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "labor",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.19,
+   "automated": {
+    "model_name": "Logistic Regression",
+    "s_cv_selected": 1.0,
+    "sigma_cv": 0.0,
+    "s_test": 0.96875,
+    "G": 0.03125,
+    "n": 61,
+    "p": 16,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 1.0,
+    "sigma_cv": 0.0,
+    "s_test": 0.96875,
+    "G": 0.03125,
+    "n": 61,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "labor",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.21,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9771428571428572,
+    "sigma_cv": 0.051110125199995214,
+    "s_test": 0.875,
+    "G": 0.1021428571428572,
+    "n": 61,
+    "p": 16,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9685714285714285,
+    "sigma_cv": 0.045624912636203746,
+    "s_test": 0.9375,
+    "G": 0.031071428571428528,
+    "n": 61,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "labor",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.21,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9875,
+    "sigma_cv": 0.02795084971874737,
+    "s_test": 1.0,
+    "G": -0.012499999999999956,
+    "n": 61,
+    "p": 16,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.9512499999999999,
+    "sigma_cv": 0.09564746468150633,
+    "s_test": 0.96875,
+    "G": -0.01750000000000007,
+    "n": 61,
+    "n_test_pos": 8,
+    "n_test_neg": 4,
+    "n_test": 12,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "mux6",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.23,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9969696969696968,
+    "sigma_cv": 0.006775963568181175,
+    "s_test": 1.0,
+    "G": -0.003030303030303161,
+    "n": 117,
+    "p": 6,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.7641414141414142,
+    "sigma_cv": 0.10464346038158612,
+    "s_test": 0.668639053254438,
+    "G": 0.09550236088697628,
+    "n": 117,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "mux6",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.21,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9944444444444445,
+    "sigma_cv": 0.012422599874998825,
+    "s_test": 1.0,
+    "G": -0.005555555555555536,
+    "n": 117,
+    "p": 6,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.6931818181818181,
+    "sigma_cv": 0.12961382875736033,
+    "s_test": 0.7573964497041421,
+    "G": -0.06421463152232398,
+    "n": 117,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "mux6",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.21,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 1.0,
+    "sigma_cv": 5.551115123125783e-17,
+    "s_test": 1.0,
+    "G": 0.0,
+    "n": 117,
+    "p": 6,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.7145202020202019,
+    "sigma_cv": 0.09720828314085557,
+    "s_test": 0.7751479289940829,
+    "G": -0.06062772697388097,
+    "n": 117,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "mux6",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.21,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9978021978021978,
+    "sigma_cv": 0.004914435115384135,
+    "s_test": 1.0,
+    "G": -0.00219780219780219,
+    "n": 138,
+    "p": 6,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.7362637362637363,
+    "sigma_cv": 0.09537981797107327,
+    "s_test": 0.6568047337278107,
+    "G": 0.07945900253592564,
+    "n": 138,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "mux6",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.21,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9989795918367348,
+    "sigma_cv": 0.0022817020178569057,
+    "s_test": 1.0,
+    "G": -0.0010204081632652073,
+    "n": 138,
+    "p": 6,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.767425431711146,
+    "sigma_cv": 0.10176935270945342,
+    "s_test": 0.7159763313609467,
+    "G": 0.05144910035019923,
+    "n": 138,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "mux6",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.21,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.9979591836734695,
+    "sigma_cv": 0.004563404035713812,
+    "s_test": 1.0,
+    "G": -0.0020408163265305257,
+    "n": 138,
+    "p": 6,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.7154631083202512,
+    "sigma_cv": 0.06348775803492125,
+    "s_test": 0.7988165680473372,
+    "G": -0.08335345972708608,
+    "n": 138,
+    "n_test_pos": 13,
+    "n_test_neg": 13,
+    "n_test": 26,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "bupa",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.27,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.7137776963180189,
+    "sigma_cv": 0.07299444023790588,
+    "s_test": 0.6592436974789917,
+    "G": 0.05453399883902721,
+    "n": 317,
+    "p": 5,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.6512312642554579,
+    "sigma_cv": 0.04370916635536216,
+    "s_test": 0.6857142857142857,
+    "G": -0.03448302145882787,
+    "n": 317,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "bupa",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.25,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.7103167193609482,
+    "sigma_cv": 0.038021451804116486,
+    "s_test": 0.45126050420168073,
+    "G": 0.25905621515926747,
+    "n": 317,
+    "p": 5,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.6498128971163245,
+    "sigma_cv": 0.09636143585336504,
+    "s_test": 0.6789915966386554,
+    "G": -0.029178699522330875,
+    "n": 317,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "bupa",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.15,
+   "elapsed_seconds": 0.26,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.7520625610948192,
+    "sigma_cv": 0.04561700035838433,
+    "s_test": 0.6495798319327731,
+    "G": 0.10248272916204604,
+    "n": 317,
+    "p": 5,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.6429716520039099,
+    "sigma_cv": 0.053815640605106914,
+    "s_test": 0.7176470588235294,
+    "G": -0.07467540681961948,
+    "n": 317,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "bupa",
+   "seed": 1,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.25,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.7792828759934023,
+    "sigma_cv": 0.02079936804705875,
+    "s_test": 0.6453781512605042,
+    "G": 0.13390472473289805,
+    "n": 373,
+    "p": 5,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.6513795171689909,
+    "sigma_cv": 0.04886833103157494,
+    "s_test": 0.6571428571428571,
+    "G": -0.005763339973866244,
+    "n": 373,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "bupa",
+   "seed": 2,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.25,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.8043276562479977,
+    "sigma_cv": 0.02847730171865536,
+    "s_test": 0.5844537815126051,
+    "G": 0.21987387473539266,
+    "n": 373,
+    "p": 5,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.6556484649656769,
+    "sigma_cv": 0.06960086061647039,
+    "s_test": 0.6747899159663865,
+    "G": -0.01914145100070963,
+    "n": 373,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "dataset": "bupa",
+   "seed": 3,
+   "corruption_type": "duplicates",
+   "rate": 0.35,
+   "elapsed_seconds": 0.26,
+   "automated": {
+    "model_name": "Random Forest",
+    "s_cv_selected": 0.8515897476423792,
+    "sigma_cv": 0.027904881361518256,
+    "s_test": 0.6357142857142857,
+    "G": 0.21587546192809348,
+    "n": 373,
+    "p": 5,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   },
+   "manual": {
+    "model_name": "Logistic Regression (manual baseline)",
+    "s_cv_selected": 0.6716372242688032,
+    "sigma_cv": 0.027725403585646458,
+    "s_test": 0.7142857142857143,
+    "G": -0.04264849001691107,
+    "n": 373,
+    "n_test_pos": 35,
+    "n_test_neg": 34,
+    "n_test": 69,
+    "test_label_codes": [
+     0,
+     1
+    ]
+   }
+  }
+ ],
+ "_redistribution_note": "Per-row arrays removed. The source datasets do not uniformly permit redistribution of row-level content, and one carries an explicit restriction. Summary counts retained; all diagnostics, scores and labels are intact, so every scoring module reproduces its published output from this file."
+}

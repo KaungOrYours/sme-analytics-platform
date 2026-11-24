@@ -221,7 +221,12 @@ venv/
 /CLAUDE.md
 docs/ai_assistance_log.md
 
-# Evaluation harness: cached datasets and generated result dumps.
+# Evaluation harness: cached datasets and the local result dumps. The local
+# dumps stay out because they embed the original target label of every test row,
+# and the source datasets do not uniformly permit redistributing that.
+# evaluation/results_public/ is the redistributable export -- aggregates intact,
+# per-row arrays replaced by counts -- and IS versioned. See
+# evaluation/export_public_results.py.
 # NOTE: pmlb resolves datasets against a mutable upstream branch, so these are
 # NOT reliably reproducible from source URLs alone. See evaluation/README.md.
 evaluation/data/

@@ -1,0 +1,653 @@
+{
+ "runs": [
+  {
+   "dataset": "labor",
+   "seed": 1,
+   "skipped": false,
+   "elapsed_seconds": 0.46,
+   "full_size": {
+    "automated": {
+     "model_name": "Random Forest",
+     "s_cv_selected": 1.0,
+     "sigma_cv": 0.0,
+     "s_test": 0.96875,
+     "G": 0.03125,
+     "n": 45,
+     "p": 16,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.9666666666666668,
+     "sigma_cv": 0.07453559924999298,
+     "s_test": 0.96875,
+     "G": -0.002083333333333215,
+     "n": 45,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   },
+   "half_size": {
+    "automated": {
+     "model_name": "Random Forest",
+     "s_cv_selected": 1.0,
+     "sigma_cv": 0.0,
+     "s_test": 0.90625,
+     "G": 0.09375,
+     "n": 22,
+     "p": 16,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 1.0,
+     "sigma_cv": 0.0,
+     "s_test": 0.875,
+     "G": 0.125,
+     "n": 22,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "dataset": "labor",
+   "seed": 2,
+   "skipped": false,
+   "elapsed_seconds": 0.41,
+   "full_size": {
+    "automated": {
+     "model_name": "Logistic Regression",
+     "s_cv_selected": 0.99,
+     "sigma_cv": 0.022360679774997918,
+     "s_test": 0.96875,
+     "G": 0.02124999999999999,
+     "n": 45,
+     "p": 16,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.99,
+     "sigma_cv": 0.022360679774997918,
+     "s_test": 0.96875,
+     "G": 0.02124999999999999,
+     "n": 45,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   },
+   "half_size": {
+    "automated": {
+     "model_name": "Random Forest",
+     "s_cv_selected": 1.0,
+     "sigma_cv": 0.0,
+     "s_test": 0.84375,
+     "G": 0.15625,
+     "n": 22,
+     "p": 16,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.9333333333333332,
+     "sigma_cv": 0.149071198499986,
+     "s_test": 0.6875,
+     "G": 0.24583333333333324,
+     "n": 22,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "dataset": "labor",
+   "seed": 3,
+   "skipped": false,
+   "elapsed_seconds": 0.41,
+   "full_size": {
+    "automated": {
+     "model_name": "Logistic Regression",
+     "s_cv_selected": 0.9777777777777779,
+     "sigma_cv": 0.030429030972509184,
+     "s_test": 0.96875,
+     "G": 0.009027777777777857,
+     "n": 45,
+     "p": 16,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.9777777777777779,
+     "sigma_cv": 0.030429030972509184,
+     "s_test": 0.96875,
+     "G": 0.009027777777777857,
+     "n": 45,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   },
+   "half_size": {
+    "automated": {
+     "model_name": "Random Forest",
+     "s_cv_selected": 0.9333333333333333,
+     "sigma_cv": 0.14907119849998599,
+     "s_test": 1.0,
+     "G": -0.06666666666666665,
+     "n": 22,
+     "p": 16,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.85,
+     "sigma_cv": 0.14907119849998599,
+     "s_test": 0.96875,
+     "G": -0.11875000000000002,
+     "n": 22,
+     "n_test_pos": 8,
+     "n_test_neg": 4,
+     "n_test": 12,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "dataset": "mux6",
+   "seed": 1,
+   "skipped": false,
+   "elapsed_seconds": 0.43,
+   "full_size": {
+    "automated": {
+     "model_name": "Random Forest",
+     "s_cv_selected": 0.9711818181818183,
+     "sigma_cv": 0.0594878277708353,
+     "s_test": 1.0,
+     "G": -0.028818181818181743,
+     "n": 102,
+     "p": 6,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.7543636363636365,
+     "sigma_cv": 0.1403131091346825,
+     "s_test": 0.6627218934911243,
+     "G": 0.09164174287251214,
+     "n": 102,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   },
+   "half_size": {
+    "automated": {
+     "model_name": "Random Forest",
+     "s_cv_selected": 0.9120000000000001,
+     "sigma_cv": 0.07694153624668534,
+     "s_test": 0.8254437869822485,
+     "G": 0.08655621301775163,
+     "n": 51,
+     "p": 6,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.7013333333333333,
+     "sigma_cv": 0.22717589856516227,
+     "s_test": 0.6863905325443787,
+     "G": 0.014942800788954602,
+     "n": 51,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "dataset": "mux6",
+   "seed": 2,
+   "skipped": false,
+   "elapsed_seconds": 0.42,
+   "full_size": {
+    "automated": {
+     "model_name": "Random Forest",
+     "s_cv_selected": 0.9887272727272727,
+     "sigma_cv": 0.016484402846026345,
+     "s_test": 1.0,
+     "G": -0.011272727272727323,
+     "n": 102,
+     "p": 6,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.7061818181818182,
+     "sigma_cv": 0.10270393942567986,
+     "s_test": 0.7159763313609467,
+     "G": -0.009794513179128495,
+     "n": 102,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   },
+   "half_size": {
+    "automated": {
+     "model_name": "Random Forest",
+     "s_cv_selected": 0.8826666666666666,
+     "sigma_cv": 0.10473246339549588,
+     "s_test": 0.9289940828402367,
+     "G": -0.04632741617357006,
+     "n": 51,
+     "p": 6,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.6773333333333333,
+     "sigma_cv": 0.1666399978663253,
+     "s_test": 0.7337278106508877,
+     "G": -0.056394477317554315,
+     "n": 51,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "dataset": "mux6",
+   "seed": 3,
+   "skipped": false,
+   "elapsed_seconds": 0.39,
+   "full_size": {
+    "automated": {
+     "model_name": "Random Forest",
+     "s_cv_selected": 0.9960000000000001,
+     "sigma_cv": 0.008944271909999166,
+     "s_test": 1.0,
+     "G": -0.0039999999999998925,
+     "n": 102,
+     "p": 6,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.7081818181818182,
+     "sigma_cv": 0.10469949126463973,
+     "s_test": 0.7633136094674556,
+     "G": -0.05513179128563739,
+     "n": 102,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   },
+   "half_size": {
+    "automated": {
+     "model_name": "Decision Tree",
+     "s_cv_selected": 0.9400000000000001,
+     "sigma_cv": 0.0547722557505166,
+     "s_test": 0.8076923076923076,
+     "G": 0.13230769230769246,
+     "n": 51,
+     "p": 6,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.7493333333333333,
+     "sigma_cv": 0.1506725662561776,
+     "s_test": 0.7100591715976332,
+     "G": 0.039274161735700086,
+     "n": 51,
+     "n_test_pos": 13,
+     "n_test_neg": 13,
+     "n_test": 26,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "dataset": "bupa",
+   "seed": 1,
+   "skipped": false,
+   "elapsed_seconds": 0.46,
+   "full_size": {
+    "automated": {
+     "model_name": "Logistic Regression",
+     "s_cv_selected": 0.6556011676701331,
+     "sigma_cv": 0.05994870165434848,
+     "s_test": 0.6781512605042017,
+     "G": -0.022550092834068614,
+     "n": 276,
+     "p": 5,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.6556011676701331,
+     "sigma_cv": 0.05994870165434848,
+     "s_test": 0.6781512605042017,
+     "G": -0.022550092834068614,
+     "n": 276,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   },
+   "half_size": {
+    "automated": {
+     "model_name": "Logistic Regression",
+     "s_cv_selected": 0.7069858712715855,
+     "sigma_cv": 0.11474998745690966,
+     "s_test": 0.5689075630252101,
+     "G": 0.13807830824637546,
+     "n": 138,
+     "p": 5,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.7069858712715855,
+     "sigma_cv": 0.11474998745690966,
+     "s_test": 0.5689075630252101,
+     "G": 0.13807830824637546,
+     "n": 138,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "dataset": "bupa",
+   "seed": 2,
+   "skipped": false,
+   "elapsed_seconds": 0.4,
+   "full_size": {
+    "automated": {
+     "model_name": "Logistic Regression",
+     "s_cv_selected": 0.6537858055099435,
+     "sigma_cv": 0.0971161110671533,
+     "s_test": 0.6890756302521008,
+     "G": -0.03528982474215736,
+     "n": 276,
+     "p": 5,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.6537858055099435,
+     "sigma_cv": 0.0971161110671533,
+     "s_test": 0.6890756302521008,
+     "G": -0.03528982474215736,
+     "n": 276,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   },
+   "half_size": {
+    "automated": {
+     "model_name": "Logistic Regression",
+     "s_cv_selected": 0.581062271062271,
+     "sigma_cv": 0.06139293514603388,
+     "s_test": 0.6722689075630252,
+     "G": -0.09120663650075411,
+     "n": 138,
+     "p": 5,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.581062271062271,
+     "sigma_cv": 0.06139293514603388,
+     "s_test": 0.6722689075630252,
+     "G": -0.09120663650075411,
+     "n": 138,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "dataset": "bupa",
+   "seed": 3,
+   "skipped": false,
+   "elapsed_seconds": 0.41,
+   "full_size": {
+    "automated": {
+     "model_name": "Logistic Regression",
+     "s_cv_selected": 0.6440704251049078,
+     "sigma_cv": 0.05384146047380257,
+     "s_test": 0.7176470588235295,
+     "G": -0.07357663371862178,
+     "n": 276,
+     "p": 5,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.6440704251049078,
+     "sigma_cv": 0.05384146047380257,
+     "s_test": 0.7176470588235295,
+     "G": -0.07357663371862178,
+     "n": 276,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   },
+   "half_size": {
+    "automated": {
+     "model_name": "Logistic Regression",
+     "s_cv_selected": 0.6309680795395082,
+     "sigma_cv": 0.047973939331539,
+     "s_test": 0.7067226890756302,
+     "G": -0.07575460953612201,
+     "n": 138,
+     "p": 5,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    },
+    "manual": {
+     "model_name": "Logistic Regression (manual baseline)",
+     "s_cv_selected": 0.6309680795395082,
+     "sigma_cv": 0.047973939331539,
+     "s_test": 0.7067226890756302,
+     "G": -0.07575460953612201,
+     "n": 138,
+     "n_test_pos": 35,
+     "n_test_neg": 34,
+     "n_test": 69,
+     "test_label_codes": [
+      0,
+      1
+     ]
+    }
+   }
+  }
+ ],
+ "_redistribution_note": "Per-row arrays removed. The source datasets do not uniformly permit redistribution of row-level content, and one carries an explicit restriction. Summary counts retained; all diagnostics, scores and labels are intact, so every scoring module reproduces its published output from this file."
+}

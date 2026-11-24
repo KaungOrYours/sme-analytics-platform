@@ -1,0 +1,6 @@
+{
+  "locked_rule": "OR",
+  "development_or_mcc": 0.15289415743128767,
+  "development_and_mcc": -0.050964719143762556,
+  "reason": "higher MCC on development group (ties toward OR)"
+}

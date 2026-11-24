@@ -1,0 +1,64 @@
+{
+  "analysis": "reliability of the run-level outcome (POST-HOC)",
+  "post_hoc": true,
+  "pre_registered": false,
+  "label": "poor_optimism",
+  "delta_g": 0.05,
+  "n_runs": 525,
+  "n_datasets": 25,
+  "bootstrap_seed": 0,
+  "label_stability": {
+    "n_cells": 175,
+    "n_cells_split_by_seed": 68,
+    "n_cells_with_a_positive": 82,
+    "n_positive_cells_split_by_seed": 68,
+    "share_of_positive_cells_split": 0.8292682926829268,
+    "base_rate": 0.2704761904761905,
+    "observed_agreement": 0.7409523809523809,
+    "chance_agreement": 0.6053623582766439,
+    "cohens_kappa": 0.3435810686573752,
+    "n_seed_pairs": 525
+  },
+  "variance_components": {
+    "n_cells_used": 175,
+    "var_within_cell_G": 0.011778509038092041,
+    "var_between_cell_G": 0.011157125543972453,
+    "icc_one_way": 0.4864537540503565,
+    "pooled_within_cell_sd_G": 0.10852883966067288,
+    "median_within_cell_sd_G": 0.07456470903405531,
+    "share_cells_sd_above_delta_g": 0.6685714285714286,
+    "seed_deviation_var_G": 0.007867324739183612,
+    "seed_deviation_var_s_cv": 0.0015338296778359614,
+    "seed_deviation_var_s_test": 0.0055313840890662686,
+    "share_of_G_variance_from_s_test_within_cell": 0.7030832299977308
+  },
+  "test_score_precision": {
+    "n_runs": 525,
+    "median_n_test": 26,
+    "min_n_test": 7,
+    "max_n_test": 100,
+    "hanley_mcneil": {
+      "median_se": 0.07984080664189362,
+      "n_runs_se_above_delta_g": 337,
+      "n_scored": 428
+    },
+    "binormal_approximation": {
+      "median_se": 0.08842483678595292,
+      "n_runs_se_above_delta_g": 387,
+      "n_scored": 525
+    },
+    "n_runs_auroc_quantum_at_or_above_delta_g": 42,
+    "delta_g": 0.05
+  },
+  "oracle": {
+    "definition": "mean G of the other seeds in the same (dataset, family, rate) cell, scored by within-dataset stratified concordance against the run's own stored label",
+    "concordance": 0.5331034482758621,
+    "n_pairs": 1450,
+    "n_strata_used": 19,
+    "ci_low": 0.41957164670303604,
+    "ci_high": 0.647990091804747,
+    "n_runs_scored": 525,
+    "full_cell_mean_reference": 0.7689655172413793,
+    "full_cell_mean_note": "leaky upper reference including the run's own G; the gap to the leave-one-out oracle is the oracle's estimation error at three seeds"
+  }
+}

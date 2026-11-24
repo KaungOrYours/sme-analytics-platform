@@ -1,0 +1,119 @@
+{
+  "analysis": "random-partition null for across-group threshold instability (POST-HOC)",
+  "post_hoc": true,
+  "pre_registered": false,
+  "label": "poor_optimism",
+  "n_datasets": 25,
+  "block_sizes": [
+    7,
+    9,
+    9
+  ],
+  "n_permutations": 5000,
+  "permutation_seed": 0,
+  "conservative_caveat": "Group A's datasets were deliberately chosen to span n/p from 1.86 to 100, so the real partition was selected to maximise predictor range in a way this null does not model. The true p-value is larger than the one reported.",
+  "diagnostics": {
+    "np": {
+      "firing_rate_spread": {
+        "observed": 0.12698412698412698,
+        "null_median": 0.25396825396825395,
+        "null_p95": 0.5555555555555556,
+        "p_value": 0.9576,
+        "n_draws": 5000
+      },
+      "mcc_spread": {
+        "observed": 0.544107251314043,
+        "null_median": 0.2881322238165078,
+        "null_p95": 0.553425819789798,
+        "p_value": 0.0562,
+        "n_draws": 5000
+      },
+      "n_undefined_draws": 0
+    },
+    "epv": {
+      "firing_rate_spread": {
+        "observed": 0.1844293272864702,
+        "null_median": 0.256235827664399,
+        "null_p95": 0.4958427815570673,
+        "p_value": 0.6754,
+        "n_draws": 5000
+      },
+      "mcc_spread": {
+        "observed": 0.08967495983616747,
+        "null_median": 0.2746708145225306,
+        "null_p95": 0.5356877563623382,
+        "p_value": 0.9292,
+        "n_draws": 5000
+      },
+      "n_undefined_draws": 0
+    },
+    "sigma_cv": {
+      "firing_rate_spread": {
+        "observed": 0.2811791383219955,
+        "null_median": 0.18291761148904007,
+        "null_p95": 0.3733938019652306,
+        "p_value": 0.1918,
+        "n_draws": 5000
+      },
+      "mcc_spread": {
+        "observed": 0.44738570784325055,
+        "null_median": 0.2878281450424478,
+        "null_p95": 0.5370488407613994,
+        "p_value": 0.1464,
+        "n_draws": 5000
+      },
+      "n_undefined_draws": 0
+    },
+    "fold_contamination": {
+      "firing_rate_spread": {
+        "observed": 0.05291005291005291,
+        "null_median": 0.07407407407407407,
+        "null_p95": 0.12244897959183676,
+        "p_value": 0.73,
+        "n_draws": 5000
+      },
+      "mcc_spread": {
+        "observed": 0.10615995127534772,
+        "null_median": 0.19166600742889492,
+        "null_p95": 0.37201788514063516,
+        "p_value": 0.816,
+        "n_draws": 5000
+      },
+      "n_undefined_draws": 0
+    },
+    "evalml_cov": {
+      "firing_rate_spread": {
+        "observed": 0.2055933484504913,
+        "null_median": 0.1602418745275888,
+        "null_p95": 0.30083144368858655,
+        "p_value": 0.3198,
+        "n_draws": 5000
+      },
+      "mcc_spread": {
+        "observed": 0.31990602782598493,
+        "null_median": 0.36995179839337283,
+        "null_p95": 0.5930420939079746,
+        "p_value": 0.6334,
+        "n_draws": 5000
+      },
+      "n_undefined_draws": 0
+    },
+    "evalml_range": {
+      "firing_rate_spread": {
+        "observed": 0.15873015873015872,
+        "null_median": 0.09599395313681028,
+        "null_p95": 0.1693121693121693,
+        "p_value": 0.092,
+        "n_draws": 5000
+      },
+      "mcc_spread": {
+        "observed": 0.134318686588774,
+        "null_median": 0.2972996240159215,
+        "null_p95": 0.4853699471393762,
+        "p_value": 0.8992,
+        "n_draws": 5000
+      },
+      "n_undefined_draws": 0
+    }
+  }
+}
