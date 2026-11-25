@@ -25,6 +25,19 @@ study record carries a banner stating what in it has been superseded.
 | `score_rq3_combination.py` | The OR/AND combination rule, fitted on development and locked before being applied to final-evaluation. |
 | `score_study2.py` | Study 2 scoring, reusing `score_rq2.py`'s primitives unchanged so figures stay comparable. |
 | `score_stratified.py` | **Post-hoc stratified re-analysis (not pre-registered).** Between- versus within-dataset discrimination, dataset-clustered bootstrap, estimable-cluster accounting. Also recomputes the previously ad-hoc AUROC tables so they are auditable. |
+| `pilot.py` | The approved plan's required pilot, run before the Study 1 protocol was frozen. |
+| `full_run_study4.py` | Study 4, which re-measures Study 2's same 525 runs with cross-validation repeated at R=10 and R=20. Protocol was committed before this file existed. |
+| `score_study4.py` | Study 4 scoring. |
+| `score_delta_sensitivity.py` | **Post-hoc (not pre-registered).** Recomputes the outcome label across a five-point `delta_G` grid and rescales the thresholded and stratified figures at each point. |
+| `score_diagnostic_differences.py` | **Post-hoc (not pre-registered).** Paired dataset-clustered bootstrap over diagnostic pairs, so shared noise cancels instead of comparing two separately-computed intervals. |
+| `score_algebraic_floor.py` | **Post-hoc (not pre-registered).** The permutation floor under within-dataset concordance, the cross-validation-mean confound behind the sub-chance reading, and the corruption-family and `delta_G` sensitivities of the between-dataset correlation. |
+| `score_clustered_intervals.py` | **Post-hoc (not pre-registered).** Every headline interval re-derived at the dataset unit, plus paired intervals on the recalibration gains. Reproduces the six published anchor MCCs exactly as its validation gate. |
+| `score_outcome_reliability.py` | **Post-hoc (not pre-registered).** How reliably the outcome is measured at run resolution: ICC, kappa, Hanley-McNeil standard errors, and a leave-one-seed-out oracle ceiling. |
+| `score_partition_null.py` | **Post-hoc (not pre-registered).** Whether a frozen threshold's across-group spread is distinguishable from randomly re-partitioning the same datasets, by permutation. |
+| `predictions_table.py` | The P1-P14 pre-registered predictions and their dispositions, each re-derived from the stored run records rather than carried over from the study write-ups. |
+| `build_appendix_tables.py` | Generates the manuscript's dataset manifest, protocol-freeze evidence, diagnostic grid and positives-concentration tables as LaTeX, so no figure in them is hand-typed. Output directory is set with `--out`. |
+| `make_threshold_figure.py` | Renders the leave-one-dataset-out threshold-refit spread as a figure, normalised by each rule's own published anchor. Output directory is set with `--out`. |
+| `export_public_results.py` | Builds `results_public/`: the aggregate score files unchanged, and the per-run records with every row-level array replaced by counts, because the raw records embed the original class label of every test row and several datasets' licences do not permit redistributing that. |
 | `study2_dataset_split.json` | The deterministic Study 2 group assignment. |
 | `backend_path.py` | Puts `backend/` on `sys.path` so this code imports `services.*` the same way `backend/main.py` does, without making `backend/` a package. |
 
