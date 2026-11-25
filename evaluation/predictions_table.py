@@ -24,7 +24,7 @@ PREDICTIONS = [
     (
         "P1",
         r"EPV$<$10 beats $n/p<10$ on Group C",
-        r"MCC $+0.141$ vs $+0.540$; paired clustered $-0.387\,[-0.619,-0.142]$",
+        r"MCC $+0.141$ vs $+0.540$; paired clustered $-0.399\,[-0.619,-0.142]$",
         "REFUTED",
         "Refuted",
         r"refutation \emph{strengthens} under clustering: neither arm alone excludes "
@@ -160,7 +160,23 @@ def predictions_table():
     for row in PREDICTIONS:
         tally[row[3]] = tally.get(row[3], 0) + 1
     corrected = sum(1 for row in PREDICTIONS if row[5].startswith("CORRECTED"))
-    changed = sum(1 for row in PREDICTIONS if row[3] != row[4].upper())
+    # A recorded disposition can differ from the re-derived one in WORDING without
+    # differing in VERDICT ("Partially supported" vs PARTIAL). Counting raw string
+    # inequality overstated our own error rate, so relabels are counted separately.
+    canon = {
+        "refuted": "REFUTED",
+        "refuted on mcc": "REFUTED",
+        "partially supported": "PARTIAL",
+        "partial": "PARTIAL",
+        "confirmed": "CONFIRMED",
+    }
+    def _canon(text):
+        return canon.get(text.strip().strip("`'\u2018\u2019\" ").lower())
+    changed = sum(1 for row in PREDICTIONS if _canon(row[4]) != row[3])
+    relabelled = sum(
+        1 for row in PREDICTIONS
+        if _canon(row[4]) == row[3] and row[4].upper() != row[3]
+    )
 
     out = [
         r"\paragraph{Pre-registered predictions and their dispositions.} All fourteen,",
@@ -168,7 +184,8 @@ def predictions_table():
         r"re-derived from the stored run records rather than carried forward}, and where a",
         r"verdict turned on an interval it was adjudicated at the dataset level.",
         rf"\textbf{{{corrected}}} previously recorded dispositions were wrong or absent and",
-        rf"are marked CORRECTED; \textbf{{{changed}}} differ from what we previously reported.",
+        rf"are marked CORRECTED. \textbf{{{changed}}} differ in verdict from what we previously",
+        rf"recorded, and a further {relabelled} differ only in wording.",
         "",
         r"\begin{center}\scriptsize",
         r"\begin{tabular}{llp{0.28\textwidth}ll}",

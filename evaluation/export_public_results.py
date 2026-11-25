@@ -9,7 +9,7 @@ was read as a finding and reached a draft abstract. Nobody working from a PDF
 could have caught it.
 
 The obvious fix -- commit `evaluation/results/` -- is not available, because the
-run records embed the original target label of every test row: 96,684 labels
+run records embed the original target label of every test row: 100,200 labels
 across 14 files. The 33 source datasets do not uniformly permit that. PMLB ships
 no licence metadata at all; 14 of the 33 have no licence statement findable at
 any primary source; and one, `irish`, carries an explicit restriction naming its

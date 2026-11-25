@@ -527,10 +527,19 @@ def multiplicity_section():
     def count(obj):
         nonlocal run_level, clustered
         if isinstance(obj, dict):
-            if "ci_lower" in obj:
-                run_level += 1
-            if "ci_low" in obj:
-                clustered += 1
+            # Prefer the stored `unit` where a module records it. Keying on the
+            # key NAME alone miscounted every run-level block that happens to
+            # spell its bound `ci_low`, which is all of score_clustered_intervals'.
+            if "ci_lower" in obj or "ci_low" in obj:
+                unit = str(obj.get("unit", "")).lower()
+                if unit.startswith("run"):
+                    run_level += 1
+                elif unit.startswith("dataset"):
+                    clustered += 1
+                elif "ci_lower" in obj:
+                    run_level += 1
+                else:
+                    clustered += 1
             for value in obj.values():
                 count(value)
         elif isinstance(obj, list):
@@ -573,9 +582,13 @@ def multiplicity_section():
 # two target-definitional-overlap cases, the three non-standard target codings,
 # and the duplicate-contamination / truth-table cases.
 # ---------------------------------------------------------------------------
+# The structural screen fires for free on a near-unique column, so a dataset is
+# recorded here as target overlap only when the partitioning feature is LOW
+# cardinality. analcatdata_aids was previously listed as "feature orders target
+# exactly"; its flagged columns are all-distinct (50 values in 50 rows), so the
+# screen says nothing about it and that entry has been withdrawn.
 FLAGS = {
     "postoperative_patient_data": r"target $\{0,2\}$, code 1 absent",
-    "analcatdata_aids":           r"feature orders target exactly",
     "parity5":                    r"truth table; AUROC quantum $>\delta_G$",
     "backache":                   r"row identifier retained",
     "lupus":                      r"apparent immortal time",
@@ -662,7 +675,8 @@ def positives_table():
         + "which "
         + f"{len(contributors)}"
         + r" datasets carry all of the signal. The last column repeats defects established in "
-        + r"\S\ref{sec:data}; it is not a new screen. Group C is the only confirmatory group "
+        + r"\S\ref{sec:data}; it is not a new screen, and a dataset is named as target overlap "
+        + r"only where the partitioning feature is low-cardinality. Group C is the only confirmatory group "
         + r"(\S\ref{sec:method}).}",
         r"\label{tab:positives}",
         r"\end{table}",
