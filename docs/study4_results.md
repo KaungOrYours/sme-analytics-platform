@@ -120,12 +120,20 @@ The data support this directly. Within-dataset Spearman correlations, median ove
 
 | Relationship | Median rho | Datasets with that sign |
 |---|---|---|
-| CV mean vs `sigma_R20` | **-0.813** | 24 of 25 negative |
+| CV mean vs `sigma_R20` | **-0.830** | 24 of 25 negative |
 | CV mean vs `G` | **+0.688** | 25 of 25 positive |
 | `sigma_R20` vs `G`, raw | **-0.630** | 23 of 25 negative |
-| `sigma_R20` vs `G`, **partialling out the CV mean** | **-0.075** | 15 of 25 negative |
+| `sigma_R20` vs `G`, **partialling out the CV mean** | **-0.084** | 14 of 24 negative |
 
-Controlling for the cross-validation mean collapses the anti-prediction from -0.630 to -0.075, which
+**Corrected 2026-11-25.** This table was previously published with -0.813 in the first row, a
+transcription error for -0.830, and with the partial correlation as -0.075 over "15 of 25" datasets.
+Both are now computed by `evaluation/score_paper_figures.py::study4_partials` rather than by an
+uncommitted script. The partial is **undefined for `irish`**, whose within-dataset rho between `G`
+and the cross-validation mean is exactly 1.0, making the denominator zero; it is therefore reported
+over the **24 datasets where it is defined**, not 25. Earlier figures of "15 of 25" and "14 of 25"
+were both wrong on the denominator.
+
+Controlling for the cross-validation mean collapses the anti-prediction from -0.630 to -0.084, which
 is near zero and close to a coin flip on sign. **The sub-chance within-dataset concordance is
 substantially a bounded-metric confound: the CV mean drives `sigma` down and `G` up at the same
 time.** Twenty per cent of runs have a CV mean above 0.95, so the ceiling is not a rare corner of

@@ -79,16 +79,19 @@ PREDICTIONS = [
     (
         "P7",
         r"recalibration materially helps evalml\_range and EPV, and helps $\sigma_{\mathrm{CV}}$ less",
-        r"gains $-0.161$, $+0.005$, $-0.140$; only $\sigma_{\mathrm{CV}}$ excludes zero",
+        r"gains $-0.147$, $+0.005$, $-0.140$; only $\sigma_{\mathrm{CV}}$ excludes zero",
         "REFUTED",
         "Refuted",
-        r"verdict unchanged but its evidence moves: the $-0.161$ collapse does not exclude "
-        r"zero when paired and clustered, while $\sigma_{\mathrm{CV}}$'s $-0.140$ does",
+        r"verdict unchanged but its evidence moves: the $-0.147$ collapse does not exclude "
+        r"zero when paired and clustered, while $\sigma_{\mathrm{CV}}$'s $-0.140$ does. "
+        r"Study 3 recorded $-0.161$ for \texttt{evalml\_range}, computed with a strict "
+        r"comparator at the anchor; the non-strict rule the protocol froze gives $-0.147$, "
+        r"and that is the figure used here",
     ),
     (
         "P8",
         r"fold\_contam.\ is not rescued by recalibration: out-of-sample MCC stays at or below zero",
-        r"$+0.192$, dataset-clustered $[+0.073,+0.319]$",
+        r"$+0.192$, dataset-clustered $[+0.072,+0.319]$",
         "REFUTED",
         r"``requires care''",
         r"CORRECTED. A non-disposition replaced by the verdict the pre-registered criterion "
@@ -188,7 +191,11 @@ def predictions_table():
         rf"recorded, and a further {relabelled} differ only in wording.",
         "",
         r"\begin{center}\scriptsize",
-        r"\begin{tabular}{llp{0.28\textwidth}ll}",
+        # Fixed-width wrapping columns on every text cell. With `l` columns the
+        # decisive-figure text ran past the page edge and silently took the two
+        # verdict columns off the page with it.
+        r"\footnotesize",
+        r"\begin{tabular}{@{}l p{0.26\textwidth} p{0.30\textwidth} l l@{}}",
         r"\toprule",
         r"& Prediction & Decisive figure & Disposition & Previously" + ROW_END,
         r"\midrule",

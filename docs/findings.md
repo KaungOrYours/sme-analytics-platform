@@ -166,10 +166,11 @@ leave-one-dataset-out, which it did, to 0.246.
   0.265 [0.18, 0.36]. The supported explanation is post-hoc and mechanical: AUROC is bounded at 1, so
   within one dataset a run whose CV mean lands near the ceiling is forced toward low fold variance
   while the same high mean raises `G = S_CV − S_test` by construction. Measured within dataset, median
-  over 25 datasets: CV mean against `sigma` −0.813 (24 of 25 negative), CV mean against `G` +0.688
-  (25 of 25 positive), `sigma` against `G` −0.630 raw but **−0.075 once the CV mean is partialled
-  out**. Twenty per cent of runs have a CV mean above 0.95. See `docs/study4_results.md` section 6;
-  that section is post-hoc.
+  over 25 datasets: CV mean against `sigma` −0.830 (24 of 25 negative), CV mean against `G` +0.688
+  (25 of 25 positive), `sigma` against `G` −0.630 raw but **−0.084 once the CV mean is partialled
+  out**, the last over the 24 datasets where that partial is defined (`irish`'s denominator is zero).
+  Corrected 2026-11-25 from −0.813 and −0.075/25. Twenty per cent of runs have a CV mean above 0.95.
+  See `docs/study4_results.md` section 6; that section is post-hoc.
 
 ## 6. Methodological findings
 

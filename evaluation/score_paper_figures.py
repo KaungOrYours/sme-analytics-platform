@@ -39,9 +39,11 @@ Run from the REPO ROOT:
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 from collections import defaultdict
+import pathlib
 from pathlib import Path
 
 import numpy as np
@@ -50,6 +52,9 @@ from evaluation.score_algebraic_floor import DELTA_G, RESULTS_DIR, load_rows
 from evaluation.score_stratified import cluster_bootstrap, spearman
 
 OUT_FILE = RESULTS_DIR / "paper_figures_scores.json"
+# pmlb resolves against a mutable upstream branch, so the screen reads from the
+# cached copies that travel with the artefact rather than refetching.
+CACHE_DIR = pathlib.Path(__file__).resolve().parent / "data" / "pmlb_cache"
 
 # Three candidate classifiers, so the argmax is over three. Folds are treated as
 # independent here, which they are not, so this is a LOWER bound on the
@@ -317,18 +322,21 @@ def structural_screen(dataset_names):
     without distinct(f)/n therefore conflates leakage with uniqueness, so the
     share is reported for every flag and a flag at share 1.0 is marked trivial.
     """
+    # Fail loudly. A screen that silently returns {"error": ...} would let the
+    # reproducibility claim pass on a machine where it never ran.
     try:
         from pmlb import fetch_data
-    except ImportError:
-        return {"error": "pmlb not installed; screen not run"}
+    except ImportError as exc:
+        raise SystemExit(
+            "pmlb is required for the structural screen and is not installed. "
+            "It is not pinned in requirements.txt and resolves datasets against a "
+            "mutable upstream branch; install it, or pass --skip-screen to emit "
+            "every other figure without it."
+        ) from exc
 
     out = {}
     for name in sorted(dataset_names):
-        try:
-            df = fetch_data(name)
-        except Exception as exc:                     # noqa: BLE001 - reported, not hidden
-            out[name] = {"error": str(exc)[:120]}
-            continue
+        df = fetch_data(name, local_cache_dir=str(CACHE_DIR))
         n = len(df)
         flags = []
         for col in df.columns:
@@ -354,7 +362,141 @@ def structural_screen(dataset_names):
 
 
 # ---------------------------------------------------------------------------
-def main():
+# 7. appendix intervals that no module emitted
+#
+# Three figures in the predictions appendix were correct but had to be
+# hand-bootstrapped to check, which is precisely what the reproducibility
+# statement says is unacceptable. They are emitted here.
+# ---------------------------------------------------------------------------
+TRIGGER_KEY = {
+    "np": "np_lt_10",
+    "epv": "epv_lt_10",
+    "fold_contamination": "fold_contamination_gt_0.10",
+}
+
+
+def _mcc(rs, key):
+    tp = sum(1 for r in rs if r[key] and r["poor"])
+    fp = sum(1 for r in rs if r[key] and not r["poor"])
+    fn = sum(1 for r in rs if not r[key] and r["poor"])
+    tn = sum(1 for r in rs if not r[key] and not r["poor"])
+    den = math.sqrt(float((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn)))
+    return 0.0 if den == 0 else (tp * tn - fp * fn) / den
+
+
+def _trigger_rows(filenames):
+    rows = []
+    for filename in filenames:
+        with (RESULTS_DIR / filename).open() as fh:
+            payload = json.load(fh)
+        for record in payload["runs"]:
+            a = record["automated"]
+            row = {"dataset": record["dataset"],
+                   "poor": bool(a["labels"]["poor_optimism"])}
+            for name, key in TRIGGER_KEY.items():
+                row[name] = bool(a["triggered"][key])
+            rows.append(row)
+    return rows
+
+
+def study4_partials(rows):
+    """Study 4 section 6's within-dataset medians, which had no module.
+
+    These carry the bounded-metric mechanism: a high cross-validation mean forces
+    low fold variance while mechanically raising G, so sigma and G anti-correlate
+    through the mean rather than through anything the diagnostic measures.
+    Partialling the mean out is what separates the two.
+    """
+    groups = _by_dataset(rows)
+
+    def rho(xs, ys):
+        return spearman(list(xs), list(ys))
+
+    def partial(xs, ys, zs):
+        rxy, rxz, ryz = rho(xs, ys), rho(xs, zs), rho(ys, zs)
+        if None in (rxy, rxz, ryz):
+            return None
+        den = math.sqrt((1 - rxz ** 2) * (1 - ryz ** 2))
+        return None if den == 0 else (rxy - rxz * ryz) / den
+
+    series = {"mean_vs_sigma": [], "mean_vs_G": [],
+              "sigma_vs_G_raw": [], "sigma_vs_G_partialling_out_mean": []}
+    for rs in groups.values():
+        m = [r["s_cv"] for r in rs]
+        s = [r["sigma"] for r in rs]          # sigma_R20, the Study 4 estimator
+        g = [_g(r) for r in rs]
+        series["mean_vs_sigma"].append(rho(m, s))
+        series["mean_vs_G"].append(rho(m, g))
+        series["sigma_vs_G_raw"].append(rho(s, g))
+        series["sigma_vs_G_partialling_out_mean"].append(partial(s, g, m))
+
+    out = {}
+    for name, vals in series.items():
+        v = [x for x in vals if x is not None]
+        out[name] = {
+            "median_within_dataset": float(np.median(v)),
+            "n_datasets": len(v),
+            "n_negative": sum(1 for x in v if x < 0),
+            "n_positive": sum(1 for x in v if x > 0),
+        }
+    return out
+
+
+def appendix_intervals():
+    """P1, P8 and P10's figures, which the predictions appendix printed with no
+    module behind them.
+
+    P8 and P10 are out-of-sample figures under leave-one-dataset-out refitting,
+    not anchor figures, so they are rebuilt from the per-held-out-dataset
+    confusion matrices that score_clustered_intervals already stores. Each
+    dataset contributes one matrix; the bootstrap resamples those.
+    """
+    group_c = _trigger_rows(["study2_group_C_results.json"])
+
+    def paired(rs):
+        return _mcc(rs, "epv") - _mcc(rs, "np")
+    p1 = {
+        "sample": "study2 Group C, anchor thresholds",
+        "epv_mcc": _mcc(group_c, "epv"),
+        "np_mcc": _mcc(group_c, "np"),
+        "observed_difference": paired(group_c),
+        **cluster_bootstrap(group_c, paired),
+    }
+
+    with (RESULTS_DIR / "clustered_intervals_scores.json").open() as fh:
+        part_b = json.load(fh)["part_b"]
+
+    def lodo(diagnostic):
+        rows = [{"dataset": d["held_out"], "m": d["recal"]}
+                for d in part_b[diagnostic]["per_dataset"]]
+
+        def stat(rs):
+            tp = sum(r["m"]["tp"] for r in rs)
+            fp = sum(r["m"]["fp"] for r in rs)
+            fn = sum(r["m"]["fn"] for r in rs)
+            tn = sum(r["m"]["tn"] for r in rs)
+            den = math.sqrt(float((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn)))
+            return 0.0 if den == 0 else (tp * tn - fp * fn) / den
+        return {
+            "sample": "leave-one-dataset-out over the 25, out of sample",
+            "oos_mcc": stat(rows),
+            "n_folds": len(rows),
+            **cluster_bootstrap(rows, stat),
+        }
+
+    return {"P1_epv_vs_np_paired": p1,
+            "P8_fold_contamination_lodo": lodo("fold_contamination"),
+            "P10_np_lodo": lodo("np")}
+
+
+
+# ---------------------------------------------------------------------------
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--skip-screen", action="store_true",
+                        help="emit every figure except the structural screen, which "
+                             "needs pmlb")
+    skip_screen = parser.parse_args(argv).skip_screen
     rows, pre_registered_commit = load_rows()
     datasets = sorted(_by_dataset(rows))
     result = {
@@ -370,7 +512,11 @@ def main():
         "selection_bias": selection_bias(rows),
         "exclusions": exclusions(rows),
         "positives_concentration": positives_concentration(rows),
-        "structural_screen": structural_screen(datasets),
+        "structural_screen": (
+            {"skipped": "--skip-screen"} if skip_screen else structural_screen(datasets)
+        ),
+        "appendix_intervals": appendix_intervals(),
+        "study4_partials": study4_partials(rows),
     }
     OUT_FILE.write_text(json.dumps(result, indent=1), encoding="utf-8")
 

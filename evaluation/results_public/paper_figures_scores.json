@@ -1,0 +1,545 @@
+{
+ "analysis": "manuscript figures with no prior producing module (POST-HOC)",
+ "post_hoc": true,
+ "pre_registered": false,
+ "source_pre_registered_commit": "7cab9db",
+ "delta_g": 0.05,
+ "n_runs": 525,
+ "n_datasets": 25,
+ "between_dataset_rho": {
+  "all": {
+   "rho": 0.8113706188709995,
+   "n_datasets": 25,
+   "ci_low": 0.5628334931436275,
+   "ci_high": 0.9223932577015931,
+   "bootstrap_median": 0.8095971207315662,
+   "n_valid_resamples": 2000,
+   "n_clusters": 25
+  },
+  "estimable": {
+   "rho": 0.6158019203998961,
+   "n_datasets": 19,
+   "definition": "datasets with at least one run above delta_G = 0.05",
+   "ci_low": 0.1899124988015066,
+   "ci_high": 0.8478102540627677,
+   "bootstrap_median": 0.6196305146595051,
+   "n_valid_resamples": 2000,
+   "n_clusters": 19
+  }
+ },
+ "candidate_outcomes": {
+  "sd_of_G": {
+   "rho_all_25": 0.8438461538461538,
+   "rho_estimable": 0.724561403508772,
+   "clustered_ci_all_25": {
+    "ci_low": 0.6167057515384604,
+    "ci_high": 0.9550748898414406,
+    "bootstrap_median": 0.8395206427159492,
+    "n_valid_resamples": 2000,
+    "n_clusters": 25
+   }
+  },
+  "rate_abs_G_gt_delta": {
+   "rho_all_25": 0.8409931090808888,
+   "rho_estimable": 0.6931719335307063,
+   "clustered_ci_all_25": {
+    "ci_low": 0.6135348666670376,
+    "ci_high": 0.9348779232076185,
+    "bootstrap_median": 0.8373436071423077,
+    "n_valid_resamples": 2000,
+    "n_clusters": 25
+   }
+  },
+  "rate_G_gt_delta_our_label": {
+   "rho_all_25": 0.8113706188709995,
+   "rho_estimable": 0.6158019203998961,
+   "clustered_ci_all_25": {
+    "ci_low": 0.5628334931436275,
+    "ci_high": 0.9223932577015931,
+    "bootstrap_median": 0.8095971207315662,
+    "n_valid_resamples": 2000,
+    "n_clusters": 25
+   }
+  },
+  "mean_G": {
+   "rho_all_25": 0.4869230769230769,
+   "rho_estimable": 0.47017543859649125,
+   "clustered_ci_all_25": {
+    "ci_low": 0.07559171535454584,
+    "ci_high": 0.7776319674384689,
+    "bootstrap_median": 0.4983534160651851,
+    "n_valid_resamples": 2000,
+    "n_clusters": 25
+   }
+  },
+  "rate_G_lt_minus_delta": {
+   "rho_all_25": -0.01815741311408353,
+   "rho_estimable": -0.3531511659907269,
+   "clustered_ci_all_25": {
+    "ci_low": -0.4658091741507761,
+    "ci_high": 0.46423095298531986,
+    "bootstrap_median": -0.03401361936209844,
+    "n_valid_resamples": 2000,
+    "n_clusters": 25
+   }
+  }
+ },
+ "selection_bias": {
+  "n_datasets": 25,
+  "condition": "clean runs only",
+  "automated_slope": 0.32941402656675944,
+  "automated_intercept": -0.009446832672670921,
+  "control_own_sigma_slope": -0.030737484791431416,
+  "control_cross_sigma_slope": 0.016552395252155107,
+  "control_note": "control_own_sigma_slope regresses the control arm's G on the CONTROL's sigma; control_cross_sigma_slope regresses it on the AUTOMATED arm's sigma. They are different regressions and differ in sign.",
+  "expected_max_of_3_normals": 0.8462843753216345,
+  "predicted_slope_coefficient": 0.37846987830302403,
+  "prediction_note": "folds are treated as independent, which they are not, so this is a LOWER bound on the predicted slope",
+  "clustered_ci": {
+   "ci_low": -0.2290756885959099,
+   "ci_high": 0.7830572826244615,
+   "bootstrap_median": 0.3221416569737255,
+   "n_valid_resamples": 2000,
+   "n_clusters": 25
+  }
+ },
+ "exclusions": {
+  "rho_all_25": 0.8113706188709995,
+  "rho_estimable": 0.6158019203998961,
+  "mlcpp_boolean_excluded": {
+   "datasets": [
+    "mux6",
+    "parity5",
+    "corral"
+   ],
+   "rho_remaining_22": 0.7553443520474639,
+   "rho_remaining_estimable": 0.5579348007497276,
+   "n_estimable": 18
+  },
+  "leave_one_dataset_out_delta": {
+   "analcatdata_aids": -0.016510960445194733,
+   "analcatdata_asbestos": 0.04605937702751284,
+   "analcatdata_bankruptcy": 0.012710001547325045,
+   "analcatdata_creditscore": -0.020020859771602395,
+   "analcatdata_fraud": -0.001751376924463477,
+   "analcatdata_japansolvent": -0.013874610002654664,
+   "appendicitis": 0.03295286621920246,
+   "backache": 0.002822276133431889,
+   "biomed": -0.009669184630169414,
+   "breast_cancer": 0.011866743802797841,
+   "bupa": 0.009413152239781786,
+   "corral": -0.020020859771602395,
+   "glass2": -0.010985607346492565,
+   "haberman": 0.012306038019806342,
+   "hepatitis": -0.004207991713341408,
+   "irish": -0.020020859771602395,
+   "labor": 0.011427449585789451,
+   "lupus": 0.002822276133431889,
+   "molecular_biology_promoters": 0.011427449585789451,
+   "mux6": -0.00644485394311245,
+   "parity5": -0.02046548610900467,
+   "postoperative_patient_data": -0.016510960445194733,
+   "prnn_crabs": -0.020020859771602395,
+   "prnn_synth": -0.020020859771602395,
+   "saheart": 0.02523125489502165
+  },
+  "jackknife_range": [
+   -0.02046548610900467,
+   0.04605937702751284
+  ],
+  "most_influential": {
+   "dataset": "analcatdata_asbestos",
+   "delta": 0.04605937702751284
+  }
+ },
+ "positives_concentration": {
+  "total_positives": 142,
+  "per_dataset": {
+   "postoperative_patient_data": 17,
+   "analcatdata_aids": 16,
+   "parity5": 15,
+   "backache": 12,
+   "lupus": 11,
+   "analcatdata_japansolvent": 10,
+   "analcatdata_fraud": 9,
+   "haberman": 9,
+   "hepatitis": 8,
+   "bupa": 7,
+   "saheart": 6,
+   "labor": 5,
+   "molecular_biology_promoters": 5,
+   "appendicitis": 4,
+   "breast_cancer": 4,
+   "analcatdata_asbestos": 1,
+   "analcatdata_bankruptcy": 1,
+   "biomed": 1,
+   "glass2": 1,
+   "analcatdata_creditscore": 0,
+   "corral": 0,
+   "irish": 0,
+   "mux6": 0,
+   "prnn_crabs": 0,
+   "prnn_synth": 0
+  },
+  "n_contributing": 19,
+  "n_zero": 6,
+  "n_datasets_supplying_half": 5,
+  "top5": [
+   "postoperative_patient_data",
+   "analcatdata_aids",
+   "parity5",
+   "backache",
+   "lupus"
+  ],
+  "top5_share": 0.5,
+  "rho_without_top5": {
+   "rho_all": 0.7367247142027631,
+   "n_all": 20,
+   "rho_estimable": 0.34563273279280576,
+   "n_estimable": 14,
+   "clustered_ci_estimable": {
+    "ci_low": -0.35158194357366596,
+    "ci_high": 0.7772355268719524,
+    "bootstrap_median": 0.3509785581429923,
+    "n_valid_resamples": 2000,
+    "n_clusters": 14
+   }
+  },
+  "baseline": {
+   "rho_all": 0.8113706188709995,
+   "rho_estimable": 0.6158019203998961
+  }
+ },
+ "structural_screen": {
+  "analcatdata_aids": {
+   "n": 50,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [
+    {
+     "feature": "AIDS",
+     "distinct_share": 1.0,
+     "trivial_all_distinct": true
+    },
+    {
+     "feature": "Total",
+     "distinct_share": 1.0,
+     "trivial_all_distinct": true
+    }
+   ],
+   "n_flags": 2,
+   "n_nontrivial_flags": 0
+  },
+  "analcatdata_asbestos": {
+   "n": 83,
+   "exact_duplicate_feature_share": 0.14457831325301204,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "analcatdata_bankruptcy": {
+   "n": 50,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [
+    {
+     "feature": "Company",
+     "distinct_share": 1.0,
+     "trivial_all_distinct": true
+    },
+    {
+     "feature": "WC/TA",
+     "distinct_share": 0.96,
+     "trivial_all_distinct": false
+    },
+    {
+     "feature": "RE/TA",
+     "distinct_share": 0.96,
+     "trivial_all_distinct": false
+    },
+    {
+     "feature": "EBIT/TA",
+     "distinct_share": 0.98,
+     "trivial_all_distinct": false
+    },
+    {
+     "feature": "BVE/BVL",
+     "distinct_share": 0.98,
+     "trivial_all_distinct": false
+    }
+   ],
+   "n_flags": 5,
+   "n_nontrivial_flags": 4
+  },
+  "analcatdata_creditscore": {
+   "n": 100,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "analcatdata_fraud": {
+   "n": 42,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "analcatdata_japansolvent": {
+   "n": 52,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [
+    {
+     "feature": "Firm",
+     "distinct_share": 1.0,
+     "trivial_all_distinct": true
+    },
+    {
+     "feature": "EBIT/TA",
+     "distinct_share": 0.9423076923076923,
+     "trivial_all_distinct": false
+    },
+    {
+     "feature": "NI/TC",
+     "distinct_share": 1.0,
+     "trivial_all_distinct": true
+    },
+    {
+     "feature": "Sales/TA",
+     "distinct_share": 1.0,
+     "trivial_all_distinct": true
+    },
+    {
+     "feature": "EBIT/Sales",
+     "distinct_share": 0.9038461538461539,
+     "trivial_all_distinct": false
+    },
+    {
+     "feature": "NI/Sales",
+     "distinct_share": 0.8653846153846154,
+     "trivial_all_distinct": false
+    },
+    {
+     "feature": "WC/TA",
+     "distinct_share": 0.9423076923076923,
+     "trivial_all_distinct": false
+    }
+   ],
+   "n_flags": 7,
+   "n_nontrivial_flags": 4
+  },
+  "appendicitis": {
+   "n": 106,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "backache": {
+   "n": 180,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [
+    {
+     "feature": "id",
+     "distinct_share": 1.0,
+     "trivial_all_distinct": true
+    }
+   ],
+   "n_flags": 1,
+   "n_nontrivial_flags": 0
+  },
+  "biomed": {
+   "n": 209,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "breast_cancer": {
+   "n": 286,
+   "exact_duplicate_feature_share": 0.06993006993006994,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "bupa": {
+   "n": 345,
+   "exact_duplicate_feature_share": 0.011594202898550725,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "corral": {
+   "n": 160,
+   "exact_duplicate_feature_share": 0.6,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "glass2": {
+   "n": 163,
+   "exact_duplicate_feature_share": 0.006134969325153374,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "haberman": {
+   "n": 306,
+   "exact_duplicate_feature_share": 0.07516339869281045,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "hepatitis": {
+   "n": 155,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "irish": {
+   "n": 500,
+   "exact_duplicate_feature_share": 0.06,
+   "partitioning_features": [
+    {
+     "feature": "Educational_level",
+     "distinct_share": 0.022,
+     "trivial_all_distinct": false
+    }
+   ],
+   "n_flags": 1,
+   "n_nontrivial_flags": 1
+  },
+  "labor": {
+   "n": 57,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "lupus": {
+   "n": 87,
+   "exact_duplicate_feature_share": 0.011494252873563218,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "molecular_biology_promoters": {
+   "n": 106,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "mux6": {
+   "n": 128,
+   "exact_duplicate_feature_share": 0.5,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "parity5": {
+   "n": 32,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "postoperative_patient_data": {
+   "n": 88,
+   "exact_duplicate_feature_share": 0.18181818181818182,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "prnn_crabs": {
+   "n": 200,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  },
+  "prnn_synth": {
+   "n": 250,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [
+    {
+     "feature": "xs",
+     "distinct_share": 1.0,
+     "trivial_all_distinct": true
+    },
+    {
+     "feature": "ys",
+     "distinct_share": 1.0,
+     "trivial_all_distinct": true
+    }
+   ],
+   "n_flags": 2,
+   "n_nontrivial_flags": 0
+  },
+  "saheart": {
+   "n": 462,
+   "exact_duplicate_feature_share": 0.0,
+   "partitioning_features": [],
+   "n_flags": 0,
+   "n_nontrivial_flags": 0
+  }
+ },
+ "appendix_intervals": {
+  "P1_epv_vs_np_paired": {
+   "sample": "study2 Group C, anchor thresholds",
+   "epv_mcc": 0.14085904245475275,
+   "np_mcc": 0.5399492471560389,
+   "observed_difference": -0.3990902047012861,
+   "ci_low": -0.6190973068935705,
+   "ci_high": -0.14195496410652594,
+   "bootstrap_median": -0.3918087055109073,
+   "n_valid_resamples": 2000,
+   "n_clusters": 9
+  },
+  "P8_fold_contamination_lodo": {
+   "sample": "leave-one-dataset-out over the 25, out of sample",
+   "oos_mcc": 0.19232766160922396,
+   "n_folds": 25,
+   "ci_low": 0.07249654236884819,
+   "ci_high": 0.3188000830561948,
+   "bootstrap_median": 0.1952890180950444,
+   "n_valid_resamples": 2000,
+   "n_clusters": 25
+  },
+  "P10_np_lodo": {
+   "sample": "leave-one-dataset-out over the 25, out of sample",
+   "oos_mcc": 0.24636874445205587,
+   "n_folds": 25,
+   "ci_low": 0.06478729148779841,
+   "ci_high": 0.41062468348306325,
+   "bootstrap_median": 0.242801536213676,
+   "n_valid_resamples": 2000,
+   "n_clusters": 25
+  }
+ },
+ "study4_partials": {
+  "mean_vs_sigma": {
+   "median_within_dataset": -0.8300811306630821,
+   "n_datasets": 25,
+   "n_negative": 24,
+   "n_positive": 1
+  },
+  "mean_vs_G": {
+   "median_within_dataset": 0.6883116883116883,
+   "n_datasets": 25,
+   "n_negative": 0,
+   "n_positive": 25
+  },
+  "sigma_vs_G_raw": {
+   "median_within_dataset": -0.6298701298701299,
+   "n_datasets": 25,
+   "n_negative": 23,
+   "n_positive": 2
+  },
+  "sigma_vs_G_partialling_out_mean": {
+   "median_within_dataset": -0.08407609872416333,
+   "n_datasets": 24,
+   "n_negative": 14,
+   "n_positive": 10
+  }
+ }
+}

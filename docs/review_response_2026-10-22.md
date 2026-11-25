@@ -74,8 +74,8 @@ were visible only in files they weighted differently.
    halves of 20 repeated folds: within-dataset concordance was unchanged (0.265 [0.18, 0.36]), so
    shared noise is refuted. Study 4 then found the real, post-hoc mechanism: AUROC's ceiling at 1
    forces a mean/variance trade-off within each dataset (within-dataset median correlations: CV mean
-   vs `sigma` -0.813, CV mean vs `G` +0.688, `sigma` vs `G` -0.630 raw but -0.075 once the CV mean is
-   partialled out). See `docs/study4_results.md` §6 and `docs/findings.md` §5's final bullet.
+   vs `sigma` -0.830, CV mean vs `G` +0.688, `sigma` vs `G` -0.630 raw but -0.084 once the CV mean is
+   partialled out, over the 24 datasets where that partial is defined; corrected 2026-11-25). See `docs/study4_results.md` §6 and `docs/findings.md` §5's final bullet.
 
 ## What the reviewer got wrong
 
